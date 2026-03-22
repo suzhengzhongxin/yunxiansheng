@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>思政课程3 - “三个代表” 重要思想</title>
+    <!-- 1. 升级图标库（引入Font Awesome 6.5.1最新版） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+     <style>
+        /* ========== 全局样式重置 & 基础配置 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", "PingFang SC", "Helvetica Neue", sans-serif;
+        }
+        /* 定义全局变量（方便统一修改配色） */
+        :root {
+            --primary-color: #991a28; /* 主红色 */
+            --primary-light: #d62828; /* 浅红 */
+            --primary-dark: #7a141e; /* 深红 */
+            --gold-color: #ffd700; /* 金色（点缀） */
+            --gray-light: #f8f9fa; /* 浅灰（背景） */
+            --gray-middle: #e9ecef; /* 中灰（边框） */
+            --gray-dark: #6c757d; /* 深灰（文字） */
+            --white-color: #ffffff; /* 白色 */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --transition: all 0.3s ease; /* 统一过渡动画 */
+            scroll-behavior: smooth; /* 开启平滑滚动 */
+        }
+        body {
+            background-color: var(--gray-light);
+            color: #333;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        ul {
+            list-style: none;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* 按钮通用样式 */
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        /* ========== 2. 导航栏样式（吸顶+渐变+阴影） ========== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
+            box-shadow: var(--shadow-sm);
+            padding: 0;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo img {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            border: 2px solid var(--white-color);
+        }
+        .logo-text {
+            color: var(--white-color);
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+        }
+        /* 导航链接默认样式 - 白色 */
+.nav-menu li a {
+    color: #ffffff; /* 白色 */
+    font-size: 16px;
+    padding: 8px 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+/* 当前页面导航链接 - 黄色（active类） */
+.nav-menu li a.active {
+    color: #ffd700; /* 金色/黄色，和你页面按钮颜色一致 */
+}
+/* 保留原有hover下划线效果（可选） */
+.nav-menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffd700;
+    transition: var(--transition);
+}
+.nav-menu li a:hover::after {
+    width: 100%;
+}
+        /* 导航下划线动效 */
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold-color);
+            transition: var(--transition);
+        }
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+        .nav-menu li a.active {
+            color: var(--gold-color);
+        }
+        /* 移动端导航按钮（适配小屏幕） */
+        .nav-toggle {
+            display: none;
+            font-size: 24px;
+            color: var(--white-color);
+            cursor: pointer;
+        }
+        /* 内容区域适配导航高度 */
+        .course-detail {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 90px 20px 60px; /* 顶部留导航高度 */
+            background-color: var(--white-color);
+        }
+        .course-detail h1 {
+            color: var(--primary-dark);
+            font-size: 32px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        .course-section {
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+        .course-section h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .course-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            text-indent: 2em;
+            margin-bottom: 10px;
+        }
+        /* 锚点跳转偏移（适配固定导航） */
+        :target {
+            scroll-margin-top: 80px;
+        }
+        /* ========== 5. 底部信息区（简洁大气） ========== */
+        .footer {
+            background-color: var(--primary-dark);
+            color: var(--white-color);
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--gold-color);
+        }
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        .footer-col ul li a:hover {
+            color: var(--gold-color);
+            padding-left: 5px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #ccc;
+        }
+        /* ========== 6. 响应式适配（适配平板/手机） ========== */
+        @media (max-width: 1200px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .banner-title {
+                font-size: 40px;
+            }
+        }
+        @media (max-width: 768px) {
+            /* 移动端导航 */
+            .nav-toggle {
+                display: block;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--primary-dark);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                gap: 25px;
+                transition: var(--transition);
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            /* 底部适配 */
+            .footer-top {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <!-- 固定导航栏 -->
+     <header class="header">
+        <div class="container nav">
+            <div class="logo">
+                <!-- 替换为你的Logo图片地址 -->
+                <img src="图片/云先生logo.jpg" alt="云先生logo">
+                <div class="logo-text">云先生思政教育平台</div>
+            </div>
+            <!-- 导航菜单 -->
+            <ul class="nav-menu">
+                <li><a href="news.html">思政文库</a></li>
+                <li><a href="bookstore.html">思政乐园</a></li>
+                <li><a href="video.html">录播课室</a></li>
+                <li><a href="download.html">直播课室</a></li>
+                <li><a href="forum.html">留言板</a></li>
+                <li><a href="index.html">返回首页</a></li>
+            </ul>
+            <!-- 移动端导航按钮 -->
+            <div class="nav-toggle" onclick="toggleNav()">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- 课程详情内容 -->
+    <div class="course-detail">
+        <h1>“三个代表” 重要思想</h1>
+        
+        <div id="section1" class="course-section">
+            <p>中国特色社会主义理论体系的重要组成部分，是世纪之交党面对新考验提出的理论创新，进一步回答了 “什么是社会主义、怎样建设社会主义”，创造性回答 “建设什么样的党、怎样建设党”。</p>
+        </div>
+
+        <div id="section2" class="course-section">
+            <h2>1.形成背景</h2>
+            <p>苏联解体、东欧剧变，世界社会主义遭遇挫折，经济全球化加速；国内改革开放深入，社会结构多样化；党实现 “两个历史性转变”，自身建设面临新课题。</p>
+        </div>
+
+        <div id="section3" class="course-section">
+            <h2>2.提出过程</h2>
+            <p>2000 年江泽民首次完整阐述，2001 年 “七一” 讲话系统阐释内涵，2002 年十六大将其确立为党的指导思想。</p>
+        </div>
+
+        <div id="section4" class="course-section">
+            <h2>3.核心内涵</h2>
+            <p>党始终代表中国先进生产力的发展要求、中国先进文化的前进方向、中国最广大人民的根本利益，三者相互联系、辩证统一。</p>
+        </div>
+
+        <div id="section5" class="course-section">
+            <h2>4.历史意义</h2>
+            <p>是马克思主义中国化的重要成果，是加强和改进党的建设的根本指针，承续发展了中国特色社会主义理论体系，指引中国特色社会主义事业推向 21 世纪。</p>
+        </div>
+    </div>
+
+    <!-- 4. 底部信息 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="#">平台介绍</a></li>
+                        <li><a href="#">团队风采</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">加入我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>学习资源</h4>
+                    <ul>
+                        <li><a href="#">时政资料库</a></li>
+                        <li><a href="#">精品课程</a></li>
+                        <li><a href="#">学习工具</a></li>
+                        <li><a href="#">常见问题</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>法律声明</h4>
+                    <ul>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">用户协议</a></li>
+                        <li><a href="#">版权声明</a></li>
+                        <li><a href="#">免责条款</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>联系方式</h4>
+                    <ul>
+                        <li><i class="fa fa-phone"></i> 0350-3339920</li>
+                        <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
+                        <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 云先生互联网乡村思政教育网络平台 版权所有 | 晋ICP备202308110020号</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

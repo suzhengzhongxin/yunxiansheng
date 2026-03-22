@@ -1,0 +1,2019 @@
+﻿<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>云先生互联网乡村思政教育网络平台</title>
+
+    <!-- 1. 升级图标库（引入Font Awesome 6.5.1最新版） -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+
+    <style>
+
+        /* ========== 全局样式重置 & 基础配置 ========== */
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+            font-family: "Microsoft Yahei", "PingFang SC", "Helvetica Neue", sans-serif;
+
+        }
+
+        /* 定义全局变量（方便统一修改配色） */
+
+        :root {
+
+            --primary-color: #991a28; /* 主红色 */
+
+            --primary-light: #d62828; /* 浅红 */
+
+            --primary-dark: #7a141e; /* 深红 */
+
+            --gold-color: #ffd700; /* 金色（点缀） */
+
+            --gray-light: #f8f9fa; /* 浅灰（背景） */
+
+            --gray-middle: #e9ecef; /* 中灰（边框） */
+
+            --gray-dark: #6c757d; /* 深灰（文字） */
+
+            --white-color: #ffffff; /* 白色 */
+
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+
+            --radius-sm: 6px;
+
+            --radius-md: 10px;
+
+            --radius-lg: 16px;
+
+            --transition: all 0.3s ease; /* 统一过渡动画 */
+
+            scroll-behavior: smooth; /* 开启平滑滚动 */
+
+        }
+
+       
+
+        body {
+
+            background-color: var(--gray-light);
+
+            color: #333;
+
+            line-height: 1.6;
+
+        }
+
+        a {
+
+            text-decoration: none;
+
+            color: inherit;
+
+            transition: var(--transition);
+
+        }
+
+        ul {
+
+            list-style: none;
+
+        }
+
+        .container {
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+            padding: 0 20px;
+
+        }
+
+        /* 按钮通用样式 */
+
+        .btn {
+
+            display: inline-block;
+
+            padding: 10px 24px;
+
+            background-color: var(--primary-color);
+
+            color: var(--white-color);
+
+            border: none;
+
+            border-radius: var(--radius-sm);
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition: var(--transition);
+
+            text-align: center;
+
+        }
+
+        .btn:hover {
+
+            background-color: var(--primary-light);
+
+            transform: translateY(-2px);
+
+            box-shadow: var(--shadow-sm);
+
+        }
+
+        .btn-outline {
+
+            background-color: transparent;
+
+            border: 1px solid var(--primary-color);
+
+            color: var(--primary-color);
+
+        }
+
+        .btn-outline:hover {
+
+            background-color: var(--primary-color);
+
+            color: var(--white-color);
+
+        }
+
+
+
+        /* ========== 2. 导航栏样式（吸顶+渐变+阴影） ========== */
+
+        .header {
+
+            position: sticky;
+
+            top: 0;
+
+             z-index: 999;
+
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
+
+            box-shadow: var(--shadow-sm);
+
+            padding: 0;
+
+        }
+
+        .nav {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            height: 70px;
+
+        }
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+        .logo img {
+
+            width: 48px;
+
+            height: 48px;
+
+            border-radius: 8px;
+
+            border: 2px solid var(--white-color);
+
+        }
+
+        .logo-text {
+
+            color: var(--white-color);
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+        }
+
+        .nav-menu {
+
+            display: flex;
+
+            gap: 35px;
+
+        }
+
+        /* 导航链接默认样式 - 白色 */
+
+.nav-menu li a {
+
+    color: #ffffff; /* 白色 */
+
+    font-size: 16px;
+
+    padding: 8px 0;
+
+    position: relative;
+
+    transition: all 0.3s ease;
+
+}
+
+/* 当前页面导航链接 - 黄色（active类） */
+
+.nav-menu li a.active {
+
+    color: #ffd700; /* 金色/黄色，和你页面按钮颜色一致 */
+
+}
+
+/* 保留原有hover下划线效果（可选） */
+
+.nav-menu li a::after {
+
+    content: '';
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 0;
+
+    height: 2px;
+
+    background-color: #ffd700;
+
+    transition: var(--transition);
+
+}
+
+.nav-menu li a:hover::after {
+
+    width: 100%;
+
+}
+
+        /* 导航下划线动效 */
+
+        .nav-menu li a::after {
+
+            content: '';
+
+            position: absolute;
+
+            bottom: 0;
+
+            left: 0;
+
+            width: 0;
+
+            height: 2px;
+
+            background-color: var(--gold-color);
+
+            transition: var(--transition);
+
+        }
+
+        .nav-menu li a:hover::after {
+
+            width: 100%;
+
+        }
+
+        .nav-menu li a.active {
+
+            color: var(--gold-color);
+
+        }
+
+        /* 移动端导航按钮（适配小屏幕） */
+
+        .nav-toggle {
+
+            display: none;
+
+            font-size: 24px;
+
+            color: var(--white-color);
+
+            cursor: pointer;
+
+        }
+
+
+
+        /* ========== 横幅（和首页完全一致，仅改副标题） ========== */
+
+        .banner {
+
+            height: 500px;
+
+            background: linear-gradient(135deg, var(--primary-color) 0%, #b82232 100%);
+
+            position: relative;
+
+            overflow: visible;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+        .banner-bg {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: url('图片/bg(1).jpg') center/cover no-repeat;
+
+            background-size: 100% auto;
+
+            opacity: 1;
+
+            z-index: 1;
+
+        }
+
+        .banner-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            text-align: center;
+
+            color: var(--white-color);
+
+            padding: 0 20px;
+
+            margin-top: -50px;
+
+        }
+
+        .banner-title {
+
+            font-size: 48px;
+
+            font-weight: bold;
+
+            margin-bottom: 18px;
+
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+
+        }
+
+        .banner-subtitle {
+
+            font-size: 22px;
+
+            margin-bottom: 30px;
+
+            text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+
+            max-width: 800px;
+
+            margin-left: auto;
+
+            margin-right: auto;
+
+        }
+
+        .banner-btn {
+
+            padding: 12px 32px;
+
+            font-size: 18px;
+
+            border-radius: var(--radius-md);
+
+            background-color: var(--gold-color);
+
+            color: var(--primary-dark);
+
+            font-weight: bold;
+
+        }
+
+        .banner-btn:hover {
+
+            background-color: #fff082;
+
+            box-shadow: var(--shadow-md);
+
+        }
+
+/* ========== 平台介绍板块（替换正式内容） ========== */
+
+        .platform-intro {
+
+            padding: 80px 0;
+
+            background-color: var(--white-color);
+
+        }
+
+        .intro-wrapper {
+
+            display: flex;
+
+            gap: 40px;
+
+            align-items: flex-start;
+
+        }
+
+        .intro-text {
+
+            flex: 1;
+
+        }
+
+        .intro-title {
+
+            font-size: 30px;
+
+            color: var(--primary-dark);
+
+            margin-bottom: 20px;
+
+            position: relative;
+
+            padding-bottom: 10px;
+
+            display: inline-block;
+
+        }
+
+        .intro-title::after {
+
+            content: '';
+
+            position: absolute;
+
+            bottom: 0;
+
+            left: 0;
+
+            width: 80px;
+
+            height: 3px;
+
+            background-color: var(--primary-color);
+
+        }
+
+        .intro-content {
+
+            font-size: 16px;
+
+            color: #555;
+
+            line-height: 1.8;
+
+            margin-bottom: 20px;
+
+            overflow: hidden;
+
+            transition: max-height 0.5s ease;
+
+        }
+
+        .intro-content.expanded {
+
+            max-height: none; /* 展开后显示全部 */
+
+        }
+
+        .intro-content h4 {
+
+            font-size: 18px;
+
+            color: var(--primary-dark);
+
+            margin: 18px 0 10px;
+
+            font-weight: bold;
+
+        }
+
+        .intro-content p {
+
+             text-indent: 2em; /* 核心：首行缩进2个字符，适配所有字体 */
+
+            margin: 8px 0;
+
+        }
+
+        .intro-content ul {
+
+            list-style: disc;
+
+            padding-left: 20px;
+
+            margin: 8px 0;
+
+        }
+
+        .more-btn {
+
+            padding: 8px 20px;
+
+            background-color: var(--primary-color);
+
+            color: white;
+
+            border: none;
+
+            border-radius: var(--radius-sm);
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+        }
+
+        .more-btn:hover {
+
+            background-color: var(--primary-light);
+
+        }
+
+        .intro-image {
+
+            flex: 1;
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            box-shadow: var(--shadow-md);
+
+            min-height: 350px; /* 最小高度350px，图片更高则自适应 */
+
+            flex-shrink: 0;
+
+        }
+
+       .intro-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+          /* 删掉原有object-fit: cover; 避免图片裁剪 */
+
+            object-fit: contain; /* 新增：图片完整适配容器，不裁剪、不变形 */
+
+            background-color: #f5f5f5; /* 可选：图片与容器比例不符时，填充浅灰背景更美观 */
+
+}
+
+
+
+        /* ========== 新增：思政课程学习 ========== */
+
+        .course-learning {
+
+            padding: 80px 0;
+
+            background-color: var(--gray-light);
+
+        }
+
+        .course-title {
+
+            text-align: center;
+
+            font-size: 30px;
+
+            color: var(--primary-dark);
+
+            margin-bottom: 40px;
+
+            position: relative;
+
+            padding-bottom: 15px;
+
+            display: inline-block;
+
+            margin-left: auto;
+
+            margin-right: auto;
+
+        }
+
+        .course-title::after {
+
+            content: '';
+
+            position: absolute;
+
+            bottom: 0;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 100px;
+
+            height: 3px;
+
+            background-color: var(--primary-color);
+
+        }
+
+        .course-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 30px;
+
+            margin-bottom: 30px;
+
+            max-height: 600px; /* 隐藏更多时显示2行 */
+
+            overflow: hidden;
+
+            transition: max-height 0.5s ease;
+
+        }
+
+        .course-grid.expanded {
+
+            max-height: none; /* 展开后显示全部6个 */
+
+        }
+
+        .course-card {
+
+            background-color: var(--primary-color);
+
+            border-radius: var(--radius-lg);
+
+            overflow: hidden;
+
+            box-shadow: var(--shadow-md);
+
+            color: white;
+
+            height: 300px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            transition: var(--transition);
+
+        }
+
+        .course-card:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow: var(--shadow-lg);
+
+        }
+
+        .card-image {
+
+            height: 50%; /* 上半部分图片 */
+
+            overflow: hidden;
+
+            background-color: #f5f5f5; /*图片比例不符合时填充浅灰背景*/
+
+        }
+
+        .card-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+            transition: transform 0.5s ease;
+
+        }
+
+        .course-card:hover .card-image img {
+
+            transform: scale(1.05);
+
+        }
+
+        .card-content {
+
+            height: 50%; /* 下半部分文字 */
+
+            padding: 20px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+        }
+
+        .card-grade {
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+
+            color: var(--gold-color);
+
+        }
+
+        .card-desc {
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            color: #f0f0f0;
+
+            margin-bottom: 15px;
+
+            display: -webkit-box;
+
+            -webkit-line-clamp: 4; /* 只显示4行 */
+
+            -webkit-box-orient: vertical;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+        .course-more-btn {
+
+            padding: 8px 20px;
+
+            background-color: var(--white-color);
+
+            color: var(--primary-color);
+
+            border: none;
+
+            border-radius: var(--radius-sm);
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            margin-left: auto; /* 右下角 */
+
+        }
+
+        .course-more-btn:hover {
+
+            background-color: var(--gold-color);
+
+            color: var(--primary-dark);
+
+        }
+
+        .course-footer {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+        }
+
+        .course-expand-btn {
+
+            padding: 10px 30px;
+
+            background-color: var(--primary-color);
+
+            color: white;
+
+            border: none;
+
+            border-radius: var(--radius-md);
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+        }
+
+        .course-expand-btn:hover {
+
+            background-color: var(--primary-light);
+
+        }
+
+
+
+
+
+        /* ========== 4. 核心功能区（卡片+hover动效+图标美化） ========== */
+
+        .features {
+
+            padding: 80px 0;
+
+        }
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 60px;
+
+        }
+
+        .section-title h2 {
+
+            font-size: 32px;
+
+            color: var(--primary-color);
+
+            margin-bottom: 12px;
+
+            position: relative;
+
+            display: inline-block;
+
+        }
+
+        .section-title h2::after {
+
+            content: '';
+
+            position: absolute;
+
+            bottom: -8px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 80px;
+
+            height: 3px;
+
+            background-color: var(--primary-color);
+
+            border-radius: 2px;
+
+        }
+
+        .section-title p {
+
+            color: var(--gray-dark);
+
+            font-size: 16px;
+
+        }
+
+        /* 功能卡片网格 */
+
+        .features-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 30px;
+
+        }
+
+        .feature-card {
+
+            background-color: var(--white-color);
+
+            border-radius: var(--radius-lg);
+
+            padding: 40px 25px;
+
+            text-align: center;
+
+            box-shadow: var(--shadow-sm);
+
+            transition: var(--transition);
+
+            border-top: 4px solid var(--primary-color);
+
+        }
+
+        .feature-card:hover {
+
+            transform: translateY(-8px);
+
+            box-shadow: var(--shadow-lg);
+
+            border-top-color: var(--gold-color);
+
+        }
+
+        /* 功能图标美化 */
+
+        .feature-icon {
+
+            width: 80px;
+
+            height: 80px;
+
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 25px;
+
+            color: var(--white-color);
+
+            font-size: 32px;
+
+        }
+
+        .feature-card h3 {
+
+            font-size: 22px;
+
+            color: #333;
+
+            margin-bottom: 15px;
+
+        }
+
+        .feature-card p {
+
+            color: var(--gray-dark);
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+        }
+
+
+
+        /* ========== 5. 底部信息区（简洁大气） ========== */
+
+        .footer {
+
+            background-color: var(--primary-dark);
+
+            color: var(--white-color);
+
+            padding: 50px 0 20px;
+
+            margin-top: 60px;
+
+        }
+
+        .footer-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            flex-wrap: wrap;
+
+            gap: 40px;
+
+            margin-bottom: 40px;
+
+        }
+
+        .footer-col h4 {
+
+            font-size: 18px;
+
+            margin-bottom: 20px;
+
+            position: relative;
+
+            padding-bottom: 10px;
+
+        }
+
+        .footer-col h4::after {
+
+            content: '';
+
+            position: absolute;
+
+            bottom: 0;
+
+            left: 0;
+
+            width: 50px;
+
+            height: 2px;
+
+            background-color: var(--gold-color);
+
+        }
+
+        .footer-col ul li {
+
+            margin-bottom: 12px;
+
+        }
+
+        .footer-col ul li a:hover {
+
+            color: var(--gold-color);
+
+            padding-left: 5px;
+
+        }
+
+        .footer-bottom {
+
+            text-align: center;
+
+            padding-top: 20px;
+
+            border-top: 1px solid rgba(255,255,255,0.1);
+
+            font-size: 14px;
+
+            color: #ccc;
+
+        }
+
+
+
+        /* ========== 6. 响应式适配（适配平板/手机） ========== */
+
+        @media (max-width: 1200px) {
+
+            .features-grid {
+
+                grid-template-columns: repeat(2, 1fr);
+
+            }
+
+            .banner-title {
+
+                font-size: 40px;
+
+            }
+
+        }
+
+        @media (max-width: 768px) {
+
+            /* 移动端导航 */
+
+            .nav-toggle {
+
+                display: block;
+
+            }
+
+            .nav-menu {
+
+                position: fixed;
+
+                top: 70px;
+
+                left: -100%;
+
+                width: 100%;
+
+                height: calc(100vh - 70px);
+
+                background-color: var(--primary-dark);
+
+                flex-direction: column;
+
+                align-items: center;
+
+                padding: 40px 0;
+
+                gap: 25px;
+
+                transition: var(--transition);
+
+            }
+
+            .nav-menu.active {
+
+                left: 0;
+
+            }
+
+            /* 平台介绍适配 */
+
+            .platform-intro {
+
+                padding: 40px 0;
+
+            }
+
+            .intro-wrapper {
+
+                flex-direction: column;
+
+            }
+
+            .intro-image {
+
+                width: 100%;
+
+                height: 250px;
+
+            }
+
+            .intro-content {
+
+                max-height: 220px;
+
+            }
+
+            /* 课程学习适配 */
+
+            .course-learning {
+
+                padding: 40px 0;
+
+            }
+
+            .course-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            /* 核心功能适配 */
+
+            .features {
+
+                padding: 40px 0;
+
+            }
+
+            .features-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            /* 横幅适配 */
+
+            .banner {
+
+                height: 400px;
+
+            }
+
+            .banner-title {
+
+                font-size: 32px;
+
+            }
+
+            .banner-subtitle {
+
+                font-size: 18px;
+
+            }
+
+            /* 底部适配 */
+
+            .footer-top {
+
+                flex-direction: column;
+
+                gap: 30px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ========== HTML结构优化：分层清晰 ========== -->
+
+    <!-- 1. 头部导航 -->
+
+    <header class="header">
+
+        <div class="container nav">
+
+            <div class="logo">
+
+                <!-- 替换为你的Logo图片地址 -->
+
+                <img src="图片/云先生logo.jpg" alt="云先生logo">
+
+                <div class="logo-text">云先生思政教育平台</div>
+
+            </div>
+
+            <!-- 导航菜单 -->
+
+            <ul class="nav-menu">
+
+                <li><a href="index.html" class="active">首页</a></li>
+
+                <li><a href="news.html">思政文库</a></li>
+
+                <li><a href="bookstore.html">思政乐园</a></li>
+
+                <li><a href="video.html">录播课室</a></li>
+
+                <li><a href="download.html">直播课室</a></li>
+
+                <li><a href="forum.html">留言板</a></li>
+
+                <li><a href="checkin.html">我的</a></li>
+
+            </ul>
+
+            <!-- 移动端导航按钮 -->
+
+            <div class="nav-toggle" onclick="toggleNav()">
+
+                <i class="fa fa-bars"></i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- 2. 横幅区域 -->
+
+    <section class="banner">
+
+        <div class="banner-bg"></div>
+
+        <div class="banner-content">
+
+            <h1 class="banner-title">云先生互联网乡村思政教育</h1>
+
+            <h1 class="banner-title">网络平台</h1>
+
+            <p class="banner-subtitle">专注乡村思政教育，助力青少年健康成长，传承红色基因，培育时代新人</p>
+
+            <a href="#course-learning-section" class="btn banner-btn">立即开始学习</a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 平台介绍板块（替换为正式文档内容，保留原排版） -->
+
+    <section class="platform-intro">
+
+        <div class="container">
+
+            <div class="intro-wrapper">
+
+                <div class="intro-text">
+
+                    <h2 class="intro-title">平台介绍</h2>
+
+                    <div class="intro-content" id="intro-content">
+
+                        <h4>平台介绍</h4>
+
+                        <p>“云先生”思政教育网络平台秉承以人为本、全方位育人的理念，以公益、双赢、服务乡村为宗旨。平台旨在根据当下乡村中小学思政课理论教学的现状与需求、结合在校思政专业师范生的各方面条件，进行“大手”牵“小手”的思政教学。一方面，为广大乡村中小学提供高质量、人性化的思政教育服务；另一方面，为在校思政专业师范生提供平台，夯实教学基本功。平台最终以构建集思政教育、思政体验于一体的高品质新型乡村思政教育模式，从而实现新时代高校思政教育人才助推乡村思政教育的良性循环。</p>
+
+                        
+
+                        <h4>云先生服务定位</h4>
+
+                        <p>基于项目提出的背景以及前期调研分析，“云先生”——师范生助力乡村思政教育网络平台的使用对象为乡村学校和师范类院校的师范生。所以“云先生”平台的服务定位应以两者的实际需要为基础，平台对需求的精准定位是平台服务开展的起点。</p>
+
+                        <p>平台通过实地调研与相关文献的调查分析，明确开展乡村思政课在国家层面、社会层面、公民个人层面的现实意义，实现乡村思政课与国家政策号召、社会各界要求、公民个人发展需要的有效对接，并依据需求的内容设计相应的乡村思政课服务项目。深入接触乡村学校师生，对其思政课的具体诉求进行及时地沟通与把握，科学的帮助平台快速定位更为具体的服务需求，进而开展极具针对性的乡村思政课专业化服务。</p>
+
+                        <p>根据服务需求，平台要确立相应的服务目标。“云先生”平台设置目标时从支持网络增强、认知转变、能力提升三个维度来进行综合考量，遵循smart原则（Specific，Measurable，Attainable，Relevant，Time-bound）。“百年大计，教育为本。教育大计，教师为本”。教育承载着国家与民族的希望，而思想政治教育更是实现中华民族伟大复兴中国梦的有力保障，做好思想政治教育工作可谓利在当代，功在千秋。“云先生”平台顺应时代发展要求，采取远程线上思政课教学，其服务目标就是实现师范生有效助力乡村思政教育，积极性应国家加强思想政治教育的号召，解决乡村思想政治教育专业教师匮乏的现实问题。</p>
+
+                        <span id="anchor-point"></span>
+
+
+
+                        <h4>云先生团队介绍</h4>
+
+                        <p><strong>（一）团队介绍</strong></p>
+
+                        <p>云先生团队成员横跨六个专业，彼此分工明确，具有跨专业、跨学科的特点，具有专业覆盖全面、专业知识互补的优势，为项目的顺利推进提供了强有力的支撑。团队致力于改变乡村思政教师匮乏的现状，主要目标是不断创新乡村思政教育模式，实现师范生夯实教学基本功与乡村思政教育的互利共赢。在“互联网+”的契机下， 将思政专业师范生与缺乏思政教师等资源的乡村中小学有机结合起来，构建基于互联网的乡村思政教育网络平台。</p>
+
+                        <p><strong>（二）成员组成</strong></p>
+
+                        <p>项目团队负责人：范乐乐：全面负责项目总体策划、内外沟通协调与整体统筹工作。责任心强、实践经验丰富，具备优秀的组织协调与沟通能力，思维敏捷、细致严谨，善于捕捉关键细节，为项目方向把控与团队协作提供核心支撑。</p>
+
+                        <p>卜丹：主要负责项目资料收集、调研数据整理与调查结果分析。耐心细致，具备较强的学术研究能力与逻辑思辨能力，能够透过现象把握本质，曾多次在校级社会实践调查报告评选中获奖，为项目提供扎实的理论与数据支撑。</p>
+
+                        <p>兰婧旖：具备优秀的观察能力、分析能力与理解能力，对项目发展拥有独立思考与独到见解。主要承担项目策划书撰写、项目整体框架规划与内容架构设计，保障项目体系完整、逻辑清晰。</p>
+
+                        <p>王文婷：擅长小规模精准市场调研与数据统计分析，担任项目与乡村中小学校的沟通联络工作，及时反馈一线需求与意见。为项目提供真实、动态的市场环境信息与落地可行性依据，是连接项目与服务对象的重要桥梁。</p>
+
+                        <p>刘梦凡：思维敏捷、逻辑性强、严谨细致，深度参与平台建设工作，负责平台界面逻辑梳理、交互流程优化、功能模块呈现设计，熟悉APP研发流程，助力平台结构更清晰、使用更便捷。</p>
+
+                        <p>雷雅茹：拥有出色的活动策划能力、创新思维与亲和力，沟通协调能力突出。面对突发问题冷静理性、分析到位，主要负责项目活动方案策划、内容优化与可行性分析，提升项目创新性与落地性。</p>
+
+                        <p>刘宇冉：负责项目整体文案撰写、宣传材料创作与品牌内容策划。文字功底扎实、创意构思能力强，能够将项目理念转化为清晰生动、富有感染力的表达，有效提升项目对外传播力与认可度。</p>
+
+                        <p>张铃欣：擅长在小范围内进行市场调研，并进行数据分析。在本项目中，起到了沟通乡村中小学校，并做出及时反馈的桥梁作用。在项目的创立过程中，提供了市场环境及其变化等重要信息。</p>
+
+                        <p>刘伟：擅长思政类实时资讯检索，能筛选适配乡村中小学的内容。在本项目中负责实时热点搜集：挖掘思政相关热点、政策资讯，辅助整理为教学素材，补充平台时效资源储备。</p>
+
+                        <p>王思辰：具备出色的活动策划能力和创新思想，还有较强的协调能力，擅长与他人沟通和有较强的亲和力。有耐心，能够对突发的问题冷静分析，在该项目中承担着策划分析的责任。</p>
+
+                        <p>陈明：熟悉青少年认知特点与学习规律，专注教学内容设计、课程打磨与形式优化。能够结合乡村学生实际调整教学方案，提升线上课程适配性、趣味性与教学效果。</p>
+
+                        <p>王雅琴：负责项目互联网平台的整体搭建与技术开发，包括网站架构搭建、功能模块实现、公众号运营维护等，保障平台服务功能稳定运行、符合项目使用需求与预期。</p>
+
+                        <p>王浩捷：负责项目财务核算、成本控制与盈亏分析，具备专业财务知识与实操技能，为项目经费管理、预算执行与可持续运营提供专业保障。</p>
+
+                        <p>马碧沄：美术功底扎实，负责项目品牌核心视觉体系设计，包括项目LOGO、封面、主视觉形象等，打造辨识度高、风格统一的项目品牌符号。</p>
+
+                        <p>刘程程：美术设计能力突出，负责项目文创产品、宣传物料及延伸视觉内容设计，丰富项目视觉表达，提升项目文化内涵与传播吸引力。</p>
+
+                        <p><strong>（三）团队口号</strong></p>
+
+                        <p>共建共赢，以自我迎接超我</p>
+
+                        <p>共享共担，以小我完成大我</p>
+
+                        <p><strong>（四）团队目标</strong></p>
+
+                        <p>在实践中认识自己，在学习中充实自己。</p>
+
+                        <p>发挥师范生团队力量，助推乡村思政教育。</p>
+
+                        
+
+                        <h4>相关活动开展</h4>
+
+                        <p>本项目孕育地区为山西省忻州市，所处高校为忻州师范学院。基于该高校的相关活动的基础上，更好的为本项目的实施奠定了基础。</p>
+
+                        <p>1. 忻州师范学院“大手拉小手，双减助双赢”课后志愿服务活动。</p>
+
+                        <p>此次活动旨在结合忻州师范学院的师范特色，主动对接忻州市基础教育发展需求，助力小学生培养学习兴趣、开阔思路视野、增强实践能力。共有130余名志愿者参加该活动。为了能更好的配合各科教师教学，志愿者们走进班级听课，随时记录课堂重要知识内容，及时关注学生听课状态，时刻为学生答疑解惑巩固知识点，提高学习效率。课后，志愿者们积极与任课教师沟通交流每位学生的具体情况，对个别学生进行针对性辅导，帮助学生查漏补缺，补足学习上的短板。</p>
+
+                        <p>2. 忻州师范学院“一起云支教，奋进新征程”系列活动。</p>
+
+                        <p>该活动共有1346人报名，经各系（院）选报、校团委青年志愿者服务中心筛选，最终510名学生入选为志愿者参加云支教活动。其中283名志愿者服从学校安排与忻州市七一路小学283名一至六年级小学生对接成功，另外227名志愿者选择就近就便自主对接学生，开展“线上＋线下”的云支教活动，开启“云”上学习之旅。此次活动开展时间为2023年1月9日—2023年2月4日（共计27天），活动内容有“一起快乐来阅读”、“一起健康做运动”、“一起来上云课堂”、“寻访伟大成就 争当时代新人”、“一起来过个春节”5个板块。</p>
+
+                        <p>3. 忻州师范学院“一起云支教，共同迎冬奥”主题实践活动。</p>
+
+                        <p>本次活动共有650名学生报名，经过宣传动员、系部推荐、层层选拔后来自20个系（院）374名志愿者成功入选。374名学生中，有138名学生选择自主招募的方式与家乡所在地中小学生匹配对接；其余236名学生服从学校安排与忻州市七一路小学6个年级18个班237 名学生进行对接，开展“线上+线下”互动的云支教活动，通过网络架起了云课堂。此次活动开展时间为2022年1月18日—2022年2月15日（共计29天），活动内容有“一起云运动”、“一起云阅读”、“一起看冬奥”、“一起过个奥运年”4个板块。志愿者引导并带领配对学生开展各种形式的运动，并用图文形式记录运动点滴，见证每日进步。</p>
+
+                        <p>4. 忻州师范学院春雨读书社志愿支教服务</p>
+
+                        <p>作为忻州师范学院的五星级社团，该社团每周都会组织社员前往忻州市上社小学进行讲课为主，活动为辅的志愿服务，为条件相对较差的学校送去爱与温暖。同时开展了线上线下多校支教、斩获多项荣誉证书、获得主流媒体报道，并与多所高校志愿服务队达成交流合作。</p>
+
+                        <p>5. 忻州师范学院爱心社远程支教活动。</p>
+
+                        <p>该活动借classin软件，大学生志愿者与中小学通过互联网的形式参加线上活动。在课程进行中，孩子们天真无邪的眼神，灿烂的笑容，学习时展现出来的可爱面貌，都让每一位志愿者心中燃起了对美好生命的渴望。用课程点亮他们的未来，用支教为他们的人生保驾护航。</p>
+
+                        
+
+                        <h4>忻州师范学院支教介绍</h4>
+
+                        <p>作为山西省师范类院校，忻州师范学院主要培养师范类人才，师范资源丰富。学校自 1997 年起，创造性开展扶贫顶岗实习支教工作，构建了高师院校、地方政府、中小学校“三位一体”协同育人机制。27年来累计派出60000余名大学生，深入山西、河北、新疆、海南等地23个县(市、区)700余所农村中小学开展实习文教工作，走出了一条符合实际、富有成效的“扶贫和扶志扶智相结合”“阻断贫困代际传递”的“忻师”脱贫攻坚之路,开创了实践育人新模式。同时不断将支教点拓展至全国各地，主动对接国家“一带一路”建设。顶岗实习支教已经成为了忻州师范学院的办学特色，形成了学院“万人下乡村，千人出山西，百人走丝路”的实习支教工作新格局。</p>
+
+                        <p>随着时代变迁、学校发展，忻州师范学院也在多年顶岗实习支教经验的基础上不断探索、创新方式方法，推出“云文教”“大手拉小手，双减助双赢”等多种方式，从各个方面丰富支教形式与内容。就忻州师范学院而言，每年顶岗实习支教的思政专业的师范生都可以成为助力乡村思政教育中坚力量，能够满足实施平台的人才条件，与此同时本团队提出的师范生助力乡村思政教育网络平台与学校的助力乡村教育的初衷相一致，已经得到了学校各方支持。所以，从忻州师范学院的思政专业的支教生入手，利用本团队的相关平台资源，能够更好的为乡村振兴思政教育。</p>
+
+                    </div>
+
+                    <button class="more-btn" id="intro-more-btn">
+
+                        <i class="fa fa-plus"></i> 查看更多
+
+                    </button>
+
+                </div>
+
+                <div class="intro-image">
+
+                    <img src="图片/平台介绍.jpg" alt="平台介绍图片">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 新增：思政课程学习 -->
+
+    <section class="course-learning" id="course-learning-section">
+
+        <div class="container">
+
+            <h2 class="course-title" style="display: block;">思政课程学习</h2>
+
+            <div class="course-grid" id="course-grid">
+
+                <!-- 习近平新时代中国特色社会主义思想 -->
+
+                 <div class="course-card">
+
+                    <div class="card-image">
+
+                        <img src="图片/思政课程1.jpg" alt="习近平新时代中国特色社会主义思想">
+
+                    </div>
+
+                    <div class="card-content">
+
+                        <h3 class="card-grade">习近平新时代中国特色社会主义思想</h3>
+
+                        <p class="card-desc">立足世界百年未有之大变局和中华民族伟大复兴关键时期，实现了马克思主义中国化时代化新的飞跃，是当代中国马克思主义、二十一世纪马克思主义，深刻回答三大时代课题：新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义；建设什么样的社会主义现代化强国、怎样建设社会主义现代化强国；建设什么样的长期执政的马克思主义政党、怎样建设长期执政的马克思主义政党。</p>
+
+                        <!-- 原页面中习近平新时代中国特色社会主义思想卡片的更多按钮 -->
+
+                        <button class="course-more-btn" onclick="window.location.href='思政课程1.html'">更多</button>
+
+                    </div>
+
+                </div>
+
+                <!-- 科学发展观 -->
+
+                <div class="course-card">
+
+                    <div class="card-image">
+
+                        <img src="图片/思政课程2.jpg" alt="科学发展观">
+
+                    </div>
+
+                    <div class="card-content">
+
+                        <h3 class="card-grade">科学发展观</h3>
+
+                        <p class="card-desc">立足社会主义初级阶段基本国情，适应新的发展要求提出的重大战略思想，是中国特色社会主义理论体系的重要组成部分，是我国经济社会发展的重要指导方针。</p>
+
+                        <!-- 思政课程2.html -->
+
+                        <button class="course-more-btn" onclick="window.location.href='思政课程2.html'">更多</button>
+
+                    </div>
+
+                </div>
+
+                <!-- “三个代表” 重要思想 -->
+
+                <div class="course-card">
+
+                    <div class="card-image">
+
+                        <img src="图片/思政课程3.jpg" alt="“三个代表” 重要思想">
+
+                    </div>
+
+                    <div class="card-content">
+
+                        <h3 class="card-grade">“三个代表” 重要思想</h3>
+
+                        <p class="card-desc">中国特色社会主义理论体系的重要组成部分，是世纪之交党面对新考验提出的理论创新，进一步回答了 “什么是社会主义、怎样建设社会主义”，创造性回答 “建设什么样的党、怎样建设党”。</p>
+
+                        <!-- 更多按钮思政课程3.html -->
+
+                        <button class="course-more-btn" onclick="window.location.href='思政课程3.html'">更多</button>
+
+                    </div>
+
+                </div>
+
+                <!-- 邓小平理论 -->
+
+                <div class="course-card">
+
+                    <div class="card-image">
+
+                        <img src="图片/思政课程4.jpg" alt="邓小平理论">
+
+                    </div>
+
+                    <div class="card-content">
+
+                        <h3 class="card-grade">邓小平理论</h3>
+
+                        <p class="card-desc">马列主义同当代中国实践和时代特征相结合的产物，是马克思主义中国化第二次历史性飞跃的开创性成果，是中国特色社会主义理论体系的开创之作，科学回答 “什么是社会主义、怎样建设社会主义”。</p>
+
+                        <button class="course-more-btn" onclick="window.location.href='思政课程4.html'">更多</button>
+
+                    </div>
+
+                </div>
+
+                <!-- 毛泽东思想 -->
+
+                <div class="course-card">
+
+                    <div class="card-image">
+
+                        <img src="图片/思政课程5.jpg" alt="毛泽东思想">
+
+                    </div>
+
+                    <div class="card-content">
+
+                        <h3 class="card-grade">毛泽东思想</h3>
+
+                        <p class="card-desc">马克思列宁主义同中国革命具体实践相结合的产物，是马克思主义中国化的第一次历史性飞跃，是中国共产党集体智慧的结晶。</p>
+
+                        <button class="course-more-btn" onclick="window.location.href='思政课程5.html'">更多</button>
+
+                    </div>
+
+                </div>
+
+                <!-- 马克思列宁主义 -->
+
+                <div class="course-card">
+
+                    <div class="card-image">
+
+                        <img src="图片/思政课程6.jpg" alt="马克思列宁主义">
+
+                    </div>
+
+                    <div class="card-content">
+
+                        <h3 class="card-grade">马克思列宁主义</h3>
+
+                        <p class="card-desc">马克思列宁主义是马克思主义和列宁主义的总称，是指导无产阶级革命、专政和社会主义建设，最终实现共产主义的行动指南，是中国共产党指导思想的理论基础。</p>
+
+                        <button class="course-more-btn" onclick="window.location.href='思政课程6.html'">更多</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+        </div>
+
+    </section>
+
+            <div class="course-footer">
+
+                <button class="course-expand-btn" id="course-expand-btn">
+
+                    <i class="fa fa-list"></i> 查看全部书目
+
+                </button>
+
+            </div>
+
+    <!-- 3. 核心功能区 -->
+
+    <section class="features">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>平台核心功能</h2>
+
+                <p>一站式思政教育学习平台，满足乡村师生多样化学习需求</p>
+
+            </div>
+
+            <div class="features-grid">
+
+                <!-- 功能卡片1：思政文库 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa fa-newspaper-o"></i>
+
+                    </div>
+
+                    <h3>思政文库</h3>
+
+                    <p>查看重要时政新闻，结合乡村实际解读政策热点，让思政教育紧跟时代步伐。</p>
+
+                    <a href="news.html" class="btn btn-outline" style="margin-top: 20px;">查看详情</a>
+
+                </div>
+
+                <!-- 功能卡片2：思政乐园 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa fa-book"></i>
+
+                    </div>
+
+                    <h3>思政乐园</h3>
+
+                    <p>精选思政经典书籍，涵盖红色经典、美德故事、成长励志等多个类别，支持在线阅读。</p>
+
+                     <a href="bookstore.html" class="btn btn-outline" style="margin-top: 20px;">进入书库</a>
+
+                </div>
+
+                <!-- 功能卡片3：录播课室 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa fa-play-circle-o"></i>
+
+                    </div>
+
+                    <h3>录播课室</h3>
+
+                    <p>趣味动画、红色电影、名师讲座等视频资源，以直观生动的形式传递思政知识，提升学习兴趣。</p>
+
+                    <a href="video.html" class="btn btn-outline" style="margin-top: 20px;">观看视频</a>
+
+                </div>
+
+                <!-- 功能卡片4：直播课室 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa fa-download"></i>
+
+                    </div>
+
+                    <h3>直播课室</h3>
+
+                    <p>提供教案、课件、学习资料等免费下载服务，助力乡村教师高效备课，丰富教学形式。</p>
+
+                    <a href="download.html" class="btn btn-outline" style="margin-top: 20px;">下载中心</a>
+
+                </div>
+
+                <!-- 功能卡片5：留言板 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa fa-comments"></i>
+
+                    </div>
+
+                    <h3>留言板</h3>
+
+                    <p>与AI助手、师生在线交流思政问题，分享学习心得，共同探讨成长，营造互动学习氛围。</p>
+
+                    <a href="forum.html" class="btn btn-outline" style="margin-top: 20px;">进入论坛</a>
+
+                </div>
+
+                <!-- 功能卡片6：我的 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa fa-calendar-check-o"></i>
+
+                    </div>
+
+                    <h3>我的</h3>
+
+                    <p>记录每日思政学习轨迹，坚持打卡养成良好学习习惯，查看月度打卡统计，见证成长进步。</p>
+
+                    <a href="checkin.html" class="btn btn-outline" style="margin-top: 20px;">我的打卡</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 4. 底部信息 -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-top">
+
+                <div class="footer-col">
+
+                    <h4>关于我们</h4>
+
+                    <ul>
+
+                        <li><a href="#">平台介绍</a></li>
+
+                        <li><a href="#">团队风采</a></li>
+
+                        <li><a href="#">联系我们</a></li>
+
+                        <li><a href="#">加入我们</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-col">
+
+                    <h4>学习资源</h4>
+
+                    <ul>
+
+                        <li><a href="#">时政资料库</a></li>
+
+                        <li><a href="#">精品课程</a></li>
+
+                        <li><a href="#">学习工具</a></li>
+
+                        <li><a href="#">常见问题</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-col">
+
+                    <h4>法律声明</h4>
+
+                    <ul>
+
+                        <li><a href="#">隐私政策</a></li>
+
+                        <li><a href="#">用户协议</a></li>
+
+                        <li><a href="#">版权声明</a></li>
+
+                        <li><a href="#">免责条款</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-col">
+
+                    <h4>联系方式</h4>
+
+                    <ul>
+
+                        <li><i class="fa fa-phone"></i> 0350-3339920</li>
+
+                        <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
+
+                        <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <p>© 2026 云先生互联网乡村思政教育网络平台 版权所有 | 晋ICP备202308110020号</p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+
+
+    <!-- 交互脚本 -->
+
+    <script>
+
+        //移动端导航切换
+
+        function toggleNav() {
+
+            const navMenu = document.querySelector('.nav-menu');
+
+            navMenu.classList.toggle('active');
+
+        }
+
+
+
+// 平台介绍 - 精准显示到服务定位结束
+
+const introContent = document.getElementById('intro-content');
+
+const introMoreBtn = document.getElementById('intro-more-btn');
+
+const anchorPoint = document.getElementById('anchor-point');
+
+const introImage = document.querySelector('.intro-image'); // 关联图片尺寸
+
+let isIntroExpanded = false;
+
+
+
+// 页面加载完成后，计算锚点高度并设置默认显示高度
+
+window.addEventListener('load', function() {
+
+    if (anchorPoint) {
+
+        // 获取锚点的底部位置（即服务定位的结尾高度）
+
+        const anchorBottom = anchorPoint.getBoundingClientRect().bottom;
+
+        const contentTop = introContent.getBoundingClientRect().top;
+
+        const defaultHeight = anchorBottom - contentTop + 20; // +20是预留一点边距
+
+        
+
+        // 设置默认显示高度
+
+        introContent.style.maxHeight = defaultHeight + 'px';
+
+        // 同步设置图片初始高度（和文字区匹配）
+
+        introImage.style.height = defaultHeight + 'px';
+
+    }
+
+});
+
+
+
+// 点击查看更多/收起
+
+introMoreBtn.addEventListener('click', function() {
+
+    isIntroExpanded = !isIntroExpanded;
+
+    if (isIntroExpanded) {
+
+        // 展开：显示全部内容，图片铺满
+
+        introContent.classList.add('expanded');
+
+        introContent.style.maxHeight = 'none';
+
+        introImage.classList.add('expanded');
+
+        introImage.style.height = 'auto'; // 图片高度自适应
+
+        introMoreBtn.innerHTML = '<i class="fa fa-minus"></i> 收起';
+
+    } else {
+
+        // 收起：回到服务定位结尾的高度
+
+        introContent.classList.remove('expanded');
+
+        const anchorBottom = anchorPoint.getBoundingClientRect().bottom;
+
+        const contentTop = introContent.getBoundingClientRect().top;
+
+        const defaultHeight = anchorBottom - contentTop + 20;
+
+        introContent.style.maxHeight = defaultHeight + 'px';
+
+        introImage.classList.remove('expanded');
+
+        introImage.style.height = defaultHeight + 'px'; // 图片恢复匹配高度
+
+        introMoreBtn.innerHTML = '<i class="fa fa-plus"></i> 查看更多';
+
+    }
+
+});
+
+        // 思政课程学习 - 查看全部/收起
+
+        const courseGrid = document.getElementById('course-grid');
+
+        const courseExpandBtn = document.getElementById('course-expand-btn');
+
+        let isCourseExpanded = false;
+
+
+
+        courseExpandBtn.addEventListener('click', function() {
+
+            isCourseExpanded = !isCourseExpanded;
+
+            courseGrid.classList.toggle('expanded', isCourseExpanded);
+
+            if (isCourseExpanded) {
+
+                courseExpandBtn.innerHTML = '<i class="fa fa-angle-up"></i> 收起全部';
+
+            } else {
+
+                courseExpandBtn.innerHTML = '<i class="fa fa-list"></i> 查看全部书目';
+
+            }
+
+        });
+
+
+
+        // 平滑滚动
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+            anchor.addEventListener('click', function (e) {
+
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+
+                    behavior: 'smooth'
+
+                });
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

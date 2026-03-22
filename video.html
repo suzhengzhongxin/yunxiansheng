@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云先生互联网乡村思政教育网络平台</title>
+    <!-- 保持和首页一致的图标库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        /* ========== 全局样式（复用首页） ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", "PingFang SC", "Helvetica Neue", sans-serif;
+        }
+        :root {
+            --primary-color: #991a28; /* 主红色 */
+            --primary-light: #d62828; /* 浅红 */
+            --primary-dark: #7a141e; /* 深红 */
+            --gold-color: #ffd700; /* 金色（点缀） */
+            --gray-light: #f8f9fa; /* 浅灰（背景） */
+            --gray-middle: #e9ecef; /* 中灰（边框） */
+            --gray-dark: #6c757d; /* 深灰（文字） */
+            --white-color: #ffffff; /* 白色 */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --transition: all 0.3s ease; /* 统一过渡动画 */
+        }
+        body {
+            background-color: var(--gray-light);
+            color: #333;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        ul {
+            list-style: none;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        /* ========== 导航栏（复用首页） ========== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
+            box-shadow: var(--shadow-sm);
+            padding: 0;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo img {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            border: 2px solid var(--white-color);
+        }
+        .logo-text {
+            color: var(--white-color);
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+        }
+        /* 导航链接默认样式 - 白色 */
+.nav-menu li a {
+    color: #ffffff; /* 白色 */
+    font-size: 16px;
+    padding: 8px 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+/* 当前页面导航链接 - 黄色（active类） */
+.nav-menu li a.active {
+    color: #ffd700; /* 金色/黄色，和你页面按钮颜色一致 */
+}
+/* 保留原有hover下划线效果（可选） */
+.nav-menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffd700;
+    transition: var(--transition);
+}
+.nav-menu li a:hover::after {
+    width: 100%;
+}
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold-color);
+            transition: var(--transition);
+        }
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+        .nav-menu li a.active {
+            color: var(--gold-color);
+        }
+        .nav-toggle {
+            display: none;
+            font-size: 24px;
+            color: var(--white-color);
+            cursor: pointer;
+        }
+
+        /* ========== 横幅（和首页完全一致，仅改副标题） ========== */
+        .banner {
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #b82232 100%);
+            position: relative;
+            overflow: visible;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .banner-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('图片/bg(1).jpg') center/cover no-repeat;
+            background-size: 100% auto;
+            opacity: 1;
+            z-index: 1;
+        }
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--white-color);
+            padding: 0 20px;
+            margin-top: -50px;
+        }
+        .banner-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 18px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .banner-subtitle {
+            font-size: 22px;
+            margin-bottom: 30px;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .banner-btn {
+            padding: 12px 32px;
+            font-size: 18px;
+            border-radius: var(--radius-md);
+            background-color: var(--gold-color);
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+        .banner-btn:hover {
+            background-color: #fff082;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ========== 新增：视频学习内容区（还原图片样式） ========== */
+        .video-section {
+            padding: 80px 0;
+        }
+        /* 课程容器：左侧目录+右侧视频 */
+        .course-container {
+            display: flex;
+            background-color: var(--white-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+        /* 左侧课程目录 */
+        .course-catalog {
+            width: 30%;
+            background-color: #f0e9e0; /* 复古纸张底色，贴近图片风格 */
+            padding: 30px 20px;
+            border-right: 1px solid var(--gray-middle);
+        }
+        .catalog-title {
+            font-size: 24px;
+            color: var(--primary-dark);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .course-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .course-item {
+            padding: 12px 15px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+        .course-item:hover {
+            background-color: var(--white-color);
+            border-left-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+        .course-item.active {
+            background-color: var(--white-color);
+            border-left-color: var(--primary-color);
+            font-weight: bold;
+        }
+        .course-item a {
+            font-size: 16px;
+            color: #333;
+            display: block; /* 整行可点击 */
+        }
+        /* 更多课程按钮 */
+        .more-course {
+            margin-top: 20px;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        .more-course:hover {
+            background-color: var(--primary-light);
+        }
+        /* 右侧视频播放区 */
+        .video-player {
+            width: 70%;
+            padding: 0;
+            position: relative;
+        }
+        .video-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        /* 视频遮罩（模拟播放控件） */
+        .video-mask {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+        .video-time {
+            font-size: 14px;
+        }
+        .video-controls {
+            display: flex;
+            gap: 15px;
+            font-size: 18px;
+        }
+        .video-controls i {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .video-controls i:hover {
+            color: var(--gold-color);
+        }
+
+        /* ========== 底部（复用首页） ========== */
+        .footer {
+            background-color: var(--primary-dark);
+            color: var(--white-color);
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--gold-color);
+        }
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        .footer-col ul li a:hover {
+            color: var(--gold-color);
+            padding-left: 5px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* ========== 响应式适配（核心适配视频区） ========== */
+        @media (max-width: 1200px) {
+            .banner-title {
+                font-size: 40px;
+            }
+            .course-item a {
+                font-size: 15px;
+            }
+        }
+        @media (max-width: 768px) {
+            /* 移动端导航 */
+            .nav-toggle {
+                display: block;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--primary-dark);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                gap: 25px;
+                transition: var(--transition);
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            /* 横幅适配 */
+            .banner {
+                height: 400px;
+            }
+            .banner-title {
+                font-size: 32px;
+            }
+            .banner-subtitle {
+                font-size: 18px;
+            }
+            /* 视频区改为上下布局 */
+            .course-container {
+                flex-direction: column;
+            }
+            .course-catalog {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--gray-middle);
+            }
+            .video-player {
+                width: 100%;
+                height: 300px;
+            }
+            /* 底部适配 */
+            .footer-top {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 导航栏（复用首页，视频学习标为active） ========== -->
+    <header class="header">
+        <div class="container nav">
+            <div class="logo">
+                <!-- 替换为你的Logo图片地址 -->
+                <img src="图片/云先生logo.jpg" alt="云先生logo">
+                <div class="logo-text">云先生思政教育平台</div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="news.html">思政文库</a></li>
+                <li><a href="bookstore.html">思政乐园</a></li>
+                <li><a href="video.html" class="active">录播课室</a></li>
+                <li><a href="download.html">直播课室</a></li>
+                <li><a href="forum.html">留言板</a></li>
+                <li><a href="checkin.html">我的</a></li>
+            </ul>
+            <div class="nav-toggle" onclick="toggleNav()">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== 横幅（复用首页，改副标题） ========== -->
+    <section class="banner">
+        <div class="banner-bg"></div>
+        <div class="banner-content">
+            <h1 class="banner-title">录播课室</h1>
+            <p class="banner-subtitle">名师精讲思政课程，沉浸式学习红色文化与家国情怀</p>
+            <a href="#video-content" class="btn banner-btn">开始学习</a>
+        </div>
+    </section>
+
+    <!-- ========== 视频学习核心内容区（还原图片样式） ========== -->
+    <section class="video-section" id="video-content">
+        <div class="container">
+            <div class="course-container">
+                <!-- 左侧课程目录 -->
+                <div class="course-catalog">
+                    <h3 class="catalog-title">课程目录</h3>
+                    <div class="course-list">
+                        <div class="course-item active">
+                            <a href="video/录课视频(1)/25思政2班韩雯婧2.7第一次录课.mp4" data-video-src="video/录课视频(1)/25思政2班韩雯婧2.7第一次录课.mp4" data-cover="图片/录播1.png">第一课：网络改变世界</a>
+                        </div>
+                        <div class="course-item">
+                            <a href="video/录课视频(1)/25思政2班韩雯婧2.19第二次录课.mp4" data-video-src="video/录课视频(1)/25思政2班韩雯婧2.19第二次录课.mp4" data-cover="图片/录播2.png">第二课：世界最长高速公路隧道</a>
+                        </div>
+                        <div class="course-item">
+                            <a href="video/录课视频(1)/25思政2班韩雯婧2.20第三次录课.mp4" data-video-src="video/录课视频(1)/25思政2班韩雯婧2.20第三次录课.mp4" data-cover="图片/录播3.png">第三课：人机共舞耀春晚</a>
+                        </div>
+                        <div class="course-item">
+                            <a href="video/录课视频(1)/25思政2班于瑞康2.7第一次录课.mp4" data-video-src="video/录课视频(1)/25思政2班于瑞康2.7第一次录课.mp4" data-cover="图片/录播4.png">第四课：科技筑梦 创新未来</a>
+                        </div>
+                        <div class="course-item">
+                            <a href="video/录课视频(1)/25思政2班于瑞康2.19第二次录课.mp4" data-video-src="video/录课视频(1)/25思政2班于瑞康2.19第二次录课.mp4" data-cover="图片/录播5.png">第五课：中国沙漠铁路：连接未来的希望之路</a>
+                        </div>
+                    </div>
+                    <button class="more-course" onclick="window.location.href='course-list.html'">更多课程</button>
+                </div>
+                <!-- 右侧视频播放区 -->
+                <div class="video-player">
+                <!-- 封面图：用于展示视频封面，随课程切换 -->
+                <img src="图片/录播1.png" alt="第一课：网络改变世界" class="video-bg" id="video-cover">
+                <!-- 真实视频标签：隐藏在封面下，解决播放问题，controls可自定义是否显示原生控件 -->
+                <video id="main-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: none;" preload="metadata">
+                <source src="" type="video/mp4">
+                您的浏览器不支持HTML5视频播放，请升级至最新浏览器！
+                </video>
+                <!-- 原有遮罩/播放按钮：保留不变，新增点击事件 -->
+            <div class="video-mask" style="cursor: pointer;" onclick="playVideo()">
+                <div class="video-time">00:00:00</div>
+                <div class="video-controls">
+                    <i class="fa fa-play" id="play-icon"></i>
+                    <i class="fa fa-pause" id="pause-icon" style="display: none;"></i>
+                    <i class="fa fa-volume-up"></i>
+                    <i class="fa fa-expand" onclick="fullScreenVideo()"></i>
+                </div>
+            </div>
+</div>
+        </div>
+    </section>
+
+    <!-- ========== 底部（复用首页） ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="#">平台介绍</a></li>
+                        <li><a href="#">团队风采</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">加入我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>学习资源</h4>
+                    <ul>
+                        <li><a href="#">时政资料库</a></li>
+                        <li><a href="#">精品课程</a></li>
+                        <li><a href="#">学习工具</a></li>
+                        <li><a href="#">常见问题</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>法律声明</h4>
+                    <ul>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">用户协议</a></li>
+                        <li><a href="#">版权声明</a></li>
+                        <li><a href="#">免责条款</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>联系方式</h4>
+                    <ul>
+                        <li><i class="fa fa-phone"></i> 0350-3339920</li>
+                        <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
+                        <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 云先生互联网乡村思政教育网络平台 版权所有 | 晋ICP备202308110020号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== 移动端导航+视频切换脚本 ========== -->
+    <script>
+      // 获取核心元素
+const courseItems = document.querySelectorAll('.course-item');
+const mainVideo = document.getElementById('main-video');
+const videoCover = document.getElementById('video-cover');
+const playIcon = document.getElementById('play-icon');
+const pauseIcon = document.getElementById('pause-icon');
+let videoSource = mainVideo.querySelector('source');
+
+// 页面加载初始化：加载默认选中课程的视频和封面
+document.addEventListener('DOMContentLoaded', function() {
+    const defaultActive = document.querySelector('.course-item.active a');
+    if (defaultActive) {
+        // 初始化视频源
+        videoSource.src = defaultActive.dataset.videoSrc;
+        videoSource.type = 'video/mp4';
+        mainVideo.load();
+        // 初始化封面图（关键：读取data-cover）
+        videoCover.src = defaultActive.dataset.cover;
+        videoCover.alt = defaultActive.textContent;
+        videoCover.title = defaultActive.textContent;
+    }
+
+    // 课程点击切换事件：同步切换视频+封面
+    courseItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            // 移除所有激活状态
+            courseItems.forEach(li => li.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 获取当前课程的核心数据
+            const currentA = this.querySelector('a');
+            const videoSrc = currentA.dataset.videoSrc;
+            const coverSrc = currentA.dataset.cover; // 读取封面路径
+            const videoTitle = currentA.textContent;
+
+            // 重置视频状态（回到封面模式）
+            mainVideo.pause();
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            videoCover.style.display = 'block';
+            mainVideo.style.display = 'none';
+
+            // 1. 切换视频源
+            videoSource.src = videoSrc;
+            videoSource.type = 'video/mp4';
+            mainVideo.load();
+
+            // 2. 切换封面图（核心修改：更新src）
+            videoCover.src = coverSrc;
+            videoCover.alt = videoTitle;
+            videoCover.title = videoTitle;
+        });
+    });
+});
+
+// 播放/暂停核心逻辑（保留不变）
+function playVideo() {
+    if (mainVideo.paused) {
+        videoCover.style.display = 'none';
+        mainVideo.style.display = 'block';
+        mainVideo.play().catch(err => {
+            console.log('播放失败：', err);
+            alert('视频播放失败，请检查文件路径/格式是否正确！');
+        });
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+    } else {
+        mainVideo.pause();
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+        videoCover.style.display = 'block';
+        mainVideo.style.display = 'none';
+    }
+}
+
+// 全屏逻辑（保留不变）
+function fullScreenVideo() {
+    if (mainVideo.requestFullscreen) {
+        mainVideo.requestFullscreen();
+    } else if (mainVideo.webkitRequestFullscreen) {
+        mainVideo.webkitRequestFullscreen();
+    } else if (mainVideo.mozRequestFullScreen) {
+        mainVideo.mozRequestFullScreen();
+    }
+}
+
+// 播放结束重置（保留不变）
+mainVideo.addEventListener('ended', function() {
+    playIcon.style.display = 'block';
+    pauseIcon.style.display = 'none';
+    videoCover.style.display = 'block';
+    mainVideo.style.display = 'none';
+});
+    </script>
+</body>
+</html>

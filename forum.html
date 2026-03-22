@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云先生互联网乡村思政教育网络平台</title>
+    <!-- 保持和首页一致的图标库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        /* ========== 全局样式（复用首页） ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", "PingFang SC", "Helvetica Neue", sans-serif;
+        }
+        :root {
+            --primary-color: #991a28; /* 主红色 */
+            --primary-light: #d62828; /* 浅红 */
+            --primary-dark: #7a141e; /* 深红 */
+            --gold-color: #ffd700; /* 金色（点缀） */
+            --gray-light: #f8f9fa; /* 浅灰（背景） */
+            --gray-middle: #e9ecef; /* 中灰（边框） */
+            --gray-dark: #6c757d; /* 深灰（文字） */
+            --white-color: #ffffff; /* 白色 */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --transition: all 0.3s ease; /* 统一过渡动画 */
+            --ai-color: #f0f0f0; /* AI消息底色 */
+            --user-color: #007bff; /* 用户消息底色 */
+        }
+        body {
+            background-color: var(--gray-light);
+            color: #333;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        ul {
+            list-style: none;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        /* ========== 导航栏（复用首页） ========== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
+            box-shadow: var(--shadow-sm);
+            padding: 0;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo img {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            border: 2px solid var(--white-color);
+        }
+        .logo-text {
+            color: var(--white-color);
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+        }
+        /* 导航链接默认样式 - 白色 */
+.nav-menu li a {
+    color: #ffffff; /* 白色 */
+    font-size: 16px;
+    padding: 8px 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+/* 当前页面导航链接 - 黄色（active类） */
+.nav-menu li a.active {
+    color: #ffd700; /* 金色/黄色，和你页面按钮颜色一致 */
+}
+/* 保留原有hover下划线效果（可选） */
+.nav-menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffd700;
+    transition: var(--transition);
+}
+.nav-menu li a:hover::after {
+    width: 100%;
+}
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold-color);
+            transition: var(--transition);
+        }
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+        .nav-menu li a.active {
+            color: var(--gold-color);
+        }
+        .nav-toggle {
+            display: none;
+            font-size: 24px;
+            color: var(--white-color);
+            cursor: pointer;
+        }
+
+        /* ========== 横幅（和首页完全一致，仅改副标题） ========== */
+        .banner {
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #b82232 100%);
+            position: relative;
+            overflow: visible;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .banner-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('图片/bg(1).jpg') center/cover no-repeat;
+            background-size: 100% auto;
+            opacity: 1;
+            z-index: 1;
+        }
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--white-color);
+            padding: 0 20px;
+            margin-top: -50px;
+        }
+        .banner-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 18px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .banner-subtitle {
+            font-size: 22px;
+            margin-bottom: 30px;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .banner-btn {
+            padding: 12px 32px;
+            font-size: 18px;
+            border-radius: var(--radius-md);
+            background-color: var(--gold-color);
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+        .banner-btn:hover {
+            background-color: #fff082;
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* ========== 新增：论坛交流内容区（还原图片样式） ========== */
+        .forum-section {
+            padding: 80px 0;
+        }
+        /* 板块标题 */
+        .forum-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .forum-title h2 {
+            font-size: 30px;
+            color: #333;
+            display: inline-block;
+            padding-bottom: 10px;
+            border-bottom: 3px double var(--primary-color);
+        }
+        /* 论坛说明文字 */
+        .forum-desc {
+            text-align: center;
+            font-size: 16px;
+            color: var(--gray-dark);
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* 聊天容器 */
+        .chat-container {
+            background-color: var(--white-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        /* 聊天记录区域 */
+        .chat-history {
+            height: 600px;
+            overflow-y: auto;
+            padding: 20px;
+            background-color: #fafafa;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--gray-middle);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        /* 滚动条美化 */
+        .chat-history::-webkit-scrollbar {
+            width: 8px;
+        }
+        .chat-history::-webkit-scrollbar-track {
+            background: var(--gray-light);
+            border-radius: 4px;
+        }
+        .chat-history::-webkit-scrollbar-thumb {
+            background: var(--gray-dark);
+            border-radius: 4px;
+        }
+        .chat-history::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+        /* 消息气泡通用样式 */
+        .message {
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: var(--radius-md);
+            position: relative;
+            line-height: 1.7;
+        }
+        /* AI消息（左侧） */
+        .ai-message {
+            align-self: flex-start;
+            background-color: var(--ai-color);
+            color: #333;
+            border-top-left-radius: 0;
+        }
+        .ai-message::before {
+            content: 'AI助手：';
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+        /* 用户消息（右侧） */
+        .user-message {
+            align-self: flex-end;
+            background-color: var(--user-color);
+            color: white;
+            border-top-right-radius: 0;
+        }
+        .user-message::before {
+            content: '你：';
+            font-weight: bold;
+        }
+        /* 其他用户消息（扩展） */
+        .other-user-message {
+            align-self: flex-start;
+            background-color: #e8f4f8;
+            color: #333;
+            border-top-left-radius: 0;
+        }
+        .other-user-message::before {
+            content: attr(data-username) '：';
+            font-weight: bold;
+            color: #007bff;
+        }
+        /* 输入区域 */
+        .chat-input-area {
+            display: flex;
+            gap: 15px;
+            align-items: flex-end;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid var(--gray-middle);
+            border-radius: var(--radius-md);
+            resize: none;
+            height: 80px;
+            font-size: 16px;
+            outline: none;
+            transition: var(--transition);
+        }
+        .chat-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(153, 26, 40, 0.1);
+        }
+        .send-btn {
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .send-btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+        /* 切换聊天模式（AI/用户互动） */
+        .chat-mode {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .mode-btn {
+            padding: 10px 25px;
+            border: 1px solid var(--gray-middle);
+            background-color: var(--white-color);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .mode-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* ========== 底部（复用首页） ========== */
+        .footer {
+            background-color: var(--primary-dark);
+            color: var(--white-color);
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--gold-color);
+        }
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        .footer-col ul li a:hover {
+            color: var(--gold-color);
+            padding-left: 5px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* ========== 响应式适配 ========== */
+        @media (max-width: 1200px) {
+            .banner-title {
+                font-size: 40px;
+            }
+        }
+        @media (max-width: 768px) {
+            /* 移动端导航 */
+            .nav-toggle {
+                display: block;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--primary-dark);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                gap: 25px;
+                transition: var(--transition);
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            /* 横幅适配 */
+            .banner {
+                height: 400px;
+            }
+            .banner-title {
+                font-size: 32px;
+            }
+            .banner-subtitle {
+                font-size: 18px;
+            }
+            /* 论坛适配 */
+            .forum-section {
+                padding: 40px 0;
+            }
+            .chat-container {
+                padding: 20px 15px;
+            }
+            .chat-history {
+                height: 400px;
+                padding: 15px;
+            }
+            .message {
+                max-width: 90%;
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+            .chat-input-area {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+            .chat-input {
+                height: 60px;
+                font-size: 14px;
+            }
+            .send-btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+            .chat-mode {
+                gap: 10px;
+            }
+            .mode-btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            /* 底部适配 */
+            .footer-top {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 导航栏（复用首页，论坛交流标为active） ========== -->
+    <header class="header">
+        <div class="container nav">
+            <div class="logo">
+                <!-- 替换为你的Logo图片地址 -->
+                <img src="图片/云先生logo.jpg" alt="云先生logo">
+                <div class="logo-text">云先生思政教育平台</div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="news.html">思政文库</a></li>
+                <li><a href="bookstore.html">思政乐园</a></li>
+                <li><a href="video.html">录播课室</a></li>
+                <li><a href="download.html">直播课室</a></li>
+                <li><a href="forum.html" class="active">留言板</a></li>
+                <li><a href="checkin.html">我的</a></li>
+            </ul>
+            <div class="nav-toggle" onclick="toggleNav()">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== 横幅（复用首页，改副标题） ========== -->
+    <section class="banner">
+        <div class="banner-bg"></div>
+        <div class="banner-content">
+            <h1 class="banner-title">留言板</h1>
+            <p class="banner-subtitle">与AI助手、师生交流思政问题，分享学习心得，共同成长进步</p>
+            <a href="#forum-content" class="btn banner-btn">进入交流</a>
+        </div>
+    </section>
+
+    <!-- ========== 论坛交流核心内容区（还原图片样式） ========== -->
+    <section class="forum-section" id="forum-content">
+        <div class="container">
+            <div class="forum-title">
+                <h2>论坛交流</h2>
+            </div>
+            <div class="forum-desc">
+                在这里，你可以与AI助手进行思政相关问题的交流互动，获得专业的解答和指导；也可以与其他用户发帖提问、互相回复，共同探讨思政学习的点点滴滴。
+            </div>
+
+            <!-- 聊天模式切换（AI交流/用户互动） -->
+            <div class="chat-mode">
+                <button class="mode-btn active" id="ai-mode">AI交流</button>
+                <button class="mode-btn" id="user-mode">用户互动</button>
+            </div>
+
+            <!-- 聊天容器 -->
+            <div class="chat-container">
+                <!-- 聊天记录 -->
+                <div class="chat-history" id="chat-history">
+                    <!-- 初始AI消息 -->
+                    <div class="message ai-message">
+                        你好！我是云先生平台的AI助手，很高兴为你服务。你可以问我任何关于思政教育、时政热点、历史知识等问题，我会尽力为你解答！
+                    </div>
+                </div>
+
+                <!-- 输入区域 -->
+                <div class="chat-input-area">
+                    <textarea class="chat-input" id="chat-input" placeholder="请输入你的问题..."></textarea>
+                    <button class="send-btn" id="send-btn">发送</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 底部（复用首页） ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="#">平台介绍</a></li>
+                        <li><a href="#">团队风采</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">加入我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>学习资源</h4>
+                    <ul>
+                        <li><a href="#">时政资料库</a></li>
+                        <li><a href="#">精品课程</a></li>
+                        <li><a href="#">学习工具</a></li>
+                        <li><a href="#">常见问题</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>法律声明</h4>
+                    <ul>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">用户协议</a></li>
+                        <li><a href="#">版权声明</a></li>
+                        <li><a href="#">免责条款</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>联系方式</h4>
+                    <ul>
+                        <li><i class="fa fa-phone"></i> 0350-3339920</li>
+                        <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
+                        <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 云先生互联网乡村思政教育网络平台 版权所有 | 晋ICP备202308110020号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== 移动端导航+论坛交互脚本 ========== -->
+    <!-- ========== 移动端导航+论坛交互脚本 ========== -->
+<script>
+    // 移动端导航交互（复用首页）
+    function toggleNav() {
+        const navMenu = document.querySelector('.nav-menu');
+        navMenu.classList.toggle('active');
+    }
+
+    // 论坛核心交互逻辑
+    document.addEventListener('DOMContentLoaded', function() {
+        // 核心元素获取
+        const chatHistory = document.getElementById('chat-history');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const aiModeBtn = document.getElementById('ai-mode');
+        const userModeBtn = document.getElementById('user-mode');
+        
+        // 当前聊天模式（默认AI交流）
+        let currentMode = 'ai';
+
+        // 模式切换
+        aiModeBtn.addEventListener('click', function() {
+            currentMode = 'ai';
+            aiModeBtn.classList.add('active');
+            userModeBtn.classList.remove('active');
+            chatHistory.innerHTML = '<div class="message ai-message">你好！我是云先生平台的AI助手，很高兴为你服务。你可以问我任何关于思政教育、时政热点、历史知识等问题，我会尽力为你解答！</div>';
+        });
+
+        userModeBtn.addEventListener('click', function() {
+            currentMode = 'user';
+            userModeBtn.classList.add('active');
+            aiModeBtn.classList.remove('active');
+            chatHistory.innerHTML = '<div class="message other-user-message" data-username="思政老师">欢迎来到用户互动区！大家可以在这里交流思政学习心得，有问题可以互相解答～</div>';
+        });
+
+        // ========== 增强版AI回复系统 ==========
+        // 1. 关键词匹配库（支持多关键词匹配）
+        const aiReplyLibrary = [
+            {
+                keywords: ['你好', '您好', '哈喽', '嗨'],
+                replies: [
+                    '你好呀 😊！有什么思政相关的问题想要问我吗？',
+                    '您好～很高兴为你解答思政相关问题！',
+                    '哈喽～随时为你解答思政教育、时政热点等问题～'
+                ]
+            },
+            {
+                keywords: ['思政教育', '思想政治教育'],
+                replies: [
+                    '思政教育即思想政治教育，是指社会或社会群体用一定的思想观念、政治观点、道德规范，对其成员施加有目的、有计划、有组织的影响，使他们形成符合一定社会所要求的思想品德的社会实践活动。',
+                    '思想政治教育的核心是立德树人，旨在培养具有正确世界观、人生观、价值观的新时代青年，涵盖理想信念教育、爱国主义教育、道德品质教育等多个方面。'
+                ]
+            },
+            {
+                keywords: ['时政热点', '最新时政', '时事政治'],
+                replies: [
+                    '近期的重要时政热点包括：乡村振兴战略深化推进、高质量发展相关政策落地、红色文化传承与思政教育融合、主题教育常态化开展等。你想了解哪个具体方向？',
+                    '最新时政热点聚焦于民生保障、科技创新、生态文明建设以及思政教育与乡村振兴结合等领域，如需详细解读可以告诉我具体想了解的内容～'
+                ]
+            },
+            {
+                keywords: ['红色故事', '革命故事', '红色经典'],
+                replies: [
+                    '给你分享一个经典红色故事——《小英雄雨来》：抗日战争时期，少年雨来为了掩护革命干部，机智地与敌人周旋，最终成功保护了同志，展现了中国少年的爱国情怀和勇敢智慧。',
+                    '分享一个感人的红色故事：董存瑞舍身炸碉堡。1948年，董存瑞在解放隆化战斗中，手托炸药包炸毁敌人碉堡，以自己的生命为部队开辟了前进道路，他的英雄事迹永远铭刻在历史中。',
+                    '《半条棉被》的红色故事：红军长征途中，三位女红军借宿农家，临走时把仅有的一床棉被剪下一半留给贫苦老乡，体现了军民鱼水情深的革命情怀。'
+                ]
+            },
+            {
+                keywords: ['乡村振兴', '农村思政'],
+                replies: [
+                    '乡村振兴背景下的思政教育，重点在于将思政教育与乡村发展实际结合，培养乡村人才的家国情怀，引导青年投身乡村建设，助力乡村文化振兴。',
+                    '农村思政教育注重接地气、贴民心，通过院坝会、田间课堂等形式，把党的政策、红色文化传递到乡村每一个角落，凝聚乡村发展的精神力量。'
+                ]
+            },
+            {
+                keywords: ['学习心得', '思政学习', '学习方法'],
+                replies: [
+                    '思政学习最好的方法是理论联系实际，既要认真学习教材知识，也要关注社会现实，结合生活中的案例理解思政理论的实践意义。',
+                    '分享一个思政学习小技巧：建立知识框架，将不同模块的思政知识（如党史、时政、道德规范）串联起来，同时多参与实践活动，在实践中深化理解。'
+                ]
+            }
+        ];
+
+        // 2. 默认回复库（无匹配关键词时使用）
+        const defaultReplies = [
+            `你的问题很有深度！由于我的知识库有限，暂时无法精准回答这个问题，但思政教育的核心是培养正确的世界观、人生观、价值观，建议你结合教材和实际案例深入学习～`,
+            `感谢你的提问！关于这个问题，你可以查阅最新的思政教育指导文件，或与身边的老师同学交流探讨，相信会有更多收获～`,
+            `这个问题涉及到思政教育的重要方面，建议从历史背景、政策导向、实践应用三个维度去理解，如有具体的切入点，我可以尽力解答～`
+        ];
+
+        // 3. 智能AI回复生成函数
+        function generateAIReply(userInput) {
+            // 转换为小写便于匹配
+            const inputLower = userInput.toLowerCase();
+            
+            // 遍历关键词库匹配
+            for (const item of aiReplyLibrary) {
+                const matched = item.keywords.some(keyword => 
+                    inputLower.includes(keyword.toLowerCase())
+                );
+                if (matched) {
+                    // 随机返回该分类下的一个回复
+                    const randomIndex = Math.floor(Math.random() * item.replies.length);
+                    return item.replies[randomIndex];
+                }
+            }
+            
+            // 无匹配时返回默认回复（随机）
+            const randomDefaultIndex = Math.floor(Math.random() * defaultReplies.length);
+            return defaultReplies[randomDefaultIndex].replace('${messageText}', userInput);
+        }
+
+        // 4. 发送消息函数
+        function sendMessage() {
+            const messageText = chatInput.value.trim();
+            if (!messageText) return; // 空消息不发送
+
+            // 添加用户消息到聊天记录
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = messageText;
+            chatHistory.appendChild(userMessage);
+
+            // 清空输入框
+            chatInput.value = '';
+
+            // 滚动到底部
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            // 根据模式生成回复
+            if (currentMode === 'ai') {
+                // AI模式：生成智能回复
+                setTimeout(() => {
+                    const aiReply = document.createElement('div');
+                    aiReply.className = 'message ai-message';
+                    aiReply.textContent = generateAIReply(messageText);
+                    chatHistory.appendChild(aiReply);
+                    chatHistory.scrollTop = chatHistory.scrollHeight;
+                }, 800); // 模拟网络延迟
+            } else {
+                // 用户互动模式：模拟其他用户回复
+                setTimeout(() => {
+                    const userReply = document.createElement('div');
+                    userReply.className = 'message other-user-message';
+                    userReply.dataset.username = '热心网友';
+                    userReply.textContent = `我来回复一下：「${messageText}」这个问题我也思考过，我的理解是...（可在实际项目中对接用户回复数据）`;
+                    chatHistory.appendChild(userReply);
+                    chatHistory.scrollTop = chatHistory.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        // 点击发送按钮
+        sendBtn.addEventListener('click', sendMessage);
+
+        // 按Enter键发送（支持Shift+Enter换行）
+        chatInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    });
+</script>
+</body>
+</html>
