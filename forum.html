@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>云先生互联网乡村思政教育网络平台</title>
+    <title>云先生-师范生助力乡村中小学道德与法治网络平台</title>
     <!-- 保持和首页一致的图标库 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
@@ -217,7 +217,7 @@
             background-color: #fff082;
             box-shadow: var(--shadow-md);
         }
-        
+
         /* ========== 新增：论坛交流内容区（还原图片样式） ========== */
         .forum-section {
             padding: 80px 0;
@@ -511,122 +511,123 @@
     </style>
 </head>
 <body>
-    <!-- ========== 导航栏（复用首页，论坛交流标为active） ========== -->
-    <header class="header">
-        <div class="container nav">
-            <div class="logo">
-                <!-- 替换为你的Logo图片地址 -->
-                <img src="图片/云先生logo.jpg" alt="云先生logo">
-                <div class="logo-text">云先生思政教育平台</div>
+<!-- ========== 导航栏（复用首页，论坛交流标为active） ========== -->
+<header class="header">
+    <div class="container nav">
+        <div class="logo">
+            <!-- 替换为你的Logo图片地址 -->
+            <img src="图片/云先生logo.jpg" alt="云先生logo">
+            <div class="logo-text">云先生思政教育平台</div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="news.html">思政文库</a></li>
+            <li><a href="bookstore.html">思政乐园</a></li>
+            <li><a href="video.html">录播课室</a></li>
+            <li><a href="download.html">直播课室</a></li>
+            <li><a href="volunteer.html">志愿者匹配</a></li>
+            <li><a href="forum.html" class="active">留言板</a></li>
+            <li><a href="checkin.html">我的</a></li>
+        </ul>
+        <div class="nav-toggle" onclick="toggleNav()">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+
+<!-- ========== 横幅（复用首页，改副标题） ========== -->
+<section class="banner">
+    <div class="banner-bg"></div>
+    <div class="banner-content">
+        <h1 class="banner-title">留言板</h1>
+        <p class="banner-subtitle">与AI助手、师生交流思政问题，分享学习心得，共同成长进步</p>
+        <a href="#forum-content" class="btn banner-btn">进入交流</a>
+    </div>
+</section>
+
+<!-- ========== 论坛交流核心内容区（还原图片样式） ========== -->
+<section class="forum-section" id="forum-content">
+    <div class="container">
+        <div class="forum-title">
+            <h2>论坛交流</h2>
+        </div>
+        <div class="forum-desc">
+            在这里，你可以与AI助手进行思政相关问题的交流互动，获得专业的解答和指导；也可以与其他用户发帖提问、互相回复，共同探讨思政学习的点点滴滴。
+        </div>
+
+        <!-- 聊天模式切换（AI交流/用户互动） -->
+        <div class="chat-mode">
+            <button class="mode-btn active" id="ai-mode">AI交流</button>
+            <button class="mode-btn" id="user-mode">用户互动</button>
+        </div>
+
+        <!-- 聊天容器 -->
+        <div class="chat-container">
+            <!-- 聊天记录 -->
+            <div class="chat-history" id="chat-history">
+                <!-- 初始AI消息 -->
+                <div class="message ai-message">
+                    你好！我是云先生平台的AI助手，很高兴为你服务。你可以问我任何关于思政教育、时政热点、历史知识等问题，我会尽力为你解答！
+                </div>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="news.html">思政文库</a></li>
-                <li><a href="bookstore.html">思政乐园</a></li>
-                <li><a href="video.html">录播课室</a></li>
-                <li><a href="download.html">直播课室</a></li>
-                <li><a href="forum.html" class="active">留言板</a></li>
-                <li><a href="checkin.html">我的</a></li>
-            </ul>
-            <div class="nav-toggle" onclick="toggleNav()">
-                <i class="fa fa-bars"></i>
+
+            <!-- 输入区域 -->
+            <div class="chat-input-area">
+                <textarea class="chat-input" id="chat-input" placeholder="请输入你的问题..."></textarea>
+                <button class="send-btn" id="send-btn">发送</button>
             </div>
         </div>
-    </header>
+    </div>
+</section>
 
-    <!-- ========== 横幅（复用首页，改副标题） ========== -->
-    <section class="banner">
-        <div class="banner-bg"></div>
-        <div class="banner-content">
-            <h1 class="banner-title">留言板</h1>
-            <p class="banner-subtitle">与AI助手、师生交流思政问题，分享学习心得，共同成长进步</p>
-            <a href="#forum-content" class="btn banner-btn">进入交流</a>
-        </div>
-    </section>
-
-    <!-- ========== 论坛交流核心内容区（还原图片样式） ========== -->
-    <section class="forum-section" id="forum-content">
-        <div class="container">
-            <div class="forum-title">
-                <h2>论坛交流</h2>
+<!-- ========== 底部（复用首页） ========== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-col">
+                <h4>关于我们</h4>
+                <ul>
+                    <li><a href="#">平台介绍</a></li>
+                    <li><a href="#">团队风采</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">加入我们</a></li>
+                </ul>
             </div>
-            <div class="forum-desc">
-                在这里，你可以与AI助手进行思政相关问题的交流互动，获得专业的解答和指导；也可以与其他用户发帖提问、互相回复，共同探讨思政学习的点点滴滴。
+            <div class="footer-col">
+                <h4>学习资源</h4>
+                <ul>
+                    <li><a href="#">时政资料库</a></li>
+                    <li><a href="#">精品课程</a></li>
+                    <li><a href="#">学习工具</a></li>
+                    <li><a href="#">常见问题</a></li>
+                </ul>
             </div>
-
-            <!-- 聊天模式切换（AI交流/用户互动） -->
-            <div class="chat-mode">
-                <button class="mode-btn active" id="ai-mode">AI交流</button>
-                <button class="mode-btn" id="user-mode">用户互动</button>
+            <div class="footer-col">
+                <h4>法律声明</h4>
+                <ul>
+                    <li><a href="#">隐私政策</a></li>
+                    <li><a href="#">用户协议</a></li>
+                    <li><a href="#">版权声明</a></li>
+                    <li><a href="#">免责条款</a></li>
+                </ul>
             </div>
-
-            <!-- 聊天容器 -->
-            <div class="chat-container">
-                <!-- 聊天记录 -->
-                <div class="chat-history" id="chat-history">
-                    <!-- 初始AI消息 -->
-                    <div class="message ai-message">
-                        你好！我是云先生平台的AI助手，很高兴为你服务。你可以问我任何关于思政教育、时政热点、历史知识等问题，我会尽力为你解答！
-                    </div>
-                </div>
-
-                <!-- 输入区域 -->
-                <div class="chat-input-area">
-                    <textarea class="chat-input" id="chat-input" placeholder="请输入你的问题..."></textarea>
-                    <button class="send-btn" id="send-btn">发送</button>
-                </div>
+            <div class="footer-col">
+                <h4>联系方式</h4>
+                <ul>
+                    <li><i class="fa fa-phone"></i> 0350-3339920</li>
+                    <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
+                    <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
+                </ul>
             </div>
         </div>
-    </section>
-
-    <!-- ========== 底部（复用首页） ========== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-col">
-                    <h4>关于我们</h4>
-                    <ul>
-                        <li><a href="#">平台介绍</a></li>
-                        <li><a href="#">团队风采</a></li>
-                        <li><a href="#">联系我们</a></li>
-                        <li><a href="#">加入我们</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>学习资源</h4>
-                    <ul>
-                        <li><a href="#">时政资料库</a></li>
-                        <li><a href="#">精品课程</a></li>
-                        <li><a href="#">学习工具</a></li>
-                        <li><a href="#">常见问题</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>法律声明</h4>
-                    <ul>
-                        <li><a href="#">隐私政策</a></li>
-                        <li><a href="#">用户协议</a></li>
-                        <li><a href="#">版权声明</a></li>
-                        <li><a href="#">免责条款</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>联系方式</h4>
-                    <ul>
-                        <li><i class="fa fa-phone"></i> 0350-3339920</li>
-                        <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
-                        <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 云先生互联网乡村思政教育网络平台 版权所有 | 晋ICP备202308110020号</p>
-            </div>
+        <div class="footer-bottom">
+            <p>© 2026 云先生-师范生助力乡村中小学道德与法治网络平台  版权所有 | 晋ICP备202308110020号</p>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <!-- ========== 移动端导航+论坛交互脚本 ========== -->
-    <!-- ========== 移动端导航+论坛交互脚本 ========== -->
+<!-- ========== 移动端导航+论坛交互脚本 ========== -->
+<!-- ========== 移动端导航+论坛交互脚本 ========== -->
 <script>
     // 移动端导航交互（复用首页）
     function toggleNav() {
@@ -642,7 +643,7 @@
         const sendBtn = document.getElementById('send-btn');
         const aiModeBtn = document.getElementById('ai-mode');
         const userModeBtn = document.getElementById('user-mode');
-        
+
         // 当前聊天模式（默认AI交流）
         let currentMode = 'ai';
 
@@ -721,10 +722,10 @@
         function generateAIReply(userInput) {
             // 转换为小写便于匹配
             const inputLower = userInput.toLowerCase();
-            
+
             // 遍历关键词库匹配
             for (const item of aiReplyLibrary) {
-                const matched = item.keywords.some(keyword => 
+                const matched = item.keywords.some(keyword =>
                     inputLower.includes(keyword.toLowerCase())
                 );
                 if (matched) {
@@ -733,7 +734,7 @@
                     return item.replies[randomIndex];
                 }
             }
-            
+
             // 无匹配时返回默认回复（随机）
             const randomDefaultIndex = Math.floor(Math.random() * defaultReplies.length);
             return defaultReplies[randomDefaultIndex].replace('${messageText}', userInput);

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>云先生互联网乡村思政教育网络平台</title>
+    <title>云先生-师范生助力乡村中小学道德与法治网络平台</title>
     <!-- 保持和首页一致的图标库 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
@@ -644,163 +644,163 @@
     </style>
 </head>
 <body>
-    <!-- ========== 导航栏（复用首页，打卡记录标为active） ========== -->
-    <header class="header">
-        <div class="container nav">
-            <div class="logo">
-                <!-- 替换为你的Logo图片地址 -->
-                <img src="图片/云先生logo.jpg" alt="云先生logo">
-                <div class="logo-text">云先生思政教育平台</div>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="news.html">思政文库</a></li>
-                <li><a href="bookstore.html">思政乐园</a></li>
-                <li><a href="video.html">录播课室</a></li>
-                <li><a href="download.html">直播课室</a></li>
-                <li><a href="forum.html">留言板</a></li>
-                <li><a href="checkin.html" class="active">我的</a></li>
-            </ul>
-            <div class="nav-toggle" onclick="toggleNav()">
-                <i class="fa fa-bars"></i>
-            </div>
+<!-- ========== 导航栏（复用首页，打卡记录标为active） ========== -->
+<header class="header">
+    <div class="container nav">
+        <div class="logo">
+            <!-- 替换为你的Logo图片地址 -->
+            <img src="图片/云先生logo.jpg" alt="云先生logo">
+            <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
         </div>
-    </header>
-
-    <!-- ========== 横幅（复用首页，改副标题） ========== -->
-    <section class="banner">
-        <div class="banner-bg"></div>
-        <div class="banner-content">
-            <h1 class="banner-title">云先生互联网乡村思政教育</h1>
-            <h1 class="banner-title">网络平台--个人中心</h1>
-            <p class="banner-subtitle">记录每日思政学习轨迹，坚持打卡养成良好学习习惯</p>
-            <a href="#checkin-content" class="btn banner-btn">查看打卡记录</a>
+        <ul class="nav-menu">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="news.html">思政文库</a></li>
+            <li><a href="bookstore.html">思政乐园</a></li>
+            <li><a href="video.html">录播课室</a></li>
+            <li><a href="download.html">直播课室</a></li>
+            <li><a href="volunteer.html">志愿者匹配</a></li>
+            <li><a href="forum.html">留言板</a></li>
+            <li><a href="checkin.html" class="active">我的</a></li>
+        </ul>
+        <div class="nav-toggle" onclick="toggleNav()">
+            <i class="fa fa-bars"></i>
         </div>
-    </section>
+    </div>
+</header>
 
-    <!-- ========== 打卡记录核心内容区 ========== -->
-    <section class="checkin-section" id="checkin-content">
-        <div class="container">
-            <div class="checkin-title">
-                <h2>我的</h2>
+<!-- ========== 横幅（复用首页，改副标题） ========== -->
+<section class="banner">
+    <div class="banner-bg"></div>
+    <div class="banner-content">
+        <h1 class="banner-title">网络平台--个人中心</h1>
+        <p class="banner-subtitle">记录每日思政学习轨迹，坚持打卡养成良好学习习惯</p>
+        <a href="#checkin-content" class="btn banner-btn">查看打卡记录</a>
+    </div>
+</section>
+
+<!-- ========== 打卡记录核心内容区 ========== -->
+<section class="checkin-section" id="checkin-content">
+    <div class="container">
+        <div class="checkin-title">
+            <h2>我的</h2>
+        </div>
+
+        <!-- 个人信息卡片 -->
+        <div class="profile-card">
+            <div class="profile-avatar">
+                <img src="https://picsum.photos/id/64/200/200" alt="用户头像">
             </div>
-
-            <!-- 个人信息卡片 -->
-            <div class="profile-card">
-                <div class="profile-avatar">
-                    <img src="https://picsum.photos/id/64/200/200" alt="用户头像">
-                </div>
-                <div class="profile-info">
-                    <div class="info-item">
-                        <span class="info-label">用户名：</span>
-                        <div class="info-content">
-                            <span class="username-display" id="username-display">思政学习者001</span>
-                            <input type="text" class="username-input" id="username-input" value="思政学习者001">
-                            <button class="edit-btn" id="edit-btn">修改</button>
-                            <button class="save-btn" id="save-btn">保存</button>
-                            <span class="edit-tips">温馨提示：用户名1个月内仅可修改1次</span>
-                            <span class="edit-limit-tips" id="edit-limit-tips">本月已修改过用户名，无法再次修改！</span>
-                        </div>
-                    </div>
-                    <!-- 打卡统计 -->
-                    <div class="checkin-stats">
-                        <div class="stat-item">
-                            <div class="stat-value" id="total-checkin">23</div>
-                            <div class="stat-label">总打卡天数</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value" id="month-checkin">8</div>
-                            <div class="stat-label">本月打卡天数</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value" id="continue-checkin">5</div>
-                            <div class="stat-label">连续打卡天数</div>
-                        </div>
+            <div class="profile-info">
+                <div class="info-item">
+                    <span class="info-label">用户名：</span>
+                    <div class="info-content">
+                        <span class="username-display" id="username-display">思政学习者001</span>
+                        <input type="text" class="username-input" id="username-input" value="思政学习者001">
+                        <button class="edit-btn" id="edit-btn">修改</button>
+                        <button class="save-btn" id="save-btn">保存</button>
+                        <span class="edit-tips">温馨提示：用户名1个月内仅可修改1次</span>
+                        <span class="edit-limit-tips" id="edit-limit-tips">本月已修改过用户名，无法再次修改！</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- 打卡日历区域 -->
-            <div class="checkin-calendar">
-                <div class="calendar-header">
-                    <div class="calendar-month" id="calendar-month">2026年2月</div>
-                    <div class="calendar-nav">
-                        <button class="calendar-nav-btn" id="prev-month"><i class="fa fa-angle-left"></i></button>
-                        <button class="calendar-nav-btn" id="next-month"><i class="fa fa-angle-right"></i></button>
+                <!-- 打卡统计 -->
+                <div class="checkin-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="total-checkin">23</div>
+                        <div class="stat-label">总打卡天数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="month-checkin">8</div>
+                        <div class="stat-label">本月打卡天数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="continue-checkin">5</div>
+                        <div class="stat-label">连续打卡天数</div>
                     </div>
                 </div>
-                <table class="calendar-table">
-                    <thead>
-                        <tr>
-                            <th>周日</th>
-                            <th>周一</th>
-                            <th>周二</th>
-                            <th>周三</th>
-                            <th>周四</th>
-                            <th>周五</th>
-                            <th>周六</th>
-                        </tr>
-                    </thead>
-                    <tbody id="calendar-body">
-                        <!-- 日历内容由JS动态生成 -->
-                    </tbody>
-                </table>
-                <!-- 今日打卡按钮 -->
-                <button class="today-checkin-btn" id="today-checkin-btn">
-                    <i class="fa fa-check-circle"></i> 今日打卡
-                </button>
             </div>
         </div>
-    </section>
 
-    <!-- ========== 底部（复用首页） ========== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-col">
-                    <h4>关于我们</h4>
-                    <ul>
-                        <li><a href="#">平台介绍</a></li>
-                        <li><a href="#">团队风采</a></li>
-                        <li><a href="#">联系我们</a></li>
-                        <li><a href="#">加入我们</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>学习资源</h4>
-                    <ul>
-                        <li><a href="#">时政资料库</a></li>
-                        <li><a href="#">精品课程</a></li>
-                        <li><a href="#">学习工具</a></li>
-                        <li><a href="#">常见问题</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>法律声明</h4>
-                    <ul>
-                        <li><a href="#">隐私政策</a></li>
-                        <li><a href="#">用户协议</a></li>
-                        <li><a href="#">版权声明</a></li>
-                        <li><a href="#">免责条款</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>联系方式</h4>
-                    <ul>
-                        <li><i class="fa fa-phone"></i> 0350-3339920</li>
-                        <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
-                        <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
-                    </ul>
+        <!-- 打卡日历区域 -->
+        <div class="checkin-calendar">
+            <div class="calendar-header">
+                <div class="calendar-month" id="calendar-month">2026年2月</div>
+                <div class="calendar-nav">
+                    <button class="calendar-nav-btn" id="prev-month"><i class="fa fa-angle-left"></i></button>
+                    <button class="calendar-nav-btn" id="next-month"><i class="fa fa-angle-right"></i></button>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2026 云先生互联网乡村思政教育网络平台 版权所有 | 晋ICP备202308110020号</p>
+            <table class="calendar-table">
+                <thead>
+                <tr>
+                    <th>周日</th>
+                    <th>周一</th>
+                    <th>周二</th>
+                    <th>周三</th>
+                    <th>周四</th>
+                    <th>周五</th>
+                    <th>周六</th>
+                </tr>
+                </thead>
+                <tbody id="calendar-body">
+                <!-- 日历内容由JS动态生成 -->
+                </tbody>
+            </table>
+            <!-- 今日打卡按钮 -->
+            <button class="today-checkin-btn" id="today-checkin-btn">
+                <i class="fa fa-check-circle"></i> 今日打卡
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 底部（复用首页） ========== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-col">
+                <h4>关于我们</h4>
+                <ul>
+                    <li><a href="#">平台介绍</a></li>
+                    <li><a href="#">团队风采</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">加入我们</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>学习资源</h4>
+                <ul>
+                    <li><a href="#">时政资料库</a></li>
+                    <li><a href="#">精品课程</a></li>
+                    <li><a href="#">学习工具</a></li>
+                    <li><a href="#">常见问题</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>法律声明</h4>
+                <ul>
+                    <li><a href="#">隐私政策</a></li>
+                    <li><a href="#">用户协议</a></li>
+                    <li><a href="#">版权声明</a></li>
+                    <li><a href="#">免责条款</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>联系方式</h4>
+                <ul>
+                    <li><i class="fa fa-phone"></i> 0350-3339920</li>
+                    <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
+                    <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
+                </ul>
             </div>
         </div>
-    </footer>
+        <div class="footer-bottom">
+            <p>© 2026 云先生互联网乡村思政教育网络平台 版权所有 | 晋ICP备202308110020号</p>
+        </div>
+    </div>
+</footer>
 
-    <!-- ========== 移动端导航+打卡交互脚本 ========== -->
-    <script>
+<!-- ========== 移动端导航+打卡交互脚本 ========== -->
+<script>
         // 移动端导航交互（复用首页）
         function toggleNav() {
             const navMenu = document.querySelector('.nav-menu');
@@ -815,7 +815,7 @@
             const editBtn = document.getElementById('edit-btn');
             const saveBtn = document.getElementById('save-btn');
             const editLimitTips = document.getElementById('edit-limit-tips');
-            
+
             // 模拟用户上次修改时间（实际项目中从后端获取）
             const lastEditTime = localStorage.getItem('lastUsernameEdit');
             const now = new Date();
@@ -861,7 +861,7 @@
             const calendarMonth = document.getElementById('calendar-month');
             const prevMonthBtn = document.getElementById('prev-month');
             const nextMonthBtn = document.getElementById('next-month');
-            
+
             // 当前显示的年月
             let currentDate = new Date();
             let currentYear = currentDate.getFullYear();
@@ -874,27 +874,27 @@
             function generateCalendar(year, month) {
                 // 更新月份标题
                 calendarMonth.textContent = `${year}年${month + 1}月`;
-                
+
                 // 清空日历
                 calendarBody.innerHTML = '';
-                
+
                 // 获取当月第一天是星期几（0-6，0是周日）
                 const firstDay = new Date(year, month, 1).getDay();
                 // 获取当月天数
                 const daysInMonth = new Date(year, month + 1, 0).getDate();
-                
+
                 // 生成日历单元格
                 let date = 1;
                 // 生成6行（最多6行）
                 for (let i = 0; i < 6; i++) {
                     const row = document.createElement('tr');
-                    
+
                     // 生成7列（周日到周六）
                     for (let j = 0; j < 7; j++) {
                         const cell = document.createElement('td');
                         const cellContent = document.createElement('div');
                         cellContent.className = 'date-cell';
-                        
+
                         // 填充日期
                         if (i === 0 && j < firstDay) {
                             // 上月空白
@@ -908,12 +908,12 @@
                             dateNumber.className = 'date-number';
                             dateNumber.textContent = date;
                             cellContent.appendChild(dateNumber);
-                            
+
                             // 标记打卡状态
                             const today = new Date();
                             const isToday = year === today.getFullYear() && month === today.getMonth() && date === today.getDate();
                             const isChecked = checkinRecords.includes(date);
-                            
+
                             const status = document.createElement('span');
                             status.className = 'checkin-status';
                             if (isChecked) {
@@ -924,21 +924,21 @@
                                 status.innerHTML = '<i class="fa fa-times"></i>';
                             }
                             cellContent.appendChild(status);
-                            
+
                             // 今日日期标记
                             if (isToday) {
                                 cellContent.style.border = '2px solid var(--primary-color)';
                             }
-                            
+
                             date++;
                         }
-                        
+
                         cell.appendChild(cellContent);
                         row.appendChild(cell);
                     }
-                    
+
                     calendarBody.appendChild(row);
-                    
+
                     // 日期填充完就停止
                     if (date > daysInMonth) break;
                 }
@@ -972,12 +972,12 @@
             const totalCheckin = document.getElementById('total-checkin');
             const monthCheckin = document.getElementById('month-checkin');
             const continueCheckin = document.getElementById('continue-checkin');
-            
+
             // 检查今日是否已打卡
             const today = new Date();
             const todayDate = today.getDate();
             let isTodayChecked = checkinRecords.includes(todayDate);
-            
+
             // 更新打卡按钮状态
             function updateCheckinBtn() {
                 if (isTodayChecked) {
@@ -990,26 +990,26 @@
                     todayCheckinBtn.disabled = false;
                 }
             }
-            
+
             updateCheckinBtn();
 
             // 今日打卡按钮点击
             todayCheckinBtn.addEventListener('click', function() {
                 if (isTodayChecked) return;
-                
+
                 // 模拟打卡成功
                 checkinRecords.push(todayDate);
                 isTodayChecked = true;
-                
+
                 // 更新统计数据
                 totalCheckin.textContent = parseInt(totalCheckin.textContent) + 1;
                 monthCheckin.textContent = parseInt(monthCheckin.textContent) + 1;
                 continueCheckin.textContent = parseInt(continueCheckin.textContent) + 1;
-                
+
                 // 更新日历和按钮
                 generateCalendar(currentYear, currentMonth);
                 updateCheckinBtn();
-                
+
                 alert('今日打卡成功！坚持学习，收获满满～');
             });
         });

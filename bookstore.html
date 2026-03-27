@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>云先生互联网乡村思政教育网络平台</title>
+    <title>云先生-师范生助力乡村中小学道德与法治网络平台</title>
     <!-- 保持和首页一致的图标库 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
@@ -439,207 +439,208 @@
     </style>
 </head>
 <body>
-    <!-- ========== 导航栏（复用首页，思政书库标为active） ========== -->
-    <header class="header">
-        <div class="container nav">
-            <div class="logo">
-                <!-- 替换为你的Logo图片地址 -->
-                <img src="图片/云先生logo.jpg" alt="云先生logo">
-                <div class="logo-text">云先生思政教育平台</div>
+<!-- ========== 导航栏（复用首页，思政书库标为active） ========== -->
+<header class="header">
+    <div class="container nav">
+        <div class="logo">
+            <!-- 替换为你的Logo图片地址 -->
+            <img src="图片/云先生logo.jpg" alt="云先生logo">
+            <div class="logo-text">云先生思政教育平台</div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="news.html">思政文库</a></li>
+            <li><a href="bookstore.html" class="active">思政乐园</a></li>
+            <li><a href="video.html">录播课室</a></li>
+            <li><a href="download.html">直播课室</a></li>
+            <li><a href="volunteer.html">志愿者匹配</a></li>
+            <li><a href="forum.html">留言板</a></li>
+            <li><a href="checkin.html">我的</a></li>
+        </ul>
+        <div class="nav-toggle" onclick="toggleNav()">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+
+<!-- ========== 横幅（复用首页，改副标题） ========== -->
+<section class="banner">
+    <div class="banner-bg"></div>
+    <div class="banner-content">
+        <h1 class="banner-title">思政乐园</h1>
+        <p class="banner-subtitle">精选优质思政读物，让红色读物陪伴孩子成长</p>
+        <a href="#bookstore-content" class="btn banner-btn">浏览书籍</a>
+    </div>
+</section>
+
+<!-- ========== 书库核心内容区（9本读物） ========== -->
+<section class="bookstore-section" id="bookstore-content">
+    <div class="container">
+        <div class="bookstore-title">
+            <h2>思政读物推荐</h2>
+            <p>适合阅读的红色故事、品德教育类书籍</p>
+        </div>
+        <div class="books-grid">
+            <!-- 第1本书：谁是最可爱的人 -->
+            <div class="book-card">
+                <a href="https://weread.qq.com/web/reader/869320a0813ab7ce0g01292eke4d32d5015e4da3b7fbb1fa" target="_blank" class="book-img">
+                    <img src="图片/思政书库1.jpg" alt="谁是最可爱的人">
+                </a>
+                <div class="book-info">
+                    <h3>谁是最可爱的人</h3>
+                    <div class="book-author"><i class="fa fa-pencil"></i>魏巍</div>
+                    <div class="book-desc"></div>
+                    <a href="https://weread.qq.com/web/reader/869320a0813ab7ce0g01292eke4d32d5015e4da3b7fbb1fa" target="_blank" class="btn book-read-btn">在线阅读</a>
+                </div>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="news.html">思政文库</a></li>
-                <li><a href="bookstore.html" class="active">思政乐园</a></li>
-                <li><a href="video.html">录播课室</a></li>
-                <li><a href="download.html">直播课室</a></li>
-                <li><a href="forum.html">留言板</a></li>
-                <li><a href="checkin.html">我的</a></li>
-            </ul>
-            <div class="nav-toggle" onclick="toggleNav()">
-                <i class="fa fa-bars"></i>
+            <!-- 第2本书：四十七天 -->
+            <div class="book-card">
+                <a href="https://weread.qq.com/web/reader/dc632170813ab8a37g01435ckecc32f3013eccbc87e4b62e" target="_blank" class="book-img">
+                    <img src="图片/思政书库2.jpg" alt="四十七天">
+                </a>
+                <div class="book-info">
+                    <h3>四十七天</h3>
+                    <div class="book-author"><i class="fa fa-pencil"></i>刘晓</div>
+                    <div class="book-desc"></div>
+                    <a href="https://weread.qq.com/web/reader/dc632170813ab8a37g01435ckecc32f3013eccbc87e4b62e" target="_blank" class="btn book-read-btn">在线阅读</a>
+                </div>
+            </div>
+            <!-- 第3本书：红色家书 -->
+            <div class="book-card">
+                <a href="https://xuexi.12371.cn/2015/07/06/VIDA1436167245536874.shtml" target="_blank" class="book-img">
+                    <img src="图片/思政书库3.jpg" alt="红色家书">
+                </a>
+                <div class="book-info">
+                    <h3>红色家书</h3>
+                    <div class="book-author"><i class="fa fa-pencil"></i>多位革命先烈书信合集</div>
+                    <div class="book-desc"></div>
+                    <a href="https://xuexi.12371.cn/2015/07/06/VIDA1436167245536874.shtml" target="_blank" class="btn book-read-btn">在线阅读</a>
+                </div>
+            </div>
+            <!-- 第4本书：为什么是中国 -->
+            <div class="book-card">
+                <a href="https://m.baidu.com/tcx?appui=alaxs&data=%7B%22fromaction%22%3A%22search_newtrans_1%22%2C%22fromaction_original%22%3A%22search_newtrans_1%22%2C%22query%22%3A%22%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%22%7D&page=detail&gid=14300287635&sign=ee432cf58e6805921eba16258e0a06e6&ts=1770816728&novelsadd=www.aqxsw.com%2Fbook%2F434356408174%2F&novelsearchquery=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%E7%94%B5%E5%AD%90%E4%B9%A6&sourceurl=&trace_log=undefined_undefined_undefined&cid=14300287635%7C1571528083&index=1&chapterIndex=0" target="_blank" class="book-img">
+                    <img src="图片/思政书库4.jpg" alt="为什么是中国">
+                </a>
+                <div class="book-info">
+                    <h3>为什么是中国</h3>
+                    <div class="book-author"><i class="fa fa-pencil"></i>金一南</div>
+                    <div class="book-desc"></div>
+                    <a href="https://m.baidu.com/tcx?appui=alaxs&data=%7B%22fromaction%22%3A%22search_newtrans_1%22%2C%22fromaction_original%22%3A%22search_newtrans_1%22%2C%22query%22%3A%22%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%22%7D&page=detail&gid=14300287635&sign=ee432cf58e6805921eba16258e0a06e6&ts=1770816728&novelsadd=www.aqxsw.com%2Fbook%2F434356408174%2F&novelsearchquery=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%E7%94%B5%E5%AD%90%E4%B9%A6&sourceurl=&trace_log=undefined_undefined_undefined&cid=14300287635%7C1571528083&index=1&chapterIndex=0" target="_blank" class="btn book-read-btn">在线阅读</a>
+                </div>
+            </div>
+            <!-- 第5本书：苦难辉煌 -->
+            <div class="book-card">
+                <a href="https://www.77zw.cc/book/3209/" target="_blank" class="book-img">
+                    <img src="图片/思政书库5.jpg" alt="苦难辉煌">
+                </a>
+                <div class="book-info">
+                    <h3>苦难辉煌</h3>
+                    <div class="book-author"><i class="fa fa-pencil"></i>金一南</div>
+                    <div class="book-desc"></div>
+                    <a href="https://www.77zw.cc/book/3209/" target="_blank" class="btn book-read-btn">在线阅读</a>
+                </div>
+            </div>
+            <!-- 第6本书：觉醒年代 -->
+            <div class="book-card">
+                <a href="https://www.acxsw.com/shtml74608.html" target="_blank" class="book-img">
+                    <img src="图片/思政书库6.jpg" alt="觉醒年代 ">
+                </a>
+                <div class="book-info">
+                    <h3>觉醒年代 </h3>
+                    <div class="book-author"><i class="fa fa-pencil"></i>龙平平</div>
+                    <div class="book-desc"></div>
+                    <a href="https://www.acxsw.com/shtml74608.html" target="_blank" class="btn book-read-btn">在线阅读</a>
+                </div>
+            </div>
+            <!-- 第7本书：红岩 -->
+            <div class="book-card">
+                <a href="https://www.kaopool.com" target="_blank" class="book-img">
+                    <img src="图片/思政书库7.jpg" alt="红岩">
+                </a>
+                <div class="book-info">
+                    <h3>红岩</h3>
+                    <div class="book-author"><i class="fa fa-pencil"></i> 罗广斌、杨益言</div>
+                    <div class="book-desc"></div>
+                    <a href="https://www.kaopool.com" target="_blank" class="btn book-read-btn">在线阅读</a>
+                </div>
+            </div>
+            <!-- 第8本书：中国共产党简史 -->
+            <div class="book-card">
+                <a href="http://www.woc88.com/v-114625064.html" target="_blank" class="book-img">
+                    <img src="图片/思政书库8.png" alt="中国共产党简史">
+                </a>
+                <div class="book-info">
+                    <h3>中国共产党简史</h3>
+                    <div class="book-author"><i class="fa fa-pencil"></i>中共中央党史研究室</div>
+                    <div class="book-desc"></div>
+                    <a href="http://www.woc88.com/v-114625064.html" target="_blank" class="btn book-read-btn">在线阅读</a>
+                </div>
+            </div>
+            <!-- 第9本书：红星照耀中国 -->
+            <div class="book-card">
+                <a href="https://ubook.reader.qq.com/book-read/52976100/8" target="_blank" class="book-img">
+                    <img src="图片/思政书库9.png" alt="红星照耀中国">
+                </a>
+                <div class="book-info">
+                    <h3>红星照耀中国</h3>
+                    <div class="book-author"><i class="fa fa-pencil"></i> 埃德加·斯诺</div>
+                    <div class="book-desc"></div>
+                    <a href="https://ubook.reader.qq.com/book-read/52976100/8" target="_blank" class="btn book-read-btn">在线阅读</a>
+                </div>
             </div>
         </div>
-    </header>
+    </div>
+</section>
 
-    <!-- ========== 横幅（复用首页，改副标题） ========== -->
-    <section class="banner">
-        <div class="banner-bg"></div>
-        <div class="banner-content">
-            <h1 class="banner-title">思政乐园</h1>
-            <p class="banner-subtitle">精选优质思政读物，让红色读物陪伴孩子成长</p>
-            <a href="#bookstore-content" class="btn banner-btn">浏览书籍</a>
-        </div>
-    </section>
-
-    <!-- ========== 书库核心内容区（9本读物） ========== -->
-    <section class="bookstore-section" id="bookstore-content">
-        <div class="container">
-            <div class="bookstore-title">
-                <h2>思政读物推荐</h2>
-                <p>适合阅读的红色故事、品德教育类书籍</p>
+<!-- ========== 底部（复用首页） ========== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-col">
+                <h4>关于我们</h4>
+                <ul>
+                    <li><a href="#">平台介绍</a></li>
+                    <li><a href="#">团队风采</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">加入我们</a></li>
+                </ul>
             </div>
-            <div class="books-grid">
-                <!-- 第1本书：谁是最可爱的人 -->
-                <div class="book-card">
-                    <a href="https://weread.qq.com/web/reader/869320a0813ab7ce0g01292eke4d32d5015e4da3b7fbb1fa" target="_blank" class="book-img">
-                        <img src="图片/思政书库1.jpg" alt="谁是最可爱的人">
-                    </a>
-                    <div class="book-info">
-                        <h3>谁是最可爱的人</h3>
-                        <div class="book-author"><i class="fa fa-pencil"></i>魏巍</div>
-                        <div class="book-desc"></div>
-                        <a href="https://weread.qq.com/web/reader/869320a0813ab7ce0g01292eke4d32d5015e4da3b7fbb1fa" target="_blank" class="btn book-read-btn">在线阅读</a>
-                    </div>
-                </div>
-                <!-- 第2本书：四十七天 -->
-                <div class="book-card">
-                    <a href="https://weread.qq.com/web/reader/dc632170813ab8a37g01435ckecc32f3013eccbc87e4b62e" target="_blank" class="book-img">
-                        <img src="图片/思政书库2.jpg" alt="四十七天">
-                    </a>
-                    <div class="book-info">
-                        <h3>四十七天</h3>
-                        <div class="book-author"><i class="fa fa-pencil"></i>刘晓</div>
-                        <div class="book-desc"></div>
-                        <a href="https://weread.qq.com/web/reader/dc632170813ab8a37g01435ckecc32f3013eccbc87e4b62e" target="_blank" class="btn book-read-btn">在线阅读</a>
-                    </div>
-                </div>
-                <!-- 第3本书：红色家书 -->
-                <div class="book-card">
-                    <a href="https://xuexi.12371.cn/2015/07/06/VIDA1436167245536874.shtml" target="_blank" class="book-img">
-                        <img src="图片/思政书库3.jpg" alt="红色家书">
-                    </a>
-                    <div class="book-info">
-                        <h3>红色家书</h3>
-                        <div class="book-author"><i class="fa fa-pencil"></i>多位革命先烈书信合集</div>
-                        <div class="book-desc"></div>
-                        <a href="https://xuexi.12371.cn/2015/07/06/VIDA1436167245536874.shtml" target="_blank" class="btn book-read-btn">在线阅读</a>
-                    </div>
-                </div>
-                <!-- 第4本书：为什么是中国 -->
-                <div class="book-card">
-                    <a href="https://m.baidu.com/tcx?appui=alaxs&data=%7B%22fromaction%22%3A%22search_newtrans_1%22%2C%22fromaction_original%22%3A%22search_newtrans_1%22%2C%22query%22%3A%22%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%22%7D&page=detail&gid=14300287635&sign=ee432cf58e6805921eba16258e0a06e6&ts=1770816728&novelsadd=www.aqxsw.com%2Fbook%2F434356408174%2F&novelsearchquery=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%E7%94%B5%E5%AD%90%E4%B9%A6&sourceurl=&trace_log=undefined_undefined_undefined&cid=14300287635%7C1571528083&index=1&chapterIndex=0" target="_blank" class="book-img">
-                        <img src="图片/思政书库4.jpg" alt="为什么是中国">
-                    </a>
-                    <div class="book-info">
-                        <h3>为什么是中国</h3>
-                        <div class="book-author"><i class="fa fa-pencil"></i>金一南</div>
-                        <div class="book-desc"></div>
-                        <a href="https://m.baidu.com/tcx?appui=alaxs&data=%7B%22fromaction%22%3A%22search_newtrans_1%22%2C%22fromaction_original%22%3A%22search_newtrans_1%22%2C%22query%22%3A%22%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%22%7D&page=detail&gid=14300287635&sign=ee432cf58e6805921eba16258e0a06e6&ts=1770816728&novelsadd=www.aqxsw.com%2Fbook%2F434356408174%2F&novelsearchquery=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%E7%94%B5%E5%AD%90%E4%B9%A6&sourceurl=&trace_log=undefined_undefined_undefined&cid=14300287635%7C1571528083&index=1&chapterIndex=0" target="_blank" class="btn book-read-btn">在线阅读</a>
-                    </div>
-                </div>
-                <!-- 第5本书：苦难辉煌 -->
-                <div class="book-card">
-                    <a href="https://www.77zw.cc/book/3209/" target="_blank" class="book-img">
-                        <img src="图片/思政书库5.jpg" alt="苦难辉煌">
-                    </a>
-                    <div class="book-info">
-                        <h3>苦难辉煌</h3>
-                        <div class="book-author"><i class="fa fa-pencil"></i>金一南</div>
-                        <div class="book-desc"></div>
-                        <a href="https://www.77zw.cc/book/3209/" target="_blank" class="btn book-read-btn">在线阅读</a>
-                    </div>
-                </div>
-                <!-- 第6本书：觉醒年代 -->
-                <div class="book-card">
-                    <a href="https://www.acxsw.com/shtml74608.html" target="_blank" class="book-img">
-                        <img src="图片/思政书库6.jpg" alt="觉醒年代 ">
-                    </a>
-                    <div class="book-info">
-                        <h3>觉醒年代 </h3>
-                        <div class="book-author"><i class="fa fa-pencil"></i>龙平平</div>
-                        <div class="book-desc"></div>
-                        <a href="https://www.acxsw.com/shtml74608.html" target="_blank" class="btn book-read-btn">在线阅读</a>
-                    </div>
-                </div>
-                <!-- 第7本书：红岩 -->
-                <div class="book-card">
-                    <a href="https://www.kaopool.com" target="_blank" class="book-img">
-                        <img src="图片/思政书库7.jpg" alt="红岩">
-                    </a>
-                    <div class="book-info">
-                        <h3>红岩</h3>
-                        <div class="book-author"><i class="fa fa-pencil"></i> 罗广斌、杨益言</div>
-                        <div class="book-desc"></div>
-                        <a href="https://www.kaopool.com" target="_blank" class="btn book-read-btn">在线阅读</a>
-                    </div>
-                </div>
-                <!-- 第8本书：中国共产党简史 -->
-                <div class="book-card">
-                    <a href="http://www.woc88.com/v-114625064.html" target="_blank" class="book-img">
-                        <img src="图片/思政书库8.png" alt="中国共产党简史">
-                    </a>
-                    <div class="book-info">
-                        <h3>中国共产党简史</h3>
-                        <div class="book-author"><i class="fa fa-pencil"></i>中共中央党史研究室</div>
-                        <div class="book-desc"></div>
-                        <a href="http://www.woc88.com/v-114625064.html" target="_blank" class="btn book-read-btn">在线阅读</a>
-                    </div>
-                </div>
-                <!-- 第9本书：红星照耀中国 -->
-                <div class="book-card">
-                    <a href="https://ubook.reader.qq.com/book-read/52976100/8" target="_blank" class="book-img">
-                        <img src="图片/思政书库9.png" alt="红星照耀中国">
-                    </a>
-                    <div class="book-info">
-                        <h3>红星照耀中国</h3>
-                        <div class="book-author"><i class="fa fa-pencil"></i> 埃德加·斯诺</div>
-                        <div class="book-desc"></div>
-                        <a href="https://ubook.reader.qq.com/book-read/52976100/8" target="_blank" class="btn book-read-btn">在线阅读</a>
-                    </div>
-                </div>
+            <div class="footer-col">
+                <h4>学习资源</h4>
+                <ul>
+                    <li><a href="#">时政资料库</a></li>
+                    <li><a href="#">精品课程</a></li>
+                    <li><a href="#">学习工具</a></li>
+                    <li><a href="#">常见问题</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>法律声明</h4>
+                <ul>
+                    <li><a href="#">隐私政策</a></li>
+                    <li><a href="#">用户协议</a></li>
+                    <li><a href="#">版权声明</a></li>
+                    <li><a href="#">免责条款</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>联系方式</h4>
+                <ul>
+                    <li><i class="fa fa-phone"></i> 0350-3339920</li>
+                    <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
+                    <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
+                </ul>
             </div>
         </div>
-    </section>
-
-    <!-- ========== 底部（复用首页） ========== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-col">
-                    <h4>关于我们</h4>
-                    <ul>
-                        <li><a href="#">平台介绍</a></li>
-                        <li><a href="#">团队风采</a></li>
-                        <li><a href="#">联系我们</a></li>
-                        <li><a href="#">加入我们</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>学习资源</h4>
-                    <ul>
-                        <li><a href="#">时政资料库</a></li>
-                        <li><a href="#">精品课程</a></li>
-                        <li><a href="#">学习工具</a></li>
-                        <li><a href="#">常见问题</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>法律声明</h4>
-                    <ul>
-                        <li><a href="#">隐私政策</a></li>
-                        <li><a href="#">用户协议</a></li>
-                        <li><a href="#">版权声明</a></li>
-                        <li><a href="#">免责条款</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>联系方式</h4>
-                    <ul>
-                        <li><i class="fa fa-phone"></i> 0350-3339920</li>
-                        <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
-                        <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 云先生互联网乡村思政教育网络平台 版权所有 | 晋ICP备202308110020号</p>
-            </div>
+        <div class="footer-bottom">
+            <p>© 2026 云先生-师范生助力乡村中小学道德与法治网络平台 版权所有 | 晋ICP备202308110020号</p>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <!-- ========== 移动端导航交互脚本（复用首页） ========== -->
-    <script>
+<!-- ========== 移动端导航交互脚本（复用首页） ========== -->
+<script>
         function toggleNav() {
             const navMenu = document.querySelector('.nav-menu');
             navMenu.classList.toggle('active');
