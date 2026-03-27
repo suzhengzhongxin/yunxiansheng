@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab1d8f2f-51fb-4735-9624-241cf356fe15" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/bookstore.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkin.html" beforeDir="false" afterPath="$PROJECT_DIR$/checkin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/course-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/download.html" beforeDir="false" afterPath="$PROJECT_DIR$/download.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news.html" beforeDir="false" afterPath="$PROJECT_DIR$/news.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video.html" beforeDir="false" afterPath="$PROJECT_DIR$/video.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/思政课程1.html" beforeDir="false" afterPath="$PROJECT_DIR$/思政课程1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/思政课程3.html" beforeDir="false" afterPath="$PROJECT_DIR$/思政课程3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/思政课程4.html" beforeDir="false" afterPath="$PROJECT_DIR$/思政课程4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/思政课程5.html" beforeDir="false" afterPath="$PROJECT_DIR$/思政课程5.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/思政课程6.html" beforeDir="false" afterPath="$PROJECT_DIR$/思政课程6.html" afterDir="false" />
-    </list>
+    <list default="true" id="ab1d8f2f-51fb-4735-9624-241cf356fe15" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +12,17 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bookstore.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="578">
+              <caret line="447" column="58" selection-start-line="447" selection-start-column="58" selection-end-line="447" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,6 +60,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -75,7 +72,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -128,13 +124,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bookstore.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7599">
-          <caret line="447" column="58" selection-start-line="447" selection-start-column="58" selection-end-line="447" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/checkin.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13532">
@@ -242,6 +231,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
           <caret line="291" column="58" selection-start-line="291" selection-start-column="58" selection-end-line="291" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bookstore.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="447" column="58" selection-start-line="447" selection-start-column="58" selection-end-line="447" selection-end-column="58" />
         </state>
       </provider>
     </entry>
