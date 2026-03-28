@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab1d8f2f-51fb-4735-9624-241cf356fe15" name="Default Changelist" comment="" />
+    <list default="true" id="ab1d8f2f-51fb-4735-9624-241cf356fe15" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/图片/banner1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/图片/banner2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/图片/banner3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/图片/banner4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/图片/录播课室.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/图片/志愿者匹配.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/图片/思政乐园.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/图片/思政文库.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/图片/留言板.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/图片/直播课室.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,12 +24,28 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bookstore.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="578">
               <caret line="447" column="58" selection-start-line="447" selection-start-column="58" selection-end-line="447" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="707">
+              <caret line="902" selection-start-line="902" selection-end-line="902" />
+              <folding>
+                <element signature="e#13677#13684#1" expanded="true" />
+                <element signature="e#14991#15038#0" expanded="true" />
+                <element signature="e#15326#15373#0" expanded="true" />
+                <element signature="e#15642#15689#0" expanded="true" />
+                <element signature="e#15959#16006#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -32,7 +60,6 @@
       <list>
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/思政课程2.html" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/bookstore.html" />
         <option value="$PROJECT_DIR$/checkin.html" />
         <option value="$PROJECT_DIR$/course-list.html" />
@@ -45,6 +72,7 @@
         <option value="$PROJECT_DIR$/思政课程4.html" />
         <option value="$PROJECT_DIR$/思政课程5.html" />
         <option value="$PROJECT_DIR$/思政课程6.html" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -59,8 +87,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -68,15 +94,28 @@
               <item name="yunxiansheng" type="b2602c69:ProjectViewProjectNode" />
               <item name="yunxiansheng" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="yunxiansheng" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yunxiansheng" type="462c0819:PsiDirectoryNode" />
+              <item name="图片" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/图片" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\yunxiansheng\图片" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -149,13 +188,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8823">
           <caret line="519" column="58" selection-start-line="519" selection-start-column="58" selection-end-line="519" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="1268" column="43" selection-start-line="1268" selection-start-column="38" selection-end-line="1268" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -238,6 +270,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="447" column="58" selection-start-line="447" selection-start-column="58" selection-end-line="447" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="707">
+          <caret line="902" selection-start-line="902" selection-end-line="902" />
+          <folding>
+            <element signature="e#13677#13684#1" expanded="true" />
+            <element signature="e#14991#15038#0" expanded="true" />
+            <element signature="e#15326#15373#0" expanded="true" />
+            <element signature="e#15642#15689#0" expanded="true" />
+            <element signature="e#15959#16006#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
