@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>课程学习 - 云先生-师范生助力乡村中小学道德与法治网络平台</title>
-    <!-- 引入和首页一致的样式/图标库 -->
+    <title>全部课程 - 云先生思政教育平台</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
-        /* ========== 全局样式（和首页完全一致） ========== */
         * {
             margin: 0;
             padding: 0;
@@ -15,21 +13,22 @@
             font-family: "Microsoft Yahei", "PingFang SC", "Helvetica Neue", sans-serif;
         }
         :root {
-            --primary-color: #991a28; /* 主红色 */
-            --primary-light: #d62828; /* 浅红 */
-            --primary-dark: #7a141e; /* 深红 */
-            --gold-color: #ffd700; /* 金色（点缀） */
-            --gray-light: #f8f9fa; /* 浅灰（背景） */
-            --gray-middle: #e9ecef; /* 中灰（边框） */
-            --gray-dark: #6c757d; /* 深灰（文字） */
-            --white-color: #ffffff; /* 白色 */
+            --primary-color: #991a28;
+            --primary-light: #d62828;
+            --primary-dark: #7a141e;
+            --gold-color: #ffd700;
+            --gray-light: #f8f9fa;
+            --gray-middle: #e9ecef;
+            --gray-dark: #6c757d;
+            --white-color: #ffffff;
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.15);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
             --radius-sm: 6px;
             --radius-md: 10px;
             --radius-lg: 16px;
-            --transition: all 0.3s ease; /* 统一过渡动画 */
-            scroll-behavior: smooth; /* 开启平滑滚动 */
+            --transition: all 0.3s ease;
+            scroll-behavior: smooth;
         }
         body {
             background-color: var(--gray-light);
@@ -66,17 +65,33 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
         }
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
+
+        /* 顶部栏 */
+        .top-bar {
+            background: var(--primary-dark);
+            color: var(--gold-color);
+            padding: 8px 0;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: var(--white-color);
+        .top-bar .slogan {
+            flex: 1;
+            text-align: center;
+        }
+        .top-bar .login-group {
+            padding-right: 20px;
+        }
+        .top-bar a {
+            color: #fff;
+            margin-left: 15px;
+        }
+        .top-bar a:hover {
+            color: var(--gold-color);
         }
 
-        /* ========== 2. 导航栏样式（吸顶+渐变+阴影） ========== */
+        /* 导航栏 */
         .header {
             position: sticky;
             top: 0;
@@ -101,6 +116,7 @@
             height: 48px;
             border-radius: 8px;
             border: 2px solid var(--white-color);
+            object-fit: cover;
         }
         .logo-text {
             color: var(--white-color);
@@ -112,12 +128,11 @@
             gap: 35px;
         }
         .nav-menu li a {
-            color: var(--white-color);
+            color: #ffffff;
             font-size: 16px;
             padding: 8px 0;
             position: relative;
         }
-        /* 导航下划线动效 */
         .nav-menu li a::after {
             content: '';
             position: absolute;
@@ -125,7 +140,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--gold-color);
+            background-color: #ffd700;
             transition: var(--transition);
         }
         .nav-menu li a:hover::after {
@@ -134,7 +149,6 @@
         .nav-menu li a.active {
             color: var(--gold-color);
         }
-        /* 移动端导航按钮（适配小屏幕） */
         .nav-toggle {
             display: none;
             font-size: 24px;
@@ -142,7 +156,50 @@
             cursor: pointer;
         }
 
-        /* ========== 核心：视频课程列表样式 ========== */
+        /* 登录弹窗 */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-box {
+            background: #fff;
+            width: 90%;
+            max-width: 420px;
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute; top: 15px; right: 15px;
+            font-size: 20px; cursor: pointer;
+        }
+        .modal-tab {
+            display: flex; margin-bottom: 20px;
+        }
+        .modal-tab-item {
+            flex: 1; text-align: center; padding: 10px 0;
+            font-weight: bold; cursor: pointer;
+        }
+        .modal-tab-item.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        .modal-panel { display: none; }
+        .modal-panel.active { display: block; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 6px; }
+        .form-group input {
+            width: 100%; padding: 10px;
+            border: 1px solid #ddd; border-radius: 6px;
+        }
+
+        /* 课程列表样式 */
         .course-section {
             padding: 40px 0;
         }
@@ -167,14 +224,18 @@
             height: 2px;
             background-color: var(--primary-color);
         }
-        /* 课程列表网格布局 */
+        .stats-info {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--gray-dark);
+            font-size: 14px;
+        }
         .course-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
             margin-top: 20px;
         }
-        /* 单个课程卡片 */
         .course-item {
             background-color: var(--white-color);
             border-radius: var(--radius-md);
@@ -186,11 +247,11 @@
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
         }
-        /* 课程封面图 */
         .course-cover {
             width: 100%;
             height: 180px;
             overflow: hidden;
+            position: relative;
         }
         .course-cover img {
             width: 100%;
@@ -201,7 +262,16 @@
         .course-item:hover .course-cover img {
             transform: scale(1.05);
         }
-        /* 课程信息 */
+        .course-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
         .course-info {
             padding: 20px;
         }
@@ -210,14 +280,26 @@
             color: #333;
             margin-bottom: 10px;
             font-weight: bold;
+            line-height: 1.4;
         }
         .course-info p {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--gray-dark);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
-        /* 播放按钮（跳转视频链接） */
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: var(--gray-dark);
+        }
         .play-btn {
             display: inline-block;
             padding: 8px 20px;
@@ -226,6 +308,8 @@
             border-radius: var(--radius-sm);
             font-size: 14px;
             transition: var(--transition);
+            width: 100%;
+            text-align: center;
         }
         .play-btn:hover {
             background-color: var(--primary-light);
@@ -235,7 +319,67 @@
             margin-right: 5px;
         }
 
-        /* ========== 底部（复用首页） ========== */
+        /* 搜索栏和筛选 */
+        .filter-bar {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .search-input {
+            width: 300px;
+            padding: 12px 20px;
+            border: 1px solid var(--gray-middle);
+            border-radius: 30px;
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+        }
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(153,26,40,0.1);
+        }
+        .filter-btn {
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .filter-btn:hover {
+            background: var(--primary-light);
+        }
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .category-tab {
+            padding: 8px 20px;
+            background: var(--white-color);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+            box-shadow: var(--shadow-sm);
+        }
+        .category-tab:hover, .category-tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        .no-result {
+            text-align: center;
+            padding: 60px;
+            color: var(--gray-dark);
+            font-size: 16px;
+        }
+
+        /* 底部 */
         .footer {
             background-color: var(--primary-dark);
             color: var(--white-color);
@@ -253,7 +397,6 @@
             font-size: 18px;
             margin-bottom: 20px;
             position: relative;
-            padding-bottom: 10px;
         }
         .footer-col h4::after {
             content: '';
@@ -262,15 +405,10 @@
             left: 0;
             width: 50px;
             height: 2px;
-            background-color: var(--gold-color);
+            background: var(--gold-color);
         }
-        .footer-col ul li {
-            margin-bottom: 12px;
-        }
-        .footer-col ul li a:hover {
-            color: var(--gold-color);
-            padding-left: 5px;
-        }
+        .footer-col li { margin-bottom: 12px; }
+        .footer-col li a:hover { color: var(--gold-color); }
         .footer-bottom {
             text-align: center;
             padding-top: 20px;
@@ -279,8 +417,6 @@
             color: #ccc;
         }
 
-
-        /* ========== 响应式适配 ========== */
         @media (max-width: 768px) {
             .nav-toggle {
                 display: block;
@@ -291,355 +427,133 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background-color: var(--primary-dark);
+                background: var(--primary-dark);
                 flex-direction: column;
                 align-items: center;
                 padding: 40px 0;
-                gap: 25px;
+                gap: 20px;
                 transition: var(--transition);
             }
-            .nav-menu.active {
-                left: 0;
+            .nav-menu.active { left: 0; }
+            .course-list {
+                grid-template-columns: 1fr;
             }
-            .banner-title {
-                font-size: 32px;
+            .filter-bar {
+                flex-direction: column;
+                align-items: center;
             }
-            .banner-subtitle {
-                font-size: 18px;
+            .search-input {
+                width: 100%;
+                max-width: 300px;
             }
             .footer-top {
                 flex-direction: column;
                 gap: 30px;
             }
-            .course-list {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 <body>
-<!-- ========== 导航栏（和首页完全一致） ========== -->
+
+<!-- 顶部栏 -->
+<div class="top-bar">
+    <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
+    <div class="login-group" id="loginGroup">
+        <a href="javascript:;" onclick="openModal('login')">登录</a>
+        <a href="javascript:;" onclick="openModal('reg')">注册</a>
+    </div>
+</div>
+
+<!-- 导航栏 -->
 <header class="header">
     <div class="container nav">
         <div class="logo">
-            <!-- 替换为你的Logo图片地址 -->
             <img src="图片/云先生logo.jpg" alt="云先生logo">
             <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
         </div>
-        <!-- 导航菜单 -->
         <ul class="nav-menu">
             <li><a href="index.html">首页</a></li>
+	    <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="news.html">思政文库</a></li>
             <li><a href="bookstore.html">思政乐园</a></li>
-            <li><a href="volunteer.html">志愿者匹配</a></li>
-            <li><a href="course-list.html">全部课程</a></li>
+            <li><a href="video.html" class="active">录播课室</a></li>
             <li><a href="download.html">直播课室</a></li>
             <li><a href="forum.html">留言板</a></li>
-            <li><a href="video.html" class="active">返回</a></li>
-
+            <li><a href="checkin.html" onclick="return checkMyNeedLogin(event)">我的</a></li>
         </ul>
-        <!-- 移动端导航按钮 -->
         <div class="nav-toggle" onclick="toggleNav()">
             <i class="fa fa-bars"></i>
         </div>
     </div>
 </header>
 
-<!-- ========== 视频课程列表 ========== -->
+<!-- 登录弹窗 -->
+<div class="modal" id="modal">
+    <div class="modal-box">
+        <div class="modal-close" onclick="closeModal()">&times;</div>
+        <div class="modal-tab">
+            <div class="modal-tab-item active" onclick="switchTabModal('login')">登录</div>
+            <div class="modal-tab-item" onclick="switchTabModal('reg')">注册</div>
+        </div>
+        <div class="modal-panel active" id="loginPanel">
+            <div class="form-group">
+                <label>账号</label>
+                <input type="text" id="loginUsername" placeholder="手机号/学号">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="loginPassword" placeholder="请输入密码">
+            </div>
+            <button class="btn" onclick="loginHandler()">登录</button>
+        </div>
+        <div class="modal-panel" id="regPanel">
+            <div class="form-group">
+                <label>手机号</label>
+                <input type="text" id="regPhone" placeholder="请输入手机号">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="regPwd" placeholder="设置密码">
+            </div>
+            <div class="form-group">
+                <label>确认密码</label>
+                <input type="password" id="regConfirm" placeholder="确认密码">
+            </div>
+            <button class="btn" onclick="registerHandler()">注册</button>
+        </div>
+    </div>
+</div>
+
+<!-- 课程列表主内容 -->
 <section class="course-section">
     <div class="container">
         <div class="course-title">
             <h2>全部视频课程</h2>
         </div>
-        <div class="course-list">
-            <!-- 课程1：示例（替换为你的视频链接/封面/标题） -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播1.png" alt="课程1封面"> <!-- 替换为实际封面图 -->
-                </div>
-                <div class="course-info">
-                    <h3>第一课：网络改变世界</h3>
-                    <p></p>
-                    <!-- 替换href为实际视频链接（可填B站/腾讯视频/自有视频地址） -->
-                    <a href="video/录课视频(1)/25思政2班韩雯婧2.7第一次录课.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程2：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播2.png" alt="课程2封面">
-                </div>
-                <div class="course-info">
-                    <h3>第二课：世界最长高速公路隧道</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/25思政2班韩雯婧2.19第二次录课.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程3：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播3.png" alt="课程3封面">
-                </div>
-                <div class="course-info">
-                    <h3>第三课：人机共舞耀春晚</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/25思政2班韩雯婧2.20第三次录课.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程4：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播4.png" alt="课程4封面">
-                </div>
-                <div class="course-info">
-                    <h3>第四课：科技筑梦 创新未来</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/25思政2班于瑞康2.7第一次录课.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程5：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播5.png" alt="课程5封面">
-                </div>
-                <div class="course-info">
-                    <h3>第五课：中国沙漠铁路：连接未来的希望之路</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/25思政2班于瑞康2.19第二次录课.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程6：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播6.png" alt="课程封面">
-                </div>
-                <div class="course-info">
-                    <h3>第六课：原始社会的解体和阶级社会的演进</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/郭文凯2.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程7：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播7.png" alt="课程封面">
-                </div>
-                <div class="course-info">
-                    <h3>第七课：2026春运中的民生温度和政治智慧</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/和士雅+2026春运中的民主温度与政治智慧录课视频（1）.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程8：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播8.png" alt="课程封面">
-                </div>
-                <div class="course-info">
-                    <h3>第八课：从航天功勋奖章看国家利益与个人担当</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/李婧婷从航天功勋奖章看国家利益与个人担当录课视频（2）.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程9：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播9.png" alt="课程封面">
-                </div>
-                <div class="course-info">
-                    <h3>第九课：当熊猫“住进"国家公园</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/李靖婷视频.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程10：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播10.png" alt="课程封面">
-                </div>
-                <div class="course-info">
-                    <h3>第十课：从国潮崛起看新时代青年的文化自信</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/屏幕录制 2026-02-13 223426.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程11：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播11.png" alt="课程封面">
-                </div>
-                <div class="course-info">
-                    <h3>第十一课：人民理发师</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/屏幕录制 2026-02-14 214156.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程12：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播12.png" alt="课程2封面">
-                </div>
-                <div class="course-info">
-                    <h3>第十二课：双轨并行，漆艺永续</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/屏幕录制 2026-02-19 203259.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程13：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播13.png" alt="课程3封面">
-                </div>
-                <div class="course-info">
-                    <h3>第十三课：时政热点----党的第二十届四中全会</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/薛宇芯负责审核的小组.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程14：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播14.png" alt="课程4封面">
-                </div>
-                <div class="course-info">
-                    <h3>第十四课：AI复活历史人物</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/AI复活历史人物——戈梦茹.mov" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程15：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播15.png" alt="课程5封面">
-                </div>
-                <div class="course-info">
-                    <h3>第十五课：认识社会生活</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/fffc2e7c715517abe6ef3c82531f6348.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程16：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播16.png" alt="课程封面">
-                </div>
-                <div class="course-info">
-                    <h3>第十六课：创新驱动发展:从”钠离子电池突围记”看中国科技自立自强</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/HnVideoEditor_2026_01_24_162317800.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程17：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播17.png" alt="课程封面">
-                </div>
-                <div class="course-info">
-                    <h3>第十七课：以案释法:从崔路路抢劫案看法律与法治精神</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/HnVideoEditor_2026_02_25_131921423.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程18：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播18.png" alt="课程封面">
-                </div>
-                <div class="course-info">
-                    <h3>第十八课：守护底线，捍卫正义</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/HnVideoEditor_2026_02_26_134608548.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程19：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播19.png" alt="课程封面">
-                </div>
-                <div class="course-info">
-                    <h3>第十九课：世界赴华:藏在旅游里的答案</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/mmexport1771512309158.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-            <!-- 课程20：示例 -->
-            <div class="course-item">
-                <div class="course-cover">
-                    <img src="图片/录播20.png" alt="课程封面">
-                </div>
-                <div class="course-info">
-                    <h3>第二十课：守望精神家园--“千万流量遇见千年社火”</h3>
-                    <p></p>
-                    <a href="video/录课视频(1)/mmexport1771675862805.mp4" target="_blank" class="play-btn">
-                        <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
-                </div>
-            </div>
-
-
-            <!-- 可继续复制添加更多课程 -->
+        <div class="stats-info" id="statsInfo">共 20 门课程，陪你一起成长</div>
+        
+        <!-- 分类筛选 -->
+        <div class="category-tabs">
+            <div class="category-tab active" data-category="all">全部课程</div>
+            <div class="category-tab" data-category="思政理论">思政理论</div>
+            <div class="category-tab" data-category="时政热点">时政热点</div>
+            <div class="category-tab" data-category="文化传承">文化传承</div>
+            <div class="category-tab" data-category="科技创新">科技创新</div>
         </div>
+
+        <!-- 搜索栏 -->
+        <div class="filter-bar">
+            <input type="text" class="search-input" id="searchInput" placeholder="搜索课程名称..." onkeyup="filterCourses()">
+            <button class="filter-btn" onclick="filterCourses()"><i class="fa fa-search"></i> 搜索</button>
+        </div>
+
+        <!-- 课程列表 -->
+        <div class="course-list" id="courseList"></div>
+        <div id="noResult" class="no-result" style="display: none;">没有找到相关课程，试试其他关键词吧～</div>
     </div>
 </section>
 
-<!-- 4. 底部信息 -->
+<!-- 底部 -->
 <footer class="footer">
     <div class="container">
         <div class="footer-top">
@@ -649,7 +563,6 @@
                     <li><a href="#">平台介绍</a></li>
                     <li><a href="#">团队风采</a></li>
                     <li><a href="#">联系我们</a></li>
-                    <li><a href="#">加入我们</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -658,7 +571,6 @@
                     <li><a href="#">时政资料库</a></li>
                     <li><a href="#">精品课程</a></li>
                     <li><a href="#">学习工具</a></li>
-                    <li><a href="#">常见问题</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -667,7 +579,6 @@
                     <li><a href="#">隐私政策</a></li>
                     <li><a href="#">用户协议</a></li>
                     <li><a href="#">版权声明</a></li>
-                    <li><a href="#">免责条款</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -685,20 +596,192 @@
     </div>
 </footer>
 
-<!-- 导航栏切换脚本（和首页一致） -->
 <script>
-        function toggleNav() {
-            const navMenu = document.querySelector('.nav-menu');
-            navMenu.classList.toggle('active');
-        }
-        // 点击非导航区域关闭移动端导航
-        document.addEventListener('click', function(e) {
-            const navMenu = document.querySelector('.nav-menu');
-            const navToggle = document.querySelector('.nav-toggle');
-            if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-                navMenu.classList.remove('active');
-            }
+    // 课程数据
+    const courses = [
+        { id: 1, title: "网络改变世界", category: "科技创新", cover: "图片/录播1.png", video: "video/录课视频(1)/25思政2班韩雯婧2.7第一次录课.mp4" },
+        { id: 2, title: "世界最长高速公路隧道", category: "科技创新", cover: "图片/录播2.png", video: "video/录课视频(1)/25思政2班韩雯婧2.19第二次录课.mp4" },
+        { id: 3, title: "人机共舞耀春晚", category: "科技创新", cover: "图片/录播3.png", video: "video/录课视频(1)/25思政2班韩雯婧2.20第三次录课.mp4" },
+        { id: 4, title: "科技筑梦 创新未来", category: "科技创新", cover: "图片/录播4.png", video: "video/录课视频(1)/25思政2班于瑞康2.7第一次录课.mp4" },
+        { id: 5, title: "中国沙漠铁路：连接未来的希望之路", category: "科技创新", cover: "图片/录播5.png", video: "video/录课视频(1)/25思政2班于瑞康2.19第二次录课.mp4" },
+        { id: 6, title: "原始社会的解体和阶级社会的演进", category: "思政理论", cover: "图片/录播6.png", video: "video/录课视频(1)/郭文凯2.mp4" },
+        { id: 7, title: "2026春运中的民生温度和政治智慧", category: "时政热点", cover: "图片/录播7.png", video: "video/录课视频(1)/和士雅+2026春运中的民主温度与政治智慧录课视频（1）.mp4" },
+        { id: 8, title: "从航天功勋奖章看国家利益与个人担当", category: "时政热点", cover: "图片/录播8.png", video: "video/录课视频(1)/李婧婷从航天功勋奖章看国家利益与个人担当录课视频（2）.mp4" },
+        { id: 9, title: "当熊猫“住进”国家公园", category: "文化传承", cover: "图片/录播9.png", video: "video/录课视频(1)/李靖婷视频.mp4" },
+        { id: 10, title: "从国潮崛起看新时代青年的文化自信", category: "文化传承", cover: "图片/录播10.png", video: "video/录课视频(1)/屏幕录制 2026-02-13 223426.mp4" },
+        { id: 11, title: "人民理发师", category: "时政热点", cover: "图片/录播11.png", video: "video/录课视频(1)/屏幕录制 2026-02-14 214156.mp4" },
+        { id: 12, title: "双轨并行，漆艺永续", category: "文化传承", cover: "图片/录播12.png", video: "video/录课视频(1)/屏幕录制 2026-02-19 203259.mp4" },
+        { id: 13, title: "时政热点——党的第二十届四中全会", category: "时政热点", cover: "图片/录播13.png", video: "video/录课视频(1)/薛宇芯负责审核的小组.mp4" },
+        { id: 14, title: "AI复活历史人物", category: "科技创新", cover: "图片/录播14.png", video: "video/录课视频(1)/AI复活历史人物——戈梦茹.mov" },
+        { id: 15, title: "认识社会生活", category: "思政理论", cover: "图片/录播15.png", video: "video/录课视频(1)/fffc2e7c715517abe6ef3c82531f6348.mp4" },
+        { id: 16, title: "创新驱动发展：从钠离子电池突围记看中国科技自立自强", category: "科技创新", cover: "图片/录播16.png", video: "video/录课视频(1)/HnVideoEditor_2026_01_24_162317800.mp4" },
+        { id: 17, title: "以案释法：从崔路路抢劫案看法律与法治精神", category: "思政理论", cover: "图片/录播17.png", video: "video/录课视频(1)/HnVideoEditor_2026_02_25_131921423.mp4" },
+        { id: 18, title: "守护底线，捍卫正义", category: "思政理论", cover: "图片/录播18.png", video: "video/录课视频(1)/HnVideoEditor_2026_02_26_134608548.mp4" },
+        { id: 19, title: "世界赴华：藏在旅游里的答案", category: "时政热点", cover: "图片/录播19.png", video: "video/录课视频(1)/mmexport1771512309158.mp4" },
+        { id: 20, title: "守望精神家园——千万流量遇见千年社火", category: "文化传承", cover: "图片/录播20.png", video: "video/录课视频(1)/mmexport1771675862805.mp4" }
+    ];
+
+    let currentCategory = 'all';
+    let currentSearch = '';
+
+    // 渲染课程列表
+    function renderCourses() {
+        const filtered = courses.filter(course => {
+            // 分类筛选
+            if (currentCategory !== 'all' && course.category !== currentCategory) return false;
+            // 搜索筛选
+            if (currentSearch && !course.title.includes(currentSearch)) return false;
+            return true;
         });
-    </script>
+
+        const container = document.getElementById('courseList');
+        const noResult = document.getElementById('noResult');
+        
+        if (filtered.length === 0) {
+            container.innerHTML = '';
+            noResult.style.display = 'block';
+            document.getElementById('statsInfo').innerText = `共 0 门课程`;
+            return;
+        }
+
+        noResult.style.display = 'none';
+        document.getElementById('statsInfo').innerHTML = `共 ${filtered.length} 门课程，陪你一起成长`;
+        
+        container.innerHTML = filtered.map(course => `
+            <div class="course-item">
+                <div class="course-cover">
+                    <img src="${course.cover}" alt="${course.title}" onerror="this.src='图片/默认封面.png'">
+                    <span class="course-badge">${course.category}</span>
+                </div>
+                <div class="course-info">
+                    <h3>${course.title}</h3>
+                    <div class="course-meta">
+                        <span><i class="fa fa-tag"></i> ${course.category}</span>
+                        <span><i class="fa fa-play-circle"></i> 师范生录课</span>
+                    </div>
+                    <a href="${course.video}" target="_blank" class="play-btn" onclick="return checkPlayAuth(event, '${course.video}')">
+                        <i class="fa fa-play-circle"></i> 播放课程
+                    </a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // 检查播放权限（需要登录）
+    function checkPlayAuth(event, videoUrl) {
+        const isLogged = localStorage.getItem('isLogin') === 'true';
+        if (!isLogged) {
+            event.preventDefault();
+            alert('请先登录后观看课程视频！');
+            openModal('login');
+            return false;
+        }
+        return true;
+    }
+
+    // 筛选课程
+    function filterCourses() {
+        currentSearch = document.getElementById('searchInput').value.trim();
+        renderCourses();
+    }
+
+    // 分类切换
+    function initCategoryTabs() {
+        const tabs = document.querySelectorAll('.category-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                currentCategory = this.dataset.category;
+                renderCourses();
+            });
+        });
+    }
+
+    // 导航栏切换
+    function toggleNav() {
+        document.querySelector('.nav-menu').classList.toggle('active');
+    }
+
+    // 登录弹窗相关
+    const modalEl = document.getElementById('modal');
+    function openModal(type) {
+        modalEl.classList.add('active');
+        if(type === 'login') switchTabModal('login');
+        else switchTabModal('reg');
+    }
+    function closeModal() { modalEl.classList.remove('active'); }
+    function switchTabModal(tab) {
+        document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.modal-tab-item').forEach(i => i.classList.remove('active'));
+        if(tab === 'login') {
+            document.getElementById('loginPanel').classList.add('active');
+            document.querySelectorAll('.modal-tab-item')[0].classList.add('active');
+        } else {
+            document.getElementById('regPanel').classList.add('active');
+            document.querySelectorAll('.modal-tab-item')[1].classList.add('active');
+        }
+    }
+
+    function loginHandler() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const pwd = document.getElementById('loginPassword').value.trim();
+        if(!username || !pwd) { alert("请输入账号和密码"); return; }
+        localStorage.setItem('isLogin', 'true');
+        localStorage.setItem('loginUser', username);
+        alert('登录成功！');
+        closeModal();
+        updateLoginUI();
+    }
+    
+    function registerHandler() {
+        const phone = document.getElementById('regPhone').value.trim();
+        const pwd = document.getElementById('regPwd').value;
+        const confirm = document.getElementById('regConfirm').value;
+        if(!phone || !pwd) { alert("请填写手机号和密码"); return; }
+        if(pwd !== confirm) { alert("两次密码不一致"); return; }
+        alert('注册成功！请登录');
+        switchTabModal('login');
+        document.getElementById('loginUsername').value = phone;
+        document.getElementById('loginPassword').value = '';
+    }
+
+    function checkMyNeedLogin(event) {
+        const isLogged = localStorage.getItem('isLogin') === 'true';
+        if(!isLogged) {
+            event.preventDefault();
+            alert('请先登录后访问"我的"页面！');
+            openModal('login');
+            return false;
+        }
+        return true;
+    }
+
+    function updateLoginUI() {
+        const isLogin = localStorage.getItem('isLogin') === 'true';
+        const loginGroup = document.getElementById('loginGroup');
+        if(isLogin && loginGroup) {
+            const user = localStorage.getItem('loginUser') || '用户';
+            loginGroup.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`;
+        } else {
+            loginGroup.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`;
+        }
+    }
+    
+    function logout() {
+        localStorage.removeItem('isLogin');
+        localStorage.removeItem('loginUser');
+        alert('已退出登录');
+        updateLoginUI();
+        window.location.href = 'index.html';
+    }
+
+    // 页面初始化
+    window.addEventListener('DOMContentLoaded', function() {
+        updateLoginUI();
+        initCategoryTabs();
+        renderCourses();
+    });
+</script>
 </body>
 </html>

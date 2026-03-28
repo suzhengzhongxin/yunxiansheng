@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>云先生-师范生助力乡村中小学道德与法治网络平台- 志愿者匹配</title>
+    <title>云先生-志愿者匹配 | 师范生助力乡村思政教育</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
-        /* 全局样式（完全复用平台现有变量和基础样式） */
         * {
             margin: 0;
             padding: 0;
@@ -14,20 +13,22 @@
             font-family: "Microsoft Yahei", "PingFang SC", "Helvetica Neue", sans-serif;
         }
         :root {
-            --primary-color: #991a28; /* 主红色 */
-            --primary-light: #d62828; /* 浅红 */
-            --primary-dark: #7a141e; /* 深红 */
-            --gold-color: #ffd700; /* 金色（点缀） */
-            --gray-light: #f8f9fa; /* 浅灰（背景） */
-            --gray-middle: #e9ecef; /* 中灰（边框） */
-            --gray-dark: #6c757d; /* 深灰（文字） */
-            --white-color: #ffffff; /* 白色 */
+            --primary-color: #991a28;
+            --primary-light: #d62828;
+            --primary-dark: #7a141e;
+            --gold-color: #ffd700;
+            --gray-light: #f8f9fa;
+            --gray-middle: #e9ecef;
+            --gray-dark: #6c757d;
+            --white-color: #ffffff;
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
             --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
             --radius-sm: 6px;
             --radius-md: 10px;
             --radius-lg: 16px;
             --transition: all 0.3s ease;
+            scroll-behavior: smooth;
         }
         body {
             background-color: var(--gray-light);
@@ -64,16 +65,33 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
         }
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
+
+        /* 顶部栏 */
+        .top-bar {
+            background: var(--primary-dark);
+            color: var(--gold-color);
+            padding: 8px 0;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: var(--white-color);
+        .top-bar .slogan {
+            flex: 1;
+            text-align: center;
         }
-        /* 导航栏（完全复用现有样式） */
+        .top-bar .login-group {
+            padding-right: 20px;
+        }
+        .top-bar a {
+            color: #fff;
+            margin-left: 15px;
+        }
+        .top-bar a:hover {
+            color: var(--gold-color);
+        }
+
+        /* 导航栏 */
         .header {
             position: sticky;
             top: 0;
@@ -98,6 +116,7 @@
             height: 48px;
             border-radius: 8px;
             border: 2px solid var(--white-color);
+            object-fit: cover;
         }
         .logo-text {
             color: var(--white-color);
@@ -136,12 +155,55 @@
             color: var(--white-color);
             cursor: pointer;
         }
-        /* 横幅（复用现有结构，修改副标题） */
+
+        /* 登录弹窗 */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-box {
+            background: #fff;
+            width: 90%;
+            max-width: 420px;
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute; top: 15px; right: 15px;
+            font-size: 20px; cursor: pointer;
+        }
+        .modal-tab {
+            display: flex; margin-bottom: 20px;
+        }
+        .modal-tab-item {
+            flex: 1; text-align: center; padding: 10px 0;
+            font-weight: bold; cursor: pointer;
+        }
+        .modal-tab-item.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        .modal-panel { display: none; }
+        .modal-panel.active { display: block; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 6px; }
+        .form-group input {
+            width: 100%; padding: 10px;
+            border: 1px solid #ddd; border-radius: 6px;
+        }
+
+        /* 横幅 */
         .banner {
-            height: 500px;
+            height: 380px;
             background: linear-gradient(135deg, var(--primary-color) 0%, #b82232 100%);
             position: relative;
-            overflow: visible;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -153,8 +215,7 @@
             width: 100%;
             height: 100%;
             background: url('图片/bg(1).jpg') center/cover no-repeat;
-            background-size: 100% auto;
-            opacity: 1;
+            opacity: 0.25;
             z-index: 1;
         }
         .banner-content {
@@ -163,43 +224,35 @@
             text-align: center;
             color: var(--white-color);
             padding: 0 20px;
-            margin-top: -50px;
         }
         .banner-title {
-            font-size: 48px;
+            font-size: 44px;
             font-weight: bold;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .banner-subtitle {
-            font-size: 22px;
-            margin-bottom: 30px;
-            text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+            font-size: 20px;
+            margin-bottom: 28px;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
         .banner-btn {
-            padding: 12px 32px;
-            font-size: 18px;
-            border-radius: var(--radius-md);
             background-color: var(--gold-color);
             color: var(--primary-dark);
             font-weight: bold;
+            padding: 12px 32px;
+            border-radius: var(--radius-md);
         }
-        .banner-btn:hover {
-            background-color: #fff082;
-            box-shadow: var(--shadow-md);
-        }
-        /* 新增：志愿者匹配核心样式 */
+
+        /* 志愿者匹配核心样式 */
         .match-section {
             padding: 80px 0;
         }
-        /* 板块标题（复用平台统一风格） */
         .section-title {
             text-align: center;
             margin-bottom: 60px;
-            position: relative;
         }
         .section-title h2 {
             font-size: 30px;
@@ -208,7 +261,15 @@
             padding-bottom: 10px;
             border-bottom: 3px double var(--primary-color);
         }
-        /* 报名+匹配切换标签 */
+        .section-desc {
+            text-align: center;
+            font-size: 16px;
+            color: var(--gray-dark);
+            margin-top: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
         .tab-container {
             max-width: 1200px;
             margin: 0 auto 40px;
@@ -239,12 +300,18 @@
             color: var(--primary-color);
             border-bottom: 3px solid var(--primary-color);
         }
-        /* 报名表单样式 */
         .form-content {
             padding: 40px;
             display: none;
         }
         .form-content.active {
+            display: block;
+        }
+        .match-content {
+            padding: 40px;
+            display: none;
+        }
+        .match-content.active {
             display: block;
         }
         .form-title {
@@ -288,25 +355,17 @@
             text-align: center;
             margin-top: 20px;
         }
-        /* 匹配展示样式 */
-        .match-content {
-            padding: 40px;
-            display: none;
-        }
-        .match-content.active {
-            display: block;
-        }
         .match-grid {
             display: grid;
             grid-template-columns: 1fr 120px 1fr;
             gap: 20px;
-            align-items: center;
+            align-items: start;
         }
         .list-container {
             background-color: #f9f5f0;
             border-radius: var(--radius-md);
             padding: 20px;
-            height: 500px;
+            height: 550px;
             overflow-y: auto;
         }
         .list-title {
@@ -324,6 +383,12 @@
             margin-bottom: 15px;
             box-shadow: var(--shadow-sm);
             border-left: 3px solid var(--primary-color);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .person-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-md);
         }
         .person-card.matched {
             border-left-color: #42b983;
@@ -345,10 +410,12 @@
             flex-direction: column;
             gap: 30px;
             align-items: center;
+            justify-content: center;
+            height: 100%;
         }
         .connect-line {
             width: 2px;
-            height: 80px;
+            height: 60px;
             background-color: var(--gray-middle);
         }
         .connect-tag {
@@ -358,11 +425,29 @@
             border-radius: 20px;
             font-size: 14px;
             font-weight: bold;
+            text-align: center;
         }
         .connect-tag.matched {
             background-color: #42b983;
         }
-        /* 底部（完全复用现有样式） */
+        .match-stats {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+            color: white;
+        }
+        .stats-number {
+            font-size: 48px;
+            font-weight: bold;
+        }
+        .stats-label {
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        /* 底部 */
         .footer {
             background-color: var(--primary-dark);
             color: var(--white-color);
@@ -380,7 +465,6 @@
             font-size: 18px;
             margin-bottom: 20px;
             position: relative;
-            padding-bottom: 10px;
         }
         .footer-col h4::after {
             content: '';
@@ -389,15 +473,9 @@
             left: 0;
             width: 50px;
             height: 2px;
-            background-color: var(--gold-color);
+            background: var(--gold-color);
         }
-        .footer-col ul li {
-            margin-bottom: 12px;
-        }
-        .footer-col ul li a:hover {
-            color: var(--gold-color);
-            padding-left: 5px;
-        }
+        .footer-col li { margin-bottom: 12px; }
         .footer-bottom {
             text-align: center;
             padding-top: 20px;
@@ -405,7 +483,6 @@
             font-size: 14px;
             color: #ccc;
         }
-        /* 弹窗样式 */
         .toast {
             position: fixed;
             top: 20px;
@@ -418,21 +495,13 @@
             z-index: 9999;
             opacity: 0;
             transition: opacity 0.3s ease;
+            pointer-events: none;
         }
-        .toast.success {
-            background-color: #42b983;
-        }
-        .toast.error {
-            background-color: #d62828;
-        }
-        .toast.show {
-            opacity: 1;
-        }
-        /* 响应式适配（复用平台现有逻辑） */
+        .toast.success { background-color: #42b983; }
+        .toast.error { background-color: #d62828; }
+        .toast.show { opacity: 1; }
+
         @media (max-width: 1200px) {
-            .banner-title {
-                font-size: 40px;
-            }
             .match-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -443,38 +512,31 @@
                 margin: 20px 0;
             }
             .connect-line {
-                width: 80px;
+                width: 60px;
                 height: 2px;
             }
         }
         @media (max-width: 768px) {
-            .nav-toggle {
-                display: block;
-            }
             .nav-menu {
                 position: fixed;
                 top: 70px;
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background-color: var(--primary-dark);
+                background: var(--primary-dark);
                 flex-direction: column;
                 align-items: center;
                 padding: 40px 0;
-                gap: 25px;
+                gap: 20px;
                 transition: var(--transition);
             }
-            .nav-menu.active {
-                left: 0;
-            }
+            .nav-menu.active { left: 0; }
+            .nav-toggle { display: block; }
             .banner {
-                height: 400px;
+                height: 320px;
             }
             .banner-title {
                 font-size: 32px;
-            }
-            .banner-subtitle {
-                font-size: 18px;
             }
             .form-grid {
                 grid-template-columns: 1fr;
@@ -486,7 +548,7 @@
                 padding: 20px;
             }
             .tab-btn {
-                font-size: 16px;
+                font-size: 14px;
                 padding: 12px;
             }
             .footer-top {
@@ -497,345 +559,553 @@
     </style>
 </head>
 <body>
-    <!-- 导航栏（新增"志愿者匹配"导航项并设为active） -->
-    <header class="header">
-        <div class="container nav">
-            <div class="logo">
-                <img src="图片/云先生logo.jpg" alt="云先生logo">
-                <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="news.html">思政文库</a></li>
-                <li><a href="bookstore.html">思政乐园</a></li>
-                <li><a href="video.html">录播课室</a></li>
-                <li><a href="download.html">直播课堂</a></li>
-		<li><a href="volunteer.html" class="active">志愿者匹配</a></li>
-                <li><a href="forum.html">留言板</a></li>
-                <li><a href="checkin.html">我的</a></li>
-            </ul>
-            <div class="nav-toggle" onclick="toggleNav()">
-                <i class="fa fa-bars"></i>
-            </div>
+
+<!-- 顶部栏 -->
+<div class="top-bar">
+    <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
+    <div class="login-group" id="loginGroup">
+        <a href="javascript:void(0);" onclick="openModal('login')">登录</a>
+        <a href="javascript:void(0);" onclick="openModal('reg')">注册</a>
+    </div>
+</div>
+
+<!-- 导航栏 -->
+<header class="header">
+    <div class="container nav">
+        <div class="logo">
+            <img src="图片/云先生logo.jpg" alt="云先生logo" onerror="this.src='https://via.placeholder.com/48x48?text=云先生'">
+            <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
         </div>
-    </header>
-
-    <!-- 横幅（保持风格统一，修改标题和副标题） -->
-    <section class="banner">
-        <div class="banner-bg"></div>
-        <div class="banner-content">
-            <h1 class="banner-title">校园志愿招募与乡村道法服务中心</h1>
-            <p class="banner-subtitle">师范生志愿者报名入驻，乡村学生需求对接，共建思政教育桥梁</p>
-            <a href="#match-content" class="btn banner-btn">立即参与</a>
+        <ul class="nav-menu">
+            <li><a href="index.html">首页</a></li>
+	    <li><a href="volunteer.html" class="active">志愿者匹配</a></li>
+            <li><a href="news.html">思政文库</a></li>
+            <li><a href="bookstore.html">思政乐园</a></li>
+            <li><a href="video.html">录播课室</a></li>
+            <li><a href="download.html">直播课室</a></li>
+            <li><a href="forum.html">留言板</a></li>
+            <li><a href="checkin.html" onclick="return checkMyNeedLogin(event)">我的</a></li>
+        </ul>
+        <div class="nav-toggle" onclick="toggleNav()">
+            <i class="fa fa-bars"></i>
         </div>
-    </section>
+    </div>
+</header>
 
-    <!-- 核心内容区：报名+匹配 -->
-    <section class="match-section" id="match-content">
-        <div class="container">
-            <div class="section-title">
-                <h2>志愿者报名与师生匹配</h2>
+<!-- 登录弹窗 -->
+<div class="modal" id="modal">
+    <div class="modal-box">
+        <div class="modal-close" onclick="closeModal()">&times;</div>
+        <div class="modal-tab">
+            <div class="modal-tab-item active" onclick="switchTabModal('login')">登录</div>
+            <div class="modal-tab-item" onclick="switchTabModal('reg')">注册</div>
+        </div>
+        <div class="modal-panel active" id="loginPanel">
+            <div class="form-group">
+                <label>账号</label>
+                <input type="text" id="loginUsername" placeholder="手机号/学号">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="loginPassword" placeholder="请输入密码">
+            </div>
+            <button class="btn" onclick="loginHandler()">登录</button>
+        </div>
+        <div class="modal-panel" id="regPanel">
+            <div class="form-group">
+                <label>手机号</label>
+                <input type="text" id="regPhone" placeholder="请输入手机号">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="regPwd" placeholder="设置密码">
+            </div>
+            <div class="form-group">
+                <label>确认密码</label>
+                <input type="password" id="regConfirm" placeholder="确认密码">
+            </div>
+            <button class="btn" onclick="registerHandler()">注册</button>
+        </div>
+    </div>
+</div>
+
+<!-- 横幅区域 -->
+<section class="banner">
+    <div class="banner-bg"></div>
+    <div class="banner-content">
+        <h1 class="banner-title">校园志愿招募与乡村道法服务中心</h1>
+        <p class="banner-subtitle">师范生志愿者报名入驻，乡村学生需求对接，共建思政教育桥梁</p>
+        <a href="#match-content" class="btn banner-btn">立即参与</a>
+    </div>
+</section>
+
+<!-- 核心内容区 -->
+<section class="match-section" id="match-content">
+    <div class="container">
+        <div class="section-title">
+            <h2>志愿者报名与师生匹配</h2>
+        </div>
+        <div class="section-desc">
+            师范生志愿者与乡村中小学生双向选择，智能匹配科目和时间，让思政教育精准对接
+        </div>
+
+        <div class="tab-container">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="volunteer-form">师范生志愿者报名</button>
+                <button class="tab-btn" data-tab="student-form">乡村中小学学生信息收集</button>
+                <button class="tab-btn" data-tab="match-result">匹配结果展示</button>
             </div>
 
-            <!-- 切换标签 -->
-            <div class="tab-container">
-                <div class="tab-buttons">
-                    <button class="tab-btn active" onclick="switchTab('volunteer-form')">师范生志愿者报名</button>
-                    <button class="tab-btn" onclick="switchTab('student-form')">乡村中小学学生信息收集</button>
-                    <button class="tab-btn" onclick="switchTab('match-result')">匹配结果展示</button>
+            <!-- 志愿者报名表单 -->
+            <div class="form-content active" id="volunteer-form">
+                <h3 class="form-title">师范生志愿者报名信息</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>姓名</label><input type="text" id="vol-name" class="form-control" placeholder="请输入您的姓名"></div>
+                    <div class="form-group"><label>联系方式</label><input type="tel" id="vol-phone" class="form-control" placeholder="电话/微信"></div>
+                    <div class="form-group"><label>所在院校</label><input type="text" id="vol-school" class="form-control" placeholder="例如：忻州师范学院"></div>
+                    <div class="form-group"><label>专业年级</label><input type="text" id="vol-major" class="form-control" placeholder="例如：思政专业2023级"></div>
+                    <div class="form-group"><label>擅长科目</label><input type="text" id="vol-subject" class="form-control" placeholder="例如：初中道德与法治、高中政治"></div>
+                    <div class="form-group"><label>可服务时间</label><input type="text" id="vol-time" class="form-control" placeholder="例如：周一三五19:00-21:00"></div>
+                    <div class="form-group form-fullwidth"><label>个人简介（教学经验/特长）</label><textarea id="vol-intro" class="form-control" rows="4" placeholder="请简要介绍您的教学相关经验或特长"></textarea></div>
+                    <div class="form-actions"><button type="button" class="btn banner-btn" id="vol-submit">提交报名</button></div>
                 </div>
+            </div>
 
-                <!-- 志愿者报名表单 -->
-                <div class="form-content active" id="volunteer-form">
-                    <h3 class="form-title">师范生志愿者报名信息</h3>
-                    <form class="form-grid">
-                        <div class="form-group">
-                            <label for="vol-name">姓名</label>
-                            <input type="text" id="vol-name" class="form-control" placeholder="请输入您的姓名">
-                        </div>
-                        <div class="form-group">
-                            <label for="vol-phone">联系方式</label>
-                            <input type="tel" id="vol-phone" class="form-control" placeholder="电话/微信">
-                        </div>
-                        <div class="form-group">
-                            <label for="vol-school">所在院校</label>
-                            <input type="text" id="vol-school" class="form-control" placeholder="例如：忻州师范学院">
-                        </div>
-                        <div class="form-group">
-                            <label for="vol-major">专业年级</label>
-                            <input type="text" id="vol-major" class="form-control" placeholder="例如：思政专业2023级">
-                        </div>
-                        <div class="form-group">
-                            <label for="vol-subject">擅长科目</label>
-                            <input type="text" id="vol-subject" class="form-control" placeholder="例如：初中道德与法治、高中政治">
-                        </div>
-                        <div class="form-group">
-                            <label for="vol-time">可服务时间</label>
-                            <input type="text" id="vol-time" class="form-control" placeholder="例如：周一三五19:00-21:00">
-                        </div>
-                        <div class="form-group form-fullwidth">
-                            <label for="vol-intro">个人简介（教学经验/特长）</label>
-                            <textarea id="vol-intro" class="form-control" rows="4" placeholder="请简要介绍您的教学相关经验或特长"></textarea>
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn banner-btn" id="vol-submit">提交报名</button>
-                        </div>
-                    </form>
+            <!-- 学生需求提交表单 -->
+            <div class="form-content" id="student-form">
+                <h3 class="form-title">乡村中小学学生信息收集</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>学生姓名</label><input type="text" id="stu-name" class="form-control" placeholder="请输入学生姓名"></div>
+                    <div class="form-group"><label>年级</label><input type="text" id="stu-grade" class="form-control" placeholder="例如：七年级、高一"></div>
+                    <div class="form-group"><label>所在学校</label><input type="text" id="stu-school" class="form-control" placeholder="例如：XX乡村中学"></div>
+                    <div class="form-group"><label>需求科目</label><input type="text" id="stu-subject" class="form-control" placeholder="例如：道德与法治、思想政治"></div>
+                    <div class="form-group"><label>期望辅导时间</label><input type="text" id="stu-time" class="form-control" placeholder="例如：周二四晚上、周末上午"></div>
+                    <div class="form-group"><label>学习难点描述</label><input type="text" id="stu-desc" class="form-control" placeholder="例如：主观题答题技巧、知识点记忆"></div>
+                    <div class="form-group form-fullwidth"><label>家长联系方式</label><input type="tel" id="guardian-phone" class="form-control" placeholder="请填写家长电话"></div>
+                    <div class="form-actions"><button type="button" class="btn banner-btn" id="stu-submit">提交需求</button></div>
                 </div>
+            </div>
 
-                <!-- 学生需求提交表单 -->
-                <div class="form-content" id="student-form">
-                    <h3 class="form-title">乡村中小学学生信息收集</h3>
-                    <form class="form-grid">
-                        <div class="form-group">
-                            <label for="stu-name">学生姓名</label>
-                            <input type="text" id="stu-name" class="form-control" placeholder="请输入学生姓名">
+            <!-- 匹配结果展示 -->
+            <div class="match-content" id="match-result">
+                <h3 class="form-title">志愿者-学生匹配结果</h3>
+                <div class="match-grid">
+                    <div class="list-container" id="volunteer-list">
+                        <h4 class="list-title">志愿者列表</h4>
+                        <div class="person-card" data-subject="初中道德与法治" data-time="周一三五">
+                            <div class="person-name">张同学</div>
+                            <div class="person-info">院校：忻州师范学院<br>专业：思政专业2022级<br>擅长：初中道德与法治<br>时间：周一三五19:00-21:00</div>
                         </div>
-                        <div class="form-group">
-                            <label for="stu-grade">年级</label>
-                            <input type="text" id="stu-grade" class="form-control" placeholder="例如：七年级、高一">
+                        <div class="person-card" data-subject="高中政治" data-time="周二四六">
+                            <div class="person-name">李同学</div>
+                            <div class="person-info">院校：山西师范大学<br>专业：思想政治教育2021级<br>擅长：高中政治、时政解读<br>时间：周二四六晚上</div>
                         </div>
-                        <div class="form-group">
-                            <label for="stu-school">所在学校</label>
-                            <input type="text" id="stu-school" class="form-control" placeholder="例如：XX乡村中学">
+                        <div class="person-card" data-subject="初中思政" data-time="周末">
+                            <div class="person-name">王同学</div>
+                            <div class="person-info">院校：忻州师范学院<br>专业：思政专业2023级<br>擅长：初中思政、红色故事<br>时间：周末全天</div>
                         </div>
-                        <div class="form-group">
-                            <label for="stu-subject">需求科目</label>
-                            <input type="text" id="stu-subject" class="form-control" placeholder="例如：道德与法治、思想政治">
+                        <div class="person-card" data-subject="法律基础" data-time="周三五,周日">
+                            <div class="person-name">赵同学</div>
+                            <div class="person-info">院校：太原师范学院<br>专业：思政教育2022级<br>擅长：法律基础、政治常识<br>时间：周三五晚上、周日上午</div>
                         </div>
-                        <div class="form-group">
-                            <label for="stu-time">期望辅导时间</label>
-                            <input type="text" id="stu-time" class="form-control" placeholder="例如：周二四晚上、周末上午">
-                        </div>
-                        <div class="form-group">
-                            <label for="stu-desc">学习难点描述</label>
-                            <input type="text" id="stu-desc" class="form-control" placeholder="例如：主观题答题技巧、知识点记忆">
-                        </div>
-                        <div class="form-group form-fullwidth">
-                            <label for="guardian-phone">家长联系方式</label>
-                            <input type="tel" id="guardian-phone" class="form-control" placeholder="请填写家长电话">
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn banner-btn" id="stu-submit">提交需求</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
 
-                <!-- 匹配结果展示 -->
-                <div class="match-content" id="match-result">
-                    <h3 class="form-title">志愿者-学生匹配结果</h3>
-                    <div class="match-grid">
-                        <!-- 志愿者列表 -->
-                        <div class="list-container">
-                            <h4 class="list-title">志愿者列表</h4>
-                            <div class="person-card" data-subject="初中道德与法治" data-time="周一三五">
-                                <div class="person-name">张同学</div>
-                                <div class="person-info">院校：忻州师范学院<br>专业：思政专业2022级<br>擅长：初中道德与法治<br>时间：周一三五19:00-21:00</div>
-                            </div>
-                            <div class="person-card" data-subject="高中政治" data-time="周二四六">
-                                <div class="person-name">李同学</div>
-                                <div class="person-info">院校：山西师范大学<br>专业：思想政治教育2021级<br>擅长：高中政治、时政解读<br>时间：周二四六晚上</div>
-                            </div>
-                            <div class="person-card" data-subject="初中思政" data-time="周末">
-                                <div class="person-name">王同学</div>
-                                <div class="person-info">院校：忻州师范学院<br>专业：思政专业2023级<br>擅长：初中思政、红色故事讲解<br>时间：周末全天</div>
-                            </div>
-                            <div class="person-card" data-subject="法律基础" data-time="周三五,周日">
-                                <div class="person-name">赵同学</div>
-                                <div class="person-info">院校：太原师范学院<br>专业：思政教育2022级<br>擅长：法律基础、政治常识<br>时间：周三五晚上、周日上午</div>
-                            </div>
-                        </div>
+                    <div class="connect-area" id="connect-area">
+                        <div class="connect-tag">未匹配</div>
+                        <div class="connect-line"></div>
+                        <div class="connect-tag">未匹配</div>
+                        <div class="connect-line"></div>
+                        <div class="connect-tag">未匹配</div>
+                        <div class="connect-line"></div>
+                        <div class="connect-tag">未匹配</div>
+                    </div>
 
-                        <!-- 匹配连线 -->
-                        <div class="connect-area">
-                            <div class="connect-tag">未匹配</div>
-                            <div class="connect-line"></div>
-                            <div class="connect-tag">未匹配</div>
-                            <div class="connect-line"></div>
-                            <div class="connect-tag">未匹配</div>
-                            <div class="connect-line"></div>
-                            <div class="connect-tag">未匹配</div>
+                    <div class="list-container" id="student-list">
+                        <h4 class="list-title">乡村中小学生需求</h4>
+                        <div class="person-card" data-subject="初中道德与法治" data-time="周一三五">
+                            <div class="person-name">小明</div>
+                            <div class="person-info">学校：XX乡村中学<br>年级：八年级<br>需求：初中道德与法治<br>时间：周一三五晚上</div>
                         </div>
-
-                        <!-- 学生列表 -->
-                        <div class="list-container">
-                            <h4 class="list-title">乡村中小学学生信息收集</h4>
-                            <div class="person-card" data-subject="初中道德与法治" data-time="周一三五">
-                                <div class="person-name">小明</div>
-                                <div class="person-info">学校：XX乡村中学<br>年级：八年级<br>需求：初中道德与法治<br>时间：周一三五晚上</div>
-                            </div>
-                            <div class="person-card" data-subject="高中政治" data-time="周二四">
-                                <div class="person-name">小红</div>
-                                <div class="person-info">学校：YY乡村中学<br>年级：高一<br>需求：高中政治主观题<br>时间：周二四晚上</div>
-                            </div>
-                            <div class="person-card" data-subject="初中思政" data-time="周末">
-                                <div class="person-name">小刚</div>
-                                <div class="person-info">学校：ZZ乡村小学<br>年级：六年级<br>需求：思政常识、红色故事<br>时间：周末上午</div>
-                            </div>
-                            <div class="person-card" data-subject="法律基础" data-time="周五,周日">
-                                <div class="person-name">小丽</div>
-                                <div class="person-info">学校：AA乡村中学<br>年级：九年级<br>需求：法律基础、时政热点<br>时间：周五晚上、周日上午</div>
-                            </div>
+                        <div class="person-card" data-subject="高中政治" data-time="周二四">
+                            <div class="person-name">小红</div>
+                            <div class="person-info">学校：YY乡村中学<br>年级：高一<br>需求：高中政治主观题<br>时间：周二四晚上</div>
+                        </div>
+                        <div class="person-card" data-subject="初中思政" data-time="周末">
+                            <div class="person-name">小刚</div>
+                            <div class="person-info">学校：ZZ乡村小学<br>年级：六年级<br>需求：思政常识、红色故事<br>时间：周末上午</div>
+                        </div>
+                        <div class="person-card" data-subject="法律基础" data-time="周五,周日">
+                            <div class="person-name">小丽</div>
+                            <div class="person-info">学校：AA乡村中学<br>年级：九年级<br>需求：法律基础、时政热点<br>时间：周五晚上、周日上午</div>
                         </div>
                     </div>
                 </div>
+
+                <div class="match-stats">
+                    <div class="stats-number" id="match-count">0</div>
+                    <div class="stats-label">成功匹配对数</div>
+                    <div class="stats-label" style="font-size: 14px; margin-top: 10px;">恭喜匹配成功的志愿者和学生！</div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- 底部（完全复用现有样式） -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-col">
-                    <h4>关于我们</h4>
-                    <ul>
-                        <li><a href="#">平台介绍</a></li>
-                        <li><a href="#">团队风采</a></li>
-                        <li><a href="#">联系我们</a></li>
-                        <li><a href="#">加入我们</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>学习资源</h4>
-                    <ul>
-                        <li><a href="#">时政资料库</a></li>
-                        <li><a href="#">精品课程</a></li>
-                        <li><a href="#">学习工具</a></li>
-                        <li><a href="#">常见问题</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>法律声明</h4>
-                    <ul>
-                        <li><a href="#">隐私政策</a></li>
-                        <li><a href="#">用户协议</a></li>
-                        <li><a href="#">版权声明</a></li>
-                        <li><a href="#">免责条款</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>联系方式</h4>
-                    <ul>
-                        <li><i class="fa fa-phone"></i> 0350-3339920</li>
-                        <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
-                        <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 云先生-师范生助力乡村中小学道德与法治网络平台 版权所有 | 晋ICP备202308110020号</p>
-            </div>
+<!-- 底部 -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-col"><h4>关于我们</h4><ul><li><a href="#">平台介绍</a></li><li><a href="#">团队风采</a></li><li><a href="#">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>学习资源</h4><ul><li><a href="#">时政资料库</a></li><li><a href="#">精品课程</a></li><li><a href="#">学习工具</a></li></ul></div>
+            <div class="footer-col"><h4>法律声明</h4><ul><li><a href="#">隐私政策</a></li><li><a href="#">用户协议</a></li><li><a href="#">版权声明</a></li></ul></div>
+            <div class="footer-col"><h4>联系方式</h4><ul><li><i class="fa fa-phone"></i> 0350-3339920</li><li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li><li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li></ul></div>
         </div>
-    </footer>
+        <div class="footer-bottom"><p>© 2026 云先生-师范生助力乡村中小学道德与法治网络平台 版权所有 | 晋ICP备202308110020号</p></div>
+    </div>
+</footer>
 
-    <!-- 弹窗容器 -->
-    <div id="toast" class="toast"></div>
+<div id="toast" class="toast"></div>
 
-    <!-- 交互脚本 -->
-    <script>
-        // 移动端导航切换（复用现有脚本）
-        function toggleNav() {
-            const navMenu = document.querySelector('.nav-menu');
-            navMenu.classList.toggle('active');
+<script>
+    // 存储志愿者和学生数据
+    let volunteers = [];
+    let students = [];
+
+    // 导航栏移动端折叠
+    function toggleNav() {
+        document.querySelector('.nav-menu').classList.toggle('active');
+    }
+
+    // 登录模态框控制
+    const modalEl = document.getElementById('modal');
+    function openModal(type) {
+        modalEl.classList.add('active');
+        if(type === 'login') switchTabModal('login');
+        else switchTabModal('reg');
+    }
+    function closeModal() { modalEl.classList.remove('active'); }
+    function switchTabModal(tab) {
+        document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.modal-tab-item').forEach(i => i.classList.remove('active'));
+        if(tab === 'login') {
+            document.getElementById('loginPanel').classList.add('active');
+            document.querySelectorAll('.modal-tab-item')[0].classList.add('active');
+        } else {
+            document.getElementById('regPanel').classList.add('active');
+            document.querySelectorAll('.modal-tab-item')[1].classList.add('active');
         }
+    }
 
-        // 标签切换脚本
-        function switchTab(tabId) {
-            // 隐藏所有内容
-            document.querySelectorAll('.form-content, .match-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            // 移除所有标签激活状态
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            // 显示选中内容和激活标签
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-
-            // 如果切换到匹配结果页，执行匹配检查
-            if (tabId === 'match-result') {
-                checkMatch();
-            }
+    // 登录注册
+    function loginHandler() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const pwd = document.getElementById('loginPassword').value.trim();
+        if(!username || !pwd) { 
+            showToast("请输入账号和密码", "error");
+            return; 
         }
-
-        // 通用弹窗函数
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = `toast ${type} show`;
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2000);
+        localStorage.setItem('isLogin', 'true');
+        localStorage.setItem('loginUser', username);
+        showToast("登录成功！", "success");
+        closeModal();
+        updateLoginUI();
+    }
+    
+    function registerHandler() {
+        const phone = document.getElementById('regPhone').value.trim();
+        const pwd = document.getElementById('regPwd').value;
+        const confirm = document.getElementById('regConfirm').value;
+        if(!phone || !pwd) { 
+            showToast("请填写手机号和密码", "error");
+            return; 
         }
+        if(pwd !== confirm) { 
+            showToast("两次密码不一致", "error");
+            return; 
+        }
+        showToast("注册成功！请登录", "success");
+        switchTabModal('login');
+        document.getElementById('loginUsername').value = phone;
+        document.getElementById('loginPassword').value = '';
+    }
 
-        // 志愿者报名提交
-        document.getElementById('vol-submit').addEventListener('click', function() {
-            const name = document.getElementById('vol-name').value;
-            const phone = document.getElementById('vol-phone').value;
-            if (name && phone) {
-                showToast('✅ 志愿者报名成功！');
-                // 清空表单
-                document.querySelector('#volunteer-form form').reset();
-            } else {
-                showToast('❌ 报名失败，请填写完整信息', 'error');
-            }
+    function checkMyNeedLogin(event) {
+        const isLogged = localStorage.getItem('isLogin') === 'true';
+        if(!isLogged) {
+            event.preventDefault();
+            showToast("请先登录后访问'我的'页面！", "error");
+            openModal('login');
+            return false;
+        }
+        return true;
+    }
+
+    function updateLoginUI() {
+        const isLogin = localStorage.getItem('isLogin') === 'true';
+        const loginGroup = document.getElementById('loginGroup');
+        if(isLogin && loginGroup) {
+            const user = localStorage.getItem('loginUser') || '用户';
+            loginGroup.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:void(0);" onclick="logout()" style="margin-left:12px;">退出</a>`;
+        } else {
+            loginGroup.innerHTML = `<a href="javascript:void(0);" onclick="openModal('login')">登录</a><a href="javascript:void(0);" onclick="openModal('reg')">注册</a>`;
+        }
+    }
+    
+    function logout() {
+        localStorage.removeItem('isLogin');
+        localStorage.removeItem('loginUser');
+        showToast("已退出登录", "success");
+        updateLoginUI();
+    }
+
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = `toast ${type} show`;
+        setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    // 标签切换（修复版）
+    function switchTab(tabId, btnElement) {
+        // 隐藏所有内容
+        document.querySelectorAll('.form-content, .match-content').forEach(content => {
+            content.classList.remove('active');
         });
-
-        // 学生需求提交
-        document.getElementById('stu-submit').addEventListener('click', function() {
-            const stuName = document.getElementById('stu-name').value;
-            const guardianPhone = document.getElementById('guardian-phone').value;
-            if (stuName && guardianPhone) {
-                showToast('✅ 学生需求提交成功！');
-                // 清空表单
-                document.querySelector('#student-form form').reset();
-            } else {
-                showToast('❌ 提交失败，请填写完整信息', 'error');
-            }
+        // 移除所有按钮的active类
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
         });
+        // 显示选中的内容
+        const activeContent = document.getElementById(tabId);
+        if (activeContent) {
+            activeContent.classList.add('active');
+        }
+        // 激活当前按钮
+        if (btnElement) {
+            btnElement.classList.add('active');
+        }
+        // 如果是匹配结果页面，执行匹配
+        if (tabId === 'match-result') {
+            checkMatch();
+        }
+    }
 
-        // 匹配逻辑：科目和时间重叠即为匹配
-        function checkMatch() {
-            const volunteers = document.querySelectorAll('#match-result .person-card[data-subject]');
-            const students = document.querySelectorAll('#match-result .person-card[data-subject]');
-            const connectTags = document.querySelectorAll('.connect-tag');
+    // 绑定标签按钮点击事件
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const tabId = this.getAttribute('data-tab');
+            switchTab(tabId, this);
+        });
+    });
 
-            volunteers.forEach((vol, index) => {
-                const volSubject = vol.getAttribute('data-subject');
-                const volTime = vol.getAttribute('data-time');
-                const stu = students[index];
-                if (!stu) return;
-
-                const stuSubject = stu.getAttribute('data-subject');
-                const stuTime = stu.getAttribute('data-time');
-
-                // 匹配规则：科目包含且时间重叠
-                const isSubjectMatch = volSubject.includes(stuSubject) || stuSubject.includes(volSubject);
-                const isTimeMatch = volTime.split(',').some(t => stuTime.includes(t)) || stuTime.split(',').some(t => volTime.includes(t));
-                const isMatch = isSubjectMatch && isTimeMatch;
-
-                if (isMatch) {
-                    vol.classList.add('matched');
-                    stu.classList.add('matched');
-                    connectTags[index]?.classList.add('matched');
-                    connectTags[index].textContent = '已匹配';
-                } else {
-                    vol.classList.remove('matched');
-                    stu.classList.remove('matched');
-                    connectTags[index]?.classList.remove('matched');
-                    connectTags[index].textContent = '未匹配';
+    // 匹配逻辑（修复版）
+    function checkMatch() {
+        const volunteerCards = document.querySelectorAll('#volunteer-list .person-card');
+        const studentCards = document.querySelectorAll('#student-list .person-card');
+        const connectTags = document.querySelectorAll('#connect-area .connect-tag');
+        
+        let matchCount = 0;
+        
+        // 重置所有连接标签
+        connectTags.forEach(tag => {
+            tag.textContent = '未匹配';
+            tag.classList.remove('matched');
+        });
+        
+        // 遍历志愿者和学生进行匹配
+        for (let i = 0; i < Math.min(volunteerCards.length, studentCards.length); i++) {
+            const vol = volunteerCards[i];
+            const stu = studentCards[i];
+            const connectTag = connectTags[i];
+            
+            if (!vol || !stu) continue;
+            
+            const volSubject = vol.getAttribute('data-subject') || '';
+            const volTime = vol.getAttribute('data-time') || '';
+            const stuSubject = stu.getAttribute('data-subject') || '';
+            const stuTime = stu.getAttribute('data-time') || '';
+            
+            // 匹配逻辑：科目匹配或时间匹配
+            const isSubjectMatch = volSubject.includes(stuSubject) || stuSubject.includes(volSubject);
+            
+            // 时间匹配（更宽松的匹配）
+            const volTimeArray = volTime.split(/[,，、\s]+/);
+            const stuTimeArray = stuTime.split(/[,，、\s]+/);
+            const isTimeMatch = volTimeArray.some(t => stuTimeArray.some(st => st.includes(t) || t.includes(st)));
+            
+            const isMatch = isSubjectMatch || isTimeMatch;
+            
+            if (isMatch) {
+                vol.classList.add('matched');
+                stu.classList.add('matched');
+                if (connectTag) {
+                    connectTag.classList.add('matched');
+                    connectTag.textContent = '已匹配';
                 }
-            });
-        }
-
-        // 页面加载时如果在匹配结果页，执行匹配检查
-        window.addEventListener('load', function() {
-            if (document.getElementById('match-result').classList.contains('active')) {
-                checkMatch();
+                matchCount++;
+            } else {
+                vol.classList.remove('matched');
+                stu.classList.remove('matched');
+                if (connectTag) {
+                    connectTag.classList.remove('matched');
+                    connectTag.textContent = '未匹配';
+                }
             }
-        });
-    </script>
+        }
+        
+        // 更新匹配计数
+        const matchCountElement = document.getElementById('match-count');
+        if (matchCountElement) {
+            matchCountElement.innerText = matchCount;
+        }
+        
+        // 显示匹配结果提示
+        if (matchCount > 0) {
+            showToast(`成功匹配 ${matchCount} 对志愿者与学生！`, "success");
+        }
+    }
+
+    // 志愿者提交表单
+    document.getElementById('vol-submit').addEventListener('click', function() {
+        const name = document.getElementById('vol-name').value.trim();
+        const phone = document.getElementById('vol-phone').value.trim();
+        const school = document.getElementById('vol-school').value.trim();
+        const major = document.getElementById('vol-major').value.trim();
+        const subject = document.getElementById('vol-subject').value.trim();
+        const time = document.getElementById('vol-time').value.trim();
+        const intro = document.getElementById('vol-intro').value.trim();
+        
+        if (!name || !phone || !subject) {
+            showToast("请填写姓名、联系方式和擅长科目", "error");
+            return;
+        }
+        
+        // 添加到志愿者列表
+        const volunteerList = document.getElementById('volunteer-list');
+        const newCard = document.createElement('div');
+        newCard.className = 'person-card';
+        newCard.setAttribute('data-subject', subject);
+        newCard.setAttribute('data-time', time);
+        newCard.innerHTML = `
+            <div class="person-name">${name}</div>
+            <div class="person-info">院校：${school || '未填写'}<br>
+            专业：${major || '未填写'}<br>
+            擅长：${subject}<br>
+            时间：${time || '未填写'}</div>
+        `;
+        volunteerList.appendChild(newCard);
+        
+        // 清空表单
+        document.getElementById('vol-name').value = '';
+        document.getElementById('vol-phone').value = '';
+        document.getElementById('vol-school').value = '';
+        document.getElementById('vol-major').value = '';
+        document.getElementById('vol-subject').value = '';
+        document.getElementById('vol-time').value = '';
+        document.getElementById('vol-intro').value = '';
+        
+        showToast("志愿者报名成功！", "success");
+        
+        // 如果在匹配结果页面，重新匹配
+        if (document.getElementById('match-result').classList.contains('active')) {
+            checkMatch();
+        }
+    });
+    
+    // 学生需求提交
+    document.getElementById('stu-submit').addEventListener('click', function() {
+        const name = document.getElementById('stu-name').value.trim();
+        const grade = document.getElementById('stu-grade').value.trim();
+        const school = document.getElementById('stu-school').value.trim();
+        const subject = document.getElementById('stu-subject').value.trim();
+        const time = document.getElementById('stu-time').value.trim();
+        const desc = document.getElementById('stu-desc').value.trim();
+        const phone = document.getElementById('guardian-phone').value.trim();
+        
+        if (!name || !subject || !phone) {
+            showToast("请填写学生姓名、需求科目和家长联系方式", "error");
+            return;
+        }
+        
+        // 添加到学生列表
+        const studentList = document.getElementById('student-list');
+        const newCard = document.createElement('div');
+        newCard.className = 'person-card';
+        newCard.setAttribute('data-subject', subject);
+        newCard.setAttribute('data-time', time);
+        newCard.innerHTML = `
+            <div class="person-name">${name}</div>
+            <div class="person-info">学校：${school || '未填写'}<br>
+            年级：${grade || '未填写'}<br>
+            需求：${subject}<br>
+            时间：${time || '未填写'}</div>
+        `;
+        studentList.appendChild(newCard);
+        
+        // 清空表单
+        document.getElementById('stu-name').value = '';
+        document.getElementById('stu-grade').value = '';
+        document.getElementById('stu-school').value = '';
+        document.getElementById('stu-subject').value = '';
+        document.getElementById('stu-time').value = '';
+        document.getElementById('stu-desc').value = '';
+        document.getElementById('guardian-phone').value = '';
+        
+        showToast("学生需求提交成功！", "success");
+        
+        // 如果在匹配结果页面，重新匹配
+        if (document.getElementById('match-result').classList.contains('active')) {
+            checkMatch();
+        }
+    });
+    
+    // 添加连接区域的连接标签（动态更新数量）
+    function updateConnectArea() {
+        const volunteerCount = document.querySelectorAll('#volunteer-list .person-card').length;
+        const studentCount = document.querySelectorAll('#student-list .person-card').length;
+        const maxCount = Math.max(volunteerCount, studentCount);
+        const connectArea = document.getElementById('connect-area');
+        
+        // 清空连接区域
+        connectArea.innerHTML = '';
+        
+        // 重新生成连接标签
+        for (let i = 0; i < maxCount; i++) {
+            const tag = document.createElement('div');
+            tag.className = 'connect-tag';
+            tag.textContent = '未匹配';
+            connectArea.appendChild(tag);
+            
+            if (i < maxCount - 1) {
+                const line = document.createElement('div');
+                line.className = 'connect-line';
+                connectArea.appendChild(line);
+            }
+        }
+    }
+    
+    // 监听列表变化，更新连接区域
+    const observer = new MutationObserver(function() {
+        updateConnectArea();
+        if (document.getElementById('match-result').classList.contains('active')) {
+            checkMatch();
+        }
+    });
+    
+    observer.observe(document.getElementById('volunteer-list'), { childList: true, subtree: true });
+    observer.observe(document.getElementById('student-list'), { childList: true, subtree: true });
+    
+    // 初始化连接区域
+    updateConnectArea();
+    
+    // 初始化登录状态
+    updateLoginUI();
+    
+    // 页面加载完成后执行匹配
+    window.addEventListener('load', function() {
+        // 初始匹配
+        checkMatch();
+    });
+</script>
 </body>
 </html>

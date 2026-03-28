@@ -3,35 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>思政课程5 - 毛泽东思想</title>
-    <!-- 1. 升级图标库（引入Font Awesome 6.5.1最新版） -->
+    <title>思政课程 - 毛泽东思想 | 云先生思政教育平台</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
-        /* ========== 全局样式重置 & 基础配置 ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: "Microsoft Yahei", "PingFang SC", "Helvetica Neue", sans-serif;
         }
-        /* 定义全局变量（方便统一修改配色） */
         :root {
-            --primary-color: #991a28; /* 主红色 */
-            --primary-light: #d62828; /* 浅红 */
-            --primary-dark: #7a141e; /* 深红 */
-            --gold-color: #ffd700; /* 金色（点缀） */
-            --gray-light: #f8f9fa; /* 浅灰（背景） */
-            --gray-middle: #e9ecef; /* 中灰（边框） */
-            --gray-dark: #6c757d; /* 深灰（文字） */
-            --white-color: #ffffff; /* 白色 */
+            --primary-color: #991a28;
+            --primary-light: #d62828;
+            --primary-dark: #7a141e;
+            --gold-color: #ffd700;
+            --gray-light: #f8f9fa;
+            --gray-middle: #e9ecef;
+            --gray-dark: #6c757d;
+            --white-color: #ffffff;
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
             --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
             --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
             --radius-sm: 6px;
             --radius-md: 10px;
             --radius-lg: 16px;
-            --transition: all 0.3s ease; /* 统一过渡动画 */
-            scroll-behavior: smooth; /* 开启平滑滚动 */
+            --transition: all 0.3s ease;
+            scroll-behavior: smooth;
         }
         body {
             background-color: var(--gray-light);
@@ -51,7 +48,6 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-        /* 按钮通用样式 */
         .btn {
             display: inline-block;
             padding: 10px 24px;
@@ -69,17 +65,33 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
         }
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
+
+        /* 顶部栏 - 与index完全一致 */
+        .top-bar {
+            background: var(--primary-dark);
+            color: var(--gold-color);
+            padding: 8px 0;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: var(--white-color);
+        .top-bar .slogan {
+            flex: 1;
+            text-align: center;
+        }
+        .top-bar .login-group {
+            padding-right: 20px;
+        }
+        .top-bar a {
+            color: #fff;
+            margin-left: 15px;
+        }
+        .top-bar a:hover {
+            color: var(--gold-color);
         }
 
-        /* ========== 2. 导航栏样式（吸顶+渐变+阴影） ========== */
+        /* 导航栏 - 与index完全一致 */
         .header {
             position: sticky;
             top: 0;
@@ -104,6 +116,7 @@
             height: 48px;
             border-radius: 8px;
             border: 2px solid var(--white-color);
+            object-fit: cover;
         }
         .logo-text {
             color: var(--white-color);
@@ -114,33 +127,12 @@
             display: flex;
             gap: 35px;
         }
-        /* 导航链接默认样式 - 白色 */
-.nav-menu li a {
-    color: #ffffff; /* 白色 */
-    font-size: 16px;
-    padding: 8px 0;
-    position: relative;
-    transition: all 0.3s ease;
-}
-/* 当前页面导航链接 - 黄色（active类） */
-.nav-menu li a.active {
-    color: #ffd700; /* 金色/黄色，和你页面按钮颜色一致 */
-}
-/* 保留原有hover下划线效果（可选） */
-.nav-menu li a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #ffd700;
-    transition: var(--transition);
-}
-.nav-menu li a:hover::after {
-    width: 100%;
-}
-        /* 导航下划线动效 */
+        .nav-menu li a {
+            color: #ffffff;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+        }
         .nav-menu li a::after {
             content: '';
             position: absolute;
@@ -148,28 +140,72 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--gold-color);
+            background-color: #ffd700;
             transition: var(--transition);
         }
         .nav-menu li a:hover::after {
             width: 100%;
         }
-        .nav-menu li a.active {
-            color: var(--gold-color);
-        }
-        /* 移动端导航按钮（适配小屏幕） */
         .nav-toggle {
             display: none;
             font-size: 24px;
             color: var(--white-color);
             cursor: pointer;
         }
-        /* 内容区域适配导航高度 */
+
+        /* 登录弹窗 - 与index完全一致 */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-box {
+            background: #fff;
+            width: 90%;
+            max-width: 420px;
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute; top: 15px; right: 15px;
+            font-size: 20px; cursor: pointer;
+        }
+        .modal-tab {
+            display: flex; margin-bottom: 20px;
+        }
+        .modal-tab-item {
+            flex: 1; text-align: center; padding: 10px 0;
+            font-weight: bold; cursor: pointer;
+        }
+        .modal-tab-item.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        .modal-panel { display: none; }
+        .modal-panel.active { display: block; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 6px; }
+        .form-group input {
+            width: 100%; padding: 10px;
+            border: 1px solid #ddd; border-radius: 6px;
+        }
+
+        /* 课程内容区域 */
         .course-detail {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 90px 20px 60px; /* 顶部留导航高度 */
+            padding: 60px 20px;
             background-color: var(--white-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-top: 40px;
+            margin-bottom: 40px;
         }
         .course-detail h1 {
             color: var(--primary-dark);
@@ -182,12 +218,19 @@
             margin: 30px 0;
             padding: 20px;
             border-radius: var(--radius-md);
+            background-color: var(--gray-light);
+            transition: var(--transition);
+        }
+        .course-section:hover {
+            transform: translateX(5px);
             box-shadow: var(--shadow-sm);
         }
         .course-section h2 {
             color: var(--primary-color);
             font-size: 24px;
             margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid var(--primary-color);
         }
         .course-section p {
             font-size: 16px;
@@ -196,11 +239,33 @@
             text-indent: 2em;
             margin-bottom: 10px;
         }
-        /* 锚点跳转偏移（适配固定导航） */
+        .course-section ul {
+            padding-left: 40px;
+            margin: 10px 0;
+        }
+        .course-section li {
+            margin-bottom: 8px;
+            list-style: disc;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 24px;
+            background-color: var(--gray-middle);
+            color: #333;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+        .back-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateX(-5px);
+        }
         :target {
             scroll-margin-top: 80px;
         }
-        /* ========== 5. 底部信息区（简洁大气） ========== */
+
+        /* 底部 - 与index完全一致 */
         .footer {
             background-color: var(--primary-dark);
             color: var(--white-color);
@@ -218,7 +283,6 @@
             font-size: 18px;
             margin-bottom: 20px;
             position: relative;
-            padding-bottom: 10px;
         }
         .footer-col h4::after {
             content: '';
@@ -227,15 +291,9 @@
             left: 0;
             width: 50px;
             height: 2px;
-            background-color: var(--gold-color);
+            background: var(--gold-color);
         }
-        .footer-col ul li {
-            margin-bottom: 12px;
-        }
-        .footer-col ul li a:hover {
-            color: var(--gold-color);
-            padding-left: 5px;
-        }
+        .footer-col li { margin-bottom: 12px; }
         .footer-bottom {
             text-align: center;
             padding-top: 20px;
@@ -243,17 +301,8 @@
             font-size: 14px;
             color: #ccc;
         }
-        /* ========== 6. 响应式适配（适配平板/手机） ========== */
-        @media (max-width: 1200px) {
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .banner-title {
-                font-size: 40px;
-            }
-        }
+
         @media (max-width: 768px) {
-            /* 移动端导航 */
             .nav-toggle {
                 display: block;
             }
@@ -263,79 +312,134 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background-color: var(--primary-dark);
+                background: var(--primary-dark);
                 flex-direction: column;
                 align-items: center;
                 padding: 40px 0;
-                gap: 25px;
+                gap: 20px;
                 transition: var(--transition);
             }
-            .nav-menu.active {
-                left: 0;
+            .nav-menu.active { left: 0; }
+            .course-detail {
+                padding: 30px 15px;
+                margin: 20px;
             }
-            /* 底部适配 */
+            .course-detail h1 {
+                font-size: 24px;
+            }
+            .course-section h2 {
+                font-size: 20px;
+            }
             .footer-top {
                 flex-direction: column;
                 gap: 30px;
             }
         }
     </style>
-
 </head>
 <body>
-<!-- 固定导航栏 -->
+
+<!-- 顶部栏 - 与index完全一致 -->
+<div class="top-bar">
+    <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
+    <div class="login-group" id="loginGroup">
+        <a href="javascript:;" onclick="openModal('login')">登录</a>
+        <a href="javascript:;" onclick="openModal('reg')">注册</a>
+    </div>
+</div>
+
+<!-- 导航栏 - 与index完全一致 -->
 <header class="header">
     <div class="container nav">
         <div class="logo">
-            <!-- 替换为你的Logo图片地址 -->
             <img src="图片/云先生logo.jpg" alt="云先生logo">
             <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
         </div>
-        <!-- 导航菜单 -->
         <ul class="nav-menu">
+            <li><a href="index.html">首页</a></li>
+	    <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="news.html">思政文库</a></li>
             <li><a href="bookstore.html">思政乐园</a></li>
             <li><a href="video.html">录播课室</a></li>
             <li><a href="download.html">直播课室</a></li>
-            <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="forum.html">留言板</a></li>
-            <li><a href="index.html">返回首页</a></li>
+            <li><a href="checkin.html" onclick="return checkMyNeedLogin(event)">我的</a></li>
         </ul>
-        <!-- 移动端导航按钮 -->
         <div class="nav-toggle" onclick="toggleNav()">
             <i class="fa fa-bars"></i>
         </div>
     </div>
 </header>
 
+<!-- 登录弹窗 -->
+<div class="modal" id="modal">
+    <div class="modal-box">
+        <div class="modal-close" onclick="closeModal()">&times;</div>
+        <div class="modal-tab">
+            <div class="modal-tab-item active" onclick="switchTabModal('login')">登录</div>
+            <div class="modal-tab-item" onclick="switchTabModal('reg')">注册</div>
+        </div>
+        <div class="modal-panel active" id="loginPanel">
+            <div class="form-group">
+                <label>账号</label>
+                <input type="text" id="loginUsername" placeholder="手机号/学号">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="loginPassword" placeholder="请输入密码">
+            </div>
+            <button class="btn" onclick="loginHandler()">登录</button>
+        </div>
+        <div class="modal-panel" id="regPanel">
+            <div class="form-group">
+                <label>手机号</label>
+                <input type="text" id="regPhone" placeholder="请输入手机号">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="regPwd" placeholder="设置密码">
+            </div>
+            <div class="form-group">
+                <label>确认密码</label>
+                <input type="password" id="regConfirm" placeholder="确认密码">
+            </div>
+            <button class="btn" onclick="registerHandler()">注册</button>
+        </div>
+    </div>
+</div>
 
 <!-- 课程详情内容 -->
 <div class="course-detail">
     <h1>毛泽东思想</h1>
-
+    
     <div id="section1" class="course-section">
         <p>马克思列宁主义同中国革命具体实践相结合的产物，是马克思主义中国化的第一次历史性飞跃，是中国共产党集体智慧的结晶。</p>
     </div>
 
     <div id="section2" class="course-section">
         <h2>1.形成基础</h2>
-        <p>社会背景：近代中国半殖民地半封建国情，民族危机深重，无产阶级壮大并登上政治舞台。</p>
-        <P>实践基础：中国共产党领导的革命实践，以及同党内右倾、“左” 倾错误的斗争。</P>
-        <P>理论渊源：以马列主义为根本，批判性继承中国优秀传统文化。</P>
+        <p><strong>社会背景：</strong>近代中国半殖民地半封建国情，民族危机深重，无产阶级壮大并登上政治舞台。</p>
+        <p><strong>实践基础：</strong>中国共产党领导的革命实践，以及同党内右倾、“左” 倾错误的斗争。</p>
+        <p><strong>理论渊源：</strong>以马列主义为根本，批判性继承中国优秀传统文化。</p>
     </div>
 
     <div id="section3" class="course-section">
         <h2>2.形成与发展过程</h2>
-        <p>萌芽（1921-1927）：《中国社会各阶级的分析》《湖南农民运动考察报告》明确革命对象、动力，肯定农民革命作用。</p>
-        <p>基本形成（1927-1935）：提出 “工农武装割据”，阐述农村包围城市的革命道路；《反对本本主义》奠定实事求是思想路线基础。</p>
-        <p>成熟（1935-1945）：遵义会议确立毛泽东领导地位；《实践论》《矛盾论》阐明哲学基础，《新民主主义论》标志思想成熟，七大将其确立为党的指导思想。</p>
-        <p>继续发展（1945-1976）：提出人民民主专政理论、过渡时期总路线，《论十大关系》等探索社会主义建设道路。</p>
+        <p><strong>萌芽（1921-1927）：</strong>《中国社会各阶级的分析》《湖南农民运动考察报告》明确革命对象、动力，肯定农民革命作用。</p>
+        <p><strong>基本形成（1927-1935）：</strong>提出 “工农武装割据”，阐述农村包围城市的革命道路；《反对本本主义》奠定实事求是思想路线基础。</p>
+        <p><strong>成熟（1935-1945）：</strong>遵义会议确立毛泽东领导地位；《实践论》《矛盾论》阐明哲学基础，《新民主主义论》标志思想成熟，七大将其确立为党的指导思想。</p>
+        <p><strong>继续发展（1945-1976）：</strong>提出人民民主专政理论、过渡时期总路线，《论十大关系》等探索社会主义建设道路。</p>
     </div>
 
     <div id="section4" class="course-section">
         <h2>3.核心内容</h2>
-        <p>精髓是实事求是、群众路线、独立自主；</p>
-        <p>涵盖新民主主义革命理论（三大法宝、农村包围城市道路）、社会主义革命和建设理论、革命军队建设和军事战略、政策和策略、思想政治工作和文化工作、党的建设六大方面，“两个务必” 是党的建设重要要求。</p>
+        <p><strong>精髓：</strong>实事求是、群众路线、独立自主；</p>
+        <p><strong>主要内容：</strong>涵盖新民主主义革命理论（三大法宝、农村包围城市道路）、社会主义革命和建设理论、革命军队建设和军事战略、政策和策略、思想政治工作和文化工作、党的建设六大方面，“两个务必” 是党的建设重要要求。</p>
+        <ul>
+            <li><strong>三大法宝：</strong>统一战线、武装斗争、党的建设</li>
+            <li><strong>活的灵魂：</strong>实事求是、群众路线、独立自主</li>
+            <li><strong>两个务必：</strong>务必保持谦虚谨慎、不骄不躁的作风，务必保持艰苦奋斗的作风</li>
+        </ul>
     </div>
 
     <div id="section5" class="course-section">
@@ -344,52 +448,110 @@
         <p>是党和人民的宝贵精神财富，其活的灵魂具有普遍指导意义；</p>
         <p>是中国特色社会主义理论体系的奠基之作。</p>
     </div>
+
+    <div class="course-section">
+        <h2>5.学习思考</h2>
+        <p>毛泽东思想的“实事求是”思想路线对我们今天的学习和工作有何指导意义？如何理解“群众路线”在新时代的价值？</p>
+        <p>作为新时代青年，我们应该如何继承和发扬毛泽东思想的核心精神？</p>
+        <p>欢迎在留言板分享你的学习心得和思考～</p>
+    </div>
+
+    <a href="index.html" class="back-btn"><i class="fa fa-arrow-left"></i> 返回首页</a>
 </div>
 
-<!-- 4. 底部信息 -->
+<!-- 底部 -->
 <footer class="footer">
     <div class="container">
         <div class="footer-top">
-            <div class="footer-col">
-                <h4>关于我们</h4>
-                <ul>
-                    <li><a href="#">平台介绍</a></li>
-                    <li><a href="#">团队风采</a></li>
-                    <li><a href="#">联系我们</a></li>
-                    <li><a href="#">加入我们</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>学习资源</h4>
-                <ul>
-                    <li><a href="#">时政资料库</a></li>
-                    <li><a href="#">精品课程</a></li>
-                    <li><a href="#">学习工具</a></li>
-                    <li><a href="#">常见问题</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>法律声明</h4>
-                <ul>
-                    <li><a href="#">隐私政策</a></li>
-                    <li><a href="#">用户协议</a></li>
-                    <li><a href="#">版权声明</a></li>
-                    <li><a href="#">免责条款</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>联系方式</h4>
-                <ul>
-                    <li><i class="fa fa-phone"></i> 0350-3339920</li>
-                    <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
-                    <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
-                </ul>
-            </div>
+            <div class="footer-col"><h4>关于我们</h4><ul><li><a href="#">平台介绍</a></li><li><a href="#">团队风采</a></li><li><a href="#">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>学习资源</h4><ul><li><a href="#">时政资料库</a></li><li><a href="#">精品课程</a></li><li><a href="#">学习工具</a></li></ul></div>
+            <div class="footer-col"><h4>法律声明</h4><ul><li><a href="#">隐私政策</a></li><li><a href="#">用户协议</a></li><li><a href="#">版权声明</a></li></ul></div>
+            <div class="footer-col"><h4>联系方式</h4><ul><li><i class="fa fa-phone"></i> 0350-3339920</li><li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li><li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li></ul></div>
         </div>
-        <div class="footer-bottom">
-            <p>© 云先生-师范生助力乡村中小学道德与法治网络平台 版权所有 | 晋ICP备202308110020号</p>
-        </div>
+        <div class="footer-bottom"><p>© 2026 云先生-师范生助力乡村中小学道德与法治网络平台 版权所有 | 晋ICP备202308110020号</p></div>
     </div>
 </footer>
+
+<script>
+    function toggleNav() {
+        document.querySelector('.nav-menu').classList.toggle('active');
+    }
+
+    const modalEl = document.getElementById('modal');
+    function openModal(type) {
+        modalEl.classList.add('active');
+        if(type === 'login') switchTabModal('login');
+        else switchTabModal('reg');
+    }
+    function closeModal() { modalEl.classList.remove('active'); }
+    function switchTabModal(tab) {
+        document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.modal-tab-item').forEach(i => i.classList.remove('active'));
+        if(tab === 'login') {
+            document.getElementById('loginPanel').classList.add('active');
+            document.querySelectorAll('.modal-tab-item')[0].classList.add('active');
+        } else {
+            document.getElementById('regPanel').classList.add('active');
+            document.querySelectorAll('.modal-tab-item')[1].classList.add('active');
+        }
+    }
+
+    function loginHandler() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const pwd = document.getElementById('loginPassword').value.trim();
+        if(!username || !pwd) { alert("请输入账号和密码"); return; }
+        localStorage.setItem('isLogin', 'true');
+        localStorage.setItem('loginUser', username);
+        alert('登录成功！');
+        closeModal();
+        updateLoginUI();
+    }
+    
+    function registerHandler() {
+        const phone = document.getElementById('regPhone').value.trim();
+        const pwd = document.getElementById('regPwd').value;
+        const confirm = document.getElementById('regConfirm').value;
+        if(!phone || !pwd) { alert("请填写手机号和密码"); return; }
+        if(pwd !== confirm) { alert("两次密码不一致"); return; }
+        alert('注册成功！请登录');
+        switchTabModal('login');
+        document.getElementById('loginUsername').value = phone;
+        document.getElementById('loginPassword').value = '';
+    }
+
+    function checkMyNeedLogin(event) {
+        const isLogged = localStorage.getItem('isLogin') === 'true';
+        if(!isLogged) {
+            event.preventDefault();
+            alert('请先登录后访问"我的"页面！');
+            openModal('login');
+            return false;
+        }
+        return true;
+    }
+
+    function updateLoginUI() {
+        const isLogin = localStorage.getItem('isLogin') === 'true';
+        const loginGroup = document.getElementById('loginGroup');
+        if(isLogin && loginGroup) {
+            const user = localStorage.getItem('loginUser') || '用户';
+            loginGroup.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`;
+        } else {
+            loginGroup.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`;
+        }
+    }
+    
+    function logout() {
+        localStorage.removeItem('isLogin');
+        localStorage.removeItem('loginUser');
+        alert('已退出登录');
+        updateLoginUI();
+        window.location.href = 'index.html';
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+        updateLoginUI();
+    });
+</script>
 </body>
 </html>

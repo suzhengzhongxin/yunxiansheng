@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>云先生-师范生助力乡村中小学道德与法治网络平台</title>
-    <!-- 保持和首页一致的图标库 -->
+    <title>云先生-思政乐园 | 红色经典读物推荐</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
-        /* ========== 全局样式（复用首页） ========== */
         * {
             margin: 0;
             padding: 0;
@@ -15,21 +13,22 @@
             font-family: "Microsoft Yahei", "PingFang SC", "Helvetica Neue", sans-serif;
         }
         :root {
-            --primary-color: #991a28; /* 主红色 */
-            --primary-light: #d62828; /* 浅红 */
-            --primary-dark: #7a141e; /* 深红 */
-            --gold-color: #ffd700; /* 金色（点缀） */
-            --gray-light: #f8f9fa; /* 浅灰（背景） */
-            --gray-middle: #e9ecef; /* 中灰（边框） */
-            --gray-dark: #6c757d; /* 深灰（文字） */
-            --white-color: #ffffff; /* 白色 */
+            --primary-color: #991a28;
+            --primary-light: #d62828;
+            --primary-dark: #7a141e;
+            --gold-color: #ffd700;
+            --gray-light: #f8f9fa;
+            --gray-middle: #e9ecef;
+            --gray-dark: #6c757d;
+            --white-color: #ffffff;
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
             --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
             --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
             --radius-sm: 6px;
             --radius-md: 10px;
             --radius-lg: 16px;
-            --transition: all 0.3s ease; /* 统一过渡动画 */
+            --transition: all 0.3s ease;
+            scroll-behavior: smooth;
         }
         body {
             background-color: var(--gray-light);
@@ -66,17 +65,33 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
         }
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
+
+        /* 顶部栏 - 与index完全一致 */
+        .top-bar {
+            background: var(--primary-dark);
+            color: var(--gold-color);
+            padding: 8px 0;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: var(--white-color);
+        .top-bar .slogan {
+            flex: 1;
+            text-align: center;
+        }
+        .top-bar .login-group {
+            padding-right: 20px;
+        }
+        .top-bar a {
+            color: #fff;
+            margin-left: 15px;
+        }
+        .top-bar a:hover {
+            color: var(--gold-color);
         }
 
-        /* ========== 导航栏（复用首页） ========== */
+        /* 导航栏 - 与index完全一致 */
         .header {
             position: sticky;
             top: 0;
@@ -101,6 +116,7 @@
             height: 48px;
             border-radius: 8px;
             border: 2px solid var(--white-color);
+            object-fit: cover;
         }
         .logo-text {
             color: var(--white-color);
@@ -111,32 +127,15 @@
             display: flex;
             gap: 35px;
         }
-        /* 导航链接默认样式 - 白色 */
-.nav-menu li a {
-    color: #ffffff; /* 白色 */
-    font-size: 16px;
-    padding: 8px 0;
-    position: relative;
-    transition: all 0.3s ease;
-}
-/* 当前页面导航链接 - 黄色（active类） */
-.nav-menu li a.active {
-    color: #ffd700; /* 金色/黄色，和你页面按钮颜色一致 */
-}
-/* 保留原有hover下划线效果（可选） */
-.nav-menu li a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #ffd700;
-    transition: var(--transition);
-}
-.nav-menu li a:hover::after {
-    width: 100%;
-}
+        .nav-menu li a {
+            color: #ffffff;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+        }
+        .nav-menu li a.active {
+            color: #ffd700;
+        }
         .nav-menu li a::after {
             content: '';
             position: absolute;
@@ -144,14 +143,11 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--gold-color);
+            background-color: #ffd700;
             transition: var(--transition);
         }
         .nav-menu li a:hover::after {
             width: 100%;
-        }
-        .nav-menu li a.active {
-            color: var(--gold-color);
         }
         .nav-toggle {
             display: none;
@@ -160,12 +156,54 @@
             cursor: pointer;
         }
 
-        /* ========== 横幅（和首页完全一致，仅改副标题） ========== */
+        /* 登录弹窗 - 与index完全一致 */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-box {
+            background: #fff;
+            width: 90%;
+            max-width: 420px;
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute; top: 15px; right: 15px;
+            font-size: 20px; cursor: pointer;
+        }
+        .modal-tab {
+            display: flex; margin-bottom: 20px;
+        }
+        .modal-tab-item {
+            flex: 1; text-align: center; padding: 10px 0;
+            font-weight: bold; cursor: pointer;
+        }
+        .modal-tab-item.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        .modal-panel { display: none; }
+        .modal-panel.active { display: block; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 6px; }
+        .form-group input {
+            width: 100%; padding: 10px;
+            border: 1px solid #ddd; border-radius: 6px;
+        }
+
+        /* 横幅 */
         .banner {
-            height: 500px;
+            height: 380px;
             background: linear-gradient(135deg, var(--primary-color) 0%, #b82232 100%);
             position: relative;
-            overflow: visible;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -177,8 +215,7 @@
             width: 100%;
             height: 100%;
             background: url('图片/bg(1).jpg') center/cover no-repeat;
-            background-size: 100% auto;
-            opacity: 1;
+            opacity: 0.25;
             z-index: 1;
         }
         .banner-content {
@@ -187,36 +224,29 @@
             text-align: center;
             color: var(--white-color);
             padding: 0 20px;
-            margin-top: -50px;
         }
         .banner-title {
-            font-size: 48px;
+            font-size: 44px;
             font-weight: bold;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .banner-subtitle {
-            font-size: 22px;
-            margin-bottom: 30px;
-            text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+            font-size: 20px;
+            margin-bottom: 28px;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
         .banner-btn {
-            padding: 12px 32px;
-            font-size: 18px;
-            border-radius: var(--radius-md);
             background-color: var(--gold-color);
             color: var(--primary-dark);
             font-weight: bold;
-        }
-        .banner-btn:hover {
-            background-color: #fff082;
-            box-shadow: var(--shadow-md);
+            padding: 12px 32px;
+            border-radius: var(--radius-md);
         }
 
-        /* ========== 新增：书库内容区样式（核心） ========== */
+        /* 书库内容区样式 */
         .bookstore-section {
             padding: 80px 0;
         }
@@ -246,13 +276,11 @@
             color: var(--gray-dark);
             font-size: 16px;
         }
-        /* 书籍网格：一行3本，响应式适配 */
         .books-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 40px 30px;
         }
-        /* 单本书籍卡片 */
         .book-card {
             background-color: var(--white-color);
             border-radius: var(--radius-lg);
@@ -265,83 +293,49 @@
             transform: translateY(-8px);
             box-shadow: var(--shadow-lg);
         }
+        .book-img {
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border-radius: 4px;
+            display: block;
+        }
+        .book-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .book-card:hover .book-img img {
+            transform: scale(1.05);
+        }
+        .book-info h3 {
+            font-size: 18px;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .book-author {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .book-read-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        .book-read-btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
 
-        /* 书籍卡片容器 - 关键：开启overflow:hidden防止内容溢出 + 固定布局 */
-.book-item {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px 15px 20px; /* 保留底部padding，给按钮留空间 */
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* 核心：防止图片放大超出白色框 */
-    position: relative; /* 配合图片定位 */
-}
-
-/* 书籍图片容器 - 增加底部margin让书名下移 + 限制最大高度 */
-.book-img {
-    width: 100%;
-    max-width: 200px;
-    margin: 0 auto 20px; /* 关键：底部margin从10px增至20px，书名下移 */
-    overflow: hidden;
-    border-radius: 4px;
-    transition: all 0.3s ease; /* 放大动画过渡 */
-    max-height: 250px; /* 限制图片容器最大高度，避免占用过多空间 */
-}
-
-/* 书籍图片 - 悬浮放大但不超出容器 + 居中显示 */
-.book-img img {
-    width: 100%;
-    height: 80%;
-    display: block;
-    margin: 0 auto;
-    transition: transform 0.3s ease; /* 放大动画 */
-    transform-origin: center top; /* 核心：从顶部居中放大，避免向下遮挡 */
-}
-
-/* 鼠标悬浮时图片放大（1.08倍适中，不遮挡下方内容） */
-.book-item:hover .book-img img {
-    transform: scale(1.08); /* 放大比例可微调：1.05-1.1倍最佳 */
-}
-
-/* 书籍信息区（书名+作者） - 固定位置，不被图片遮挡 */
-.book-info {
-    margin-bottom: 40px; /* 保留和按钮的间距 */
-    position: relative; /* 层级高于图片，防止被遮挡 */
-    z-index: 2; /* 核心：确保文字在图片上层 */
-}
-
-/* 书名样式 - 微调间距 */
-.book-info h3 {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 6px;
-    font-weight: bold;
-}
-
-/* 作者样式 */
-.book-info p {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 0;
-}
-
-/* 在线阅读按钮 - 固定层级，不被遮挡 */
-.book-btn {
-    margin-top: 0;
-    padding: 6px 12px;
-    font-size: 14px;
-    background: #991a28;
-    color: #fff;
-    border-radius: 4px;
-    display: inline-block;
-    position: relative; /* 层级高于图片 */
-    z-index: 2;
-}
-
-        /* ========== 底部（复用首页） ========== */
+        /* 底部 - 与index完全一致 */
         .footer {
             background-color: var(--primary-dark);
             color: var(--white-color);
@@ -359,7 +353,6 @@
             font-size: 18px;
             margin-bottom: 20px;
             position: relative;
-            padding-bottom: 10px;
         }
         .footer-col h4::after {
             content: '';
@@ -368,15 +361,9 @@
             left: 0;
             width: 50px;
             height: 2px;
-            background-color: var(--gold-color);
+            background: var(--gold-color);
         }
-        .footer-col ul li {
-            margin-bottom: 12px;
-        }
-        .footer-col ul li a:hover {
-            color: var(--gold-color);
-            padding-left: 5px;
-        }
+        .footer-col li { margin-bottom: 12px; }
         .footer-bottom {
             text-align: center;
             padding-top: 20px;
@@ -385,77 +372,66 @@
             color: #ccc;
         }
 
-        /* ========== 响应式适配（复用+新增书库适配） ========== */
-        @media (max-width: 1200px) {
-            .banner-title {
-                font-size: 40px;
-            }
-            .books-grid {
-                grid-template-columns: repeat(2, 1fr); /* 平板端一行2本 */
-            }
-        }
-        @media (max-width: 768px) {
-            .nav-toggle {
-                display: block;
-            }
+        @media (max-width:768px) {
             .nav-menu {
                 position: fixed;
                 top: 70px;
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background-color: var(--primary-dark);
+                background: var(--primary-dark);
                 flex-direction: column;
                 align-items: center;
                 padding: 40px 0;
-                gap: 25px;
+                gap: 20px;
                 transition: var(--transition);
             }
-            .nav-menu.active {
-                left: 0;
-            }
+            .nav-menu.active { left: 0; }
+            .nav-toggle { display: block; }
             .banner {
-                height: 400px;
+                height: 320px;
             }
             .banner-title {
                 font-size: 32px;
             }
-            .banner-subtitle {
-                font-size: 18px;
+            .books-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
             .footer-top {
                 flex-direction: column;
                 gap: 30px;
             }
-            /* 手机端一行1本 */
-            .books-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            .book-img {
-                height: 240px;
-            }
         }
     </style>
 </head>
 <body>
-<!-- ========== 导航栏（复用首页，思政书库标为active） ========== -->
+
+<!-- 顶部栏 - 与index完全一致 -->
+<div class="top-bar">
+    <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
+    <div class="login-group" id="loginGroup">
+        <a href="javascript:;" onclick="openModal('login')">登录</a>
+        <a href="javascript:;" onclick="openModal('reg')">注册</a>
+    </div>
+</div>
+
+<!-- 导航栏 - 与index完全一致 -->
 <header class="header">
     <div class="container nav">
         <div class="logo">
-            <!-- 替换为你的Logo图片地址 -->
             <img src="图片/云先生logo.jpg" alt="云先生logo">
             <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
         </div>
         <ul class="nav-menu">
             <li><a href="index.html">首页</a></li>
+	    <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="news.html">思政文库</a></li>
             <li><a href="bookstore.html" class="active">思政乐园</a></li>
             <li><a href="video.html">录播课室</a></li>
             <li><a href="download.html">直播课室</a></li>
-            <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="forum.html">留言板</a></li>
-            <li><a href="checkin.html">我的</a></li>
+            <li><a href="checkin.html" onclick="return checkMyNeedLogin(event)">我的</a></li>
         </ul>
         <div class="nav-toggle" onclick="toggleNav()">
             <i class="fa fa-bars"></i>
@@ -463,7 +439,44 @@
     </div>
 </header>
 
-<!-- ========== 横幅（复用首页，改副标题） ========== -->
+<!-- 登录弹窗 -->
+<div class="modal" id="modal">
+    <div class="modal-box">
+        <div class="modal-close" onclick="closeModal()">&times;</div>
+        <div class="modal-tab">
+            <div class="modal-tab-item active" onclick="switchTab('login')">登录</div>
+            <div class="modal-tab-item" onclick="switchTab('reg')">注册</div>
+        </div>
+        <div class="modal-panel active" id="loginPanel">
+            <div class="form-group">
+                <label>账号</label>
+                <input type="text" id="loginUsername" placeholder="手机号/学号">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="loginPassword" placeholder="请输入密码">
+            </div>
+            <button class="btn" onclick="loginHandler()">登录</button>
+        </div>
+        <div class="modal-panel" id="regPanel">
+            <div class="form-group">
+                <label>手机号</label>
+                <input type="text" id="regPhone" placeholder="请输入手机号">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="regPwd" placeholder="设置密码">
+            </div>
+            <div class="form-group">
+                <label>确认密码</label>
+                <input type="password" id="regConfirm" placeholder="确认密码">
+            </div>
+            <button class="btn" onclick="registerHandler()">注册</button>
+        </div>
+    </div>
+</div>
+
+<!-- 横幅区域 -->
 <section class="banner">
     <div class="banner-bg"></div>
     <div class="banner-content">
@@ -473,7 +486,7 @@
     </div>
 </section>
 
-<!-- ========== 书库核心内容区（9本读物） ========== -->
+<!-- 书库核心内容区 -->
 <section class="bookstore-section" id="bookstore-content">
     <div class="container">
         <div class="bookstore-title">
@@ -488,9 +501,8 @@
                 </a>
                 <div class="book-info">
                     <h3>谁是最可爱的人</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i>魏巍</div>
-                    <div class="book-desc"></div>
-                    <a href="https://weread.qq.com/web/reader/869320a0813ab7ce0g01292eke4d32d5015e4da3b7fbb1fa" target="_blank" class="btn book-read-btn">在线阅读</a>
+                    <div class="book-author"><i class="fa fa-pencil"></i> 魏巍</div>
+                    <a href="https://weread.qq.com/web/reader/869320a0813ab7ce0g01292eke4d32d5015e4da3b7fbb1fa" target="_blank" class="book-read-btn">在线阅读</a>
                 </div>
             </div>
             <!-- 第2本书：四十七天 -->
@@ -500,9 +512,8 @@
                 </a>
                 <div class="book-info">
                     <h3>四十七天</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i>刘晓</div>
-                    <div class="book-desc"></div>
-                    <a href="https://weread.qq.com/web/reader/dc632170813ab8a37g01435ckecc32f3013eccbc87e4b62e" target="_blank" class="btn book-read-btn">在线阅读</a>
+                    <div class="book-author"><i class="fa fa-pencil"></i> 刘晓</div>
+                    <a href="https://weread.qq.com/web/reader/dc632170813ab8a37g01435ckecc32f3013eccbc87e4b62e" target="_blank" class="book-read-btn">在线阅读</a>
                 </div>
             </div>
             <!-- 第3本书：红色家书 -->
@@ -512,9 +523,8 @@
                 </a>
                 <div class="book-info">
                     <h3>红色家书</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i>多位革命先烈书信合集</div>
-                    <div class="book-desc"></div>
-                    <a href="https://xuexi.12371.cn/2015/07/06/VIDA1436167245536874.shtml" target="_blank" class="btn book-read-btn">在线阅读</a>
+                    <div class="book-author"><i class="fa fa-pencil"></i> 革命先烈书信合集</div>
+                    <a href="https://xuexi.12371.cn/2015/07/06/VIDA1436167245536874.shtml" target="_blank" class="book-read-btn">在线阅读</a>
                 </div>
             </div>
             <!-- 第4本书：为什么是中国 -->
@@ -524,9 +534,8 @@
                 </a>
                 <div class="book-info">
                     <h3>为什么是中国</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i>金一南</div>
-                    <div class="book-desc"></div>
-                    <a href="https://m.baidu.com/tcx?appui=alaxs&data=%7B%22fromaction%22%3A%22search_newtrans_1%22%2C%22fromaction_original%22%3A%22search_newtrans_1%22%2C%22query%22%3A%22%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%22%7D&page=detail&gid=14300287635&sign=ee432cf58e6805921eba16258e0a06e6&ts=1770816728&novelsadd=www.aqxsw.com%2Fbook%2F434356408174%2F&novelsearchquery=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%E7%94%B5%E5%AD%90%E4%B9%A6&sourceurl=&trace_log=undefined_undefined_undefined&cid=14300287635%7C1571528083&index=1&chapterIndex=0" target="_blank" class="btn book-read-btn">在线阅读</a>
+                    <div class="book-author"><i class="fa fa-pencil"></i> 金一南</div>
+                    <a href="https://m.baidu.com/tcx?appui=alaxs&data=%7B%22fromaction%22%3A%22search_newtrans_1%22%2C%22fromaction_original%22%3A%22search_newtrans_1%22%2C%22query%22%3A%22%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%22%7D&page=detail&gid=14300287635&sign=ee432cf58e6805921eba16258e0a06e6&ts=1770816728&novelsadd=www.aqxsw.com%2Fbook%2F434356408174%2F&novelsearchquery=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%E7%94%B5%E5%AD%90%E4%B9%A6&sourceurl=&trace_log=undefined_undefined_undefined&cid=14300287635%7C1571528083&index=1&chapterIndex=0" target="_blank" class="book-read-btn">在线阅读</a>
                 </div>
             </div>
             <!-- 第5本书：苦难辉煌 -->
@@ -536,21 +545,19 @@
                 </a>
                 <div class="book-info">
                     <h3>苦难辉煌</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i>金一南</div>
-                    <div class="book-desc"></div>
-                    <a href="https://www.77zw.cc/book/3209/" target="_blank" class="btn book-read-btn">在线阅读</a>
+                    <div class="book-author"><i class="fa fa-pencil"></i> 金一南</div>
+                    <a href="https://www.77zw.cc/book/3209/" target="_blank" class="book-read-btn">在线阅读</a>
                 </div>
             </div>
             <!-- 第6本书：觉醒年代 -->
             <div class="book-card">
                 <a href="https://www.acxsw.com/shtml74608.html" target="_blank" class="book-img">
-                    <img src="图片/思政书库6.jpg" alt="觉醒年代 ">
+                    <img src="图片/思政书库6.jpg" alt="觉醒年代">
                 </a>
                 <div class="book-info">
-                    <h3>觉醒年代 </h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i>龙平平</div>
-                    <div class="book-desc"></div>
-                    <a href="https://www.acxsw.com/shtml74608.html" target="_blank" class="btn book-read-btn">在线阅读</a>
+                    <h3>觉醒年代</h3>
+                    <div class="book-author"><i class="fa fa-pencil"></i> 龙平平</div>
+                    <a href="https://www.acxsw.com/shtml74608.html" target="_blank" class="book-read-btn">在线阅读</a>
                 </div>
             </div>
             <!-- 第7本书：红岩 -->
@@ -561,8 +568,7 @@
                 <div class="book-info">
                     <h3>红岩</h3>
                     <div class="book-author"><i class="fa fa-pencil"></i> 罗广斌、杨益言</div>
-                    <div class="book-desc"></div>
-                    <a href="https://www.kaopool.com" target="_blank" class="btn book-read-btn">在线阅读</a>
+                    <a href="https://www.kaopool.com" target="_blank" class="book-read-btn">在线阅读</a>
                 </div>
             </div>
             <!-- 第8本书：中国共产党简史 -->
@@ -572,9 +578,8 @@
                 </a>
                 <div class="book-info">
                     <h3>中国共产党简史</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i>中共中央党史研究室</div>
-                    <div class="book-desc"></div>
-                    <a href="http://www.woc88.com/v-114625064.html" target="_blank" class="btn book-read-btn">在线阅读</a>
+                    <div class="book-author"><i class="fa fa-pencil"></i> 中共中央党史研究室</div>
+                    <a href="http://www.woc88.com/v-114625064.html" target="_blank" class="book-read-btn">在线阅读</a>
                 </div>
             </div>
             <!-- 第9本书：红星照耀中国 -->
@@ -585,66 +590,104 @@
                 <div class="book-info">
                     <h3>红星照耀中国</h3>
                     <div class="book-author"><i class="fa fa-pencil"></i> 埃德加·斯诺</div>
-                    <div class="book-desc"></div>
-                    <a href="https://ubook.reader.qq.com/book-read/52976100/8" target="_blank" class="btn book-read-btn">在线阅读</a>
+                    <a href="https://ubook.reader.qq.com/book-read/52976100/8" target="_blank" class="book-read-btn">在线阅读</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ========== 底部（复用首页） ========== -->
+<!-- 底部 -->
 <footer class="footer">
     <div class="container">
         <div class="footer-top">
-            <div class="footer-col">
-                <h4>关于我们</h4>
-                <ul>
-                    <li><a href="#">平台介绍</a></li>
-                    <li><a href="#">团队风采</a></li>
-                    <li><a href="#">联系我们</a></li>
-                    <li><a href="#">加入我们</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>学习资源</h4>
-                <ul>
-                    <li><a href="#">时政资料库</a></li>
-                    <li><a href="#">精品课程</a></li>
-                    <li><a href="#">学习工具</a></li>
-                    <li><a href="#">常见问题</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>法律声明</h4>
-                <ul>
-                    <li><a href="#">隐私政策</a></li>
-                    <li><a href="#">用户协议</a></li>
-                    <li><a href="#">版权声明</a></li>
-                    <li><a href="#">免责条款</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>联系方式</h4>
-                <ul>
-                    <li><i class="fa fa-phone"></i> 0350-3339920</li>
-                    <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
-                    <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
-                </ul>
-            </div>
+            <div class="footer-col"><h4>关于我们</h4><ul><li><a href="#">平台介绍</a></li><li><a href="#">团队风采</a></li><li><a href="#">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>学习资源</h4><ul><li><a href="#">时政资料库</a></li><li><a href="#">精品课程</a></li><li><a href="#">学习工具</a></li></ul></div>
+            <div class="footer-col"><h4>法律声明</h4><ul><li><a href="#">隐私政策</a></li><li><a href="#">用户协议</a></li><li><a href="#">版权声明</a></li></ul></div>
+            <div class="footer-col"><h4>联系方式</h4><ul><li><i class="fa fa-phone"></i> 0350-3339920</li><li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li><li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li></ul></div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2026 云先生-师范生助力乡村中小学道德与法治网络平台 版权所有 | 晋ICP备202308110020号</p>
-        </div>
+        <div class="footer-bottom"><p>© 2026 云先生-师范生助力乡村中小学道德与法治网络平台 版权所有 | 晋ICP备202308110020号</p></div>
     </div>
 </footer>
 
-<!-- ========== 移动端导航交互脚本（复用首页） ========== -->
 <script>
-        function toggleNav() {
-            const navMenu = document.querySelector('.nav-menu');
-            navMenu.classList.toggle('active');
+    function toggleNav() {
+        document.querySelector('.nav-menu').classList.toggle('active');
+    }
+
+    const modalEl = document.getElementById('modal');
+    function openModal(type) {
+        modalEl.classList.add('active');
+        switchTab(type);
+    }
+    function closeModal() { modalEl.classList.remove('active'); }
+    function switchTab(tab) {
+        document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.modal-tab-item').forEach(i => i.classList.remove('active'));
+        if(tab === 'login') {
+            document.getElementById('loginPanel').classList.add('active');
+            document.querySelectorAll('.modal-tab-item')[0].classList.add('active');
+        } else {
+            document.getElementById('regPanel').classList.add('active');
+            document.querySelectorAll('.modal-tab-item')[1].classList.add('active');
         }
-    </script>
+    }
+
+    function loginHandler() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const pwd = document.getElementById('loginPassword').value.trim();
+        if(!username || !pwd) { alert("请输入账号和密码"); return; }
+        localStorage.setItem('isLogin', 'true');
+        localStorage.setItem('loginUser', username);
+        alert('登录成功！');
+        closeModal();
+        updateLoginUI();
+    }
+    
+    function registerHandler() {
+        const phone = document.getElementById('regPhone').value.trim();
+        const pwd = document.getElementById('regPwd').value;
+        const confirm = document.getElementById('regConfirm').value;
+        if(!phone || !pwd) { alert("请填写手机号和密码"); return; }
+        if(pwd !== confirm) { alert("两次密码不一致"); return; }
+        alert('注册成功！请登录');
+        switchTab('login');
+        document.getElementById('loginUsername').value = phone;
+        document.getElementById('loginPassword').value = '';
+    }
+
+    function checkMyNeedLogin(event) {
+        const isLogged = localStorage.getItem('isLogin') === 'true';
+        if(!isLogged) {
+            event.preventDefault();
+            alert('请先登录后访问"我的"页面！');
+            openModal('login');
+            return false;
+        }
+        return true;
+    }
+
+    function updateLoginUI() {
+        const isLogin = localStorage.getItem('isLogin') === 'true';
+        const loginGroup = document.getElementById('loginGroup');
+        if(isLogin && loginGroup) {
+            const user = localStorage.getItem('loginUser') || '用户';
+            loginGroup.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`;
+        } else {
+            loginGroup.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`;
+        }
+    }
+    
+    function logout() {
+        localStorage.removeItem('isLogin');
+        localStorage.removeItem('loginUser');
+        alert('已退出登录');
+        updateLoginUI();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        updateLoginUI();
+    });
+</script>
 </body>
 </html>

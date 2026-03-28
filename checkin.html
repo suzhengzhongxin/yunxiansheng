@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>云先生-师范生助力乡村中小学道德与法治网络平台</title>
-    <!-- 保持和首页一致的图标库 -->
+    <title>云先生-个人中心 | 我的打卡学习记录</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
-        /* ========== 全局样式（复用首页） ========== */
         * {
             margin: 0;
             padding: 0;
@@ -15,23 +13,24 @@
             font-family: "Microsoft Yahei", "PingFang SC", "Helvetica Neue", sans-serif;
         }
         :root {
-            --primary-color: #991a28; /* 主红色 */
-            --primary-light: #d62828; /* 浅红 */
-            --primary-dark: #7a141e; /* 深红 */
-            --gold-color: #ffd700; /* 金色（点缀） */
-            --gray-light: #f8f9fa; /* 浅灰（背景） */
-            --gray-middle: #e9ecef; /* 中灰（边框） */
-            --gray-dark: #6c757d; /* 深灰（文字） */
-            --white-color: #ffffff; /* 白色 */
+            --primary-color: #991a28;
+            --primary-light: #d62828;
+            --primary-dark: #7a141e;
+            --gold-color: #ffd700;
+            --gray-light: #f8f9fa;
+            --gray-middle: #e9ecef;
+            --gray-dark: #6c757d;
+            --white-color: #ffffff;
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
             --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
             --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
             --radius-sm: 6px;
             --radius-md: 10px;
             --radius-lg: 16px;
-            --transition: all 0.3s ease; /* 统一过渡动画 */
-            --checkin-color: #28a745; /* 打卡成功颜色 */
-            --uncheckin-color: #dc3545; /* 未打卡颜色 */
+            --transition: all 0.3s ease;
+            scroll-behavior: smooth;
+            --checkin-color: #28a745;
+            --uncheckin-color: #dc3545;
         }
         body {
             background-color: var(--gray-light);
@@ -68,27 +67,33 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
         }
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
+
+        /* 顶部栏 - 与index完全一致 */
+        .top-bar {
+            background: var(--primary-dark);
+            color: var(--gold-color);
+            padding: 8px 0;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: var(--white-color);
+        .top-bar .slogan {
+            flex: 1;
+            text-align: center;
         }
-        .btn-disabled {
-            background-color: var(--gray-middle);
-            color: var(--gray-dark);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+        .top-bar .login-group {
+            padding-right: 20px;
         }
-        .btn-disabled:hover {
-            background-color: var(--gray-middle);
+        .top-bar a {
+            color: #fff;
+            margin-left: 15px;
+        }
+        .top-bar a:hover {
+            color: var(--gold-color);
         }
 
-        /* ========== 导航栏（复用首页） ========== */
+        /* 导航栏 - 与index完全一致 */
         .header {
             position: sticky;
             top: 0;
@@ -113,6 +118,7 @@
             height: 48px;
             border-radius: 8px;
             border: 2px solid var(--white-color);
+            object-fit: cover;
         }
         .logo-text {
             color: var(--white-color);
@@ -123,32 +129,15 @@
             display: flex;
             gap: 35px;
         }
-        /* 导航链接默认样式 - 白色 */
-.nav-menu li a {
-    color: #ffffff; /* 白色 */
-    font-size: 16px;
-    padding: 8px 0;
-    position: relative;
-    transition: all 0.3s ease;
-}
-/* 当前页面导航链接 - 黄色（active类） */
-.nav-menu li a.active {
-    color: #ffd700; /* 金色/黄色，和你页面按钮颜色一致 */
-}
-/* 保留原有hover下划线效果（可选） */
-.nav-menu li a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #ffd700;
-    transition: var(--transition);
-}
-.nav-menu li a:hover::after {
-    width: 100%;
-}
+        .nav-menu li a {
+            color: #ffffff;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+        }
+        .nav-menu li a.active {
+            color: #ffd700;
+        }
         .nav-menu li a::after {
             content: '';
             position: absolute;
@@ -156,14 +145,11 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--gold-color);
+            background-color: #ffd700;
             transition: var(--transition);
         }
         .nav-menu li a:hover::after {
             width: 100%;
-        }
-        .nav-menu li a.active {
-            color: var(--gold-color);
         }
         .nav-toggle {
             display: none;
@@ -172,12 +158,54 @@
             cursor: pointer;
         }
 
-        /* ========== 横幅（和首页完全一致，仅改副标题） ========== */
+        /* 登录弹窗 - 与index完全一致 */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-box {
+            background: #fff;
+            width: 90%;
+            max-width: 420px;
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute; top: 15px; right: 15px;
+            font-size: 20px; cursor: pointer;
+        }
+        .modal-tab {
+            display: flex; margin-bottom: 20px;
+        }
+        .modal-tab-item {
+            flex: 1; text-align: center; padding: 10px 0;
+            font-weight: bold; cursor: pointer;
+        }
+        .modal-tab-item.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        .modal-panel { display: none; }
+        .modal-panel.active { display: block; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 6px; }
+        .form-group input {
+            width: 100%; padding: 10px;
+            border: 1px solid #ddd; border-radius: 6px;
+        }
+
+        /* 横幅 */
         .banner {
-            height: 500px;
+            height: 380px;
             background: linear-gradient(135deg, var(--primary-color) 0%, #b82232 100%);
             position: relative;
-            overflow: visible;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -189,8 +217,7 @@
             width: 100%;
             height: 100%;
             background: url('图片/bg(1).jpg') center/cover no-repeat;
-            background-size: 100% auto;
-            opacity: 1;
+            opacity: 0.25;
             z-index: 1;
         }
         .banner-content {
@@ -199,43 +226,35 @@
             text-align: center;
             color: var(--white-color);
             padding: 0 20px;
-            margin-top: -50px;
         }
         .banner-title {
-            font-size: 48px;
+            font-size: 44px;
             font-weight: bold;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .banner-subtitle {
-            font-size: 22px;
-            margin-bottom: 30px;
-            text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+            font-size: 20px;
+            margin-bottom: 28px;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
         .banner-btn {
-            padding: 12px 32px;
-            font-size: 18px;
-            border-radius: var(--radius-md);
             background-color: var(--gold-color);
             color: var(--primary-dark);
             font-weight: bold;
+            padding: 12px 32px;
+            border-radius: var(--radius-md);
         }
-        .banner-btn:hover {
-            background-color: #fff082;
-            box-shadow: var(--shadow-md);
-        }
-        /* ========== 新增：打卡记录内容区 ========== */
+
+        /* 个人中心样式 */
         .checkin-section {
             padding: 80px 0;
         }
-        /* 板块标题 */
         .checkin-title {
             text-align: center;
             margin-bottom: 40px;
-            position: relative;
         }
         .checkin-title h2 {
             font-size: 30px;
@@ -244,7 +263,6 @@
             padding-bottom: 10px;
             border-bottom: 3px double var(--primary-color);
         }
-        /* 个人信息卡片 */
         .profile-card {
             background-color: var(--white-color);
             border-radius: var(--radius-lg);
@@ -256,7 +274,6 @@
             align-items: center;
             gap: 30px;
         }
-        /* 头像区域 */
         .profile-avatar {
             width: 120px;
             height: 120px;
@@ -267,13 +284,32 @@
             justify-content: center;
             overflow: hidden;
             border: 3px solid var(--primary-color);
+            position: relative;
+            cursor: pointer;
         }
         .profile-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        /* 信息编辑区域 */
+        .avatar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            color: white;
+            font-size: 14px;
+        }
+        .profile-avatar:hover .avatar-overlay {
+            opacity: 1;
+        }
         .profile-info {
             flex: 1;
         }
@@ -282,6 +318,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            flex-wrap: wrap;
         }
         .info-label {
             font-size: 16px;
@@ -311,27 +348,24 @@
         .username-input:focus {
             border-color: var(--primary-color);
         }
-        .edit-btn {
+        .edit-btn, .save-btn {
             padding: 6px 15px;
             font-size: 14px;
-            background-color: var(--gray-light);
-            border: 1px solid var(--gray-middle);
             border-radius: var(--radius-sm);
             cursor: pointer;
             transition: var(--transition);
+        }
+        .edit-btn {
+            background-color: var(--gray-light);
+            border: 1px solid var(--gray-middle);
         }
         .edit-btn:hover {
             background-color: var(--gray-middle);
         }
         .save-btn {
-            padding: 6px 15px;
-            font-size: 14px;
             background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
             display: none;
         }
         .save-btn:hover {
@@ -340,8 +374,8 @@
         .edit-tips {
             font-size: 12px;
             color: var(--gray-dark);
-            margin-top: 5px;
             display: block;
+            margin-top: 5px;
         }
         .edit-limit-tips {
             font-size: 12px;
@@ -349,7 +383,6 @@
             margin-top: 5px;
             display: none;
         }
-        /* 打卡统计 */
         .checkin-stats {
             display: flex;
             gap: 30px;
@@ -362,9 +395,10 @@
             border-radius: var(--radius-md);
             text-align: center;
             min-width: 120px;
+            flex: 1;
         }
         .stat-value {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             color: var(--primary-color);
             margin-bottom: 5px;
@@ -373,7 +407,6 @@
             font-size: 14px;
             color: var(--gray-dark);
         }
-        /* 打卡日历区域 */
         .checkin-calendar {
             background-color: var(--white-color);
             border-radius: var(--radius-lg);
@@ -405,18 +438,13 @@
             border-radius: 50%;
             border: 1px solid var(--gray-middle);
             background-color: var(--white-color);
-            color: #333;
             cursor: pointer;
             transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         .calendar-nav-btn:hover {
             border-color: var(--primary-color);
             color: var(--primary-color);
         }
-        /* 日历表格 */
         .calendar-table {
             width: 100%;
             border-collapse: collapse;
@@ -438,7 +466,7 @@
         .date-cell {
             position: relative;
             height: 100%;
-            padding: 5px;
+            padding: 8px 5px;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -457,16 +485,12 @@
             color: var(--gray-dark);
             cursor: not-allowed;
         }
-        .date-disabled:hover {
-            background-color: #f5f5f5;
-        }
-        /* 打卡状态标识 */
         .checkin-status {
             position: absolute;
             bottom: 5px;
             right: 5px;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -480,35 +504,53 @@
         .status-unchecked {
             background-color: var(--uncheckin-color);
         }
-        /* 今日打卡按钮 */
         .today-checkin-btn {
-            margin-top: 20px;
-            padding: 12px 30px;
+            margin-top: 30px;
+            padding: 14px 40px;
             background-color: var(--checkin-color);
             color: white;
             border: none;
             border-radius: var(--radius-md);
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
             transition: var(--transition);
             display: block;
             margin-left: auto;
             margin-right: auto;
         }
-        .today-checkin-btn:hover {
+        .today-checkin-btn:hover:not(:disabled) {
             background-color: #218838;
             transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
         }
-        .today-checkin-btn.checked {
+        .today-checkin-btn:disabled {
             background-color: var(--gray-middle);
             color: var(--gray-dark);
             cursor: not-allowed;
             transform: none;
-            box-shadow: none;
         }
 
-        /* ========== 底部（复用首页） ========== */
+        /* 学习建议卡片 */
+        .study-tips {
+            max-width: 900px;
+            margin: 40px auto 0;
+            background: linear-gradient(135deg, #fff5e6, #fff);
+            border-radius: var(--radius-lg);
+            padding: 25px 30px;
+            border-left: 4px solid var(--primary-color);
+        }
+        .study-tips h4 {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+        .study-tips p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* 底部 - 与index完全一致 */
         .footer {
             background-color: var(--primary-dark);
             color: var(--white-color);
@@ -526,7 +568,6 @@
             font-size: 18px;
             margin-bottom: 20px;
             position: relative;
-            padding-bottom: 10px;
         }
         .footer-col h4::after {
             content: '';
@@ -535,15 +576,9 @@
             left: 0;
             width: 50px;
             height: 2px;
-            background-color: var(--gold-color);
+            background: var(--gold-color);
         }
-        .footer-col ul li {
-            margin-bottom: 12px;
-        }
-        .footer-col ul li a:hover {
-            color: var(--gold-color);
-            padding-left: 5px;
-        }
+        .footer-col li { margin-bottom: 12px; }
         .footer-bottom {
             text-align: center;
             padding-top: 20px;
@@ -552,90 +587,50 @@
             color: #ccc;
         }
 
-        /* ========== 响应式适配 ========== */
-        @media (max-width: 1200px) {
-            .banner-title {
-                font-size: 40px;
-            }
-        }
         @media (max-width: 768px) {
-            /* 移动端导航 */
-            .nav-toggle {
-                display: block;
-            }
             .nav-menu {
                 position: fixed;
                 top: 70px;
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background-color: var(--primary-dark);
+                background: var(--primary-dark);
                 flex-direction: column;
                 align-items: center;
                 padding: 40px 0;
-                gap: 25px;
+                gap: 20px;
                 transition: var(--transition);
             }
-            .nav-menu.active {
-                left: 0;
-            }
-            /* 横幅适配 */
+            .nav-menu.active { left: 0; }
+            .nav-toggle { display: block; }
             .banner {
-                height: 400px;
+                height: 320px;
             }
             .banner-title {
                 font-size: 32px;
             }
-            .banner-subtitle {
-                font-size: 18px;
-            }
-            /* 打卡区适配 */
-            .checkin-section {
-                padding: 40px 0;
-            }
             .profile-card {
                 flex-direction: column;
-                padding: 20px 15px;
-                gap: 20px;
+                padding: 20px;
                 text-align: center;
-            }
-            .profile-avatar {
-                width: 100px;
-                height: 100px;
             }
             .info-item {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 5px;
             }
             .info-label {
                 width: auto;
             }
-            .username-input {
-                max-width: 100%;
-            }
-            .checkin-stats {
-                justify-content: center;
-            }
-            .stat-item {
-                min-width: 100px;
-                padding: 10px 15px;
-            }
             .checkin-calendar {
-                padding: 20px 15px;
+                padding: 20px;
             }
             .calendar-table td {
                 height: 60px;
             }
-            .date-number {
-                font-size: 12px;
-            }
             .checkin-status {
-                width: 16px;
-                height: 16px;
-                font-size: 10px;
+                width: 20px;
+                height: 20px;
             }
-            /* 底部适配 */
             .footer-top {
                 flex-direction: column;
                 gap: 30px;
@@ -644,21 +639,30 @@
     </style>
 </head>
 <body>
-<!-- ========== 导航栏（复用首页，打卡记录标为active） ========== -->
+
+<!-- 顶部栏 - 与index完全一致 -->
+<div class="top-bar">
+    <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
+    <div class="login-group" id="loginGroup">
+        <a href="javascript:;" onclick="openModal('login')">登录</a>
+        <a href="javascript:;" onclick="openModal('reg')">注册</a>
+    </div>
+</div>
+
+<!-- 导航栏 - 与index完全一致 -->
 <header class="header">
     <div class="container nav">
         <div class="logo">
-            <!-- 替换为你的Logo图片地址 -->
             <img src="图片/云先生logo.jpg" alt="云先生logo">
             <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
         </div>
         <ul class="nav-menu">
             <li><a href="index.html">首页</a></li>
+	    <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="news.html">思政文库</a></li>
             <li><a href="bookstore.html">思政乐园</a></li>
             <li><a href="video.html">录播课室</a></li>
             <li><a href="download.html">直播课室</a></li>
-            <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="forum.html">留言板</a></li>
             <li><a href="checkin.html" class="active">我的</a></li>
         </ul>
@@ -668,7 +672,44 @@
     </div>
 </header>
 
-<!-- ========== 横幅（复用首页，改副标题） ========== -->
+<!-- 登录弹窗 -->
+<div class="modal" id="modal">
+    <div class="modal-box">
+        <div class="modal-close" onclick="closeModal()">&times;</div>
+        <div class="modal-tab">
+            <div class="modal-tab-item active" onclick="switchTabModal('login')">登录</div>
+            <div class="modal-tab-item" onclick="switchTabModal('reg')">注册</div>
+        </div>
+        <div class="modal-panel active" id="loginPanel">
+            <div class="form-group">
+                <label>账号</label>
+                <input type="text" id="loginUsername" placeholder="手机号/学号">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="loginPassword" placeholder="请输入密码">
+            </div>
+            <button class="btn" onclick="loginHandler()">登录</button>
+        </div>
+        <div class="modal-panel" id="regPanel">
+            <div class="form-group">
+                <label>手机号</label>
+                <input type="text" id="regPhone" placeholder="请输入手机号">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="regPwd" placeholder="设置密码">
+            </div>
+            <div class="form-group">
+                <label>确认密码</label>
+                <input type="password" id="regConfirm" placeholder="确认密码">
+            </div>
+            <button class="btn" onclick="registerHandler()">注册</button>
+        </div>
+    </div>
+</div>
+
+<!-- 横幅区域 -->
 <section class="banner">
     <div class="banner-bg"></div>
     <div class="banner-content">
@@ -678,7 +719,7 @@
     </div>
 </section>
 
-<!-- ========== 打卡记录核心内容区 ========== -->
+<!-- 个人中心核心内容区 -->
 <section class="checkin-section" id="checkin-content">
     <div class="container">
         <div class="checkin-title">
@@ -687,8 +728,11 @@
 
         <!-- 个人信息卡片 -->
         <div class="profile-card">
-            <div class="profile-avatar">
-                <img src="https://picsum.photos/id/64/200/200" alt="用户头像">
+            <div class="profile-avatar" id="avatarUpload">
+                <img src="https://picsum.photos/id/64/200/200" alt="用户头像" id="avatarImg">
+                <div class="avatar-overlay">
+                    <i class="fa fa-camera"></i> 更换
+                </div>
             </div>
             <div class="profile-info">
                 <div class="info-item">
@@ -702,7 +746,12 @@
                         <span class="edit-limit-tips" id="edit-limit-tips">本月已修改过用户名，无法再次修改！</span>
                     </div>
                 </div>
-                <!-- 打卡统计 -->
+                <div class="info-item">
+                    <span class="info-label">学习时长：</span>
+                    <div class="info-content">
+                        <span class="username-display" id="study-duration">128</span> 小时
+                    </div>
+                </div>
                 <div class="checkin-stats">
                     <div class="stat-item">
                         <div class="stat-value" id="total-checkin">23</div>
@@ -731,288 +780,283 @@
             </div>
             <table class="calendar-table">
                 <thead>
-                <tr>
-                    <th>周日</th>
-                    <th>周一</th>
-                    <th>周二</th>
-                    <th>周三</th>
-                    <th>周四</th>
-                    <th>周五</th>
-                    <th>周六</th>
-                </tr>
+                    <tr><th>周日</th><th>周一</th><th>周二</th><th>周三</th><th>周四</th><th>周五</th><th>周六</th></tr>
                 </thead>
-                <tbody id="calendar-body">
-                <!-- 日历内容由JS动态生成 -->
-                </tbody>
+                <tbody id="calendar-body"></tbody>
             </table>
-            <!-- 今日打卡按钮 -->
             <button class="today-checkin-btn" id="today-checkin-btn">
                 <i class="fa fa-check-circle"></i> 今日打卡
             </button>
         </div>
+
+        <!-- 学习建议卡片 -->
+        <div class="study-tips">
+            <h4><i class="fa fa-lightbulb-o"></i> 学习建议</h4>
+            <p>坚持每日打卡学习，累计打卡满30天可获得“学习之星”勋章！连续打卡7天可获得专属学习资料包。让我们一起在思政学习的道路上共同进步～</p>
+        </div>
     </div>
 </section>
 
-<!-- ========== 底部（复用首页） ========== -->
+<!-- 底部 -->
 <footer class="footer">
     <div class="container">
         <div class="footer-top">
-            <div class="footer-col">
-                <h4>关于我们</h4>
-                <ul>
-                    <li><a href="#">平台介绍</a></li>
-                    <li><a href="#">团队风采</a></li>
-                    <li><a href="#">联系我们</a></li>
-                    <li><a href="#">加入我们</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>学习资源</h4>
-                <ul>
-                    <li><a href="#">时政资料库</a></li>
-                    <li><a href="#">精品课程</a></li>
-                    <li><a href="#">学习工具</a></li>
-                    <li><a href="#">常见问题</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>法律声明</h4>
-                <ul>
-                    <li><a href="#">隐私政策</a></li>
-                    <li><a href="#">用户协议</a></li>
-                    <li><a href="#">版权声明</a></li>
-                    <li><a href="#">免责条款</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>联系方式</h4>
-                <ul>
-                    <li><i class="fa fa-phone"></i> 0350-3339920</li>
-                    <li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li>
-                    <li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li>
-                </ul>
-            </div>
+            <div class="footer-col"><h4>关于我们</h4><ul><li><a href="#">平台介绍</a></li><li><a href="#">团队风采</a></li><li><a href="#">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>学习资源</h4><ul><li><a href="#">时政资料库</a></li><li><a href="#">精品课程</a></li><li><a href="#">学习工具</a></li></ul></div>
+            <div class="footer-col"><h4>法律声明</h4><ul><li><a href="#">隐私政策</a></li><li><a href="#">用户协议</a></li><li><a href="#">版权声明</a></li></ul></div>
+            <div class="footer-col"><h4>联系方式</h4><ul><li><i class="fa fa-phone"></i> 0350-3339920</li><li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li><li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li></ul></div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2026 云先生-师范生助力乡村中小学道德与法治网络平台 版权所有 | 晋ICP备202308110020号</p>
-        </div>
+        <div class="footer-bottom"><p>© 2026 云先生-师范生助力乡村中小学道德与法治网络平台 版权所有 | 晋ICP备202308110020号</p></div>
     </div>
 </footer>
 
-<!-- ========== 移动端导航+打卡交互脚本 ========== -->
 <script>
-        // 移动端导航交互（复用首页）
-        function toggleNav() {
-            const navMenu = document.querySelector('.nav-menu');
-            navMenu.classList.toggle('active');
+    function toggleNav() {
+        document.querySelector('.nav-menu').classList.toggle('active');
+    }
+
+    const modalEl = document.getElementById('modal');
+    function openModal(type) {
+        modalEl.classList.add('active');
+        if(type === 'login') switchTabModal('login');
+        else switchTabModal('reg');
+    }
+    function closeModal() { modalEl.classList.remove('active'); }
+    function switchTabModal(tab) {
+        document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.modal-tab-item').forEach(i => i.classList.remove('active'));
+        if(tab === 'login') {
+            document.getElementById('loginPanel').classList.add('active');
+            document.querySelectorAll('.modal-tab-item')[0].classList.add('active');
+        } else {
+            document.getElementById('regPanel').classList.add('active');
+            document.querySelectorAll('.modal-tab-item')[1].classList.add('active');
         }
+    }
 
-        // 打卡记录核心交互逻辑
-        document.addEventListener('DOMContentLoaded', function() {
-            // ========== 1. 用户名修改逻辑（1个月仅1次） ==========
-            const usernameDisplay = document.getElementById('username-display');
-            const usernameInput = document.getElementById('username-input');
-            const editBtn = document.getElementById('edit-btn');
-            const saveBtn = document.getElementById('save-btn');
-            const editLimitTips = document.getElementById('edit-limit-tips');
+    function loginHandler() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const pwd = document.getElementById('loginPassword').value.trim();
+        if(!username || !pwd) { alert("请输入账号和密码"); return; }
+        localStorage.setItem('isLogin', 'true');
+        localStorage.setItem('loginUser', username);
+        alert('登录成功！');
+        closeModal();
+        updateLoginUI();
+    }
+    
+    function registerHandler() {
+        const phone = document.getElementById('regPhone').value.trim();
+        const pwd = document.getElementById('regPwd').value;
+        const confirm = document.getElementById('regConfirm').value;
+        if(!phone || !pwd) { alert("请填写手机号和密码"); return; }
+        if(pwd !== confirm) { alert("两次密码不一致"); return; }
+        alert('注册成功！请登录');
+        switchTabModal('login');
+        document.getElementById('loginUsername').value = phone;
+        document.getElementById('loginPassword').value = '';
+    }
 
-            // 模拟用户上次修改时间（实际项目中从后端获取）
-            const lastEditTime = localStorage.getItem('lastUsernameEdit');
-            const now = new Date();
-            const canEdit = !lastEditTime || (now - new Date(lastEditTime) > 30 * 24 * 60 * 60 * 1000);
+    function updateLoginUI() {
+        const isLogin = localStorage.getItem('isLogin') === 'true';
+        const loginGroup = document.getElementById('loginGroup');
+        if(isLogin && loginGroup) {
+            const user = localStorage.getItem('loginUser') || '用户';
+            loginGroup.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`;
+            document.getElementById('username-display').textContent = user;
+            document.getElementById('username-input').value = user;
+        } else {
+            loginGroup.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`;
+            window.location.href = 'index.html';
+        }
+    }
+    
+    function logout() {
+        localStorage.removeItem('isLogin');
+        localStorage.removeItem('loginUser');
+        alert('已退出登录');
+        window.location.href = 'index.html';
+    }
 
-            // 编辑按钮点击
-            editBtn.addEventListener('click', function() {
-                if (!canEdit) {
-                    // 本月已修改，显示限制提示
-                    editLimitTips.style.display = 'block';
-                    return;
-                }
-                // 切换显示状态
-                usernameDisplay.style.display = 'none';
-                usernameInput.style.display = 'block';
-                editBtn.style.display = 'none';
-                saveBtn.style.display = 'inline-block';
-                usernameInput.focus();
-            });
+    // 页面加载时检查登录状态
+    window.addEventListener('DOMContentLoaded', function() {
+        const isLogin = localStorage.getItem('isLogin') === 'true';
+        if(!isLogin) {
+            alert('请先登录！');
+            window.location.href = 'index.html';
+            return;
+        }
+        updateLoginUI();
+        initCheckin();
+    });
 
-            // 保存按钮点击
-            saveBtn.addEventListener('click', function() {
-                const newUsername = usernameInput.value.trim();
-                if (!newUsername) {
-                    alert('用户名不能为空！');
-                    return;
-                }
-                // 更新显示
-                usernameDisplay.textContent = newUsername;
-                usernameDisplay.style.display = 'inline';
-                usernameInput.style.display = 'none';
-                saveBtn.style.display = 'none';
-                editBtn.style.display = 'inline-block';
-                // 记录修改时间（实际项目中提交到后端）
-                localStorage.setItem('lastUsernameEdit', new Date().toString());
-                // 更新可编辑状态
-                canEdit = false;
-                alert('用户名修改成功！本月不可再次修改。');
-            });
+    // 打卡功能初始化
+    function initCheckin() {
+        const usernameDisplay = document.getElementById('username-display');
+        const usernameInput = document.getElementById('username-input');
+        const editBtn = document.getElementById('edit-btn');
+        const saveBtn = document.getElementById('save-btn');
+        const editLimitTips = document.getElementById('edit-limit-tips');
+        
+        let lastEditTime = localStorage.getItem('lastUsernameEdit');
+        let canEdit = !lastEditTime || (Date.now() - new Date(lastEditTime).getTime() > 30 * 24 * 60 * 60 * 1000);
 
-            // ========== 2. 日历生成逻辑 ==========
-            const calendarBody = document.getElementById('calendar-body');
-            const calendarMonth = document.getElementById('calendar-month');
-            const prevMonthBtn = document.getElementById('prev-month');
-            const nextMonthBtn = document.getElementById('next-month');
-
-            // 当前显示的年月
-            let currentDate = new Date();
-            let currentYear = currentDate.getFullYear();
-            let currentMonth = currentDate.getMonth(); // 0-11
-
-            // 模拟打卡记录（实际项目中从后端获取）
-            const checkinRecords = [1, 3, 5, 8, 10, 12, 15, 20]; // 2月打卡的日期
-
-            // 生成日历函数
-            function generateCalendar(year, month) {
-                // 更新月份标题
-                calendarMonth.textContent = `${year}年${month + 1}月`;
-
-                // 清空日历
-                calendarBody.innerHTML = '';
-
-                // 获取当月第一天是星期几（0-6，0是周日）
-                const firstDay = new Date(year, month, 1).getDay();
-                // 获取当月天数
-                const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-                // 生成日历单元格
-                let date = 1;
-                // 生成6行（最多6行）
-                for (let i = 0; i < 6; i++) {
-                    const row = document.createElement('tr');
-
-                    // 生成7列（周日到周六）
-                    for (let j = 0; j < 7; j++) {
-                        const cell = document.createElement('td');
-                        const cellContent = document.createElement('div');
-                        cellContent.className = 'date-cell';
-
-                        // 填充日期
-                        if (i === 0 && j < firstDay) {
-                            // 上月空白
-                            cellContent.classList.add('date-disabled');
-                        } else if (date > daysInMonth) {
-                            // 下月空白
-                            cellContent.classList.add('date-disabled');
-                        } else {
-                            // 当月日期
-                            const dateNumber = document.createElement('span');
-                            dateNumber.className = 'date-number';
-                            dateNumber.textContent = date;
-                            cellContent.appendChild(dateNumber);
-
-                            // 标记打卡状态
-                            const today = new Date();
-                            const isToday = year === today.getFullYear() && month === today.getMonth() && date === today.getDate();
-                            const isChecked = checkinRecords.includes(date);
-
-                            const status = document.createElement('span');
-                            status.className = 'checkin-status';
-                            if (isChecked) {
-                                status.classList.add('status-checked');
-                                status.innerHTML = '<i class="fa fa-check"></i>';
-                            } else if (date < today.getDate() && !isToday) {
-                                status.classList.add('status-unchecked');
-                                status.innerHTML = '<i class="fa fa-times"></i>';
-                            }
-                            cellContent.appendChild(status);
-
-                            // 今日日期标记
-                            if (isToday) {
-                                cellContent.style.border = '2px solid var(--primary-color)';
-                            }
-
-                            date++;
-                        }
-
-                        cell.appendChild(cellContent);
-                        row.appendChild(cell);
-                    }
-
-                    calendarBody.appendChild(row);
-
-                    // 日期填充完就停止
-                    if (date > daysInMonth) break;
-                }
+        editBtn.addEventListener('click', function() {
+            if (!canEdit) {
+                editLimitTips.style.display = 'block';
+                return;
             }
-
-            // 初始化日历
-            generateCalendar(currentYear, currentMonth);
-
-            // 上月按钮
-            prevMonthBtn.addEventListener('click', function() {
-                currentMonth--;
-                if (currentMonth < 0) {
-                    currentMonth = 11;
-                    currentYear--;
-                }
-                generateCalendar(currentYear, currentMonth);
-            });
-
-            // 下月按钮
-            nextMonthBtn.addEventListener('click', function() {
-                currentMonth++;
-                if (currentMonth > 11) {
-                    currentMonth = 0;
-                    currentYear++;
-                }
-                generateCalendar(currentYear, currentMonth);
-            });
-
-            // ========== 3. 今日打卡逻辑 ==========
-            const todayCheckinBtn = document.getElementById('today-checkin-btn');
-            const totalCheckin = document.getElementById('total-checkin');
-            const monthCheckin = document.getElementById('month-checkin');
-            const continueCheckin = document.getElementById('continue-checkin');
-
-            // 检查今日是否已打卡
-            const today = new Date();
-            const todayDate = today.getDate();
-            let isTodayChecked = checkinRecords.includes(todayDate);
-
-            // 更新打卡按钮状态
-            function updateCheckinBtn() {
-                if (isTodayChecked) {
-                    todayCheckinBtn.classList.add('checked');
-                    todayCheckinBtn.innerHTML = '<i class="fa fa-check-circle"></i> 今日已打卡';
-                    todayCheckinBtn.disabled = true;
-                } else {
-                    todayCheckinBtn.classList.remove('checked');
-                    todayCheckinBtn.innerHTML = '<i class="fa fa-check-circle"></i> 今日打卡';
-                    todayCheckinBtn.disabled = false;
-                }
-            }
-
-            updateCheckinBtn();
-
-            // 今日打卡按钮点击
-            todayCheckinBtn.addEventListener('click', function() {
-                if (isTodayChecked) return;
-
-                // 模拟打卡成功
-                checkinRecords.push(todayDate);
-                isTodayChecked = true;
-
-                // 更新统计数据
-                totalCheckin.textContent = parseInt(totalCheckin.textContent) + 1;
-                monthCheckin.textContent = parseInt(monthCheckin.textContent) + 1;
-                continueCheckin.textContent = parseInt(continueCheckin.textContent) + 1;
-
-                // 更新日历和按钮
-                generateCalendar(currentYear, currentMonth);
-                updateCheckinBtn();
-
-                alert('今日打卡成功！坚持学习，收获满满～');
-            });
+            usernameDisplay.style.display = 'none';
+            usernameInput.style.display = 'inline-block';
+            editBtn.style.display = 'none';
+            saveBtn.style.display = 'inline-block';
+            usernameInput.focus();
         });
-    </script>
+
+        saveBtn.addEventListener('click', function() {
+            const newUsername = usernameInput.value.trim();
+            if (!newUsername) { alert('用户名不能为空！'); return; }
+            usernameDisplay.textContent = newUsername;
+            usernameDisplay.style.display = 'inline';
+            usernameInput.style.display = 'none';
+            saveBtn.style.display = 'none';
+            editBtn.style.display = 'inline-block';
+            localStorage.setItem('lastUsernameEdit', new Date().toString());
+            localStorage.setItem('loginUser', newUsername);
+            canEdit = false;
+            alert('用户名修改成功！本月不可再次修改。');
+            updateLoginUI();
+        });
+
+        // 头像更换
+        document.getElementById('avatarUpload').addEventListener('click', function() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if(file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        document.getElementById('avatarImg').src = event.target.result;
+                        localStorage.setItem('userAvatar', event.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        });
+        
+        const savedAvatar = localStorage.getItem('userAvatar');
+        if(savedAvatar) document.getElementById('avatarImg').src = savedAvatar;
+
+        // 打卡数据
+        let checkinRecords = JSON.parse(localStorage.getItem('checkinRecords')) || [1, 3, 5, 8, 10, 12, 15, 20];
+        let totalDays = checkinRecords.length;
+        let currentMonthDays = checkinRecords.filter(d => d <= new Date().getDate()).length;
+        let continueDays = 5;
+
+        document.getElementById('total-checkin').textContent = totalDays;
+        document.getElementById('month-checkin').textContent = currentMonthDays;
+        document.getElementById('continue-checkin').textContent = continueDays;
+
+        let currentYear = new Date().getFullYear();
+        let currentMonth = new Date().getMonth();
+        const calendarBody = document.getElementById('calendar-body');
+        const calendarMonth = document.getElementById('calendar-month');
+        
+        function generateCalendar(year, month) {
+            calendarMonth.textContent = `${year}年${month + 1}月`;
+            calendarBody.innerHTML = '';
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            let date = 1;
+            const today = new Date();
+            
+            for (let i = 0; i < 6; i++) {
+                const row = document.createElement('tr');
+                for (let j = 0; j < 7; j++) {
+                    const cell = document.createElement('td');
+                    const cellContent = document.createElement('div');
+                    cellContent.className = 'date-cell';
+                    
+                    if (i === 0 && j < firstDay) {
+                        cellContent.classList.add('date-disabled');
+                    } else if (date > daysInMonth) {
+                        cellContent.classList.add('date-disabled');
+                    } else {
+                        const dateNumber = document.createElement('span');
+                        dateNumber.className = 'date-number';
+                        dateNumber.textContent = date;
+                        cellContent.appendChild(dateNumber);
+                        
+                        const isToday = year === today.getFullYear() && month === today.getMonth() && date === today.getDate();
+                        const isChecked = checkinRecords.includes(date);
+                        
+                        const status = document.createElement('span');
+                        status.className = 'checkin-status';
+                        if (isChecked) {
+                            status.classList.add('status-checked');
+                            status.innerHTML = '<i class="fa fa-check"></i>';
+                        } else if (date < today.getDate() && !isToday) {
+                            status.classList.add('status-unchecked');
+                            status.innerHTML = '<i class="fa fa-times"></i>';
+                        }
+                        cellContent.appendChild(status);
+                        
+                        if (isToday) cellContent.style.border = '2px solid var(--primary-color)';
+                        date++;
+                    }
+                    cell.appendChild(cellContent);
+                    row.appendChild(cell);
+                }
+                calendarBody.appendChild(row);
+                if (date > daysInMonth) break;
+            }
+        }
+        
+        generateCalendar(currentYear, currentMonth);
+        
+        document.getElementById('prev-month').addEventListener('click', function() {
+            currentMonth--;
+            if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+            generateCalendar(currentYear, currentMonth);
+        });
+        
+        document.getElementById('next-month').addEventListener('click', function() {
+            currentMonth++;
+            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+            generateCalendar(currentYear, currentMonth);
+        });
+        
+        const todayCheckinBtn = document.getElementById('today-checkin-btn');
+        const today = new Date();
+        const todayDate = today.getDate();
+        let isTodayChecked = checkinRecords.includes(todayDate);
+        
+        function updateCheckinBtn() {
+            if (isTodayChecked) {
+                todayCheckinBtn.disabled = true;
+                todayCheckinBtn.innerHTML = '<i class="fa fa-check-circle"></i> 今日已打卡';
+            } else {
+                todayCheckinBtn.disabled = false;
+                todayCheckinBtn.innerHTML = '<i class="fa fa-check-circle"></i> 今日打卡';
+            }
+        }
+        updateCheckinBtn();
+        
+        todayCheckinBtn.addEventListener('click', function() {
+            if (isTodayChecked) return;
+            checkinRecords.push(todayDate);
+            localStorage.setItem('checkinRecords', JSON.stringify(checkinRecords));
+            isTodayChecked = true;
+            document.getElementById('total-checkin').textContent = checkinRecords.length;
+            document.getElementById('month-checkin').textContent = checkinRecords.filter(d => d <= todayDate).length;
+            generateCalendar(currentYear, currentMonth);
+            updateCheckinBtn();
+            alert('🎉 打卡成功！坚持学习，收获满满～');
+        });
+    }
+</script>
 </body>
 </html>
