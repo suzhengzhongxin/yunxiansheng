@@ -829,7 +829,7 @@
     
     function checkLogin() {
         if (!localStorage.getItem('isLogin')) {
-            alert('请先登录！');
+            alert('请先登录后访问“我的”页面！');
             openModal('login');
             return false;
         }
