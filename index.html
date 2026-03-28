@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>云先生-师范生助力乡村中小学道德与法治网络平台</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
@@ -32,22 +32,12 @@
         }
         body {
             background-color: var(--white-color);
-            color: #333;
+            color: #1e2a3e;
             line-height: 1.6;
         }
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-        ul {
-            list-style: none;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         .btn {
             display: inline-block;
             padding: 10px 24px;
@@ -66,7 +56,7 @@
             box-shadow: var(--shadow-sm);
         }
 
-        /* 顶部栏 */
+        /* 顶部栏 + 导航 */
         .top-bar {
             background: var(--primary-dark);
             color: var(--gold-color);
@@ -76,29 +66,17 @@
             justify-content: space-between;
             align-items: center;
         }
-        .top-bar .slogan {
-            flex: 1;
-            text-align: center;
-        }
-        .top-bar .login-group {
-            padding-right: 20px;
-        }
-        .top-bar a {
-            color: #fff;
-            margin-left: 15px;
-        }
-        .top-bar a:hover {
-            color: var(--gold-color);
-        }
+        .top-bar .slogan { flex: 1; text-align: center; }
+        .top-bar .login-group { padding-right: 20px; }
+        .top-bar a { color: #fff; margin-left: 15px; }
+        .top-bar a:hover { color: var(--gold-color); }
 
-        /* 导航栏 */
         .header {
             position: sticky;
             top: 0;
             z-index: 999;
             background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
             box-shadow: var(--shadow-sm);
-            padding: 0;
         }
         .nav {
             display: flex;
@@ -106,11 +84,7 @@
             align-items: center;
             height: 70px;
         }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .logo { display: flex; align-items: center; gap: 12px; }
         .logo img {
             width: 48px;
             height: 48px;
@@ -123,19 +97,14 @@
             font-size: 20px;
             font-weight: bold;
         }
-        .nav-menu {
-            display: flex;
-            gap: 35px;
-        }
+        .nav-menu { display: flex; gap: 35px; }
         .nav-menu li a {
             color: #ffffff;
             font-size: 16px;
             padding: 8px 0;
             position: relative;
         }
-        .nav-menu li a.active {
-            color: #ffd700;
-        }
+        .nav-menu li a.active { color: var(--gold-color); }
         .nav-menu li a::after {
             content: '';
             position: absolute;
@@ -143,18 +112,11 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: #ffd700;
+            background-color: var(--gold-color);
             transition: var(--transition);
         }
-        .nav-menu li a:hover::after {
-            width: 100%;
-        }
-        .nav-toggle {
-            display: none;
-            font-size: 24px;
-            color: var(--white-color);
-            cursor: pointer;
-        }
+        .nav-menu li a:hover::after { width: 100%; }
+        .nav-toggle { display: none; font-size: 24px; color: var(--white-color); cursor: pointer; }
 
         /* 登录弹窗 */
         .modal {
@@ -175,29 +137,15 @@
             border-radius: 12px;
             position: relative;
         }
-        .modal-close {
-            position: absolute; top: 15px; right: 15px;
-            font-size: 20px; cursor: pointer;
-        }
-        .modal-tab {
-            display: flex; margin-bottom: 20px;
-        }
-        .modal-tab-item {
-            flex: 1; text-align: center; padding: 10px 0;
-            font-weight: bold; cursor: pointer;
-        }
-        .modal-tab-item.active {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-        }
+        .modal-close { position: absolute; top: 15px; right: 15px; font-size: 20px; cursor: pointer; }
+        .modal-tab { display: flex; margin-bottom: 20px; }
+        .modal-tab-item { flex: 1; text-align: center; padding: 10px 0; font-weight: bold; cursor: pointer; }
+        .modal-tab-item.active { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); }
         .modal-panel { display: none; }
         .modal-panel.active { display: block; }
         .form-group { margin-bottom: 18px; }
         .form-group label { display: block; margin-bottom: 6px; }
-        .form-group input {
-            width: 100%; padding: 10px;
-            border: 1px solid #ddd; border-radius: 6px;
-        }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
 
         /* 轮播 */
         .banner-slider {
@@ -224,115 +172,203 @@
             padding: 0 20px;
             color: #fff;
             text-align: center;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(2px);
+            border-radius: 28px;
+            padding: 32px 40px;
         }
-        .banner-title {
-            font-size: 46px;
-            margin-bottom: 16px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .banner-subtitle {
-            font-size: 20px;
-            margin-bottom: 26px;
-            text-shadow: 0 1px 6px rgba(0,0,0,0.2);
-        }
-        .banner-btn {
-            background: var(--gold-color);
-            color: var(--primary-dark);
-            font-weight: bold;
-            padding: 12px 32px;
-            border-radius: 8px;
-        }
+        .banner-title { font-size: 46px; margin-bottom: 16px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .banner-subtitle { font-size: 20px; margin-bottom: 26px; }
+        .banner-btn { background: var(--gold-color); color: var(--primary-dark); font-weight: bold; padding: 12px 32px; border-radius: 8px; }
 
-        /* 平台介绍 */
-        .platform-intro {
-            padding: 80px 0;
-            background: #fff;
+        /* 平台介绍区域 - 左右布局：左边文字+三个按钮，右边图片 */
+        .platform-section {
+            padding: 70px 0;
+            background: linear-gradient(135deg, #fef7e6, #fff4e8);
         }
-        .intro-wrapper {
+        .platform-wrapper {
             display: flex;
-            gap: 40px;
+            gap: 60px;
             align-items: flex-start;
         }
-        .intro-text { flex: 1; }
-        .intro-title {
-            font-size: 30px;
+        .platform-left {
+            flex: 1.2;
+        }
+        .platform-left h2 {
+            font-size: 32px;
             color: var(--primary-dark);
             margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
+            border-left: 5px solid var(--gold-color);
+            padding-left: 20px;
         }
-        .intro-title::after {
+        .intro-text {
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        .intro-text p {
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+        .btn-group-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .info-btn {
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-dark);
+            padding: 14px 24px;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .info-btn i {
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+        .info-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(8px);
+        }
+        .info-btn:hover i {
+            color: white;
+        }
+        .platform-right {
+            flex: 0.9;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .platform-right img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* 核心功能模块 */
+        .core-modules {
+            padding: 70px 0 50px;
+            background: #fff;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-header h2 {
+            font-size: 36px;
+            color: var(--primary-dark);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 12px;
+        }
+        .section-header h2:after {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
-            width: 80px;
+            left: 20%;
+            width: 60%;
             height: 3px;
-            background: var(--primary-color);
+            background: linear-gradient(90deg, var(--gold-color), var(--primary-color));
+            border-radius: 3px;
         }
-        .intro-content {
-            font-size: 16px;
-            line-height: 1.8;
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .module-card {
+            background: var(--white-color);
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            transition: max-height 0.5s ease;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid #f0e6df;
         }
-        .intro-content h4 {
-            font-size: 18px;
-            color: var(--primary-dark);
-            margin: 18px 0 10px;
-            font-weight: bold;
-        }
-        .intro-content p {
-            text-indent: 2em;
-            margin-bottom: 12px;
-        }
-        .intro-image {
-            flex: 1;
-            border-radius: 16px;
-            overflow: hidden;
+        .module-card:hover {
+            transform: translateY(-6px);
             box-shadow: var(--shadow-md);
         }
-        .intro-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+        .module-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
         }
-        .more-btn {
-            margin-top: 20px;
-            padding: 8px 20px;
-            background-color: var(--primary-color);
+        .module-img .tag {
+            position: absolute;
+            bottom: 12px;
+            left: 16px;
+            background: var(--primary-color);
             color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .module-content {
+            padding: 24px 22px 28px;
+        }
+        .module-content h3 {
+            font-size: 26px;
+            margin-bottom: 12px;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .module-highlight {
+            background: #fef2e8;
+            padding: 10px 14px;
+            border-radius: 12px;
+            margin: 12px 0;
             font-size: 14px;
-            transition: var(--transition);
+            color: var(--primary-dark);
+            font-weight: 500;
+            border-left: 3px solid var(--gold-color);
         }
-        .more-btn:hover {
-            background-color: var(--primary-light);
-            transform: translateY(-2px);
+        .module-description {
+            color: #4b5563;
+            margin-bottom: 18px;
+            line-height: 1.5;
+            font-size: 14px;
         }
+        .module-stats {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--gray-middle);
+            padding-top: 14px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--gray-dark);
+        }
+        .module-link {
+            display: inline-block;
+            margin-top: 12px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .module-link i { margin-left: 6px; transition: 0.2s; }
+        .module-link:hover i { transform: translateX(4px); }
 
         /* 思政课程 */
         .course-learning {
-            padding: 80px 0;
+            padding: 70px 0;
             background: var(--gray-light);
         }
-        .course-title {
-            text-align: center;
-            font-size: 30px;
-            color: var(--primary-dark);
-            margin-bottom: 15px;
-        }
-        .course-desc {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            font-size: 16px;
-            color: #555;
-            line-height: 1.7;
-        }
+        .course-title { text-align: center; font-size: 34px; color: var(--primary-dark); margin-bottom: 15px; }
+        .course-desc { text-align: center; max-width: 800px; margin: 0 auto 40px; color: #555; }
         .course-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -340,124 +376,112 @@
         }
         .course-card {
             position: relative;
-            height: 300px;
+            height: 280px;
             border-radius: var(--radius-lg);
             overflow: hidden;
+            box-shadow: var(--shadow-sm);
         }
-        .course-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .course-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+        .course-card:hover img { transform: scale(1.05); }
         .course-info {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
             padding: 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
             color: #fff;
         }
-        .course-info h3 {
-            color: var(--gold-color);
-            font-size: 18px;
-        }
-        .course-info p {
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        /* 功能模块 */
-        .features {
-            padding: 80px 0;
-            background: #fff;
-        }
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        .section-title h2 {
-            font-size: 32px;
-            color: var(--primary-color);
-            margin-bottom: 12px;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-        .feature-item {
-            position: relative;
-            height: 240px;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-        }
-        .feature-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .feature-mask {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.4);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-        }
-        .feature-mask h3 {
-            font-size: 22px;
-            margin-bottom: 8px;
-        }
-        .feature-mask p {
-            font-size: 14px;
-            max-width: 85%;
-            text-align: center;
-        }
+        .course-info h3 { color: var(--gold-color); font-size: 18px; margin-bottom: 4px; }
 
         /* 底部 */
         .footer {
             background-color: var(--primary-dark);
             color: var(--white-color);
             padding: 50px 0 20px;
-            margin-top: 60px;
+            margin-top: 20px;
         }
-        .footer-top {
+        .footer-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { font-size: 18px; margin-bottom: 20px; position: relative; padding-bottom: 8px; }
+        .footer-col h4::after { content: ''; position: absolute; bottom: 0; left: 0; width: 50px; height: 2px; background: var(--gold-color); }
+        .footer-col li { margin-bottom: 12px; cursor: pointer; }
+        .footer-col li a:hover, .footer-col li span:hover { color: var(--gold-color); }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #ccc; }
+
+        /* 纯文字弹窗样式 */
+        .info-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .info-modal.active { display: flex; }
+        .info-modal-content {
+            background: #fff;
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            border-radius: 28px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-lg);
+        }
+        .info-modal-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 20px 28px;
             display: flex;
             justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-bottom: 40px;
+            align-items: center;
         }
-        .footer-col h4 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            position: relative;
+        .info-modal-header h3 {
+            font-size: 24px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .footer-col h4::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--gold-color);
+        .info-modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            line-height: 1;
         }
-        .footer-col li { margin-bottom: 12px; }
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 14px;
-            color: #ccc;
+        .info-modal-close:hover { opacity: 0.8; }
+        .info-modal-body {
+            padding: 32px 36px;
+            overflow-y: auto;
+            flex: 1;
+            font-size: 15px;
+            line-height: 1.75;
+            color: #2c3e4e;
+        }
+        .info-modal-body h4 {
+            color: var(--primary-dark);
+            font-size: 22px;
+            margin: 24px 0 12px 0;
+            border-left: 5px solid var(--gold-color);
+            padding-left: 16px;
+        }
+        .info-modal-body h4:first-of-type { margin-top: 0; }
+        .info-modal-body p {
+            margin-bottom: 14px;
+            text-indent: 2em;
         }
 
-        @media (max-width:768px) {
+        @media (max-width: 992px) {
+            .platform-wrapper { flex-direction: column; }
+            .modules-grid, .course-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
             .nav-menu {
                 position: fixed;
                 top: 70px;
@@ -473,9 +497,10 @@
             }
             .nav-menu.active { left: 0; }
             .nav-toggle { display: block; }
-            .course-grid, .features-grid { grid-template-columns: 1fr; }
-            .banner-slider { height: 360px; }
-            .intro-wrapper { flex-direction: column; }
+            .modules-grid, .course-grid { grid-template-columns: 1fr; }
+            .banner-title { font-size: 32px; }
+            .banner-slider { height: 420px; }
+            .info-modal-body { padding: 20px; }
         }
     </style>
 </head>
@@ -507,9 +532,7 @@
             <li><a href="forum.html">留言板</a></li>
             <li><a href="checkin.html" onclick="return checkLogin()">我的</a></li>
         </ul>
-        <div class="nav-toggle" onclick="toggleNav()">
-            <i class="fa fa-bars"></i>
-        </div>
+        <div class="nav-toggle" onclick="toggleNav()"><i class="fa fa-bars"></i></div>
     </div>
 </header>
 
@@ -522,133 +545,77 @@
             <div class="modal-tab-item" onclick="switchTab('reg')">注册</div>
         </div>
         <div class="modal-panel active" id="loginPanel">
-            <div class="form-group">
-                <label>账号</label>
-                <input type="text" id="loginUsername" placeholder="手机号/学号">
-            </div>
-            <div class="form-group">
-                <label>密码</label>
-                <input type="password" id="loginPassword" placeholder="请输入密码">
-            </div>
+            <div class="form-group"><label>账号</label><input type="text" id="loginUsername" placeholder="手机号/学号"></div>
+            <div class="form-group"><label>密码</label><input type="password" id="loginPassword" placeholder="请输入密码"></div>
             <button class="btn" onclick="login()">登录</button>
         </div>
         <div class="modal-panel" id="regPanel">
-            <div class="form-group">
-                <label>手机号</label>
-                <input type="text" id="regPhone" placeholder="请输入手机号">
-            </div>
-            <div class="form-group">
-                <label>密码</label>
-                <input type="password" id="regPwd" placeholder="设置密码">
-            </div>
-            <div class="form-group">
-                <label>确认密码</label>
-                <input type="password" id="regConfirm" placeholder="确认密码">
-            </div>
+            <div class="form-group"><label>手机号</label><input type="text" id="regPhone" placeholder="请输入手机号"></div>
+            <div class="form-group"><label>密码</label><input type="password" id="regPwd" placeholder="设置密码"></div>
+            <div class="form-group"><label>确认密码</label><input type="password" id="regConfirm" placeholder="确认密码"></div>
             <button class="btn" onclick="register()">注册</button>
         </div>
     </div>
 </div>
 
-<!-- 轮播 -->
+<!-- 轮播区 -->
 <section class="banner-slider">
     <div class="banner-slide active" style="background-image: url('图片/banner1.jpg')">
-        <div class="banner-content">
-            <h1 class="banner-title">云先生-师范生助力乡村中小学道德与法治</h1>
-            <p class="banner-subtitle">专注乡村思政教育，助力青少年健康成长，传承红色基因，培育时代新人</p>
-            <a href="#course" class="btn banner-btn">立即学习</a>
-        </div>
+        <div class="banner-content"><h1 class="banner-title">云先生-师范生助力乡村中小学道德与法治</h1><p class="banner-subtitle">师范生在线支教 · 红色基因云端传承</p><a href="#course" class="btn banner-btn">立即学习</a></div>
     </div>
     <div class="banner-slide" style="background-image: url('图片/banner2.jpg')">
-        <div class="banner-content">
-            <h1 class="banner-title">大手牵小手</h1>
-            <p class="banner-subtitle">师范生在线支教，补齐乡村思政教育师资短板</p>
-            <a href="#course" class="btn banner-btn">开始学习</a>
-        </div>
+        <div class="banner-content"><h1 class="banner-title">大手牵小手</h1><p class="banner-subtitle">师范生补齐乡村思政师资短板</p><a href="#course" class="btn banner-btn">开始学习</a></div>
     </div>
     <div class="banner-slide" style="background-image: url('图片/banner3.jpg')">
-        <div class="banner-content">
-            <h1 class="banner-title">云端育新人</h1>
-            <p class="banner-subtitle">互联网+思政教育，让红色种子在乡村落地生根</p>
-            <a href="#course" class="btn banner-btn">进入课堂</a>
-        </div>
+        <div class="banner-content"><h1 class="banner-title">云端育新人</h1><p class="banner-subtitle">互联网+思政，红色种子落地生根</p><a href="#course" class="btn banner-btn">进入课堂</a></div>
     </div>
     <div class="banner-slide" style="background-image: url('图片/banner4.jpg')">
-        <div class="banner-content">
-            <h1 class="banner-title">红色传承</h1>
-            <p class="banner-subtitle">铸魂育人，立德树人，助力乡村教育全面振兴</p>
-            <a href="#course" class="btn banner-btn">学习课程</a>
+        <div class="banner-content"><h1 class="banner-title">红色传承 · 铸魂育人</h1><p class="banner-subtitle">助力乡村教育全面振兴</p><a href="#course" class="btn banner-btn">学习课程</a></div>
+    </div>
+</section>
+
+<!-- ========= 平台介绍区域：左边简要文字+三个弹窗按钮，右边图片 ========= -->
+<section class="platform-section">
+    <div class="container">
+        <div class="platform-wrapper">
+            <div class="platform-left">
+                <h2>平台介绍</h2>
+                <div class="intro-text">
+                    <h4>平台介绍</h4>
+                    <p>       “云先生”思政教育网络平台秉承以人为本、全方位育人的理念，以公益、双赢、服务乡村为宗旨。平台旨在根据当下乡村中小学思政课理论教学的现状与需求、结合在校思政专业师范生的各方面条件，进行“大手”牵“小手”的思政教学。一方面，为广大乡村中小学提供高质量、人性化的思政教育服务；另一方面，为在校思政专业师范生提供平台，夯实教学基本功。平台最终以构建集思政教育、思政体验于一体的高品质新型乡村思政教育模式，从而实现新时代高校思政教育人才助推乡村思政教育的良性循环。</p>
+
+                    <h4>云先生服务定位</h4>
+                    <p>        基于项目提出的背景以及前期调研分析，“云先生”——师范生助力乡村思政教育网络平台的使用对象为乡村学校和师范类院校的师范生。所以“云先生”平台的服务定位应以两者的实际需要为基础，平台对需求的精准定位是平台服务开展的起点。</p>
+                    <p>    “云先生”平台设置目标时从支持网络增强、认知转变、能力提升三个维度来进行综合考量，遵循smart原则（Specific，Measurable，Attainable，Relevant，Time-bound）。“百年大计，教育为本。教育大计，教师为本”。教育承载着国家与民族的希望，而思想政治教育更是实现中华民族伟大复兴中国梦的有力保障，做好思想政治教育工作可谓利在当代，功在千秋。“云先生”平台顺应时代发展要求，采取远程线上思政课教学，其服务目标就是实现师范生有效助力乡村思政教育，积极性应国家加强思想政治教育的号召，解决乡村思想政治教育专业教师匮乏的现实问题。</p>
+                    <span id="anchorPoint"></span>
+                </div>
+                <div class="btn-group-vertical">
+                    <button class="info-btn" onclick="openModalInfo('team')"><i class="fa fa-users"></i> 团队介绍</button>
+                    <button class="info-btn" onclick="openModalInfo('activities')"><i class="fa fa-calendar-check-o"></i> 支教活动纪实</button>
+                    <button class="info-btn" onclick="openModalInfo('xinzhi')"><i class="fa fa-graduation-cap"></i> 忻师支教历程</button>
+                </div>
+            </div>
+            <div class="platform-right">
+                <img src="图片/平台介绍.jpg" alt="平台介绍图片">
+            </div>
         </div>
     </div>
 </section>
 
-<!-- 平台介绍板块 - 完整内容 -->
-<section class="platform-intro">
+<!-- 核心功能模块 -->
+<section class="core-modules">
     <div class="container">
-        <div class="intro-wrapper">
-            <div class="intro-text">
-                <h2 class="intro-title">平台介绍</h2>
-                <div class="intro-content" id="introContent">
-                    <h4>平台介绍</h4>
-                    <p>“云先生”思政教育网络平台秉承以人为本、全方位育人的理念，以公益、双赢、服务乡村为宗旨。平台旨在根据当下乡村中小学思政课理论教学的现状与需求、结合在校思政专业师范生的各方面条件，进行“大手”牵“小手”的思政教学。一方面，为广大乡村中小学提供高质量、人性化的思政教育服务；另一方面，为在校思政专业师范生提供平台，夯实教学基本功。平台最终以构建集思政教育、思政体验于一体的高品质新型乡村思政教育模式，从而实现新时代高校思政教育人才助推乡村思政教育的良性循环。</p>
-
-                    <h4>云先生服务定位</h4>
-                    <p>基于项目提出的背景以及前期调研分析，“云先生”——师范生助力乡村思政教育网络平台的使用对象为乡村学校和师范类院校的师范生。所以“云先生”平台的服务定位应以两者的实际需要为基础，平台对需求的精准定位是平台服务开展的起点。</p>
-                    <p>平台通过实地调研与相关文献的调查分析，明确开展乡村思政课在国家层面、社会层面、公民个人层面的现实意义，实现乡村思政课与国家政策号召、社会各界要求、公民个人发展需要的有效对接，并依据需求的内容设计相应的乡村思政课服务项目。深入接触乡村学校师生，对其思政课的具体诉求进行及时地沟通与把握，科学的帮助平台快速定位更为具体的服务需求，进而开展极具针对性的乡村思政课专业化服务。</p>
-                    <p>根据服务需求，平台要确立相应的服务目标。“云先生”平台设置目标时从支持网络增强、认知转变、能力提升三个维度来进行综合考量，遵循smart原则（Specific，Measurable，Attainable，Relevant，Time-bound）。“百年大计，教育为本。教育大计，教师为本”。教育承载着国家与民族的希望，而思想政治教育更是实现中华民族伟大复兴中国梦的有力保障，做好思想政治教育工作可谓利在当代，功在千秋。“云先生”平台顺应时代发展要求，采取远程线上思政课教学，其服务目标就是实现师范生有效助力乡村思政教育，积极性应国家加强思想政治教育的号召，解决乡村思想政治教育专业教师匮乏的现实问题。</p>
-                    <span id="anchorPoint"></span>
-
-                    <h4>云先生团队介绍</h4>
-                    <p><strong>（一）团队介绍</strong></p>
-                    <p>云先生团队成员横跨六个专业，彼此分工明确，具有跨专业、跨学科的特点，具有专业覆盖全面、专业知识互补的优势，为项目的顺利推进提供了强有力的支撑。团队致力于改变乡村思政教师匮乏的现状，主要目标是不断创新乡村思政教育模式，实现师范生夯实教学基本功与乡村思政教育的互利共赢。在“互联网+”的契机下， 将思政专业师范生与缺乏思政教师等资源的乡村中小学有机结合起来，构建基于互联网的乡村思政教育网络平台。</p>
-
-                    <p><strong>（二）成员组成</strong></p>
-                    <p>项目团队负责人：范乐乐：全面负责项目总体策划、内外沟通协调与整体统筹工作。责任心强、实践经验丰富，具备优秀的组织协调与沟通能力，思维敏捷、细致严谨，善于捕捉关键细节，为项目方向把控与团队协作提供核心支撑。</p>
-                    <p>卜丹：主要负责项目资料收集、调研数据整理与调查结果分析。耐心细致，具备较强的学术研究能力与逻辑思辨能力，能够透过现象把握本质，曾多次在校级社会实践调查报告评选中获奖，为项目提供扎实的理论与数据支撑。</p>
-                    <p>兰婧旖：具备优秀的观察能力、分析能力与理解能力，对项目发展拥有独立思考与独到见解。主要承担项目策划书撰写、项目整体框架规划与内容架构设计，保障项目体系完整、逻辑清晰。</p>
-                    <p>王文婷：擅长小规模精准市场调研与数据统计分析，担任项目与乡村中小学校的沟通联络工作，及时反馈一线需求与意见。为项目提供真实、动态的市场环境信息与落地可行性依据，是连接项目与服务对象的重要桥梁。</p>
-                    <p>刘梦凡：思维敏捷、逻辑性强、严谨细致，深度参与平台建设工作，负责平台界面逻辑梳理、交互流程优化、功能模块呈现设计，熟悉APP研发流程，助力平台结构更清晰、使用更便捷。</p>
-                    <p>雷雅茹：拥有出色的活动策划能力、创新思维与亲和力，沟通协调能力突出。面对突发问题冷静理性、分析到位，主要负责项目活动方案策划、内容优化与可行性分析，提升项目创新性与落地性。</p>
-                    <p>刘宇冉：负责项目整体文案撰写、宣传材料创作与品牌内容策划。文字功底扎实、创意构思能力强，能够将项目理念转化为清晰生动、富有感染力的表达，有效提升项目对外传播力与认可度。</p>
-                    <p>张铃欣：擅长在小范围内进行市场调研，并进行数据分析。在本项目中，起到了沟通乡村中小学校，并做出及时反馈的桥梁作用。在项目的创立过程中，提供了市场环境及其变化等重要信息。</p>
-                    <p>刘伟：擅长思政类实时资讯检索，能筛选适配乡村中小学的内容。在本项目中负责实时热点搜集：挖掘思政相关热点、政策资讯，辅助整理为教学素材，补充平台时效资源储备。</p>
-                    <p>王思辰：具备出色的活动策划能力和创新思想，还有较强的协调能力，擅长与他人沟通和有较强的亲和力。有耐心，能够对突发的问题冷静分析，在该项目中承担着策划分析的责任。</p>
-                    <p>陈明：熟悉青少年认知特点与学习规律，专注教学内容设计、课程打磨与形式优化。能够结合乡村学生实际调整教学方案，提升线上课程适配性、趣味性与教学效果。</p>
-                    <p>王雅琴：负责项目互联网平台的整体搭建与技术开发，包括网站架构搭建、功能模块实现、公众号运营维护等，保障平台服务功能稳定运行、符合项目使用需求与预期。</p>
-                    <p>王浩捷：负责项目财务核算、成本控制与盈亏分析，具备专业财务知识与实操技能，为项目经费管理、预算执行与可持续运营提供专业保障。</p>
-                    <p>马碧沄：美术功底扎实，负责项目品牌核心视觉体系设计，包括项目LOGO、封面、主视觉形象等，打造辨识度高、风格统一的项目品牌符号。</p>
-                    <p>刘程程：美术设计能力突出，负责项目文创产品、宣传物料及延伸视觉内容设计，丰富项目视觉表达，提升项目文化内涵与传播吸引力。</p>
-
-                    <p><strong>（三）团队口号</strong></p>
-                    <p>共建共赢，以自我迎接超我</p>
-                    <p>共享共担，以小我完成大我</p>
-
-                    <p><strong>（四）团队目标</strong></p>
-                    <p>在实践中认识自己，在学习中充实自己。</p>
-                    <p>发挥师范生团队力量，助推乡村思政教育。</p>
-
-                    <h4>相关活动开展</h4>
-                    <p>本项目孕育地区为山西省忻州市，所处高校为忻州师范学院。基于该高校的相关活动的基础上，更好的为本项目的实施奠定了基础。</p>
-                    <p>1. 忻州师范学院“大手拉小手，双减助双赢”课后志愿服务活动。</p>
-                    <p>此次活动旨在结合忻州师范学院的师范特色，主动对接忻州市基础教育发展需求，助力小学生培养学习兴趣、开阔思路视野、增强实践能力。共有130余名志愿者参加该活动。为了能更好的配合各科教师教学，志愿者们走进班级听课，随时记录课堂重要知识内容，及时关注学生听课状态，时刻为学生答疑解惑巩固知识点，提高学习效率。课后，志愿者们积极与任课教师沟通交流每位学生的具体情况，对个别学生进行针对性辅导，帮助学生查漏补缺，补足学习上的短板。</p>
-                    <p>2. 忻州师范学院“一起云支教，奋进新征程”系列活动。</p>
-                    <p>该活动共有1346人报名，经各系（院）选报、校团委青年志愿者服务中心筛选，最终510名学生入选为志愿者参加云支教活动。其中283名志愿者服从学校安排与忻州市七一路小学283名一至六年级小学生对接成功，另外227名志愿者选择就近就便自主对接学生，开展“线上＋线下”的云支教活动，开启“云”上学习之旅。此次活动开展时间为2023年1月9日—2023年2月4日（共计27天），活动内容有“一起快乐来阅读”、“一起健康做运动”、“一起来上云课堂”、“寻访伟大成就 争当时代新人”、“一起来过个春节”5个板块。</p>
-                    <p>3. 忻州师范学院“一起云支教，共同迎冬奥”主题实践活动。</p>
-                    <p>本次活动共有650名学生报名，经过宣传动员、系部推荐、层层选拔后来自20个系（院）374名志愿者成功入选。374名学生中，有138名学生选择自主招募的方式与家乡所在地中小学生匹配对接；其余236名学生服从学校安排与忻州市七一路小学6个年级18个班237 名学生进行对接，开展“线上+线下”互动的云支教活动，通过网络架起了云课堂。此次活动开展时间为2022年1月18日—2022年2月15日（共计29天），活动内容有“一起云运动”、“一起云阅读”、“一起看冬奥”、“一起过个奥运年”4个板块。志愿者引导并带领配对学生开展各种形式的运动，并用图文形式记录运动点滴，见证每日进步。</p>
-                    <p>4. 忻州师范学院春雨读书社志愿支教服务</p>
-                    <p>作为忻州师范学院的五星级社团，该社团每周都会组织社员前往忻州市上社小学进行讲课为主，活动为辅的志愿服务，为条件相对较差的学校送去爱与温暖。同时开展了线上线下多校支教、斩获多项荣誉证书、获得主流媒体报道，并与多所高校志愿服务队达成交流合作。</p>
-                    <p>5. 忻州师范学院爱心社远程支教活动。</p>
-                    <p>该活动借classin软件，大学生志愿者与中小学通过互联网的形式参加线上活动。在课程进行中，孩子们天真无邪的眼神，灿烂的笑容，学习时展现出来的可爱面貌，都让每一位志愿者心中燃起了对美好生命的渴望。用课程点亮他们的未来，用支教为他们的人生保驾护航。</p>
-
-                    <h4>忻州师范学院支教介绍</h4>
-                    <p>作为山西省师范类院校，忻州师范学院主要培养师范类人才，师范资源丰富。学校自 1997 年起，创造性开展扶贫顶岗实习支教工作，构建了高师院校、地方政府、中小学校“三位一体”协同育人机制。27年来累计派出60000余名大学生，深入山西、河北、新疆、海南等地23个县(市、区)700余所农村中小学开展实习文教工作，走出了一条符合实际、富有成效的“扶贫和扶志扶智相结合”“阻断贫困代际传递”的“忻师”脱贫攻坚之路,开创了实践育人新模式。同时不断将支教点拓展至全国各地，主动对接国家“一带一路”建设。顶岗实习支教已经成为了忻州师范学院的办学特色，形成了学院“万人下乡村，千人出山西，百人走丝路”的实习支教工作新格局。</p>
-                    <p>随着时代变迁、学校发展，忻州师范学院也在多年顶岗实习支教经验的基础上不断探索、创新方式方法，推出“云文教”“大手拉小手，双减助双赢”等多种方式，从各个方面丰富支教形式与内容。就忻州师范学院而言，每年顶岗实习支教的思政专业的师范生都可以成为助力乡村思政教育中坚力量，能够满足实施平台的人才条件，与此同时本团队提出的师范生助力乡村思政教育网络平台与学校的助力乡村教育的初衷相一致，已经得到了学校各方支持。所以，从忻州师范学院的思政专业的支教生入手，利用本团队的相关平台资源，能够更好的为乡村振兴思政教育。</p>
-                </div>
-                <button class="more-btn" id="moreBtn"><i class="fa fa-plus"></i> 查看更多</button>
-            </div>
-            <div class="intro-image">
-                <img src="图片/平台介绍.jpg" alt="平台介绍图片">
-            </div>
+        <div class="section-header">
+            <h2>平台核心功能矩阵</h2>
+            <p>六大模块 · 精准服务乡村思政教育</p>
+        </div>
+        <div class="modules-grid">
+            <div class="module-card"><div class="module-img" style="background-image: url('图片/思政文库.jpg');"><div class="tag">权威时政</div></div><div class="module-content"><h3><i class="fa fa-book"></i> 思政文库</h3><div class="module-highlight">📖 时政热点 · 政策解读 · 理论文章</div><div class="module-description">汇聚中央最新精神、权威评论员文章、乡村思政教学案例，打造可检索、可下载的思政数字资源库。</div><div class="module-stats"><span>📚 持续更新</span><span>⭐ 每日时评</span></div><a href="news.html" class="module-link">进入文库 <i class="fa fa-arrow-right"></i></a></div></div>
+            <div class="module-card"><div class="module-img" style="background-image: url('图片/思政乐园.jpg');"><div class="tag">红色经典</div></div><div class="module-content"><h3><i class="fa fa-heart"></i> 思政乐园</h3><div class="module-highlight">📖 美德故事 · 励志书籍 · 红色家书</div><div class="module-description">以生动故事传递核心价值观，提供适合乡村青少年的电子读物、有声书，让思政学习更有温度。</div><div class="module-stats"><span>🎧 有声读物</span><span>📖 红色绘本</span></div><a href="bookstore.html" class="module-link">走进乐园 <i class="fa fa-arrow-right"></i></a></div></div>
+            <div class="module-card"><div class="module-img" style="background-image: url('图片/录播课室.jpg');"><div class="tag">名师课程</div></div><div class="module-content"><h3><i class="fa fa-video-camera"></i> 录播课室</h3><div class="module-highlight">🎬 红色影片 · 动画微课 · 名师示范课</div><div class="module-description">精品思政微课、党史故事动画，支持随时点播，适配乡村网络环境，让优质资源触手可及。</div><div class="module-stats"><span>📹 精品视频库</span><span>🏆 金课资源</span></div><a href="video.html" class="module-link">观看课程 <i class="fa fa-arrow-right"></i></a></div></div>
+            <div class="module-card"><div class="module-img" style="background-image: url('图片/直播课室.jpg');"><div class="tag">互动课堂</div></div><div class="module-content"><h3><i class="fa fa-desktop"></i> 直播课室</h3><div class="module-highlight">🎥 乡村思政双师课堂 · 名师面对面 · 连麦答疑</div><div class="module-description">师范生直播授课+乡村教师辅助，每周“时政小讲堂”，支持回放与实时互动，打破地域限制。</div><div class="module-stats"><span>📡 每周直播</span><span>👥 万人参与</span></div><a href="download.html" class="module-link">进入直播 <i class="fa fa-arrow-right"></i></a></div></div>
+            <div class="module-card"><div class="module-img" style="background-image: url('图片/志愿者匹配.jpg');"><div class="tag">精准对接</div></div><div class="module-content"><h3><i class="fa fa-handshake-o"></i> 志愿者匹配</h3><div class="module-highlight">🤝 师范生精准对接 · 1对1伴学 · 在线支教</div><div class="module-description">根据乡村学校需求与师范生专业、特长智能匹配，建立长期支教帮扶关系，让爱精准抵达。</div><div class="module-stats"><span>🎓 志愿者库</span><span>🏫 乡村学校对接</span></div><a href="volunteer.html" class="module-link">申请匹配 <i class="fa fa-arrow-right"></i></a></div></div>
+            <div class="module-card"><div class="module-img" style="background-image: url('图片/留言板.jpg');"><div class="tag">互动社区</div></div><div class="module-content"><h3><i class="fa fa-comments-o"></i> 留言板</h3><div class="module-highlight">💬 学习心得 · 成长感悟 · 答疑互助</div><div class="module-description">师生交流思政学习感悟，展示优秀作业，形成互助共进的乡村思政学习共同体。</div><div class="module-stats"><span>📝 交流社区</span><span>❤️ 师生互动</span></div><a href="forum.html" class="module-link">参与讨论 <i class="fa fa-arrow-right"></i></a></div></div>
         </div>
     </div>
 </section>
@@ -657,104 +624,14 @@
 <section class="course-learning" id="course">
     <div class="container">
         <h2 class="course-title">思政课程学习</h2>
-        <p class="course-desc">本栏目系统梳理中国特色社会主义理论体系从思想源头到最新成果的完整脉络，帮助学生系统掌握党的创新理论，坚定理想信念，厚植爱国情怀</p>
+        <p class="course-desc">系统梳理中国特色社会主义理论体系，坚定理想信念，厚植爱国情怀</p>
         <div class="course-grid">
-            <a class="course-card" href="思政课程1.html">
-                <img src="图片/思政课程1.jpg">
-                <div class="course-info">
-                    <h3>习近平新时代中国特色社会主义思想</h3>
-                    <p>当代中国马克思主义、二十一世纪马克思主义</p>
-                </div>
-            </a>
-            <a class="course-card" href="思政课程2.html">
-                <img src="图片/思政课程2.jpg">
-                <div class="course-info">
-                    <h3>科学发展观</h3>
-                    <p>以人为本、全面协调可持续的科学发展理论</p>
-                </div>
-            </a>
-            <a class="course-card" href="思政课程3.html">
-                <img src="图片/思政课程3.jpg">
-                <div class="course-info">
-                    <h3>“三个代表”重要思想</h3>
-                    <p>代表先进生产力、先进文化、人民根本利益</p>
-                </div>
-            </a>
-            <a class="course-card" href="思政课程4.html">
-                <img src="图片/思政课程4.jpg">
-                <div class="course-info">
-                    <h3>邓小平理论</h3>
-                    <p>中国特色社会主义理论体系的开篇之作</p>
-                </div>
-            </a>
-            <a class="course-card" href="思政课程5.html">
-                <img src="图片/思政课程5.jpg">
-                <div class="course-info">
-                    <h3>毛泽东思想</h3>
-                    <p>马克思列宁主义在中国的运用和发展</p>
-                </div>
-            </a>
-            <a class="course-card" href="思政课程6.html">
-                <img src="图片/思政课程6.jpg">
-                <div class="course-info">
-                    <h3>马克思列宁主义</h3>
-                    <p>无产阶级革命和建设的科学理论基础</p>
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- 核心功能 -->
-<section class="features">
-    <div class="container">
-        <div class="section-title">
-            <h2>平台核心功能</h2>
-            <p class="course-desc">一站式思政教育学习平台，满足乡村师生多样化学习需求</p>
-        </div>
-        <div class="features-grid">
-	    <a class="feature-item" href="volunteer.html">
-                <img src="图片/志愿者匹配.jpg">
-                <div class="feature-mask">
-                    <h3>志愿者匹配</h3>
-                    <p>师范生精准对接，助力乡村思政教育</p>
-                </div>
-            </a>
-            <a class="feature-item" href="news.html">
-                <img src="图片/思政文库.jpg">
-                <div class="feature-mask">
-                    <h3>思政文库</h3>
-                    <p>汇聚时政热点、政策解读、理论文章，权威全面</p>
-                </div>
-            </a>
-            <a class="feature-item" href="bookstore.html">
-                <img src="图片/思政乐园.jpg">
-                <div class="feature-mask">
-                    <h3>思政乐园</h3>
-                    <p>红色经典、美德故事、励志书籍，随时阅读</p>
-                </div>
-            </a>
-            <a class="feature-item" href="video.html">
-                <img src="图片/录播课室.jpg">
-                <div class="feature-mask">
-                    <h3>录播课室</h3>
-                    <p>名师课程、红色影片、动画微课，生动易懂</p>
-                </div>
-            </a>
-            <a class="feature-item" href="download.html">
-                <img src="图片/直播课室.jpg">
-                <div class="feature-mask">
-                    <h3>直播课室</h3>
-                    <p>实时互动教学，线上面对面，学习更高效</p>
-                </div>
-            </a>
-            <a class="feature-item" href="forum.html">
-                <img src="图片/留言板.jpg">
-                <div class="feature-mask">
-                    <h3>留言板</h3>
-                    <p>交流学习心得，分享成长感悟</p>
-                </div>
-            </a>
+            <a class="course-card" href="思政课程1.html"><img src="图片/思政课程1.jpg"><div class="course-info"><h3>习近平新时代中国特色社会主义思想</h3><p>当代中国马克思主义</p></div></a>
+            <a class="course-card" href="思政课程2.html"><img src="图片/思政课程2.jpg"><div class="course-info"><h3>科学发展观</h3><p>以人为本、全面协调可持续</p></div></a>
+            <a class="course-card" href="思政课程3.html"><img src="图片/思政课程3.jpg"><div class="course-info"><h3>“三个代表”重要思想</h3><p>代表先进生产力、先进文化</p></div></a>
+            <a class="course-card" href="思政课程4.html"><img src="图片/思政课程4.jpg"><div class="course-info"><h3>邓小平理论</h3><p>中国特色社会主义开篇之作</p></div></a>
+            <a class="course-card" href="思政课程5.html"><img src="图片/思政课程5.jpg"><div class="course-info"><h3>毛泽东思想</h3><p>马克思列宁主义中国化</p></div></a>
+            <a class="course-card" href="思政课程6.html"><img src="图片/思政课程6.jpg"><div class="course-info"><h3>马克思列宁主义</h3><p>无产阶级革命科学理论</p></div></a>
         </div>
     </div>
 </section>
@@ -763,7 +640,7 @@
 <footer class="footer">
     <div class="container">
         <div class="footer-top">
-            <div class="footer-col"><h4>关于我们</h4><ul><li><a href="#">平台介绍</a></li><li><a href="#">团队风采</a></li><li><a href="#">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>关于我们</h4><ul><li><span onclick="openModalInfo('team')">团队介绍</span></li><li><span onclick="openModalInfo('activities')">支教活动纪实</span></li><li><span onclick="openModalInfo('xinzhi')">忻师支教历程</span></li><li><a href="#">联系我们</a></li></ul></div>
             <div class="footer-col"><h4>学习资源</h4><ul><li><a href="#">时政资料库</a></li><li><a href="#">精品课程</a></li><li><a href="#">学习工具</a></li></ul></div>
             <div class="footer-col"><h4>法律声明</h4><ul><li><a href="#">隐私政策</a></li><li><a href="#">用户协议</a></li><li><a href="#">版权声明</a></li></ul></div>
             <div class="footer-col"><h4>联系方式</h4><ul><li><i class="fa fa-phone"></i> 0350-3339920</li><li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li><li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li></ul></div>
@@ -772,123 +649,86 @@
     </div>
 </footer>
 
+<!-- 纯文字弹窗容器 -->
+<div id="infoModal" class="info-modal">
+    <div class="info-modal-content">
+        <div class="info-modal-header">
+            <h3 id="modalTitle"><i class="fa fa-info-circle"></i> 详情</h3>
+            <button class="info-modal-close" onclick="closeInfoModal()">×</button>
+        </div>
+        <div class="info-modal-body" id="modalBody"></div>
+    </div>
+</div>
+
 <script>
-    function toggleNav() {
-        document.querySelector('.nav-menu').classList.toggle('active');
-    }
+    // 导航
+    function toggleNav() { document.querySelector('.nav-menu').classList.toggle('active'); }
     
+    // 轮播
     let slides = document.querySelectorAll('.banner-slide');
     let slideIndex = 0;
-    function runSlide() {
-        slides.forEach(i => i.classList.remove('active'));
-        slideIndex = (slideIndex + 1) % slides.length;
-        slides[slideIndex].classList.add('active');
-    }
+    function runSlide() { slides.forEach(i => i.classList.remove('active')); slideIndex = (slideIndex + 1) % slides.length; slides[slideIndex].classList.add('active'); }
     setInterval(runSlide, 4000);
     
+    // 登录
     const modalEl = document.getElementById('modal');
-    function openModal(type) {
-        modalEl.classList.add('active');
-        switchTab(type);
-    }
+    function openModal(type) { modalEl.classList.add('active'); switchTab(type); }
     function closeModal() { modalEl.classList.remove('active'); }
     function switchTab(t) {
         document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.modal-tab-item').forEach(i => i.classList.remove('active'));
-        if (t === 'login') {
-            document.getElementById('loginPanel').classList.add('active');
-            document.querySelectorAll('.modal-tab-item')[0].classList.add('active');
+        if (t === 'login') { document.getElementById('loginPanel').classList.add('active'); document.querySelectorAll('.modal-tab-item')[0].classList.add('active'); }
+        else { document.getElementById('regPanel').classList.add('active'); document.querySelectorAll('.modal-tab-item')[1].classList.add('active'); }
+    }
+    function login() { const u = document.getElementById('loginUsername').value.trim(), p = document.getElementById('loginPassword').value.trim(); if(!u||!p){alert("请输入账号和密码");return;} localStorage.setItem('isLogin','true'); localStorage.setItem('loginUser',u); alert('登录成功！'); closeModal(); updateLoginUI(); }
+    function register() { const phone = document.getElementById('regPhone').value.trim(), pwd = document.getElementById('regPwd').value, cfm = document.getElementById('regConfirm').value; if(!phone||!pwd){alert("请填写手机号和密码");return;} if(pwd!==cfm){alert("两次密码不一致");return;} alert('注册成功！请登录'); switchTab('login'); document.getElementById('loginUsername').value = phone; document.getElementById('loginPassword').value = ''; }
+    function checkLogin() { if(!localStorage.getItem('isLogin')){ alert('请先登录！'); openModal('login'); return false; } return true; }
+    function logout() { localStorage.removeItem('isLogin'); localStorage.removeItem('loginUser'); alert('已退出登录'); updateLoginUI(); }
+    function updateLoginUI() { const isLogin = localStorage.getItem('isLogin') === 'true'; const group = document.getElementById('loginGroup'); if(isLogin && group){ const user = localStorage.getItem('loginUser') || '用户'; group.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`; } else { group.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`; } }
+    window.addEventListener('load', updateLoginUI);
+    
+    // 完整内容（保留原所有文字）
+    const teamFull = `
+        <h4>云先生团队介绍</h4>
+        <p><strong>（一）团队介绍</strong><br>云先生团队成员横跨六个专业，彼此分工明确，具有跨专业、跨学科的特点，专业覆盖全面、专业知识互补，为项目推进提供强有力支撑。团队致力于改变乡村思政教师匮乏的现状，主要目标是不断创新乡村思政教育模式，实现师范生夯实教学基本功与乡村思政教育的互利共赢。在“互联网+”的契机下，将思政专业师范生与缺乏思政教师等资源的乡村中小学有机结合起来，构建基于互联网的乡村思政教育网络平台。</p>
+        <p><strong>（二）成员组成</strong><br>项目团队负责人：范乐乐：全面负责项目总体策划、内外沟通协调与整体统筹工作。责任心强、实践经验丰富，具备优秀的组织协调与沟通能力，思维敏捷、细致严谨，善于捕捉关键细节，为项目方向把控与团队协作提供核心支撑。<br>卜丹：主要负责项目资料收集、调研数据整理与调查结果分析。耐心细致，具备较强的学术研究能力与逻辑思辨能力，能够透过现象把握本质，曾多次在校级社会实践调查报告评选中获奖，为项目提供扎实的理论与数据支撑。<br>兰婧旖：具备优秀的观察能力、分析能力与理解能力，对项目发展拥有独立思考与独到见解。主要承担项目策划书撰写、项目整体框架规划与内容架构设计，保障项目体系完整、逻辑清晰。<br>王文婷：擅长小规模精准市场调研与数据统计分析，担任项目与乡村中小学校的沟通联络工作，及时反馈一线需求与意见。为项目提供真实、动态的市场环境信息与落地可行性依据，是连接项目与服务对象的重要桥梁。<br>刘梦凡：思维敏捷、逻辑性强、严谨细致，深度参与平台建设工作，负责平台界面逻辑梳理、交互流程优化、功能模块呈现设计，熟悉APP研发流程，助力平台结构更清晰、使用更便捷。<br>雷雅茹：拥有出色的活动策划能力、创新思维与亲和力，沟通协调能力突出。面对突发问题冷静理性、分析到位，主要负责项目活动方案策划、内容优化与可行性分析，提升项目创新性与落地性。<br>刘宇冉：负责项目整体文案撰写、宣传材料创作与品牌内容策划。文字功底扎实、创意构思能力强，能够将项目理念转化为清晰生动、富有感染力的表达，有效提升项目对外传播力与认可度。<br>张铃欣：擅长在小范围内进行市场调研，并进行数据分析。在本项目中，起到了沟通乡村中小学校，并做出及时反馈的桥梁作用。在项目的创立过程中，提供了市场环境及其变化等重要信息。<br>刘伟：擅长思政类实时资讯检索，能筛选适配乡村中小学的内容。在本项目中负责实时热点搜集：挖掘思政相关热点、政策资讯，辅助整理为教学素材，补充平台时效资源储备。<br>王思辰：具备出色的活动策划能力和创新思想，还有较强的协调能力，擅长与他人沟通和有较强的亲和力。有耐心，能够对突发的问题冷静分析，在该项目中承担着策划分析的责任。<br>陈明：熟悉青少年认知特点与学习规律，专注教学内容设计、课程打磨与形式优化。能够结合乡村学生实际调整教学方案，提升线上课程适配性、趣味性与教学效果。<br>王雅琴：负责项目互联网平台的整体搭建与技术开发，包括网站架构搭建、功能模块实现、公众号运营维护等，保障平台服务功能稳定运行、符合项目使用需求与预期。<br>王浩捷：负责项目财务核算、成本控制与盈亏分析，具备专业财务知识与实操技能，为项目经费管理、预算执行与可持续运营提供专业保障。<br>马碧沄：美术功底扎实，负责项目品牌核心视觉体系设计，包括项目LOGO、封面、主视觉形象等，打造辨识度高、风格统一的项目品牌符号。<br>刘程程：美术设计能力突出，负责项目文创产品、宣传物料及延伸视觉内容设计，丰富项目视觉表达，提升项目文化内涵与传播吸引力。</p>
+        <p><strong>（三）团队口号</strong><br>共建共赢，以自我迎接超我<br>共享共担，以小我完成大我</p>
+        <p><strong>（四）团队目标</strong><br>在实践中认识自己，在学习中充实自己。<br>发挥师范生团队力量，助推乡村思政教育。</p>
+    `;
+    const activitiesFull = `
+        <h4>相关活动开展</h4>
+        <p>本项目孕育地区为山西省忻州市，所处高校为忻州师范学院。基于该高校的相关活动的基础上，更好的为本项目的实施奠定了基础。</p>
+        <p><strong>1. 忻州师范学院“大手拉小手，双减助双赢”课后志愿服务活动：</strong>此次活动旨在结合忻州师范学院的师范特色，主动对接忻州市基础教育发展需求，助力小学生培养学习兴趣、开阔思路视野、增强实践能力。共有130余名志愿者参加该活动。为了能更好的配合各科教师教学，志愿者们走进班级听课，随时记录课堂重要知识内容，及时关注学生听课状态，时刻为学生答疑解惑巩固知识点，提高学习效率。课后，志愿者们积极与任课教师沟通交流每位学生的具体情况，对个别学生进行针对性辅导，帮助学生查漏补缺，补足学习上的短板。</p>
+        <p><strong>2. 忻州师范学院“一起云支教，奋进新征程”系列活动：</strong>该活动共有1346人报名，经各系（院）选报、校团委青年志愿者服务中心筛选，最终510名学生入选为志愿者参加云支教活动。其中283名志愿者服从学校安排与忻州市七一路小学283名一至六年级小学生对接成功，另外227名志愿者选择就近就便自主对接学生，开展“线上＋线下”的云支教活动，开启“云”上学习之旅。此次活动开展时间为2023年1月9日—2023年2月4日（共计27天），活动内容有“一起快乐来阅读”、“一起健康做运动”、“一起来上云课堂”、“寻访伟大成就 争当时代新人”、“一起来过个春节”5个板块。</p>
+        <p><strong>3. 忻州师范学院“一起云支教，共同迎冬奥”主题实践活动：</strong>本次活动共有650名学生报名，经过宣传动员、系部推荐、层层选拔后来自20个系（院）374名志愿者成功入选。374名学生中，有138名学生选择自主招募的方式与家乡所在地中小学生匹配对接；其余236名学生服从学校安排与忻州市七一路小学6个年级18个班237 名学生进行对接，开展“线上+线下”互动的云支教活动，通过网络架起了云课堂。此次活动开展时间为2022年1月18日—2022年2月15日（共计29天），活动内容有“一起云运动”、“一起云阅读”、“一起看冬奥”、“一起过个奥运年”4个板块。志愿者引导并带领配对学生开展各种形式的运动，并用图文形式记录运动点滴，见证每日进步。</p>
+        <p><strong>4. 忻州师范学院春雨读书社志愿支教服务：</strong>作为忻州师范学院的五星级社团，该社团每周都会组织社员前往忻州市上社小学进行讲课为主，活动为辅的志愿服务，为条件相对较差的学校送去爱与温暖。同时开展了线上线下多校支教、斩获多项荣誉证书、获得主流媒体报道，并与多所高校志愿服务队达成交流合作。</p>
+        <p><strong>5. 忻州师范学院爱心社远程支教活动：</strong>该活动借classin软件，大学生志愿者与中小学通过互联网的形式参加线上活动。在课程进行中，孩子们天真无邪的眼神，灿烂的笑容，学习时展现出来的可爱面貌，都让每一位志愿者心中燃起了对美好生命的渴望。用课程点亮他们的未来，用支教为他们的人生保驾护航。</p>
+    `;
+    const xinzhiFull = `
+        <h4>忻州师范学院支教介绍</h4>
+        <p>作为山西省师范类院校，忻州师范学院主要培养师范类人才，师范资源丰富。学校自1997年起，创造性开展扶贫顶岗实习支教工作，构建了高师院校、地方政府、中小学校“三位一体”协同育人机制。27年来累计派出60000余名大学生，深入山西、河北、新疆、海南等地23个县(市、区)700余所农村中小学开展实习文教工作，走出了一条符合实际、富有成效的“扶贫和扶志扶智相结合”“阻断贫困代际传递”的“忻师”脱贫攻坚之路，开创了实践育人新模式。同时不断将支教点拓展至全国各地，主动对接国家“一带一路”建设。顶岗实习支教已经成为了忻州师范学院的办学特色，形成了学院“万人下乡村，千人出山西，百人走丝路”的实习支教工作新格局。</p>
+        <p>随着时代变迁、学校发展，忻州师范学院也在多年顶岗实习支教经验的基础上不断探索、创新方式方法，推出“云文教”“大手拉小手，双减助双赢”等多种方式，从各个方面丰富支教形式与内容。就忻州师范学院而言，每年顶岗实习支教的思政专业的师范生都可以成为助力乡村思政教育中坚力量，能够满足实施平台的人才条件，与此同时本团队提出的师范生助力乡村思政教育网络平台与学校的助力乡村教育的初衷相一致，已经得到了学校各方支持。所以，从忻州师范学院的思政专业的支教生入手，利用本团队的相关平台资源，能够更好的为乡村振兴思政教育。</p>
+    `;
+    
+    function openModalInfo(type) {
+        const modal = document.getElementById('infoModal');
+        const titleEl = document.getElementById('modalTitle');
+        const bodyEl = document.getElementById('modalBody');
+        if (type === 'team') {
+            titleEl.innerHTML = '<i class="fa fa-users"></i> 团队介绍 · 云先生风采';
+            bodyEl.innerHTML = teamFull;
+        } else if (type === 'activities') {
+            titleEl.innerHTML = '<i class="fa fa-calendar-check-o"></i> 支教活动纪实 · 爱心足迹';
+            bodyEl.innerHTML = activitiesFull;
         } else {
-            document.getElementById('regPanel').classList.add('active');
-            document.querySelectorAll('.modal-tab-item')[1].classList.add('active');
+            titleEl.innerHTML = '<i class="fa fa-graduation-cap"></i> 忻州师范学院支教历程';
+            bodyEl.innerHTML = xinzhiFull;
         }
+        modal.classList.add('active');
     }
     
-    function login() {
-        const username = document.getElementById('loginUsername').value.trim();
-        const pwd = document.getElementById('loginPassword').value.trim();
-        if (!username || !pwd) { alert("请输入账号和密码"); return; }
-        localStorage.setItem('isLogin', 'true');
-        localStorage.setItem('loginUser', username);
-        alert('登录成功！');
-        closeModal();
-        updateLoginUI();
-    }
-    
-    function register() {
-        const phone = document.getElementById('regPhone').value.trim();
-        const pwd = document.getElementById('regPwd').value;
-        const confirm = document.getElementById('regConfirm').value;
-        if (!phone || !pwd) { alert("请填写手机号和密码"); return; }
-        if (pwd !== confirm) { alert("两次密码不一致"); return; }
-        alert('注册成功！请登录');
-        switchTab('login');
-        document.getElementById('loginUsername').value = phone;
-        document.getElementById('loginPassword').value = '';
-    }
-    
-    function checkLogin() {
-        if (!localStorage.getItem('isLogin')) {
-            alert('请先登录后访问“我的”页面！');
-            openModal('login');
-            return false;
-        }
-        return true;
-    }
-    
-    function logout() {
-        localStorage.removeItem('isLogin');
-        localStorage.removeItem('loginUser');
-        alert('已退出登录');
-        updateLoginUI();
-    }
-    
-    function updateLoginUI() {
-        const isLogin = localStorage.getItem('isLogin') === 'true';
-        const loginGroup = document.getElementById('loginGroup');
-        if (isLogin && loginGroup) {
-            const user = localStorage.getItem('loginUser') || '用户';
-            loginGroup.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`;
-        } else {
-            loginGroup.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`;
-        }
-    }
-    
-    const introContent = document.getElementById('introContent');
-    const moreBtn = document.getElementById('moreBtn');
-    const anchorPoint = document.getElementById('anchorPoint');
-    let isExpanded = false;
-    
-    window.addEventListener('load', function() {
-        if (anchorPoint) {
-            const anchorBottom = anchorPoint.getBoundingClientRect().bottom;
-            const contentTop = introContent.getBoundingClientRect().top;
-            const defaultHeight = anchorBottom - contentTop + 30;
-            introContent.style.maxHeight = defaultHeight + 'px';
-            const introImage = document.querySelector('.intro-image');
-            if (introImage) introImage.style.height = defaultHeight + 'px';
-        }
-        updateLoginUI();
-    });
-    
-    moreBtn.addEventListener('click', function() {
-        isExpanded = !isExpanded;
-        const introImage = document.querySelector('.intro-image');
-        if (isExpanded) {
-            introContent.style.maxHeight = 'none';
-            if (introImage) introImage.style.height = 'auto';
-            moreBtn.innerHTML = '<i class="fa fa-minus"></i> 收起';
-        } else {
-            if (anchorPoint) {
-                const anchorBottom = anchorPoint.getBoundingClientRect().bottom;
-                const contentTop = introContent.getBoundingClientRect().top;
-                const defaultHeight = anchorBottom - contentTop + 30;
-                introContent.style.maxHeight = defaultHeight + 'px';
-                if (introImage) introImage.style.height = defaultHeight + 'px';
-            }
-            moreBtn.innerHTML = '<i class="fa fa-plus"></i> 查看更多';
-        }
-    });
+    function closeInfoModal() { document.getElementById('infoModal').classList.remove('active'); }
+    document.getElementById('infoModal').addEventListener('click', (e) => { if(e.target === document.getElementById('infoModal')) closeInfoModal(); });
 </script>
 </body>
 </html>
