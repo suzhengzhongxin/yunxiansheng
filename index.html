@@ -682,7 +682,7 @@
     }
     function login() { const u = document.getElementById('loginUsername').value.trim(), p = document.getElementById('loginPassword').value.trim(); if(!u||!p){alert("请输入账号和密码");return;} localStorage.setItem('isLogin','true'); localStorage.setItem('loginUser',u); alert('登录成功！'); closeModal(); updateLoginUI(); }
     function register() { const phone = document.getElementById('regPhone').value.trim(), pwd = document.getElementById('regPwd').value, cfm = document.getElementById('regConfirm').value; if(!phone||!pwd){alert("请填写手机号和密码");return;} if(pwd!==cfm){alert("两次密码不一致");return;} alert('注册成功！请登录'); switchTab('login'); document.getElementById('loginUsername').value = phone; document.getElementById('loginPassword').value = ''; }
-    function checkLogin() { if(!localStorage.getItem('isLogin')){ alert('请先登录！'); openModal('login'); return false; } return true; }
+    function checkLogin() { if(!localStorage.getItem('isLogin')){ alert('请先登录再访问“我的”页面！'); openModal('login'); return false; } return true; }
     function logout() { localStorage.removeItem('isLogin'); localStorage.removeItem('loginUser'); alert('已退出登录'); updateLoginUI(); }
     function updateLoginUI() { const isLogin = localStorage.getItem('isLogin') === 'true'; const group = document.getElementById('loginGroup'); if(isLogin && group){ const user = localStorage.getItem('loginUser') || '用户'; group.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`; } else { group.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`; } }
     window.addEventListener('load', updateLoginUI);
