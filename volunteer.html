@@ -32,7 +32,7 @@ ul{list-style:none;}
 .nav-toggle{display:none;font-size:24px;color:var(--white-color);cursor:pointer;}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;display:none;align-items:center;justify-content:center;}
 .modal.active{display:flex;}
-.modal-box{background:#fff;width:90%;max-width:460px;padding:30px;border-radius:12px;position:relative;}
+.modal-box{background:#fff;width:90%;max-width:500px;padding:30px;border-radius:12px;position:relative;max-height:90vh;overflow-y:auto;}
 .modal-close{position:absolute;top:15px;right:15px;font-size:20px;cursor:pointer;}
 .modal-tab{display:flex;margin-bottom:20px;}
 .modal-tab-item{flex:1;text-align:center;padding:10px 0;font-weight:bold;cursor:pointer;}
@@ -41,7 +41,7 @@ ul{list-style:none;}
 .modal-panel.active{display:block;}
 .form-group{margin-bottom:18px;}
 .form-group label{display:block;margin-bottom:6px;}
-.form-group input{width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;}
+.form-group input,.form-group select{width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;}
 .banner{height:380px;background:linear-gradient(135deg,var(--primary-color) 0%,#b82233 100%);position:relative;display:flex;align-items:center;justify-content:center;}
 .banner-bg{position:absolute;top:0;left:0;width:100%;height:100%;background:url('图片/bg(1).jpg') center/cover no-repeat;opacity:0.25;z-index:1;}
 .banner-content{position:relative;z-index:2;text-align:center;color:var(--white-color);padding:0 20px;}
@@ -67,7 +67,7 @@ ul{list-style:none;}
 .form-group{margin-bottom:20px;}
 .form-group label{display:block;margin-bottom:8px;font-weight:500;color:#333;}
 .form-control{width:100%;padding:12px 15px;border:1px solid var(--gray-middle);border-radius:var(--radius-sm);font-size:16px;transition:var(--transition);}
-.form-control:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 3px rgba(153, 26, 40, 0.1);}
+.form-control:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 3px rgba(153,26,40,0.1);}
 .form-fullwidth{grid-column:1 / -1;}
 .form-actions{grid-column:1 / -1;text-align:center;margin-top:20px;}
 .match-list{background-color:#f9f5f0;border-radius:var(--radius-md);padding:20px;max-height:600px;overflow-y:auto;}
@@ -78,17 +78,19 @@ ul{list-style:none;}
 .match-content-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .person-info{font-size:15px;color:#555;line-height:1.6;}
 .person-name{font-weight:bold;font-size:18px;color:var(--primary-dark);margin-bottom:8px;}
-.admin-bar{display:flex;gap:8px;margin-bottom:10px;}
+.admin-bar{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
 .admin-btn{padding:5px 10px;font-size:12px;border:none;border-radius:4px;color:#fff;cursor:pointer;}
 .btn-edit{background:#0066cc;}
 .btn-del{background:#cc0000;}
+.btn-unbind{background:#ff9800;}
+.btn-manual{background:#28a745;}
 .match-stats{background:linear-gradient(135deg,var(--primary-color),var(--primary-light));border-radius:var(--radius-lg);padding:30px;margin-top:40px;text-align:center;color:white;}
 .stats-number{font-size:48px;font-weight:bold;}
 .stats-label{font-size:16px;margin-top:5px;}
 .search-bar{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;align-items:center;}
 .search-input{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--gray-middle);border-radius:var(--radius-sm);font-size:14px;}
 .search-btn{padding:10px 18px;background:var(--primary-color);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;}
-.pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:20px;padding:10px 0;}
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:10px;padding:10px 0;}
 .page-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--gray-middle);background:white;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition);}
 .page-btn:hover,.page-btn.active{background:var(--primary-color);color:white;border-color:var(--primary-color);}
 .page-info{font-size:14px;color:var(--gray-dark);padding:0 10px;}
@@ -108,6 +110,9 @@ ul{list-style:none;}
 .toast.success{background-color:#42b983;}
 .toast.error{background-color:#d62828;}
 .toast.show{opacity:1;}
+.select-match-box{max-height:200px;overflow-y:auto;border:1px solid #ddd;border-radius:6px;padding:8px;}
+.select-match-item{padding:6px 10px;border-bottom:1px solid #eee;cursor:pointer;}
+.select-match-item:hover{background:#f5f5f5;}
 @media (max-width:768px){
 .nav-menu{position:fixed;top:70px;left:-100%;width:100%;height:calc(100vh - 70px);background:var(--primary-dark);flex-direction:column;align-items:center;padding:40px 0;gap:20px;transition:var(--transition);}
 .nav-menu.active{left:0;}
@@ -125,427 +130,519 @@ ul{list-style:none;}
 </head>
 <body>
 <div class="top-bar">
-<div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
-<div class="login-group" id="loginGroup">
-<a href="javascript:void(0);" onclick="openModal('login')">登录</a>
-<a href="javascript:void(0);" onclick="openModal('reg')">注册</a>
-</div>
+  <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
+  <div class="login-group" id="loginGroup"></div>
 </div>
 <header class="header">
-<div class="container nav">
-<div class="logo">
-<img src="图片/云先生logo.jpg" alt="云先生logo" onerror="this.src='https://via.placeholder.com/48x48?text=云先生'">
-<div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
-</div>
-<ul class="nav-menu">
-<li><a href="index.html">首页</a></li>
-<li><a href="volunteer.html" class="active">志愿者匹配</a></li>
-<li><a href="news.html">思政文库</a></li>
-<li><a href="bookstore.html">思政乐园</a></li>
-<li><a href="video.html">录播课室</a></li>
-<li><a href="download.html">直播课室</a></li>
-<li><a href="forum.html">留言板</a></li>
-<li><a href="checkin.html" onclick="return checkMyNeedLogin(event)">我的</a></li>
-</ul>
-<div class="nav-toggle" onclick="toggleNav()">
-<i class="fa fa-bars"></i>
-</div>
-</div>
+  <div class="container nav">
+    <div class="logo">
+      <img src="图片/云先生logo.jpg" onerror="this.src='https://via.placeholder.com/48x48?text=云先生'">
+      <div class="logo-text">云先生-师范生助力乡村道德与法治平台</div>
+    </div>
+    <ul class="nav-menu">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="volunteer.html" class="active">志愿者匹配</a></li>
+      <li><a href="news.html">思政文库</a></li>
+      <li><a href="bookstore.html">思政乐园</a></li>
+      <li><a href="video.html">录播课室</a></li>
+      <li><a href="download.html">直播课室</a></li>
+      <li><a href="forum.html">留言板</a></li>
+      <li><a href="checkin.html" onclick="return checkMyNeedLogin(event)">我的</a></li>
+    </ul>
+    <div class="nav-toggle" onclick="toggleNav()"><i class="fa fa-bars"></i></div>
+  </div>
 </header>
 <div class="modal" id="modal">
-<div class="modal-box">
-<div class="modal-close" onclick="closeModal()">&times;</div>
-<div class="modal-tab">
-<div class="modal-tab-item active" onclick="switchTabModal('login')">登录</div>
-<div class="modal-tab-item" onclick="switchTabModal('reg')">注册</div>
-</div>
-<div class="modal-panel active" id="loginPanel">
-<div class="form-group">
-<label>账号</label>
-<input type="text" id="loginUsername" placeholder="手机号/学号">
-</div>
-<div class="form-group">
-<label>密码</label>
-<input type="password" id="loginPassword" placeholder="请输入密码">
-</div>
-<button class="btn" onclick="loginHandler()">登录</button>
-</div>
-<div class="modal-panel" id="regPanel">
-<div class="form-group">
-<label>手机号</label>
-<input type="text" id="regPhone" placeholder="请输入手机号">
-</div>
-<div class="form-group">
-<label>密码</label>
-<input type="password" id="regPwd" placeholder="设置密码">
-</div>
-<div class="form-group">
-<label>确认密码</label>
-<input type="password" id="regConfirm" placeholder="确认密码">
-</div>
-<button class="btn" onclick="registerHandler()">注册</button>
-</div>
-</div>
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeModal()">&times;</div>
+    <div class="modal-tab">
+      <div class="modal-tab-item active" onclick="switchTabModal('login')">登录</div>
+      <div class="modal-tab-item" onclick="switchTabModal('reg')">注册</div>
+    </div>
+    <div class="modal-panel active" id="loginPanel">
+      <div class="form-group"><label>账号</label><input type="text" id="loginUsername" placeholder="手机号/学号"></div>
+      <div class="form-group"><label>密码</label><input type="password" id="loginPassword" placeholder="请输入密码"></div>
+      <button class="btn" onclick="loginHandler()">登录</button>
+    </div>
+    <div class="modal-panel" id="regPanel">
+      <div class="form-group"><label>手机号</label><input type="text" id="regPhone" placeholder="请输入手机号"></div>
+      <div class="form-group"><label>密码</label><input type="password" id="regPwd" placeholder="设置密码"></div>
+      <div class="form-group"><label>确认密码</label><input type="password" id="regConfirm" placeholder="确认密码"></div>
+      <button class="btn" onclick="registerHandler()">注册</button>
+    </div>
+  </div>
 </div>
 <div class="modal" id="editModal">
-<div class="modal-box">
-<div class="modal-close" onclick="closeEditModal()">&times;</div>
-<h3 style="text-align:center;margin-bottom:20px;">编辑信息</h3>
-<div class="form-group">
-<label>姓名/班级</label>
-<input type="text" id="editName" class="form-control">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeEditModal()">&times;</div>
+    <h3 style="text-align:center;margin-bottom:20px;">编辑信息</h3>
+    <div class="form-group"><label>姓名/班级</label><input type="text" id="editName" class="form-control"></div>
+    <div class="form-group"><label>电话</label><input type="text" id="editPhone" class="form-control"></div>
+    <div class="form-group" id="editSchoolGroup"><label>院校/学校</label><input type="text" id="editSchool" class="form-control"></div>
+    <div class="form-group" id="editGradeGroup"><label>年级</label><input type="text" id="editGrade" class="form-control"></div>
+    <button class="btn" onclick="saveEdit()">保存</button>
+  </div>
 </div>
-<div class="form-group">
-<label>电话</label>
-<input type="text" id="editPhone" class="form-control">
-</div>
-<div class="form-group" id="editSchoolGroup">
-<label>院校/学校</label>
-<input type="text" id="editSchool" class="form-control">
-</div>
-<div class="form-group" id="editGradeGroup">
-<label>年级</label>
-<input type="text" id="editGrade" class="form-control">
-</div>
-<button class="btn" onclick="saveEdit()">保存</button>
-</div>
+<div class="modal" id="manualMatchModal">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeManualModal()">&times;</div>
+    <h3 style="text-align:center;margin-bottom:20px;">手动指定匹配</h3>
+    <div class="form-group"><label>选择志愿者</label><div id="manualVolList" class="select-match-box"></div></div>
+    <div class="form-group"><label>选择班级</label><div id="manualClsList" class="select-match-box"></div></div>
+    <button class="btn" onclick="saveManualMatch()" style="width:100%;margin-top:10px;">确认匹配</button>
+  </div>
 </div>
 <section class="banner">
-<div class="banner-bg"></div>
-<div class="banner-content">
-<h1 class="banner-title">校园志愿招募与乡村道法服务中心</h1>
-<p class="banner-subtitle">师范生志愿者报名入驻，乡村班级需求对接，共建思政教育桥梁</p>
-<a href="#volunteer-form" class="btn banner-btn">立即参与</a>
-</div>
+  <div class="banner-bg"></div>
+  <div class="banner-content">
+    <h1 class="banner-title">校园志愿招募与乡村道法服务中心</h1>
+    <p class="banner-subtitle">师范生志愿者报名入驻，乡村班级需求对接，共建思政教育桥梁</p>
+    <a href="#volunteer-form" class="btn banner-btn">立即参与</a>
+  </div>
 </section>
 <section class="match-section">
-<div class="container">
-<div class="section-title">
-<h2>志愿者报名与班级需求匹配</h2>
-</div>
-<div class="section-desc">师范生志愿者与乡村中小学班级双向选择，智能匹配学段，一对一精准对接</div>
-<div class="tab-container">
-<div class="tab-buttons" id="tabButtons"></div>
-<div class="form-content active" id="volunteer-form">
-<h3 class="form-title">师范生志愿者报名</h3>
-<div class="form-grid">
-<div class="form-group"><label>姓名 *</label><input type="text" id="vol-name" class="form-control" placeholder="请输入姓名"></div>
-<div class="form-group"><label>联系方式 *</label><input type="text" id="vol-phone" class="form-control" placeholder="请输入电话/微信"></div>
-<div class="form-group"><label>院校 *</label><input type="text" id="vol-school" class="form-control" placeholder="请输入院校名称"></div>
-<div class="form-group"><label>专业 *</label><input type="text" id="vol-major" class="form-control" placeholder="请输入专业年级"></div>
-<div class="form-group"><label>授课范围 *</label><input type="text" id="vol-subject" class="form-control" placeholder="如：小学道德与法治、初中道法"></div>
-<div class="form-group"><label>可服务时间 *</label><input type="text" id="vol-time" class="form-control" placeholder="如：周一到周五晚19:00-21:00"></div>
-<div class="form-group form-fullwidth"><label>个人简介</label><textarea id="vol-intro" rows="3" class="form-control" placeholder="请介绍自己的专业优势、教学经验等"></textarea></div>
-<div class="form-actions"><button class="btn banner-btn" id="vol-submit">提交报名</button></div>
-</div>
-</div>
-<div class="form-content" id="student-form">
-<h3 class="form-title">乡村班级需求收集</h3>
-<div class="form-grid">
-<div class="form-group"><label>班级名称 *</label><input type="text" id="cls-name" class="form-control" placeholder="如：八年级2班"></div>
-<div class="form-group"><label>年级 *</label>
-<select id="cls-grade" class="form-control">
-<option value="一年级">一年级</option><option value="二年级">二年级</option><option value="三年级">三年级</option>
-<option value="四年级">四年级</option><option value="五年级">五年级</option><option value="六年级">六年级</option>
-<option value="七年级">七年级</option><option value="八年级">八年级</option><option value="九年级">九年级</option>
-</select>
-</div>
-<div class="form-group"><label>学校 *</label><input type="text" id="cls-school" class="form-control" placeholder="请输入学校名称"></div>
-<div class="form-group"><label>辅导老师电话 *</label><input type="text" id="cls-phone" class="form-control" placeholder="请输入联系电话"></div>
-<div class="form-group"><label>期望时间 *</label><input type="text" id="cls-time" class="form-control" placeholder="如：周末上午9:00-11:00"></div>
-<div class="form-group"><label>班级情况</label><input type="text" id="cls-desc" class="form-control" placeholder="请描述班级需求、学生情况等"></div>
-<div class="form-actions"><button class="btn banner-btn" id="cls-submit">提交需求</button></div>
-</div>
-</div>
-<div class="match-content" id="match-result">
-<h3 class="form-title">✅ 成功匹配名单</h3>
-<div class="search-bar">
-<input type="text" id="searchInput" class="search-input" placeholder="搜索姓名/班级/学校">
-<button class="search-btn" onclick="doSearch()">搜索</button>
-<button class="search-btn" onclick="exportAll()">导出Excel</button>
-</div>
-<div class="match-list" id="matchList"><div style="text-align:center;padding:30px;color:#999">加载中...</div></div>
-<div id="matchPagination" class="pagination"></div>
-<div class="match-stats"><div class="stats-number" id="match-count">0</div><div class="stats-label">成功匹配对数</div></div>
-</div>
-<div class="admin-content" id="admin">
-<h3 class="form-title">🔧 管理后台</h3>
-<div class="admin-tabs">
-<div class="admin-tab active" onclick="switchAdminTab('volunteer-admin')">志愿者管理</div>
-<div class="admin-tab" onclick="switchAdminTab('class-admin')">班级管理</div>
-</div>
-<div id="volunteer-admin" class="admin-panel active">
-<table class="admin-table"><thead><tr><th>姓名</th><th>电话</th><th>院校</th><th>专业</th><th>授课范围</th><th>操作</th></tr></thead><tbody id="adminVolunteerList"></tbody></table>
-<div id="adminVolPagination" class="pagination"></div>
-</div>
-<div id="class-admin" class="admin-panel">
-<table class="admin-table"><thead><tr><th>班级</th><th>年级</th><th>学校</th><th>电话</th><th>操作</th></tr></thead><tbody id="adminClassList"></tbody></table>
-<div id="adminClsPagination" class="pagination"></div>
-</div>
-</div>
-</div>
-</div>
+  <div class="container">
+    <div class="section-title"><h2>志愿者报名与班级需求匹配</h2></div>
+    <div class="section-desc">师范生志愿者与乡村中小学班级双向选择，智能匹配学段，一对一精准对接</div>
+    <div class="tab-container">
+      <div class="tab-buttons" id="tabButtons"></div>
+      <div class="form-content active" id="volunteer-form">
+        <h3 class="form-title">师范生志愿者报名</h3>
+        <div class="form-grid">
+          <div class="form-group"><label>姓名 *</label><input type="text" id="vol-name" class="form-control" placeholder="请输入姓名"></div>
+          <div class="form-group"><label>联系方式 *</label><input type="text" id="vol-phone" class="form-control" placeholder="电话/微信"></div>
+          <div class="form-group"><label>院校 *</label><input type="text" id="vol-school" class="form-control" placeholder="院校名称"></div>
+          <div class="form-group"><label>专业 *</label><input type="text" id="vol-major" class="form-control" placeholder="专业年级"></div>
+          <div class="form-group"><label>授课范围 *</label><input type="text" id="vol-subject" class="form-control" placeholder="小学/初中道德与法治"></div>
+          <div class="form-group"><label>可服务时间 *</label><input type="text" id="vol-time" class="form-control"></div>
+          <div class="form-group form-fullwidth"><label>个人简介</label><textarea id="vol-intro" rows="3" class="form-control"></textarea></div>
+          <div class="form-actions"><button class="btn banner-btn" id="vol-submit">提交报名</button></div>
+        </div>
+      </div>
+      <div class="form-content" id="student-form">
+        <h3 class="form-title">乡村班级需求收集</h3>
+        <div class="form-grid">
+          <div class="form-group"><label>班级名称 *</label><input type="text" id="cls-name" class="form-control"></div>
+          <div class="form-group"><label>年级 *</label>
+            <select id="cls-grade" class="form-control">
+              <option>一年级</option><option>二年级</option><option>三年级</option><option>四年级</option><option>五年级</option><option>六年级</option>
+              <option>七年级</option><option>八年级</option><option>九年级</option>
+            </select>
+          </div>
+          <div class="form-group"><label>学校 *</label><input type="text" id="cls-school" class="form-control"></div>
+          <div class="form-group"><label>辅导老师电话 *</label><input type="text" id="cls-phone" class="form-control"></div>
+          <div class="form-group"><label>期望时间 *</label><input type="text" id="cls-time" class="form-control"></div>
+          <div class="form-group"><label>班级情况</label><input type="text" id="cls-desc" class="form-control"></div>
+          <div class="form-actions"><button class="btn banner-btn" id="cls-submit">提交需求</button></div>
+        </div>
+      </div>
+      <div class="match-content" id="match-result">
+        <h3 class="form-title">✅ 成功匹配名单</h3>
+        <div class="search-bar">
+          <input type="text" id="searchInput" class="search-input" placeholder="搜索姓名/班级/学校">
+          <button class="search-btn" onclick="doSearch()">搜索</button>
+          <button class="search-btn" onclick="exportExcel()">导出Excel</button>
+          <button class="search-btn" onclick="resetMatch()" style="background:#ff9800;">重置匹配</button>
+          <button class="search-btn" onclick="openManualMatch()" style="background:#28a745;">手动匹配</button>
+        </div>
+        <div class="match-list" id="matchList">加载中...</div>
+        <div id="matchPagination" class="pagination"></div>
+        <div class="match-stats"><div class="stats-number" id="match-count">0</div><div class="stats-label">成功匹配对数</div></div>
+      </div>
+      <div class="admin-content" id="admin">
+        <h3 class="form-title">🔧 管理后台</h3>
+        <div class="admin-tabs">
+          <div class="admin-tab active" onclick="switchAdminTab('volunteer-admin')">志愿者管理</div>
+          <div class="admin-tab" onclick="switchAdminTab('class-admin')">班级管理</div>
+        </div>
+        <div id="volunteer-admin" class="admin-panel active">
+          <table class="admin-table">
+            <thead><tr><th>姓名</th><th>电话</th><th>院校</th><th>专业</th><th>授课</th><th>操作</th></tr></thead>
+            <tbody id="adminVolunteerList"></tbody>
+          </table>
+          <div id="adminVolPagination" class="pagination"></div>
+        </div>
+        <div id="class-admin" class="admin-panel">
+          <table class="admin-table">
+            <thead><tr><th>班级</th><th>年级</th><th>学校</th><th>电话</th><th>操作</th></tr></thead>
+            <tbody id="adminClassList"></tbody>
+          </table>
+          <div id="adminClsPagination" class="pagination"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <footer class="footer">
-<div class="container"><div class="footer-top"><div class="footer-col"><h4>关于我们</h4><ul><li><a href="#">平台介绍</a></li><li><a href="#">团队风采</a></li><li><a href="#">联系我们</a></li></ul></div>
-<div class="footer-col"><h4>学习资源</h4><ul><li><a href="#">时政资料库</a></li><li><a href="#">精品课程</a></li><li><a href="#">学习工具</a></li></ul></div>
-<div class="footer-col"><h4>法律声明</h4><ul><li><a href="#">隐私政策</a></li><li><a href="#">用户协议</a></li><li><a href="#">版权声明</a></li></ul></div>
-<div class="footer-col"><h4>联系方式</h4><ul><li><i class="fa fa-phone"></i> 0350-3339920</li><li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li></ul></div></div>
-<div class="footer-bottom"><p>© 2026 云先生-师范生助力乡村道德与法治平台 版权所有</p></div></div>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col"><h4>关于我们</h4><ul><li>平台介绍</li><li>团队风采</li><li>联系我们</li></ul></div>
+      <div class="footer-col"><h4>学习资源</h4><ul><li>时政资料库</li><li>精品课程</li><li>学习工具</li></ul></div>
+      <div class="footer-col"><h4>法律声明</h4><ul><li>隐私政策</li><li>用户协议</li><li>版权声明</li></ul></div>
+      <div class="footer-col"><h4>联系方式</h4><ul><li><i class="fa fa-phone"></i> 0350-3339920</li><li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 云先生-师范生助力乡村道德与法治平台 版权所有</p></div>
+  </div>
 </footer>
 <div id="toast" class="toast"></div>
-
 <script>
 const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
 const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
 const HEADERS = { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY, "Content-Type": "application/json" };
-
 let volunteers = [], classes = [];
 let currentUserAccount = null, isAdmin = false;
 let editId = null, editType = null;
+let matchedPairs = [];
+let manualSelectVol = null, manualSelectCls = null;
 const PAGE_SIZE = 6;
+const ADMIN_PAGE_SIZE = 6;
 let matchPage = 1, adminVolPage = 1, adminClsPage = 1, searchKeyword = "";
 
-// ============= 统一登录状态管理（与论坛页面完全一致） =============
 function getStoredLoginInfo() {
-    const isLogin = localStorage.getItem('isLogin') === 'true';
-    const account = localStorage.getItem('loginUser') || null;
-    const role = localStorage.getItem('userRole') || 'user';
-    return { isLogin, account, role };
+  return {isLogin: localStorage.getItem('isLogin') === 'true', account: localStorage.getItem('loginUser') || null, role: localStorage.getItem('userRole') || 'user'};
 }
-
 function setLoginInfo(account, role) {
-    localStorage.setItem('isLogin', 'true');
-    localStorage.setItem('loginUser', account);
-    localStorage.setItem('userRole', role);
-    currentUserAccount = account;
-    isAdmin = (role === 'admin');
+  localStorage.setItem('isLogin', 'true'); localStorage.setItem('loginUser', account); localStorage.setItem('userRole', role);
+  currentUserAccount = account; isAdmin = role === 'admin';
 }
-
-function clearLoginInfo() {
-    localStorage.removeItem('isLogin');
-    localStorage.removeItem('loginUser');
-    localStorage.removeItem('userRole');
-    currentUserAccount = null;
-    isAdmin = false;
-}
-
+function clearLoginInfo() { localStorage.removeItem('isLogin'); localStorage.removeItem('loginUser'); localStorage.removeItem('userRole'); currentUserAccount = null; isAdmin = false; }
 function updateLoginUI() {
-    const { isLogin, account } = getStoredLoginInfo();
-    const group = document.getElementById('loginGroup');
-    if (isLogin && account) {
-        group.innerHTML = `<span style="color:#ffd700;">欢迎，${account}</span> <a href="javascript:void(0);" onclick="logout()" style="margin-left:12px;">退出</a>`;
-    } else {
-        group.innerHTML = `<a href="javascript:void(0);" onclick="openModal('login')">登录</a><a href="javascript:void(0);" onclick="openModal('reg')">注册</a>`;
-    }
-    initTabButtons();
+  const { isLogin, account } = getStoredLoginInfo();
+  const g = document.getElementById('loginGroup');
+  if (isLogin && account) {
+    g.innerHTML = `<span style="color:#ffd700;">欢迎，${account}</span><a href="javascript:logout()" style="margin-left:12px;">退出</a>`;
+  } else {
+    g.innerHTML = `<a href="javascript:openModal('login')">登录</a><a href="javascript:openModal('reg')">注册</a>`;
+  }
+  initTabButtons();
 }
-
 async function loginHandler() {
-    const account = document.getElementById('loginUsername').value.trim();
-    const pwd = document.getElementById('loginPassword').value.trim();
-    if (!account || !pwd) { showToast('请输入账号密码', 'error'); return; }
-    try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(account)}&password=eq.${encodeURIComponent(pwd)}&select=*`, { headers: HEADERS });
-        const data = await res.json();
-        if (data.length === 0) { showToast('账号或密码错误', 'error'); return; }
-        const user = data[0];
-        setLoginInfo(user.account, user.role);
-        showToast('登录成功');
-        closeModal();
-        updateLoginUI();
-        document.getElementById('loginUsername').value = '';
-        document.getElementById('loginPassword').value = '';
-        await loadAllData();
-        renderMatch();
-        renderAdminData();
-    } catch (e) { showToast('登录失败', 'error'); }
+  const account = document.getElementById('loginUsername').value.trim();
+  const pwd = document.getElementById('loginPassword').value.trim();
+  if (!account || !pwd) { showToast('请输入账号密码', 'error'); return; }
+  try {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(account)}&password=eq.${encodeURIComponent(pwd)}`, { headers: HEADERS });
+    const d = await r.json();
+    if (!d.length) { showToast('账号或密码错误', 'error'); return; }
+    setLoginInfo(d[0].account, d[0].role);
+    showToast('登录成功'); closeModal(); updateLoginUI(); await loadAllData(); renderMatch(); renderAdminData();
+  } catch (e) { showToast('登录失败', 'error'); }
 }
-
 async function registerHandler() {
-    const phone = document.getElementById('regPhone').value.trim();
-    const pwd = document.getElementById('regPwd').value;
-    const confirm = document.getElementById('regConfirm').value;
-    if (!phone || !pwd) { showToast('请填写完整信息', 'error'); return; }
-    if (pwd !== confirm) { showToast('两次密码不一致', 'error'); return; }
-    if (phone.length < 6) { showToast('账号长度不能少于6位', 'error'); return; }
-    try {
-        const checkRes = await fetch(`${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(phone)}`, { headers: HEADERS });
-        const checkData = await checkRes.json();
-        if (checkData && checkData.length > 0) { showToast('该手机号已被注册', 'error'); return; }
-        await fetch(`${SUPABASE_URL}/rest/v1/user`, { method: 'POST', headers: HEADERS, body: JSON.stringify({ account: phone, password: pwd, role: 'user' }) });
-        showToast('注册成功，请登录');
-        switchTabModal('login');
-        document.getElementById('loginUsername').value = phone;
-        document.getElementById('regPhone').value = '';
-        document.getElementById('regPwd').value = '';
-        document.getElementById('regConfirm').value = '';
-    } catch (e) { showToast('注册失败', 'error'); }
+  const phone = document.getElementById('regPhone').value.trim();
+  const pwd = document.getElementById('regPwd').value;
+  const cf = document.getElementById('regConfirm').value;
+  if (!phone || !pwd) { showToast('请填写完整', 'error'); return; }
+  if (pwd !== cf) { showToast('两次密码不一致', 'error'); return; }
+  try {
+    const check = await fetch(`${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(phone)}`, { headers: HEADERS });
+    if ((await check.json()).length) { showToast('已注册', 'error'); return; }
+    await fetch(`${SUPABASE_URL}/rest/v1/user`, { method: 'POST', headers: HEADERS, body: JSON.stringify({ account: phone, password: pwd, role: 'user' }) });
+    showToast('注册成功，请登录'); switchTabModal('login');
+  } catch (e) { showToast('注册失败', 'error'); }
 }
-
-function logout() {
-    clearLoginInfo();
-    updateLoginUI();
-    showToast('已退出登录');
-    initTabButtons();
-    renderMatch();
-    renderAdminData();
-}
-
-function checkMyNeedLogin(event) {
-    const { isLogin } = getStoredLoginInfo();
-    if (!isLogin) { event.preventDefault(); showToast('请先登录', 'error'); openModal('login'); return false; }
-    return true;
-}
-// ============= 登录状态管理结束 =============
-
+function logout() { clearLoginInfo(); updateLoginUI(); showToast('已退出'); matchedPairs = []; renderMatch(); }
+function checkMyNeedLogin(e) { const l = getStoredLoginInfo().isLogin; if (!l) { e.preventDefault(); showToast('请先登录', 'error'); openModal('login'); } return l; }
 function toggleNav() { document.querySelector('.nav-menu').classList.toggle('active'); }
 function openModal(t) { document.getElementById('modal').classList.add('active'); switchTabModal(t); }
 function closeModal() { document.getElementById('modal').classList.remove('active'); }
 function switchTabModal(t) {
-    document.querySelectorAll('.modal-panel,.modal-tab-item').forEach(e => e.classList.remove('active'));
-    document.getElementById(t + 'Panel').classList.add('active');
-    document.querySelectorAll('.modal-tab-item')[t === 'login' ? 0 : 1].classList.add('active');
+  document.querySelectorAll('.modal-panel,.modal-tab-item').forEach(x => x.classList.remove('active'));
+  document.getElementById(t+'Panel').classList.add('active');
+  document.querySelectorAll('.modal-tab-item')[t==='login'?0:1].classList.add('active');
 }
-function showToast(msg, type = 'success') {
-    const toast = document.getElementById('toast');
-    toast.textContent = msg; toast.className = `toast ${type} show`;
-    setTimeout(() => toast.classList.remove('show'), 2000);
+function showToast(msg, t = 'success') {
+  const o = document.getElementById('toast'); o.textContent = msg; o.className = `toast ${t} show`;
+  setTimeout(() => o.classList.remove('show'), 2000);
 }
 function openEditModal(id, type) {
-    editId = id; editType = type;
-    if (type === 'vol') {
-        const item = volunteers.find(v => v.id === id);
-        document.getElementById('editName').value = item?.name || '';
-        document.getElementById('editPhone').value = item?.phone || '';
-        document.getElementById('editSchool').value = item?.school || '';
-        document.getElementById('editSchoolGroup').style.display = 'block';
-        document.getElementById('editGradeGroup').style.display = 'none';
-    } else {
-        const item = classes.find(c => c.id === id);
-        document.getElementById('editName').value = item?.class_name || '';
-        document.getElementById('editPhone').value = item?.contact_phone || '';
-        document.getElementById('editGrade').value = item?.grade || '';
-        document.getElementById('editSchoolGroup').style.display = 'none';
-        document.getElementById('editGradeGroup').style.display = 'block';
-    }
-    document.getElementById('editModal').classList.add('active');
+  editId = id; editType = type;
+  if (type === 'vol') {
+    const o = volunteers.find(x => x.id === id);
+    document.getElementById('editName').value = o?.name||'';
+    document.getElementById('editPhone').value = o?.phone||'';
+    document.getElementById('editSchool').value = o?.school||'';
+    document.getElementById('editSchoolGroup').style.display = 'block';
+    document.getElementById('editGradeGroup').style.display = 'none';
+  } else {
+    const o = classes.find(x => x.id === id);
+    document.getElementById('editName').value = o?.class_name||'';
+    document.getElementById('editPhone').value = o?.contact_phone||'';
+    document.getElementById('editGrade').value = o?.grade||'';
+    document.getElementById('editSchoolGroup').style.display = 'none';
+    document.getElementById('editGradeGroup').style.display = 'block';
+  }
+  document.getElementById('editModal').classList.add('active');
 }
 function closeEditModal() { document.getElementById('editModal').classList.remove('active'); }
-
 async function saveEdit() {
-    const name = document.getElementById('editName').value.trim();
-    const phone = document.getElementById('editPhone').value.trim();
-    if (!name || !phone) { showToast('姓名和电话不能为空', 'error'); return; }
-    const table = editType === 'vol' ? 'volunteers' : 'classes';
-    let data = {};
-    if (editType === 'vol') data = { name, phone, school: document.getElementById('editSchool').value.trim() };
-    else data = { class_name: name, contact_phone: phone, grade: document.getElementById('editGrade').value.trim() };
-    try {
-        await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${editId}`, { method: 'PATCH', headers: HEADERS, body: JSON.stringify(data) });
-        showToast('保存成功'); closeEditModal(); await loadAllData(); renderMatch(); renderAdminData();
-    } catch (e) { showToast('保存失败', 'error'); }
+  const n = document.getElementById('editName').value.trim();
+  const p = document.getElementById('editPhone').value.trim();
+  if (!n || !p) { showToast('不能为空', 'error'); return; }
+  const tab = editType === 'vol' ? 'volunteers' : 'classes';
+  let d = editType === 'vol' ? { name:n, phone:p, school:document.getElementById('editSchool').value.trim() }
+    : { class_name:n, contact_phone:p, grade:document.getElementById('editGrade').value.trim() };
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/${tab}?id=eq.${editId}`, { method:'PATCH', headers:HEADERS, body:JSON.stringify(d) });
+    showToast('保存成功'); closeEditModal(); await loadAllData(); renderMatch(); renderAdminData();
+  } catch (e) { showToast('失败', 'error'); }
 }
 async function deleteItem(id, type) {
-    if (!confirm('确定删除？')) return;
-    const table = type === 'vol' ? 'volunteers' : 'classes';
-    try { await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, { method: 'DELETE', headers: HEADERS }); showToast('删除成功'); await loadAllData(); renderMatch(); renderAdminData(); } 
-    catch (e) { showToast('删除失败', 'error'); }
+  if (!confirm('确定删除？')) return;
+  const tab = type === 'vol' ? 'volunteers' : 'classes';
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/${tab}?id=eq.${id}`, { method:'DELETE', headers:HEADERS });
+    showToast('删除成功'); await loadAllData(); matchedPairs = []; renderMatch(); renderAdminData();
+  } catch (e) { showToast('失败', 'error'); }
+}
+function unbindMatch(volId, clsId) {
+  if (!isAdmin) { showToast('仅管理员', 'error'); return; }
+  if (!confirm('确定解绑？')) return;
+  matchedPairs = matchedPairs.filter(p => p.vol.id !== volId || p.cls.id !== clsId);
+  showToast('解绑成功'); renderMatch();
+}
+function resetMatch() {
+  if (!isAdmin) { showToast('仅管理员', 'error'); return; }
+  if (!confirm('确定清空所有匹配？')) return;
+  matchedPairs = []; renderMatch(); showToast('已重置');
 }
 async function loadAllData() {
-    try {
-        const v = await fetch(`${SUPABASE_URL}/rest/v1/volunteers?select=*`, { headers: HEADERS });
-        volunteers = await v.json() || [];
-        const c = await fetch(`${SUPABASE_URL}/rest/v1/classes?select=*`, { headers: HEADERS });
-        classes = await c.json() || [];
-    } catch (e) { console.error('加载失败', e); }
+  try {
+    volunteers = await (await fetch(`${SUPABASE_URL}/rest/v1/volunteers?select=*`, { headers:HEADERS })).json() || [];
+    classes = await (await fetch(`${SUPABASE_URL}/rest/v1/classes?select=*`, { headers:HEADERS })).json() || [];
+  } catch (e) { console.error(e); }
 }
-function doSearch() { searchKeyword = document.getElementById('searchInput').value.trim().toLowerCase(); matchPage = 1; renderMatch(); }
-function exportAll() { /* 保持原有导出功能 */ alert('导出功能保留'); }
-
-function renderPagination(total, page, containerId, type, isAdminFlag = false) { /* 简单实现分页UI */ const container = document.getElementById(containerId); container.innerHTML = `<div style="padding:10px;text-align:center">第${page}/${Math.ceil(total/PAGE_SIZE)||1}页</div>`; }
-
+function autoMatch() {
+  if (matchedPairs.length > 0) return;
+  const usedV = new Set(), usedC = new Set();
+  const res = [];
+  const v1 = volunteers.filter(v => (v.subject||'').includes('小学'));
+  const v2 = volunteers.filter(v => !v1.includes(v));
+  const c1 = classes.filter(c => ['一年级','二年级','三年级','四年级','五年级','六年级'].includes(c.grade));
+  const c2 = classes.filter(c => !c1.includes(c));
+  function go(vs, cs) {
+    vs.forEach(v => {
+      if (usedV.has(v.id)) return;
+      const m = cs.find(c => !usedC.has(c.id));
+      if (m) { res.push({vol:v, cls:m}); usedV.add(v.id); usedC.add(m.id); }
+    });
+  }
+  go(v1, c1); go(v2, c2);
+  matchedPairs = res;
+}
+function renderPagination(total, current, container) {
+  const el = document.getElementById(container); el.innerHTML = '';
+  const totalPage = Math.ceil(total / PAGE_SIZE) || 1;
+  if (totalPage <= 1) return;
+  const first = document.createElement('button'); first.className = 'page-btn'; first.innerText = '«';
+  first.onclick = () => { matchPage = 1; renderMatch(); };
+  const prev = document.createElement('button'); prev.className = 'page-btn'; prev.innerText = '<';
+  prev.onclick = () => { if (matchPage > 1) { matchPage--; renderMatch(); } };
+  const info = document.createElement('div'); info.className = 'page-info'; info.innerText = `${current}/${totalPage}`;
+  const next = document.createElement('button'); next.className = 'page-btn'; next.innerText = '>';
+  next.onclick = () => { if (matchPage < totalPage) { matchPage++; renderMatch(); } };
+  const last = document.createElement('button'); last.className = 'page-btn'; last.innerText = '»';
+  last.onclick = () => { matchPage = totalPage; renderMatch(); };
+  el.append(first, prev, info, next, last);
+}
 function renderMatch() {
-    const usedVolIds = new Set(), usedClassIds = new Set(), result = [];
-    const volPri = volunteers.filter(v => (v.subject || '').includes('小学'));
-    const volMid = volunteers.filter(v => !(v.subject || '').includes('小学'));
-    const clsPri = classes.filter(c => (c.grade || '').includes('一')||(c.grade||'').includes('二')||(c.grade||'').includes('三')||(c.grade||'').includes('四')||(c.grade||'').includes('五')||(c.grade||'').includes('六'));
-    const clsMid = classes.filter(c => !clsPri.includes(c));
-    const matchGroup = (vols, clsList) => { vols.forEach(vol => { if(usedVolIds.has(vol.id)) return; const match = clsList.find(c => !usedClassIds.has(c.id)); if(match) { result.push({vol, cls:match}); usedVolIds.add(vol.id); usedClassIds.add(match.id); } }); };
-    matchGroup(volPri, clsPri); matchGroup(volMid, clsMid);
-    const filtered = result.filter(i => (i.vol.name+ i.vol.school+ i.cls.class_name+ i.cls.school_name).toLowerCase().includes(searchKeyword));
-    const total = filtered.length, start = (matchPage-1)*PAGE_SIZE, pageData = filtered.slice(start, start+PAGE_SIZE);
-    const listEl = document.getElementById('matchList');
-    if(pageData.length===0) listEl.innerHTML = '<div style="text-align:center;padding:30px;color:#999">暂无匹配数据</div>';
-    else {
-        let html = '';
-        pageData.forEach(item => {
-            const adminBtns = isAdmin ? `<div class="admin-bar"><button class="admin-btn btn-edit" onclick="openEditModal(${item.vol.id},'vol')">编辑志愿者</button><button class="admin-btn btn-del" onclick="deleteItem(${item.vol.id},'vol')">删除</button><button class="admin-btn btn-edit" onclick="openEditModal(${item.cls.id},'cls')">编辑班级</button><button class="admin-btn btn-del" onclick="deleteItem(${item.cls.id},'cls')">删除</button></div>` : '';
-            html += `<div class="match-item">${adminBtns}<div class="match-header"><div class="match-tag">✓ 已精准匹配</div></div><div class="match-content-row"><div><div class="person-name">志愿者：${item.vol.name}</div><div class="person-info">院校：${item.vol.school||'-'}<br>专业：${item.vol.major||'-'}<br>授课：${item.vol.subject||'-'}<br>时间：${item.vol.available_time||'-'}</div></div><div><div class="person-name">班级：${item.cls.class_name}</div><div class="person-info">学校：${item.cls.school_name||'-'}<br>年级：${item.cls.grade}<br>期望时间：${item.cls.time||'-'}</div></div></div></div>`;
-        });
-        listEl.innerHTML = html;
-    }
-    document.getElementById('match-count').textContent = filtered.length;
-    renderPagination(total, matchPage, 'matchPagination', 'match');
+  autoMatch();
+  const f = matchedPairs.filter(i =>
+    (i.vol.name + i.vol.school + i.cls.class_name + i.cls.school_name).toLowerCase().includes(searchKeyword)
+  );
+  const total = f.length;
+  const start = (matchPage - 1) * PAGE_SIZE;
+  const items = f.slice(start, start + PAGE_SIZE);
+  const list = document.getElementById('matchList');
+  if (!items.length) { list.innerHTML = '<div style="padding:30px;text-align:center;color:#999">暂无匹配</div>'; } else {
+    let html = '';
+    items.forEach(i => {
+      const adminBar = isAdmin ? `
+      <div class="admin-bar">
+        <button class="admin-btn btn-edit" onclick="openEditModal(${i.vol.id},'vol')">编辑志愿者</button>
+        <button class="admin-btn btn-del" onclick="deleteItem(${i.vol.id},'vol')">删志愿者</button>
+        <button class="admin-btn btn-edit" onclick="openEditModal(${i.cls.id},'cls')">编辑班级</button>
+        <button class="admin-btn btn-del" onclick="deleteItem(${i.cls.id},'cls')">删班级</button>
+        <button class="admin-btn btn-unbind" onclick="unbindMatch(${i.vol.id},${i.cls.id})">解绑</button>
+      </div>` : '';
+      html += `
+      <div class="match-item">
+        ${adminBar}
+        <div class="match-header"><div class="match-tag">已匹配</div></div>
+        <div class="match-content-row">
+          <div>
+            <div class="person-name">志愿者：${i.vol.name}</div>
+            <div class="person-info">院校：${i.vol.school||'-'}<br>专业：${i.vol.major||'-'}<br>授课：${i.vol.subject||'-'}<br>时间：${i.vol.available_time||'-'}</div>
+          </div>
+          <div>
+            <div class="person-name">班级：${i.cls.class_name}</div>
+            <div class="person-info">学校：${i.cls.school_name||'-'}<br>年级：${i.cls.grade}<br>时间：${i.cls.time||'-'}</div>
+          </div>
+        </div>
+      </div>`;
+    });
+    list.innerHTML = html;
+  }
+  document.getElementById('match-count').textContent = total;
+  renderPagination(total, matchPage, 'matchPagination');
 }
-function renderAdminData() { if(!isAdmin) return; const volList = volunteers.map(v => `<tr><td>${v.name}</td><td>${v.phone}</td><td>${v.school||'-'}</td><td>${v.major||'-'}</td><td>${v.subject||'-'}</td><td><button class="admin-btn btn-edit" onclick="openEditModal(${v.id},'vol')">编辑</button><button class="admin-btn btn-del" onclick="deleteItem(${v.id},'vol')">删除</button></td></tr>`).join('');
-    document.getElementById('adminVolunteerList').innerHTML = volList || '<tr><td colspan="6">暂无数据</td></tr>';
-    const clsList = classes.map(c => `<tr><td>${c.class_name}</td><td>${c.grade}</td><td>${c.school_name||'-'}</td><td>${c.contact_phone||'-'}</td><td><button class="admin-btn btn-edit" onclick="openEditModal(${c.id},'cls')">编辑</button><button class="admin-btn btn-del" onclick="deleteItem(${c.id},'cls')">删除</button></td></tr>`).join('');
-    document.getElementById('adminClassList').innerHTML = clsList || '<tr><td colspan="5">暂无数据</td></tr>';
+function renderAdminPagination(total, currentPage, containerId, type) {
+  const el = document.getElementById(containerId); el.innerHTML = '';
+  const totalPage = Math.ceil(total / ADMIN_PAGE_SIZE) || 1;
+  if(totalPage <= 1) return;
+  const first = document.createElement('button'); first.className = 'page-btn'; first.innerText = '«';
+  first.onclick = () => { type === 'vol' ? adminVolPage = 1 : adminClsPage = 1; renderAdminData(); };
+  const prev = document.createElement('button'); prev.className = 'page-btn'; prev.innerText = '<';
+  prev.onclick = () => {
+    if(type === 'vol' && adminVolPage > 1) adminVolPage--;
+    if(type === 'cls' && adminClsPage > 1) adminClsPage--;
+    renderAdminData();
+  };
+  const info = document.createElement('div'); info.className = 'page-info'; info.innerText = `${currentPage}/${totalPage}`;
+  const next = document.createElement('button'); next.className = 'page-btn'; next.innerText = '>';
+  next.onclick = () => {
+    if(type === 'vol' && adminVolPage < totalPage) adminVolPage++;
+    if(type === 'cls' && adminClsPage < totalPage) adminClsPage++;
+    renderAdminData();
+  };
+  const last = document.createElement('button'); last.className = 'page-btn'; last.innerText = '»';
+  last.onclick = () => { type === 'vol' ? adminVolPage = totalPage : adminClsPage = totalPage; renderAdminData(); };
+  el.append(first, prev, info, next, last);
+}
+function renderAdminData() { 
+  if(!isAdmin) return; 
+  const totalVol = volunteers.length;
+  const startVol = (adminVolPage - 1) * ADMIN_PAGE_SIZE;
+  const volPageData = volunteers.slice(startVol, startVol + ADMIN_PAGE_SIZE);
+  document.getElementById('adminVolunteerList').innerHTML = volPageData.map(v => `
+  <tr>
+    <td>${v.name}</td><td>${v.phone}</td><td>${v.school||'-'}</td><td>${v.major||'-'}</td><td>${v.subject||'-'}</td>
+    <td>
+      <button class="admin-btn btn-edit" onclick="openEditModal(${v.id},'vol')">编辑</button>
+      <button class="admin-btn btn-del" onclick="deleteItem(${v.id},'vol')">删除</button>
+    </td>
+  </tr>`).join('') || '<tr><td colspan="6">暂无数据</td></tr>';
+  const totalCls = classes.length;
+  const startCls = (adminClsPage - 1) * ADMIN_PAGE_SIZE;
+  const clsPageData = classes.slice(startCls, startCls + ADMIN_PAGE_SIZE);
+  document.getElementById('adminClassList').innerHTML = clsPageData.map(c => `
+  <tr>
+    <td>${c.class_name}</td><td>${c.grade}</td><td>${c.school_name||'-'}</td><td>${c.contact_phone||'-'}</td>
+    <td>
+      <button class="admin-btn btn-edit" onclick="openEditModal(${c.id},'cls')">编辑</button>
+      <button class="admin-btn btn-del" onclick="deleteItem(${c.id},'cls')">删除</button>
+    </td>
+  </tr>`).join('') || '<tr><td colspan="5">暂无数据</td></tr>';
+  renderAdminPagination(totalVol, adminVolPage, 'adminVolPagination', 'vol');
+  renderAdminPagination(totalCls, adminClsPage, 'adminClsPagination', 'cls');
 }
 function initTabButtons() {
-    const container = document.getElementById('tabButtons');
-    container.innerHTML = `<button class="tab-btn active" data-tab="volunteer-form">志愿者报名</button><button class="tab-btn" data-tab="student-form">班级需求</button><button class="tab-btn" data-tab="match-result">匹配结果</button>`;
-    if (isAdmin) container.innerHTML += `<button class="tab-btn" data-tab="admin">管理后台</button>`;
-    container.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.onclick = () => {
-            document.querySelectorAll('.form-content,.match-content,.admin-content').forEach(x => x.classList.remove('active'));
-            document.getElementById(btn.dataset.tab).classList.add('active');
-            container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            if(btn.dataset.tab === 'match-result') renderMatch();
-            if(btn.dataset.tab === 'admin') renderAdminData();
-        };
-    });
+  const c = document.getElementById('tabButtons');
+  c.innerHTML = `
+  <button class="tab-btn active" data-tab="volunteer-form">志愿者报名</button>
+  <button class="tab-btn" data-tab="student-form">班级需求</button>
+  <button class="tab-btn" data-tab="match-result">匹配结果</button>`;
+  if (isAdmin) c.innerHTML += `<button class="tab-btn" data-tab="admin">管理后台</button>`;
+  c.querySelectorAll('.tab-btn').forEach(b => {
+    b.onclick = () => {
+      document.querySelectorAll('.form-content,.match-content,.admin-content').forEach(x => x.classList.remove('active'));
+      document.getElementById(b.dataset.tab).classList.add('active');
+      c.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      if (b.dataset.tab === 'match-result') renderMatch();
+      if (b.dataset.tab === 'admin') renderAdminData();
+    };
+  });
 }
-function switchAdminTab(tab) {
-    document.querySelectorAll('.admin-tab,.admin-panel').forEach(x => x.classList.remove('active'));
-    document.querySelectorAll('.admin-tab')[tab === 'volunteer-admin' ? 0 : 1].classList.add('active');
-    document.getElementById(tab).classList.add('active');
+function switchAdminTab(t) {
+  document.querySelectorAll('.admin-tab,.admin-panel').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.admin-tab')[t==='volunteer-admin'?0:1].classList.add('active');
+  document.getElementById(t).classList.add('active');
 }
 document.getElementById('vol-submit').onclick = async () => {
-    const { isLogin } = getStoredLoginInfo();
-    if (!isLogin) { showToast('请先登录', 'error'); openModal('login'); return; }
-    const name = document.getElementById('vol-name').value.trim();
-    if (!name || !document.getElementById('vol-phone').value.trim()) { showToast('带*为必填项', 'error'); return; }
-    try {
-        await fetch(`${SUPABASE_URL}/rest/v1/volunteers`, { method: 'POST', headers: HEADERS, body: JSON.stringify({ name, phone: document.getElementById('vol-phone').value, school: document.getElementById('vol-school').value, major: document.getElementById('vol-major').value, subject: document.getElementById('vol-subject').value, available_time: document.getElementById('vol-time').value, intro: document.getElementById('vol-intro').value }) });
-        showToast('报名成功'); await loadAllData(); renderMatch();
-        document.querySelectorAll('#volunteer-form input,#volunteer-form textarea').forEach(i => i.value = '');
-    } catch(e) { showToast('提交失败', 'error'); }
+  if (!getStoredLoginInfo().isLogin) { showToast('请先登录', 'error'); openModal('login'); return; }
+  const n = document.getElementById('vol-name').value.trim();
+  const p = document.getElementById('vol-phone').value.trim();
+  if (!n || !p) { showToast('必填项不能为空', 'error'); return; }
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/volunteers`, {
+      method: 'POST', headers: HEADERS,
+      body: JSON.stringify({
+        name: n, phone: p, school: document.getElementById('vol-school').value,
+        major: document.getElementById('vol-major').value, subject: document.getElementById('vol-subject').value,
+        available_time: document.getElementById('vol-time').value, intro: document.getElementById('vol-intro').value
+      })
+    });
+    showToast('报名成功');
+    await loadAllData(); matchedPairs = []; renderMatch();
+    document.querySelectorAll('#volunteer-form input,#volunteer-form textarea').forEach(i => i.value = '');
+  } catch (e) { showToast('提交失败', 'error'); }
 };
 document.getElementById('cls-submit').onclick = async () => {
-    const { isLogin } = getStoredLoginInfo();
-    if (!isLogin) { showToast('请先登录', 'error'); openModal('login'); return; }
-    const class_name = document.getElementById('cls-name').value.trim();
-    if (!class_name) { showToast('请填写班级名称', 'error'); return; }
-    try {
-        await fetch(`${SUPABASE_URL}/rest/v1/classes`, { method: 'POST', headers: HEADERS, body: JSON.stringify({ class_name, grade: document.getElementById('cls-grade').value, school_name: document.getElementById('cls-school').value, contact_phone: document.getElementById('cls-phone').value, time: document.getElementById('cls-time').value, study_desc: document.getElementById('cls-desc').value, subject: '道德与法治' }) });
-        showToast('需求提交成功'); await loadAllData(); renderMatch();
-        document.querySelectorAll('#student-form input,#student-form select').forEach(i => i.value = '');
-    } catch(e) { showToast('提交失败', 'error'); }
+  if (!getStoredLoginInfo().isLogin) { showToast('请先登录', 'error'); openModal('login'); return; }
+  const cn = document.getElementById('cls-name').value.trim();
+  if (!cn) { showToast('班级名称不能为空', 'error'); return; }
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/classes`, {
+      method: 'POST', headers: HEADERS,
+      body: JSON.stringify({
+        class_name: cn, grade: document.getElementById('cls-grade').value,
+        school_name: document.getElementById('cls-school').value, contact_phone: document.getElementById('cls-phone').value,
+        time: document.getElementById('cls-time').value, study_desc: document.getElementById('cls-desc').value, subject: '道德与法治'
+      })
+    });
+    showToast('提交成功');
+    await loadAllData(); matchedPairs = []; renderMatch();
+    document.querySelectorAll('#student-form input,#student-form select').forEach(i => i.value = '');
+  } catch (e) { showToast('失败', 'error'); }
 };
+function doSearch() {
+  searchKeyword = document.getElementById('searchInput').value.trim().toLowerCase();
+  matchPage = 1; renderMatch();
+}
+function exportExcel() {
+  if (!matchedPairs.length) { showToast('无数据可导出', 'error'); return; }
+  const header = [['志愿者姓名','院校','专业','授课范围','班级','年级','学校','辅导老师电话','服务时间']];
+  const body = matchedPairs.map(p => [
+    p.vol.name, p.vol.school||'', p.vol.major||'', p.vol.subject||'',
+    p.cls.class_name, p.cls.grade, p.cls.school_name||'', p.cls.contact_phone||'', p.vol.available_time||''
+  ]);
+  const csv = header.concat(body).map(row => row.map(c => `"${(c||'').replace(/"/g, '""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = '志愿者匹配名单_' + new Date().toLocaleDateString() + '.csv';
+  a.click(); URL.revokeObjectURL(url);
+  showToast('导出成功');
+}
+function openManualMatch() {
+  if (!isAdmin) { showToast('仅管理员', 'error'); return; }
+  manualSelectVol = null; manualSelectCls = null;
+  const vlist = document.getElementById('manualVolList');
+  vlist.innerHTML = volunteers.map(v => `<div class="select-match-item" onclick="selectManualVol(${v.id},'${v.name}')">${v.name} | ${v.school||''} | ${v.subject||''}</div>`).join('') || '<div style="padding:6px">无志愿者</div>';
+  const clist = document.getElementById('manualClsList');
+  clist.innerHTML = classes.map(c => `<div class="select-match-item" onclick="selectManualCls(${c.id},'${c.class_name}')">${c.class_name} | ${c.grade} | ${c.school_name||''}</div>`).join('') || '<div style="padding:6px">无班级</div>';
+  document.getElementById('manualMatchModal').classList.add('active');
+}
+function closeManualModal() { document.getElementById('manualMatchModal').classList.remove('active'); }
+function selectManualVol(id, name) { manualSelectVol = id; showToast('已选：' + name); }
+function selectManualCls(id, name) { manualSelectCls = id; showToast('已选：' + name); }
+function saveManualMatch() {
+  if (!manualSelectVol || !manualSelectCls) { showToast('请选择', 'error'); return; }
+  const v = volunteers.find(x => x.id === manualSelectVol);
+  const c = classes.find(x => x.id === manualSelectCls);
+  if (!v || !c) { showToast('数据错误', 'error'); return; }
+  matchedPairs = matchedPairs.filter(p => p.vol.id !== v.id && p.cls.id !== c.id);
+  matchedPairs.unshift({ vol: v, cls: c });
+  closeManualModal(); renderMatch(); showToast('手动匹配成功');
+}
 window.onload = async () => {
-    const { isLogin, account, role } = getStoredLoginInfo();
-    if (isLogin && account) { currentUserAccount = account; isAdmin = (role === 'admin'); }
-    updateLoginUI();
-    await loadAllData();
-    renderMatch();
-    initTabButtons();
-    document.getElementById('volunteer-form').classList.add('active');
-    document.getElementById('student-form').classList.remove('active');
-    document.getElementById('match-result').classList.remove('active');
-    if(document.getElementById('admin')) document.getElementById('admin').classList.remove('active');
+  const { isLogin, account, role } = getStoredLoginInfo();
+  if (isLogin && account) { currentUserAccount = account; isAdmin = role === 'admin'; }
+  updateLoginUI();
+  await loadAllData();
+  renderMatch();
+  initTabButtons();
 };
 </script>
 </body>
