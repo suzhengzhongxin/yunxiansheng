@@ -65,8 +65,6 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
         }
-
-        /* 顶部栏 - 与index完全一致 */
         .top-bar {
             background: var(--primary-dark);
             color: var(--gold-color);
@@ -91,8 +89,6 @@
         .top-bar a:hover {
             color: var(--gold-color);
         }
-
-        /* 导航栏 - 与index完全一致 */
         .header {
             position: sticky;
             top: 0;
@@ -156,8 +152,6 @@
             color: var(--white-color);
             cursor: pointer;
         }
-
-        /* 登录弹窗 - 与index完全一致 */
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -199,8 +193,6 @@
             width: 100%; padding: 10px;
             border: 1px solid #ddd; border-radius: 6px;
         }
-
-        /* 提示toast */
         .toast {
             position: fixed;
             top: 20px;
@@ -218,8 +210,6 @@
         .toast.success { background-color: #42b983; }
         .toast.error { background-color: #d62828; }
         .toast.show { opacity: 1; }
-
-        /* 横幅 */
         .banner {
             height: 380px;
             background: linear-gradient(135deg, var(--primary-color) 0%, #b82232 100%);
@@ -265,8 +255,6 @@
             padding: 12px 32px;
             border-radius: var(--radius-md);
         }
-
-        /* 视频学习内容区 */
         .video-section {
             padding: 80px 0;
         }
@@ -337,47 +325,11 @@
             width: 70%;
             position: relative;
             background-color: #000;
-            min-height: 450px;
+            min-height: 550px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .video-bg {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .video-mask {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0,0,0,0.5);
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: white;
-            cursor: pointer;
-        }
-        .video-time {
-            font-size: 14px;
-        }
-        .video-controls {
-            display: flex;
-            gap: 15px;
-            font-size: 18px;
-        }
-        .video-controls i {
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .video-controls i:hover {
-            color: var(--gold-color);
-        }
-
-        /* 底部 - 与index完全一致 */
         .footer {
             background-color: var(--primary-dark);
             color: var(--white-color);
@@ -413,7 +365,6 @@
             font-size: 14px;
             color: #ccc;
         }
-
         @media (max-width:768px) {
             .nav-menu {
                 position: fixed;
@@ -430,34 +381,17 @@
             }
             .nav-menu.active { left: 0; }
             .nav-toggle { display: block; }
-            .banner {
-                height: 320px;
-            }
-            .banner-title {
-                font-size: 32px;
-            }
-            .course-container {
-                flex-direction: column;
-            }
-            .course-catalog {
-                width: 100%;
-                border-right: none;
-                border-bottom: 1px solid var(--gray-middle);
-            }
-            .video-player {
-                width: 100%;
-                min-height: 300px;
-            }
-            .footer-top {
-                flex-direction: column;
-                gap: 30px;
-            }
+            .banner { height: 320px; }
+            .banner-title { font-size: 32px; }
+            .course-container { flex-direction: column; }
+            .course-catalog { width: 100%; border-right: none; border-bottom: 1px solid var(--gray-middle); }
+            .video-player { width: 100%; min-height: 300px; }
+            .footer-top { flex-direction: column; gap: 30px; }
         }
     </style>
 </head>
 <body>
 
-<!-- 顶部栏 - 与index完全一致 -->
 <div class="top-bar">
     <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
     <div class="login-group" id="loginGroup">
@@ -466,7 +400,6 @@
     </div>
 </div>
 
-<!-- 导航栏 - 与index完全一致 -->
 <header class="header">
     <div class="container nav">
         <div class="logo">
@@ -475,7 +408,7 @@
         </div>
         <ul class="nav-menu">
             <li><a href="index.html">首页</a></li>
-	    <li><a href="volunteer.html">志愿者匹配</a></li>
+	        <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="news.html">思政文库</a></li>
             <li><a href="bookstore.html">思政乐园</a></li>
             <li><a href="video.html" class="active">录播课室</a></li>
@@ -483,13 +416,10 @@
             <li><a href="forum.html">留言板</a></li>
             <li><a href="checkin.html" onclick="return checkMyNeedLogin(event)">我的</a></li>
         </ul>
-        <div class="nav-toggle" onclick="toggleNav()">
-            <i class="fa fa-bars"></i>
-        </div>
+        <div class="nav-toggle" onclick="toggleNav()"><i class="fa fa-bars"></i></div>
     </div>
 </header>
 
-<!-- 登录弹窗 -->
 <div class="modal" id="modal">
     <div class="modal-box">
         <div class="modal-close" onclick="closeModal()">&times;</div>
@@ -498,35 +428,19 @@
             <div class="modal-tab-item" onclick="switchTab('reg')">注册</div>
         </div>
         <div class="modal-panel active" id="loginPanel">
-            <div class="form-group">
-                <label>账号</label>
-                <input type="text" id="loginUsername" placeholder="手机号/学号">
-            </div>
-            <div class="form-group">
-                <label>密码</label>
-                <input type="password" id="loginPassword" placeholder="请输入密码">
-            </div>
+            <div class="form-group"><label>账号</label><input type="text" id="loginUsername" placeholder="手机号/学号"></div>
+            <div class="form-group"><label>密码</label><input type="password" id="loginPassword" placeholder="请输入密码"></div>
             <button class="btn" onclick="loginHandler()">登录</button>
         </div>
         <div class="modal-panel" id="regPanel">
-            <div class="form-group">
-                <label>手机号</label>
-                <input type="text" id="regPhone" placeholder="请输入手机号">
-            </div>
-            <div class="form-group">
-                <label>密码</label>
-                <input type="password" id="regPwd" placeholder="设置密码">
-            </div>
-            <div class="form-group">
-                <label>确认密码</label>
-                <input type="password" id="regConfirm" placeholder="确认密码">
-            </div>
+            <div class="form-group"><label>手机号</label><input type="text" id="regPhone" placeholder="请输入手机号"></div>
+            <div class="form-group"><label>密码</label><input type="password" id="regPwd" placeholder="设置密码"></div>
+            <div class="form-group"><label>确认密码</label><input type="password" id="regConfirm" placeholder="确认密码"></div>
             <button class="btn" onclick="registerHandler()">注册</button>
         </div>
     </div>
 </div>
 
-<!-- 横幅区域 -->
 <section class="banner">
     <div class="banner-bg"></div>
     <div class="banner-content">
@@ -536,54 +450,40 @@
     </div>
 </section>
 
-<!-- 视频学习核心内容区 -->
 <section class="video-section" id="video-content">
     <div class="container">
         <div class="course-container">
-            <!-- 左侧课程目录 -->
             <div class="course-catalog">
                 <h3 class="catalog-title">课程目录</h3>
                 <div class="course-list">
-                    <div class="course-item active">
-                        <a href="#" data-video-src="video/录课视频(1)/25思政2班韩雯婧2.7第一次录课.mp4" data-cover="图片/录播1.png">第一课：网络改变世界</a>
-                    </div>
-                    <div class="course-item">
-                        <a href="#" data-video-src="video/录课视频(1)/25思政2班韩雯婧2.19第二次录课.mp4" data-cover="图片/录播2.png">第二课：世界最长高速公路隧道</a>
-                    </div>
-                    <div class="course-item">
-                        <a href="#" data-video-src="video/录课视频(1)/25思政2班韩雯婧2.20第三次录课.mp4" data-cover="图片/录播3.png">第三课：人机共舞耀春晚</a>
-                    </div>
-                    <div class="course-item">
-                        <a href="#" data-video-src="video/录课视频(1)/25思政2班于瑞康2.7第一次录课.mp4" data-cover="图片/录播4.png">第四课：科技筑梦 创新未来</a>
-                    </div>
-                    <div class="course-item">
-                        <a href="#" data-video-src="video/录课视频(1)/25思政2班于瑞康2.19第二次录课.mp4" data-cover="图片/录播5.png">第五课：中国沙漠铁路：连接未来的希望之路</a>
-                    </div>
+                    <div class="course-item active" onclick="play(0)"><a>第一课：网络改变世界</a></div>
+                    <div class="course-item" onclick="play(1)"><a>第二课：世界最长高速公路隧道</a></div>
+                    <div class="course-item" onclick="play(2)"><a>第三课：人机共舞耀春晚</a></div>
+                    <div class="course-item" onclick="play(3)"><a>第四课：科技筑梦 创新未来</a></div>
+                    <div class="course-item" onclick="play(4)"><a>第五课：中国沙漠铁路：连接未来的希望之路</a></div>
                 </div>
                 <button class="more-course" onclick="window.location.href='course-list.html'">更多课程</button>
             </div>
-            <!-- 右侧视频播放区 -->
+
             <div class="video-player">
-                <img src="图片/录播1.png" alt="第一课：网络改变世界" class="video-bg" id="video-cover">
-                <video id="main-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: none;" preload="metadata">
-                    <source src="" type="video/mp4">
-                    您的浏览器不支持HTML5视频播放，请升级至最新浏览器！
-                </video>
-                <div class="video-mask" onclick="playVideo()">
-                    <div class="video-time" id="video-time">00:00:00</div>
-                    <div class="video-controls">
-                        <i class="fa fa-play" id="play-icon"></i>
-                        <i class="fa fa-pause" id="pause-icon" style="display: none;"></i>
-                        <i class="fa fa-volume-up"></i>
-                        <i class="fa fa-expand" onclick="event.stopPropagation(); fullScreenVideo()"></i>
-                    </div>
-                </div>
+                <iframe 
+                    id="player" 
+                    src="https://player.bilibili.com/player.html?bvid=BV16a9EBQEbD&page=1&high_quality=1&autoplay=0"
+                    scrolling="no"
+                    border="0"
+                    frameborder="no"
+                    framespacing="0"
+                    allowfullscreen="true"
+                    allow="autoplay; fullscreen"
+                    width="100%"
+                    height="100%"
+                    style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                </iframe>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 底部 -->
 <footer class="footer">
     <div class="container">
         <div class="footer-top">
@@ -599,270 +499,101 @@
 <div id="toast" class="toast"></div>
 
 <script>
-    // Supabase 配置
-    const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
-    const HEADERS = {
-        apikey: SUPABASE_KEY,
-        Authorization: "Bearer " + SUPABASE_KEY,
-        "Content-Type": "application/json"
-    };
+const videos = [
+  "https://player.bilibili.com/player.html?bvid=BV16a9EBQEbD&page=1&high_quality=1&autoplay=0",
+  "https://player.bilibili.com/player.html?bvid=BV1px9EBdEd8&page=1&high_quality=1&autoplay=0",
+  "https://player.bilibili.com/player.html?bvid=BV1px9EBdEo7&page=1&high_quality=1&autoplay=0",
+  "https://player.bilibili.com/player.html?bvid=BV1Bd97BjEiS&page=1&high_quality=1&autoplay=0",
+  "https://player.bilibili.com/player.html?bvid=BV1Bd97BjEPY&page=1&high_quality=1&autoplay=0"
+];
 
-    // 显示提示消息
-    function showToast(msg, type = 'success') {
-        const toast = document.getElementById('toast');
-        toast.textContent = msg;
-        toast.className = `toast ${type} show`;
-        setTimeout(() => toast.classList.remove('show'), 2000);
-    }
+function play(index) {
+  document.getElementById("player").src = videos[index];
+  document.querySelectorAll(".course-item").forEach((item, i) => {
+    item.classList.toggle("active", i === index);
+  });
+}
 
-    // 导航栏移动端折叠
-    function toggleNav() {
-        document.querySelector('.nav-menu').classList.toggle('active');
-    }
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+function toggleNav() { document.querySelector('.nav-menu').classList.toggle('active'); }
+const modalEl = document.getElementById('modal');
+function openModal(t) { modalEl.classList.add('active'); switchTab(t); }
+function closeModal() { modalEl.classList.remove('active'); }
+function switchTab(t) {
+  document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.modal-tab-item').forEach(i => i.classList.remove('active'));
+  if (t === 'login') {
+    document.getElementById('loginPanel').classList.add('active');
+    document.querySelectorAll('.modal-tab-item')[0].classList.add('active');
+  } else {
+    document.getElementById('regPanel').classList.add('active');
+    document.querySelectorAll('.modal-tab-item')[1].classList.add('active');
+  }
+}
 
-    // 登录模态框控制
-    const modalEl = document.getElementById('modal');
-    function openModal(type) {
-        modalEl.classList.add('active');
-        switchTab(type);
-    }
-    function closeModal() { modalEl.classList.remove('active'); }
-    function switchTab(tab) {
-        document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.modal-tab-item').forEach(i => i.classList.remove('active'));
-        if(tab === 'login') {
-            document.getElementById('loginPanel').classList.add('active');
-            document.querySelectorAll('.modal-tab-item')[0].classList.add('active');
-        } else {
-            document.getElementById('regPanel').classList.add('active');
-            document.querySelectorAll('.modal-tab-item')[1].classList.add('active');
-        }
-    }
+const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
+const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
+const HEADERS = { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY, "Content-Type": "application/json" };
 
-    // 登录处理 - 连接Supabase user表
-    async function loginHandler() {
-        const username = document.getElementById('loginUsername').value.trim();
-        const pwd = document.getElementById('loginPassword').value.trim();
-        if(!username || !pwd) {
-            showToast("请输入账号和密码", "error");
-            return;
-        }
-        
-        try {
-            const response = await fetch(
-                `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(pwd)}&select=*`,
-                { headers: HEADERS }
-            );
-            
-            if (!response.ok) {
-                throw new Error("网络请求失败");
-            }
-            
-            const data = await response.json();
-            
-            if (data && data.length > 0) {
-                const user = data[0];
-                localStorage.setItem('isLogin', 'true');
-                localStorage.setItem('loginUser', user.account);
-                localStorage.setItem('userRole', user.role || 'user');
-                showToast("登录成功！", "success");
-                closeModal();
-                updateLoginUI();
-                document.getElementById('loginUsername').value = '';
-                document.getElementById('loginPassword').value = '';
-            } else {
-                showToast("账号或密码错误", "error");
-            }
-        } catch (error) {
-            console.error("登录错误:", error);
-            showToast("登录失败，请检查网络连接", "error");
-        }
-    }
-    
-    // 注册处理 - 连接Supabase user表
-    async function registerHandler() {
-        const phone = document.getElementById('regPhone').value.trim();
-        const pwd = document.getElementById('regPwd').value;
-        const confirm = document.getElementById('regConfirm').value;
-        
-        if(!phone) {
-            showToast("请填写手机号", "error");
-            return;
-        }
-        if(!pwd) {
-            showToast("请设置密码", "error");
-            return;
-        }
-        if(pwd !== confirm) {
-            showToast("两次密码不一致", "error");
-            return;
-        }
-        try {
-            // 检查账号是否已存在
-            const checkResponse = await fetch(
-                `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(phone)}&select=*`,
-                { headers: HEADERS }
-            );
-            const existingUsers = await checkResponse.json();
-            
-            if (existingUsers && existingUsers.length > 0) {
-                showToast("该账号已存在，请直接登录", "error");
-                return;
-            }
-            
-            // 创建新用户
-            const newUser = {
-                account: phone,
-                password: pwd,
-                role: "user"
-            };
-            
-            const createResponse = await fetch(`${SUPABASE_URL}/rest/v1/user`, {
-                method: 'POST',
-                headers: HEADERS,
-                body: JSON.stringify(newUser)
-            });
-            
-            if (createResponse.ok) {
-                showToast("注册成功！请登录", "success");
-                document.getElementById('regPhone').value = '';
-                document.getElementById('regPwd').value = '';
-                document.getElementById('regConfirm').value = '';
-                switchTab('login');
-                document.getElementById('loginUsername').value = phone;
-                document.getElementById('loginPassword').value = '';
-            } else {
-                const errorData = await createResponse.text();
-                console.error("注册失败:", errorData);
-                showToast("注册失败，请稍后重试", "error");
-            }
-        } catch (error) {
-            console.error("注册错误:", error);
-            showToast("注册失败，请检查网络连接", "error");
-        }
-    }
+async function loginHandler() {
+  const u = document.getElementById('loginUsername').value.trim();
+  const p = document.getElementById('loginPassword').value.trim();
+  if (!u || !p) { showToast("请输入账号和密码", "error"); return; }
+  try {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(u)}&password=eq.${encodeURIComponent(p)}&select=*`, { headers: HEADERS });
+    const d = await r.json();
+    if (d && d.length > 0) {
+      localStorage.setItem('isLogin', 'true');
+      localStorage.setItem('loginUser', d[0].account);
+      localStorage.setItem('userRole', d[0].role || 'user');
+      showToast("登录成功！");
+      closeModal(); updateLoginUI();
+    } else { showToast("账号或密码错误", "error"); }
+  } catch (e) { showToast("登录失败", "error"); }
+}
 
-    // 我的页面登录拦截
-    function checkMyNeedLogin(event) {
-        const isLogged = localStorage.getItem('isLogin') === 'true';
-        if(!isLogged) {
-            event.preventDefault();
-            showToast("请先登录后访问我的页面", "error");
-            openModal('login');
-            return false;
-        }
-        return true;
-    }
-
-    // 更新顶部登录状态UI
-    function updateLoginUI() {
-        const isLogin = localStorage.getItem('isLogin') === 'true';
-        const loginGroup = document.getElementById('loginGroup');
-        if(isLogin && loginGroup) {
-            const user = localStorage.getItem('loginUser') || '用户';
-            loginGroup.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`;
-        } else {
-            loginGroup.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`;
-        }
-    }
-    
-    function logout() {
-        localStorage.removeItem('isLogin');
-        localStorage.removeItem('loginUser');
-        localStorage.removeItem('userRole');
-        showToast("已退出登录", "success");
-        updateLoginUI();
-    }
-
-    // 视频播放相关功能
-    const courseItems = document.querySelectorAll('.course-item');
-    const mainVideo = document.getElementById('main-video');
-    const videoCover = document.getElementById('video-cover');
-    const playIcon = document.getElementById('play-icon');
-    const pauseIcon = document.getElementById('pause-icon');
-    const videoTime = document.getElementById('video-time');
-    let videoSource = mainVideo.querySelector('source');
-
-    // 页面加载初始化
-    document.addEventListener('DOMContentLoaded', function() {
-        const defaultActive = document.querySelector('.course-item.active a');
-        if (defaultActive) {
-            videoSource.src = defaultActive.dataset.videoSrc;
-            videoSource.type = 'video/mp4';
-            mainVideo.load();
-            videoCover.src = defaultActive.dataset.cover;
-            videoCover.alt = defaultActive.textContent;
-        }
-        updateLoginUI();
-        
-        // 更新时间显示
-        mainVideo.addEventListener('timeupdate', function() {
-            let minutes = Math.floor(mainVideo.currentTime / 60);
-            let seconds = Math.floor(mainVideo.currentTime % 60);
-            videoTime.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}:00`;
-        });
+async function registerHandler() {
+  const phone = document.getElementById('regPhone').value.trim();
+  const pwd = document.getElementById('regPwd').value;
+  const cfm = document.getElementById('regConfirm').value;
+  if (!phone || !pwd || pwd !== cfm) { showToast("输入不合法", "error"); return; }
+  try {
+    const chk = await fetch(`${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(phone)}&select=*`, { headers: HEADERS });
+    const ex = await chk.json();
+    if (ex && ex.length > 0) { showToast("账号已存在", "error"); return; }
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/user`, {
+      method: 'POST', headers: HEADERS,
+      body: JSON.stringify({ account: phone, password: pwd, role: "user" })
     });
+    if (res.ok) { showToast("注册成功！"); switchTab('login'); }
+    else { showToast("注册失败", "error"); }
+  } catch (e) { showToast("注册失败", "error"); }
+}
 
-    // 课程点击切换
-    courseItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            courseItems.forEach(li => li.classList.remove('active'));
-            this.classList.add('active');
-            
-            const currentA = this.querySelector('a');
-            const videoSrc = currentA.dataset.videoSrc;
-            const coverSrc = currentA.dataset.cover;
-            
-            mainVideo.pause();
-            playIcon.style.display = 'block';
-            pauseIcon.style.display = 'none';
-            videoCover.style.display = 'block';
-            mainVideo.style.display = 'none';
-            
-            videoSource.src = videoSrc;
-            videoSource.type = 'video/mp4';
-            mainVideo.load();
-            videoCover.src = coverSrc;
-        });
-    });
+function checkMyNeedLogin(e) {
+  if (localStorage.getItem('isLogin') !== 'true') {
+    e.preventDefault(); showToast("请先登录", "error"); openModal('login'); return false;
+  } return true;
+}
 
-    function playVideo() {
-        if (mainVideo.paused) {
-            videoCover.style.display = 'none';
-            mainVideo.style.display = 'block';
-            mainVideo.play().catch(err => {
-                console.log('播放失败：', err);
-                showToast('视频播放失败，请检查文件路径是否正确！', 'error');
-            });
-            playIcon.style.display = 'none';
-            pauseIcon.style.display = 'block';
-        } else {
-            mainVideo.pause();
-            playIcon.style.display = 'block';
-            pauseIcon.style.display = 'none';
-            videoCover.style.display = 'block';
-            mainVideo.style.display = 'none';
-        }
-    }
+function updateLoginUI() {
+  const log = localStorage.getItem('isLogin') === 'true';
+  const g = document.getElementById('loginGroup');
+  if (log) {
+    const user = localStorage.getItem('loginUser');
+    g.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span><a href="javascript:logout()" style="margin-left:12px;">退出</a>`;
+  } else {
+    g.innerHTML = `<a href="javascript:openModal('login')">登录</a><a href="javascript:openModal('reg')">注册</a>`;
+  }
+}
 
-    function fullScreenVideo() {
-        if (mainVideo.requestFullscreen) {
-            mainVideo.requestFullscreen();
-        } else if (mainVideo.webkitRequestFullscreen) {
-            mainVideo.webkitRequestFullscreen();
-        } else if (mainVideo.mozRequestFullScreen) {
-            mainVideo.mozRequestFullScreen();
-        }
-    }
-
-    mainVideo.addEventListener('ended', function() {
-        playIcon.style.display = 'block';
-        pauseIcon.style.display = 'none';
-        videoCover.style.display = 'block';
-        mainVideo.style.display = 'none';
-    });
+function logout() { localStorage.clear(); showToast("已退出"); updateLoginUI(); }
+document.addEventListener('DOMContentLoaded', () => { updateLoginUI(); });
 </script>
 </body>
 </html>
