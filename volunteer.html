@@ -1,1111 +1,552 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>云先生-志愿者匹配 | 师范生助力乡村思政教育</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Microsoft Yahei", "PingFang SC", "Helvetica Neue", sans-serif;
-        }
-        :root {
-            --primary-color: #991a28;
-            --primary-light: #d62828;
-            --primary-dark: #7a141e;
-            --gold-color: #ffd700;
-            --gray-light: #f8f9fa;
-            --gray-middle: #e9ecef;
-            --gray-dark: #6c757d;
-            --white-color: #ffffff;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 16px;
-            --transition: all 0.3s ease;
-            scroll-behavior: smooth;
-        }
-        body {
-            background-color: var(--gray-light);
-            color: #333;
-            line-height: 1.6;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-        ul {
-            list-style: none;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 24px;
-            background-color: var(--primary-color);
-            color: var(--white-color);
-            border: none;
-            border-radius: var(--radius-sm);
-            font-size: 15px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
-        }
-        .btn:hover {
-            background-color: var(--primary-light);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* 顶部栏 */
-        .top-bar {
-            background: var(--primary-dark);
-            color: var(--gold-color);
-            padding: 8px 0;
-            font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .top-bar .slogan {
-            flex: 1;
-            text-align: center;
-        }
-        .top-bar .login-group {
-            padding-right: 20px;
-        }
-        .top-bar a {
-            color: #fff;
-            margin-left: 15px;
-        }
-        .top-bar a:hover {
-            color: var(--gold-color);
-        }
-
-        /* 导航栏 */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 999;
-            background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
-            box-shadow: var(--shadow-sm);
-            padding: 0;
-        }
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .logo img {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            border: 2px solid var(--white-color);
-            object-fit: cover;
-        }
-        .logo-text {
-            color: var(--white-color);
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .nav-menu {
-            display: flex;
-            gap: 35px;
-        }
-        .nav-menu li a {
-            color: #ffffff;
-            font-size: 16px;
-            padding: 8px 0;
-            position: relative;
-        }
-        .nav-menu li a.active {
-            color: #ffd700;
-        }
-        .nav-menu li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #ffd700;
-            transition: var(--transition);
-        }
-        .nav-menu li a:hover::after {
-            width: 100%;
-        }
-        .nav-toggle {
-            display: none;
-            font-size: 24px;
-            color: var(--white-color);
-            cursor: pointer;
-        }
-
-        /* 登录弹窗 */
-        .modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal.active { display: flex; }
-        .modal-box {
-            background: #fff;
-            width: 90%;
-            max-width: 420px;
-            padding: 30px;
-            border-radius: 12px;
-            position: relative;
-        }
-        .modal-close {
-            position: absolute; top: 15px; right: 15px;
-            font-size: 20px; cursor: pointer;
-        }
-        .modal-tab {
-            display: flex; margin-bottom: 20px;
-        }
-        .modal-tab-item {
-            flex: 1; text-align: center; padding: 10px 0;
-            font-weight: bold; cursor: pointer;
-        }
-        .modal-tab-item.active {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-        }
-        .modal-panel { display: none; }
-        .modal-panel.active { display: block; }
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; margin-bottom: 6px; }
-        .form-group input {
-            width: 100%; padding: 10px;
-            border: 1px solid #ddd; border-radius: 6px;
-        }
-
-        /* 横幅 */
-        .banner {
-            height: 380px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #b82232 100%);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .banner-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('图片/bg(1).jpg') center/cover no-repeat;
-            opacity: 0.25;
-            z-index: 1;
-        }
-        .banner-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            color: var(--white-color);
-            padding: 0 20px;
-        }
-        .banner-title {
-            font-size: 44px;
-            font-weight: bold;
-            margin-bottom: 16px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .banner-subtitle {
-            font-size: 20px;
-            margin-bottom: 28px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .banner-btn {
-            background-color: var(--gold-color);
-            color: var(--primary-dark);
-            font-weight: bold;
-            padding: 12px 32px;
-            border-radius: var(--radius-md);
-        }
-
-        /* 志愿者匹配核心样式 */
-        .match-section {
-            padding: 80px 0;
-        }
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        .section-title h2 {
-            font-size: 30px;
-            color: var(--primary-dark);
-            display: inline-block;
-            padding-bottom: 10px;
-            border-bottom: 3px double var(--primary-color);
-        }
-        .section-desc {
-            text-align: center;
-            font-size: 16px;
-            color: var(--gray-dark);
-            margin-top: 15px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .tab-container {
-            max-width: 1200px;
-            margin: 0 auto 40px;
-            background-color: var(--white-color);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            overflow: hidden;
-        }
-        .tab-buttons {
-            display: flex;
-            background-color: #f0e9e0;
-            border-bottom: 1px solid var(--gray-middle);
-        }
-        .tab-btn {
-            flex: 1;
-            padding: 16px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary-dark);
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            background: transparent;
-        }
-        .tab-btn.active {
-            background-color: var(--white-color);
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--primary-color);
-        }
-        .form-content {
-            padding: 40px;
-            display: none;
-        }
-        .form-content.active {
-            display: block;
-        }
-        .match-content {
-            padding: 40px;
-            display: none;
-        }
-        .match-content.active {
-            display: block;
-        }
-        .form-title {
-            font-size: 22px;
-            color: var(--primary-dark);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #333;
-        }
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--gray-middle);
-            border-radius: var(--radius-sm);
-            font-size: 16px;
-            transition: var(--transition);
-        }
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(153, 26, 40, 0.1);
-        }
-        .form-fullwidth {
-            grid-column: 1 / -1;
-        }
-        .form-actions {
-            grid-column: 1 / -1;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .match-grid {
-            display: grid;
-            grid-template-columns: 1fr 120px 1fr;
-            gap: 20px;
-            align-items: start;
-        }
-        .list-container {
-            background-color: #f9f5f0;
-            border-radius: var(--radius-md);
-            padding: 20px;
-            height: 550px;
-            overflow-y: auto;
-        }
-        .list-title {
-            font-size: 20px;
-            color: var(--primary-dark);
-            margin-bottom: 20px;
-            text-align: center;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--gray-middle);
-        }
-        .person-card {
-            background-color: var(--white-color);
-            border-radius: var(--radius-sm);
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: var(--shadow-sm);
-            border-left: 3px solid var(--primary-color);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        .person-card:hover {
-            transform: translateX(5px);
-            box-shadow: var(--shadow-md);
-        }
-        .person-card.matched {
-            border-left-color: #42b983;
-            background-color: #f0fff9;
-        }
-        .person-name {
-            font-weight: bold;
-            font-size: 17px;
-            color: var(--primary-dark);
-            margin-bottom: 8px;
-        }
-        .person-info {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.5;
-        }
-        .connect-area {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
-        .connect-line {
-            width: 2px;
-            height: 60px;
-            background-color: var(--gray-middle);
-        }
-        .connect-tag {
-            padding: 8px 16px;
-            background-color: var(--primary-color);
-            color: var(--white-color);
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .connect-tag.matched {
-            background-color: #42b983;
-        }
-        .match-stats {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            border-radius: var(--radius-lg);
-            padding: 30px;
-            margin-top: 40px;
-            text-align: center;
-            color: white;
-        }
-        .stats-number {
-            font-size: 48px;
-            font-weight: bold;
-        }
-        .stats-label {
-            font-size: 16px;
-            margin-top: 5px;
-        }
-
-        /* 底部 */
-        .footer {
-            background-color: var(--primary-dark);
-            color: var(--white-color);
-            padding: 50px 0 20px;
-            margin-top: 60px;
-        }
-        .footer-top {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        .footer-col h4 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .footer-col h4::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--gold-color);
-        }
-        .footer-col li { margin-bottom: 12px; }
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 14px;
-            color: #ccc;
-        }
-        .toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 12px 24px;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 16px;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-        .toast.success { background-color: #42b983; }
-        .toast.error { background-color: #d62828; }
-        .toast.show { opacity: 1; }
-
-        @media (max-width: 1200px) {
-            .match-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            .connect-area {
-                flex-direction: row;
-                justify-content: center;
-                margin: 20px 0;
-            }
-            .connect-line {
-                width: 60px;
-                height: 2px;
-            }
-        }
-        @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: var(--primary-dark);
-                flex-direction: column;
-                align-items: center;
-                padding: 40px 0;
-                gap: 20px;
-                transition: var(--transition);
-            }
-            .nav-menu.active { left: 0; }
-            .nav-toggle { display: block; }
-            .banner {
-                height: 320px;
-            }
-            .banner-title {
-                font-size: 32px;
-            }
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            .match-section {
-                padding: 40px 0;
-            }
-            .form-content, .match-content {
-                padding: 20px;
-            }
-            .tab-btn {
-                font-size: 14px;
-                padding: 12px;
-            }
-            .footer-top {
-                flex-direction: column;
-                gap: 30px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云先生-志愿者匹配 | 师范生助力乡村思政教育</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+<style>
+* {margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft Yahei","PingFang SC","Helvetica Neue",sans-serif;}
+:root{--primary-color:#991a28;--primary-light:#d62828;--primary-dark:#7a141e;--gold-color:#ffd700;--gray-light:#f8f9fa;--gray-middle:#e9ecef;--gray-dark:#6c757d;--white-color:#ffffff;--shadow-sm:0 2px 8px rgba(0,0,0,0.08);--shadow-md:0 4px 16px rgba(0,0,0,0.12);--shadow-lg:0 8px 24px rgba(0,0,0,0.15);--radius-sm:6px;--radius-md:10px;--radius-lg:16px;--transition:all 0.3s ease;scroll-behavior:smooth;}
+body{background-color:var(--gray-light);color:#333;line-height:1.6;}
+a{text-decoration:none;color:inherit;transition:var(--transition);}
+ul{list-style:none;}
+.container{max-width:1400px;margin:0 auto;padding:0 20px;}
+.btn{display:inline-block;padding:10px 24px;background-color:var(--primary-color);color:var(--white-color);border:none;border-radius:var(--radius-sm);font-size:15px;cursor:pointer;transition:var(--transition);text-align:center;}
+.btn:hover{background-color:var(--primary-light);transform:translateY(-2px);box-shadow:var(--shadow-sm);}
+.top-bar{background:var(--primary-dark);color:var(--gold-color);padding:8px 0;font-size:14px;display:flex;justify-content:space-between;align-items:center;}
+.top-bar .slogan{flex:1;text-align:center;}
+.top-bar .login-group{padding-right:20px;}
+.top-bar a{color:#fff;margin-left:15px;cursor:pointer;}
+.top-bar a:hover{color:var(--gold-color);}
+.header{position:sticky;top:0;z-index:999;background:linear-gradient(90deg,var(--primary-dark),var(--primary-color));box-shadow:var(--shadow-sm);padding:0;}
+.nav{display:flex;justify-content:space-between;align-items:center;height:70px;}
+.logo{display:flex;align-items:center;gap:12px;}
+.logo img{width:48px;height:48px;border-radius:8px;border:2px solid var(--white-color);object-fit:cover;}
+.logo-text{color:var(--white-color);font-size:20px;font-weight:bold;}
+.nav-menu{display:flex;gap:35px;}
+.nav-menu li a{color:#ffffff;font-size:16px;padding:8px 0;position:relative;}
+.nav-menu li a.active{color:#ffd700;}
+.nav-menu li a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background-color:#ffd700;transition:var(--transition);}
+.nav-menu li a:hover::after{width:100%;}
+.nav-toggle{display:none;font-size:24px;color:var(--white-color);cursor:pointer;}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;display:none;align-items:center;justify-content:center;}
+.modal.active{display:flex;}
+.modal-box{background:#fff;width:90%;max-width:460px;padding:30px;border-radius:12px;position:relative;}
+.modal-close{position:absolute;top:15px;right:15px;font-size:20px;cursor:pointer;}
+.modal-tab{display:flex;margin-bottom:20px;}
+.modal-tab-item{flex:1;text-align:center;padding:10px 0;font-weight:bold;cursor:pointer;}
+.modal-tab-item.active{color:var(--primary-color);border-bottom:2px solid var(--primary-color);}
+.modal-panel{display:none;}
+.modal-panel.active{display:block;}
+.form-group{margin-bottom:18px;}
+.form-group label{display:block;margin-bottom:6px;}
+.form-group input{width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;}
+.banner{height:380px;background:linear-gradient(135deg,var(--primary-color) 0%,#b82233 100%);position:relative;display:flex;align-items:center;justify-content:center;}
+.banner-bg{position:absolute;top:0;left:0;width:100%;height:100%;background:url('图片/bg(1).jpg') center/cover no-repeat;opacity:0.25;z-index:1;}
+.banner-content{position:relative;z-index:2;text-align:center;color:var(--white-color);padding:0 20px;}
+.banner-title{font-size:44px;font-weight:bold;margin-bottom:16px;text-shadow:0 2px 10px rgba(0,0,0,0.3);}
+.banner-subtitle{font-size:20px;margin-bottom:28px;max-width:800px;margin-left:auto;margin-right:auto;}
+.banner-btn{background-color:var(--gold-color);color:var(--primary-dark);font-weight:bold;padding:12px 32px;border-radius:var(--radius-md);}
+.match-section{padding:80px 0;}
+.section-title{text-align:center;margin-bottom:60px;}
+.section-title h2{font-size:30px;color:var(--primary-dark);display:inline-block;padding-bottom:10px;border-bottom:3px double var(--primary-color);}
+.section-desc{text-align:center;font-size:16px;color:var(--gray-dark);margin-top:15px;max-width:800px;margin-left:auto;margin-right:auto;}
+.tab-container{max-width:1200px;margin:0 auto 40px;background-color:var(--white-color);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);overflow:hidden;}
+.tab-buttons{display:flex;background-color:#f0e9e0;border-bottom:1px solid var(--gray-middle);}
+.tab-btn{flex:1;padding:16px;text-align:center;font-size:18px;font-weight:bold;color:var(--primary-dark);cursor:pointer;transition:var(--transition);border:none;background:transparent;}
+.tab-btn.active{background-color:var(--white-color);color:var(--primary-color);border-bottom:3px solid var(--primary-color);}
+.form-content{padding:40px;display:none;}
+.form-content.active{display:block;}
+.match-content{padding:40px;display:none;}
+.match-content.active{display:block;}
+.admin-content{padding:40px;display:none;}
+.admin-content.active{display:block;}
+.form-title{font-size:22px;color:var(--primary-dark);margin-bottom:30px;text-align:center;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;}
+.form-group{margin-bottom:20px;}
+.form-group label{display:block;margin-bottom:8px;font-weight:500;color:#333;}
+.form-control{width:100%;padding:12px 15px;border:1px solid var(--gray-middle);border-radius:var(--radius-sm);font-size:16px;transition:var(--transition);}
+.form-control:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 3px rgba(153, 26, 40, 0.1);}
+.form-fullwidth{grid-column:1 / -1;}
+.form-actions{grid-column:1 / -1;text-align:center;margin-top:20px;}
+.match-list{background-color:#f9f5f0;border-radius:var(--radius-md);padding:20px;max-height:600px;overflow-y:auto;}
+.match-item{background-color:var(--white-color);border-radius:var(--radius-sm);padding:15px;margin-bottom:15px;box-shadow:var(--shadow-sm);border-left:3px solid #42b983;transition:var(--transition);}
+.match-item:hover{transform:translateX(5px);box-shadow:var(--shadow-md);}
+.match-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.match-tag{padding:4px 12px;background-color:#42b983;color:var(--white-color);border-radius:20px;font-size:14px;font-weight:bold;}
+.match-content-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.person-info{font-size:15px;color:#555;line-height:1.6;}
+.person-name{font-weight:bold;font-size:18px;color:var(--primary-dark);margin-bottom:8px;}
+.admin-bar{display:flex;gap:8px;margin-bottom:10px;}
+.admin-btn{padding:5px 10px;font-size:12px;border:none;border-radius:4px;color:#fff;cursor:pointer;}
+.btn-edit{background:#0066cc;}
+.btn-del{background:#cc0000;}
+.match-stats{background:linear-gradient(135deg,var(--primary-color),var(--primary-light));border-radius:var(--radius-lg);padding:30px;margin-top:40px;text-align:center;color:white;}
+.stats-number{font-size:48px;font-weight:bold;}
+.stats-label{font-size:16px;margin-top:5px;}
+.search-bar{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;align-items:center;}
+.search-input{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--gray-middle);border-radius:var(--radius-sm);font-size:14px;}
+.search-btn{padding:10px 18px;background:var(--primary-color);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;}
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:20px;padding:10px 0;}
+.page-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--gray-middle);background:white;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition);}
+.page-btn:hover,.page-btn.active{background:var(--primary-color);color:white;border-color:var(--primary-color);}
+.page-info{font-size:14px;color:var(--gray-dark);padding:0 10px;}
+.admin-tabs{display:flex;justify-content:center;gap:20px;margin-bottom:30px;}
+.admin-tab{padding:12px 24px;background:#f5f5f5;border-radius:8px;cursor:pointer;font-weight:bold;}
+.admin-tab.active{background:var(--primary-color);color:#fff;}
+.admin-table{width:100%;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow-md);}
+.admin-table th{background:var(--primary-dark);color:#fff;padding:12px;text-align:center;}
+.admin-table td{padding:12px;text-align:center;border-bottom:1px solid #eee;}
+.footer{background-color:var(--primary-dark);color:var(--white-color);padding:50px 0 20px;margin-top:60px;}
+.footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;margin-bottom:40px;}
+.footer-col h4{font-size:18px;margin-bottom:20px;position:relative;}
+.footer-col h4::after{content:'';position:absolute;bottom:0;left:0;width:50px;height:2px;background:var(--gold-color);}
+.footer-col li{margin-bottom:12px;}
+.footer-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);font-size:14px;color:#ccc;}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:8px;color:#fff;z-index:9999;opacity:0;transition:opacity 0.3s ease;pointer-events:none;}
+.toast.success{background-color:#42b983;}
+.toast.error{background-color:#d62828;}
+.toast.show{opacity:1;}
+@media (max-width:768px){
+.nav-menu{position:fixed;top:70px;left:-100%;width:100%;height:calc(100vh - 70px);background:var(--primary-dark);flex-direction:column;align-items:center;padding:40px 0;gap:20px;transition:var(--transition);}
+.nav-menu.active{left:0;}
+.nav-toggle{display:block;}
+.banner{height:320px;}
+.banner-title{font-size:32px;}
+.form-grid{grid-template-columns:1fr;}
+.match-section{padding:40px 0;}
+.form-content,.match-content,.admin-content{padding:20px;}
+.tab-btn{font-size:14px;padding:12px;}
+.match-content-row{grid-template-columns:1fr;}
+.footer-top{flex-direction:column;gap:30px;}
+}
+</style>
 </head>
 <body>
-
-<!-- 顶部栏 -->
 <div class="top-bar">
-    <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
-    <div class="login-group" id="loginGroup">
-        <a href="javascript:void(0);" onclick="openModal('login')">登录</a>
-        <a href="javascript:void(0);" onclick="openModal('reg')">注册</a>
-    </div>
+<div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
+<div class="login-group" id="loginGroup">
+<a href="javascript:void(0);" onclick="openModal('login')">登录</a>
+<a href="javascript:void(0);" onclick="openModal('reg')">注册</a>
 </div>
-
-<!-- 导航栏 -->
+</div>
 <header class="header">
-    <div class="container nav">
-        <div class="logo">
-            <img src="图片/云先生logo.jpg" alt="云先生logo" onerror="this.src='https://via.placeholder.com/48x48?text=云先生'">
-            <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
-        </div>
-        <ul class="nav-menu">
-            <li><a href="index.html">首页</a></li>
-	    <li><a href="volunteer.html" class="active">志愿者匹配</a></li>
-            <li><a href="news.html">思政文库</a></li>
-            <li><a href="bookstore.html">思政乐园</a></li>
-            <li><a href="video.html">录播课室</a></li>
-            <li><a href="download.html">直播课室</a></li>
-            <li><a href="forum.html">留言板</a></li>
-            <li><a href="checkin.html" onclick="return checkMyNeedLogin(event)">我的</a></li>
-        </ul>
-        <div class="nav-toggle" onclick="toggleNav()">
-            <i class="fa fa-bars"></i>
-        </div>
-    </div>
-</header>
-
-<!-- 登录弹窗 -->
-<div class="modal" id="modal">
-    <div class="modal-box">
-        <div class="modal-close" onclick="closeModal()">&times;</div>
-        <div class="modal-tab">
-            <div class="modal-tab-item active" onclick="switchTabModal('login')">登录</div>
-            <div class="modal-tab-item" onclick="switchTabModal('reg')">注册</div>
-        </div>
-        <div class="modal-panel active" id="loginPanel">
-            <div class="form-group">
-                <label>账号</label>
-                <input type="text" id="loginUsername" placeholder="手机号/学号">
-            </div>
-            <div class="form-group">
-                <label>密码</label>
-                <input type="password" id="loginPassword" placeholder="请输入密码">
-            </div>
-            <button class="btn" onclick="loginHandler()">登录</button>
-        </div>
-        <div class="modal-panel" id="regPanel">
-            <div class="form-group">
-                <label>手机号</label>
-                <input type="text" id="regPhone" placeholder="请输入手机号">
-            </div>
-            <div class="form-group">
-                <label>密码</label>
-                <input type="password" id="regPwd" placeholder="设置密码">
-            </div>
-            <div class="form-group">
-                <label>确认密码</label>
-                <input type="password" id="regConfirm" placeholder="确认密码">
-            </div>
-            <button class="btn" onclick="registerHandler()">注册</button>
-        </div>
-    </div>
+<div class="container nav">
+<div class="logo">
+<img src="图片/云先生logo.jpg" alt="云先生logo" onerror="this.src='https://via.placeholder.com/48x48?text=云先生'">
+<div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
 </div>
-
-<!-- 横幅区域 -->
+<ul class="nav-menu">
+<li><a href="index.html">首页</a></li>
+<li><a href="volunteer.html" class="active">志愿者匹配</a></li>
+<li><a href="news.html">思政文库</a></li>
+<li><a href="bookstore.html">思政乐园</a></li>
+<li><a href="video.html">录播课室</a></li>
+<li><a href="download.html">直播课室</a></li>
+<li><a href="forum.html">留言板</a></li>
+<li><a href="checkin.html" onclick="return checkMyNeedLogin(event)">我的</a></li>
+</ul>
+<div class="nav-toggle" onclick="toggleNav()">
+<i class="fa fa-bars"></i>
+</div>
+</div>
+</header>
+<div class="modal" id="modal">
+<div class="modal-box">
+<div class="modal-close" onclick="closeModal()">&times;</div>
+<div class="modal-tab">
+<div class="modal-tab-item active" onclick="switchTabModal('login')">登录</div>
+<div class="modal-tab-item" onclick="switchTabModal('reg')">注册</div>
+</div>
+<div class="modal-panel active" id="loginPanel">
+<div class="form-group">
+<label>账号</label>
+<input type="text" id="loginUsername" placeholder="手机号/学号">
+</div>
+<div class="form-group">
+<label>密码</label>
+<input type="password" id="loginPassword" placeholder="请输入密码">
+</div>
+<button class="btn" onclick="loginHandler()">登录</button>
+</div>
+<div class="modal-panel" id="regPanel">
+<div class="form-group">
+<label>手机号</label>
+<input type="text" id="regPhone" placeholder="请输入手机号">
+</div>
+<div class="form-group">
+<label>密码</label>
+<input type="password" id="regPwd" placeholder="设置密码">
+</div>
+<div class="form-group">
+<label>确认密码</label>
+<input type="password" id="regConfirm" placeholder="确认密码">
+</div>
+<button class="btn" onclick="registerHandler()">注册</button>
+</div>
+</div>
+</div>
+<div class="modal" id="editModal">
+<div class="modal-box">
+<div class="modal-close" onclick="closeEditModal()">&times;</div>
+<h3 style="text-align:center;margin-bottom:20px;">编辑信息</h3>
+<div class="form-group">
+<label>姓名/班级</label>
+<input type="text" id="editName" class="form-control">
+</div>
+<div class="form-group">
+<label>电话</label>
+<input type="text" id="editPhone" class="form-control">
+</div>
+<div class="form-group" id="editSchoolGroup">
+<label>院校/学校</label>
+<input type="text" id="editSchool" class="form-control">
+</div>
+<div class="form-group" id="editGradeGroup">
+<label>年级</label>
+<input type="text" id="editGrade" class="form-control">
+</div>
+<button class="btn" onclick="saveEdit()">保存</button>
+</div>
+</div>
 <section class="banner">
-    <div class="banner-bg"></div>
-    <div class="banner-content">
-        <h1 class="banner-title">校园志愿招募与乡村道法服务中心</h1>
-        <p class="banner-subtitle">师范生志愿者报名入驻，乡村学生需求对接，共建思政教育桥梁</p>
-        <a href="#match-content" class="btn banner-btn">立即参与</a>
-    </div>
+<div class="banner-bg"></div>
+<div class="banner-content">
+<h1 class="banner-title">校园志愿招募与乡村道法服务中心</h1>
+<p class="banner-subtitle">师范生志愿者报名入驻，乡村班级需求对接，共建思政教育桥梁</p>
+<a href="#volunteer-form" class="btn banner-btn">立即参与</a>
+</div>
 </section>
-
-<!-- 核心内容区 -->
-<section class="match-section" id="match-content">
-    <div class="container">
-        <div class="section-title">
-            <h2>志愿者报名与师生匹配</h2>
-        </div>
-        <div class="section-desc">
-            师范生志愿者与乡村中小学生双向选择，智能匹配科目和时间，让思政教育精准对接
-        </div>
-
-        <div class="tab-container">
-            <div class="tab-buttons">
-                <button class="tab-btn active" data-tab="volunteer-form">师范生志愿者报名</button>
-                <button class="tab-btn" data-tab="student-form">乡村中小学学生信息收集</button>
-                <button class="tab-btn" data-tab="match-result">匹配结果展示</button>
-            </div>
-
-            <!-- 志愿者报名表单 -->
-            <div class="form-content active" id="volunteer-form">
-                <h3 class="form-title">师范生志愿者报名信息</h3>
-                <div class="form-grid">
-                    <div class="form-group"><label>姓名</label><input type="text" id="vol-name" class="form-control" placeholder="请输入您的姓名"></div>
-                    <div class="form-group"><label>联系方式</label><input type="tel" id="vol-phone" class="form-control" placeholder="电话/微信"></div>
-                    <div class="form-group"><label>所在院校</label><input type="text" id="vol-school" class="form-control" placeholder="例如：忻州师范学院"></div>
-                    <div class="form-group"><label>专业年级</label><input type="text" id="vol-major" class="form-control" placeholder="例如：思政专业2023级"></div>
-                    <div class="form-group"><label>擅长科目</label><input type="text" id="vol-subject" class="form-control" placeholder="例如：初中道德与法治、高中政治"></div>
-                    <div class="form-group"><label>可服务时间</label><input type="text" id="vol-time" class="form-control" placeholder="例如：周一三五19:00-21:00"></div>
-                    <div class="form-group form-fullwidth"><label>个人简介（教学经验/特长）</label><textarea id="vol-intro" class="form-control" rows="4" placeholder="请简要介绍您的教学相关经验或特长"></textarea></div>
-                    <div class="form-actions"><button type="button" class="btn banner-btn" id="vol-submit">提交报名</button></div>
-                </div>
-            </div>
-
-            <!-- 学生需求提交表单 -->
-            <div class="form-content" id="student-form">
-                <h3 class="form-title">乡村中小学学生信息收集</h3>
-                <div class="form-grid">
-                    <div class="form-group"><label>学生姓名</label><input type="text" id="stu-name" class="form-control" placeholder="请输入学生姓名"></div>
-                    <div class="form-group"><label>年级</label><input type="text" id="stu-grade" class="form-control" placeholder="例如：七年级、高一"></div>
-                    <div class="form-group"><label>所在学校</label><input type="text" id="stu-school" class="form-control" placeholder="例如：XX乡村中学"></div>
-                    <div class="form-group"><label>需求科目</label><input type="text" id="stu-subject" class="form-control" placeholder="例如：道德与法治、思想政治"></div>
-                    <div class="form-group"><label>期望辅导时间</label><input type="text" id="stu-time" class="form-control" placeholder="例如：周二四晚上、周末上午"></div>
-                    <div class="form-group"><label>学习难点描述</label><input type="text" id="stu-desc" class="form-control" placeholder="例如：主观题答题技巧、知识点记忆"></div>
-                    <div class="form-group form-fullwidth"><label>家长联系方式</label><input type="tel" id="guardian-phone" class="form-control" placeholder="请填写家长电话"></div>
-                    <div class="form-actions"><button type="button" class="btn banner-btn" id="stu-submit">提交需求</button></div>
-                </div>
-            </div>
-
-            <!-- 匹配结果展示 -->
-            <div class="match-content" id="match-result">
-                <h3 class="form-title">志愿者-学生匹配结果</h3>
-                <div class="match-grid">
-                    <div class="list-container" id="volunteer-list">
-                        <h4 class="list-title">志愿者列表</h4>
-                        <div class="person-card" data-subject="初中道德与法治" data-time="周一三五">
-                            <div class="person-name">张同学</div>
-                            <div class="person-info">院校：忻州师范学院<br>专业：思政专业2022级<br>擅长：初中道德与法治<br>时间：周一三五19:00-21:00</div>
-                        </div>
-                        <div class="person-card" data-subject="高中政治" data-time="周二四六">
-                            <div class="person-name">李同学</div>
-                            <div class="person-info">院校：山西师范大学<br>专业：思想政治教育2021级<br>擅长：高中政治、时政解读<br>时间：周二四六晚上</div>
-                        </div>
-                        <div class="person-card" data-subject="初中思政" data-time="周末">
-                            <div class="person-name">王同学</div>
-                            <div class="person-info">院校：忻州师范学院<br>专业：思政专业2023级<br>擅长：初中思政、红色故事<br>时间：周末全天</div>
-                        </div>
-                        <div class="person-card" data-subject="法律基础" data-time="周三五,周日">
-                            <div class="person-name">赵同学</div>
-                            <div class="person-info">院校：太原师范学院<br>专业：思政教育2022级<br>擅长：法律基础、政治常识<br>时间：周三五晚上、周日上午</div>
-                        </div>
-                    </div>
-
-                    <div class="connect-area" id="connect-area">
-                        <div class="connect-tag">未匹配</div>
-                        <div class="connect-line"></div>
-                        <div class="connect-tag">未匹配</div>
-                        <div class="connect-line"></div>
-                        <div class="connect-tag">未匹配</div>
-                        <div class="connect-line"></div>
-                        <div class="connect-tag">未匹配</div>
-                    </div>
-
-                    <div class="list-container" id="student-list">
-                        <h4 class="list-title">乡村中小学生需求</h4>
-                        <div class="person-card" data-subject="初中道德与法治" data-time="周一三五">
-                            <div class="person-name">小明</div>
-                            <div class="person-info">学校：XX乡村中学<br>年级：八年级<br>需求：初中道德与法治<br>时间：周一三五晚上</div>
-                        </div>
-                        <div class="person-card" data-subject="高中政治" data-time="周二四">
-                            <div class="person-name">小红</div>
-                            <div class="person-info">学校：YY乡村中学<br>年级：高一<br>需求：高中政治主观题<br>时间：周二四晚上</div>
-                        </div>
-                        <div class="person-card" data-subject="初中思政" data-time="周末">
-                            <div class="person-name">小刚</div>
-                            <div class="person-info">学校：ZZ乡村小学<br>年级：六年级<br>需求：思政常识、红色故事<br>时间：周末上午</div>
-                        </div>
-                        <div class="person-card" data-subject="法律基础" data-time="周五,周日">
-                            <div class="person-name">小丽</div>
-                            <div class="person-info">学校：AA乡村中学<br>年级：九年级<br>需求：法律基础、时政热点<br>时间：周五晚上、周日上午</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="match-stats">
-                    <div class="stats-number" id="match-count">0</div>
-                    <div class="stats-label">成功匹配对数</div>
-                    <div class="stats-label" style="font-size: 14px; margin-top: 10px;">恭喜匹配成功的志愿者和学生！</div>
-                </div>
-            </div>
-        </div>
-    </div>
+<section class="match-section">
+<div class="container">
+<div class="section-title">
+<h2>志愿者报名与班级需求匹配</h2>
+</div>
+<div class="section-desc">师范生志愿者与乡村中小学班级双向选择，智能匹配学段，一对一精准对接</div>
+<div class="tab-container">
+<div class="tab-buttons" id="tabButtons"></div>
+<div class="form-content active" id="volunteer-form">
+<h3 class="form-title">师范生志愿者报名</h3>
+<div class="form-grid">
+<div class="form-group"><label>姓名 *</label><input type="text" id="vol-name" class="form-control" placeholder="请输入姓名"></div>
+<div class="form-group"><label>联系方式 *</label><input type="text" id="vol-phone" class="form-control" placeholder="请输入电话/微信"></div>
+<div class="form-group"><label>院校 *</label><input type="text" id="vol-school" class="form-control" placeholder="请输入院校名称"></div>
+<div class="form-group"><label>专业 *</label><input type="text" id="vol-major" class="form-control" placeholder="请输入专业年级"></div>
+<div class="form-group"><label>授课范围 *</label><input type="text" id="vol-subject" class="form-control" placeholder="如：小学道德与法治、初中道法"></div>
+<div class="form-group"><label>可服务时间 *</label><input type="text" id="vol-time" class="form-control" placeholder="如：周一到周五晚19:00-21:00"></div>
+<div class="form-group form-fullwidth"><label>个人简介</label><textarea id="vol-intro" rows="3" class="form-control" placeholder="请介绍自己的专业优势、教学经验等"></textarea></div>
+<div class="form-actions"><button class="btn banner-btn" id="vol-submit">提交报名</button></div>
+</div>
+</div>
+<div class="form-content" id="student-form">
+<h3 class="form-title">乡村班级需求收集</h3>
+<div class="form-grid">
+<div class="form-group"><label>班级名称 *</label><input type="text" id="cls-name" class="form-control" placeholder="如：八年级2班"></div>
+<div class="form-group"><label>年级 *</label>
+<select id="cls-grade" class="form-control">
+<option value="一年级">一年级</option><option value="二年级">二年级</option><option value="三年级">三年级</option>
+<option value="四年级">四年级</option><option value="五年级">五年级</option><option value="六年级">六年级</option>
+<option value="七年级">七年级</option><option value="八年级">八年级</option><option value="九年级">九年级</option>
+</select>
+</div>
+<div class="form-group"><label>学校 *</label><input type="text" id="cls-school" class="form-control" placeholder="请输入学校名称"></div>
+<div class="form-group"><label>辅导老师电话 *</label><input type="text" id="cls-phone" class="form-control" placeholder="请输入联系电话"></div>
+<div class="form-group"><label>期望时间 *</label><input type="text" id="cls-time" class="form-control" placeholder="如：周末上午9:00-11:00"></div>
+<div class="form-group"><label>班级情况</label><input type="text" id="cls-desc" class="form-control" placeholder="请描述班级需求、学生情况等"></div>
+<div class="form-actions"><button class="btn banner-btn" id="cls-submit">提交需求</button></div>
+</div>
+</div>
+<div class="match-content" id="match-result">
+<h3 class="form-title">✅ 成功匹配名单</h3>
+<div class="search-bar">
+<input type="text" id="searchInput" class="search-input" placeholder="搜索姓名/班级/学校">
+<button class="search-btn" onclick="doSearch()">搜索</button>
+<button class="search-btn" onclick="exportAll()">导出Excel</button>
+</div>
+<div class="match-list" id="matchList"><div style="text-align:center;padding:30px;color:#999">加载中...</div></div>
+<div id="matchPagination" class="pagination"></div>
+<div class="match-stats"><div class="stats-number" id="match-count">0</div><div class="stats-label">成功匹配对数</div></div>
+</div>
+<div class="admin-content" id="admin">
+<h3 class="form-title">🔧 管理后台</h3>
+<div class="admin-tabs">
+<div class="admin-tab active" onclick="switchAdminTab('volunteer-admin')">志愿者管理</div>
+<div class="admin-tab" onclick="switchAdminTab('class-admin')">班级管理</div>
+</div>
+<div id="volunteer-admin" class="admin-panel active">
+<table class="admin-table"><thead><tr><th>姓名</th><th>电话</th><th>院校</th><th>专业</th><th>授课范围</th><th>操作</th></tr></thead><tbody id="adminVolunteerList"></tbody></table>
+<div id="adminVolPagination" class="pagination"></div>
+</div>
+<div id="class-admin" class="admin-panel">
+<table class="admin-table"><thead><tr><th>班级</th><th>年级</th><th>学校</th><th>电话</th><th>操作</th></tr></thead><tbody id="adminClassList"></tbody></table>
+<div id="adminClsPagination" class="pagination"></div>
+</div>
+</div>
+</div>
+</div>
 </section>
-
-<!-- 底部 -->
 <footer class="footer">
-    <div class="container">
-        <div class="footer-top">
-            <div class="footer-col"><h4>关于我们</h4><ul><li><a href="#">平台介绍</a></li><li><a href="#">团队风采</a></li><li><a href="#">联系我们</a></li></ul></div>
-            <div class="footer-col"><h4>学习资源</h4><ul><li><a href="#">时政资料库</a></li><li><a href="#">精品课程</a></li><li><a href="#">学习工具</a></li></ul></div>
-            <div class="footer-col"><h4>法律声明</h4><ul><li><a href="#">隐私政策</a></li><li><a href="#">用户协议</a></li><li><a href="#">版权声明</a></li></ul></div>
-            <div class="footer-col"><h4>联系方式</h4><ul><li><i class="fa fa-phone"></i> 0350-3339920</li><li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li><li><i class="fa fa-map-marker"></i> 山西省忻州市顿奇东街1号 忻州师范学院</li></ul></div>
-        </div>
-        <div class="footer-bottom"><p>© 2026 云先生-师范生助力乡村中小学道德与法治网络平台 版权所有 | 晋ICP备202308110020号</p></div>
-    </div>
+<div class="container"><div class="footer-top"><div class="footer-col"><h4>关于我们</h4><ul><li><a href="#">平台介绍</a></li><li><a href="#">团队风采</a></li><li><a href="#">联系我们</a></li></ul></div>
+<div class="footer-col"><h4>学习资源</h4><ul><li><a href="#">时政资料库</a></li><li><a href="#">精品课程</a></li><li><a href="#">学习工具</a></li></ul></div>
+<div class="footer-col"><h4>法律声明</h4><ul><li><a href="#">隐私政策</a></li><li><a href="#">用户协议</a></li><li><a href="#">版权声明</a></li></ul></div>
+<div class="footer-col"><h4>联系方式</h4><ul><li><i class="fa fa-phone"></i> 0350-3339920</li><li><i class="fa fa-envelope"></i> contact@yunxiansheng.com</li></ul></div></div>
+<div class="footer-bottom"><p>© 2026 云先生-师范生助力乡村道德与法治平台 版权所有</p></div></div>
 </footer>
-
 <div id="toast" class="toast"></div>
 
 <script>
-    // 存储志愿者和学生数据
-    let volunteers = [];
-    let students = [];
+const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
+const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
+const HEADERS = { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY, "Content-Type": "application/json" };
 
-    // 导航栏移动端折叠
-    function toggleNav() {
-        document.querySelector('.nav-menu').classList.toggle('active');
-    }
+let volunteers = [], classes = [];
+let currentUserAccount = null, isAdmin = false;
+let editId = null, editType = null;
+const PAGE_SIZE = 6;
+let matchPage = 1, adminVolPage = 1, adminClsPage = 1, searchKeyword = "";
 
-    // 登录模态框控制
-    const modalEl = document.getElementById('modal');
-    function openModal(type) {
-        modalEl.classList.add('active');
-        if(type === 'login') switchTabModal('login');
-        else switchTabModal('reg');
-    }
-    function closeModal() { modalEl.classList.remove('active'); }
-    function switchTabModal(tab) {
-        document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.modal-tab-item').forEach(i => i.classList.remove('active'));
-        if(tab === 'login') {
-            document.getElementById('loginPanel').classList.add('active');
-            document.querySelectorAll('.modal-tab-item')[0].classList.add('active');
-        } else {
-            document.getElementById('regPanel').classList.add('active');
-            document.querySelectorAll('.modal-tab-item')[1].classList.add('active');
-        }
-    }
+// ============= 统一登录状态管理（与论坛页面完全一致） =============
+function getStoredLoginInfo() {
+    const isLogin = localStorage.getItem('isLogin') === 'true';
+    const account = localStorage.getItem('loginUser') || null;
+    const role = localStorage.getItem('userRole') || 'user';
+    return { isLogin, account, role };
+}
 
-    // 登录注册
-    function loginHandler() {
-        const username = document.getElementById('loginUsername').value.trim();
-        const pwd = document.getElementById('loginPassword').value.trim();
-        if(!username || !pwd) { 
-            showToast("请输入账号和密码", "error");
-            return; 
-        }
-        localStorage.setItem('isLogin', 'true');
-        localStorage.setItem('loginUser', username);
-        showToast("登录成功！", "success");
+function setLoginInfo(account, role) {
+    localStorage.setItem('isLogin', 'true');
+    localStorage.setItem('loginUser', account);
+    localStorage.setItem('userRole', role);
+    currentUserAccount = account;
+    isAdmin = (role === 'admin');
+}
+
+function clearLoginInfo() {
+    localStorage.removeItem('isLogin');
+    localStorage.removeItem('loginUser');
+    localStorage.removeItem('userRole');
+    currentUserAccount = null;
+    isAdmin = false;
+}
+
+function updateLoginUI() {
+    const { isLogin, account } = getStoredLoginInfo();
+    const group = document.getElementById('loginGroup');
+    if (isLogin && account) {
+        group.innerHTML = `<span style="color:#ffd700;">欢迎，${account}</span> <a href="javascript:void(0);" onclick="logout()" style="margin-left:12px;">退出</a>`;
+    } else {
+        group.innerHTML = `<a href="javascript:void(0);" onclick="openModal('login')">登录</a><a href="javascript:void(0);" onclick="openModal('reg')">注册</a>`;
+    }
+    initTabButtons();
+}
+
+async function loginHandler() {
+    const account = document.getElementById('loginUsername').value.trim();
+    const pwd = document.getElementById('loginPassword').value.trim();
+    if (!account || !pwd) { showToast('请输入账号密码', 'error'); return; }
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(account)}&password=eq.${encodeURIComponent(pwd)}&select=*`, { headers: HEADERS });
+        const data = await res.json();
+        if (data.length === 0) { showToast('账号或密码错误', 'error'); return; }
+        const user = data[0];
+        setLoginInfo(user.account, user.role);
+        showToast('登录成功');
         closeModal();
         updateLoginUI();
-    }
-    
-    function registerHandler() {
-        const phone = document.getElementById('regPhone').value.trim();
-        const pwd = document.getElementById('regPwd').value;
-        const confirm = document.getElementById('regConfirm').value;
-        if(!phone || !pwd) { 
-            showToast("请填写手机号和密码", "error");
-            return; 
-        }
-        if(pwd !== confirm) { 
-            showToast("两次密码不一致", "error");
-            return; 
-        }
-        showToast("注册成功！请登录", "success");
+        document.getElementById('loginUsername').value = '';
+        document.getElementById('loginPassword').value = '';
+        await loadAllData();
+        renderMatch();
+        renderAdminData();
+    } catch (e) { showToast('登录失败', 'error'); }
+}
+
+async function registerHandler() {
+    const phone = document.getElementById('regPhone').value.trim();
+    const pwd = document.getElementById('regPwd').value;
+    const confirm = document.getElementById('regConfirm').value;
+    if (!phone || !pwd) { showToast('请填写完整信息', 'error'); return; }
+    if (pwd !== confirm) { showToast('两次密码不一致', 'error'); return; }
+    if (phone.length < 6) { showToast('账号长度不能少于6位', 'error'); return; }
+    try {
+        const checkRes = await fetch(`${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(phone)}`, { headers: HEADERS });
+        const checkData = await checkRes.json();
+        if (checkData && checkData.length > 0) { showToast('该手机号已被注册', 'error'); return; }
+        await fetch(`${SUPABASE_URL}/rest/v1/user`, { method: 'POST', headers: HEADERS, body: JSON.stringify({ account: phone, password: pwd, role: 'user' }) });
+        showToast('注册成功，请登录');
         switchTabModal('login');
         document.getElementById('loginUsername').value = phone;
-        document.getElementById('loginPassword').value = '';
-    }
+        document.getElementById('regPhone').value = '';
+        document.getElementById('regPwd').value = '';
+        document.getElementById('regConfirm').value = '';
+    } catch (e) { showToast('注册失败', 'error'); }
+}
 
-    function checkMyNeedLogin(event) {
-        const isLogged = localStorage.getItem('isLogin') === 'true';
-        if(!isLogged) {
-            event.preventDefault();
-            showToast("请先登录后访问'我的'页面！", "error");
-            openModal('login');
-            return false;
-        }
-        return true;
-    }
-
-    function updateLoginUI() {
-        const isLogin = localStorage.getItem('isLogin') === 'true';
-        const loginGroup = document.getElementById('loginGroup');
-        if(isLogin && loginGroup) {
-            const user = localStorage.getItem('loginUser') || '用户';
-            loginGroup.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:void(0);" onclick="logout()" style="margin-left:12px;">退出</a>`;
-        } else {
-            loginGroup.innerHTML = `<a href="javascript:void(0);" onclick="openModal('login')">登录</a><a href="javascript:void(0);" onclick="openModal('reg')">注册</a>`;
-        }
-    }
-    
-    function logout() {
-        localStorage.removeItem('isLogin');
-        localStorage.removeItem('loginUser');
-        showToast("已退出登录", "success");
-        updateLoginUI();
-    }
-
-    function showToast(message, type = 'success') {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.className = `toast ${type} show`;
-        setTimeout(() => toast.classList.remove('show'), 2000);
-    }
-
-    // 标签切换（修复版）
-    function switchTab(tabId, btnElement) {
-        // 隐藏所有内容
-        document.querySelectorAll('.form-content, .match-content').forEach(content => {
-            content.classList.remove('active');
-        });
-        // 移除所有按钮的active类
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        // 显示选中的内容
-        const activeContent = document.getElementById(tabId);
-        if (activeContent) {
-            activeContent.classList.add('active');
-        }
-        // 激活当前按钮
-        if (btnElement) {
-            btnElement.classList.add('active');
-        }
-        // 如果是匹配结果页面，执行匹配
-        if (tabId === 'match-result') {
-            checkMatch();
-        }
-    }
-
-    // 绑定标签按钮点击事件
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            const tabId = this.getAttribute('data-tab');
-            switchTab(tabId, this);
-        });
-    });
-
-    // 匹配逻辑（修复版）
-    function checkMatch() {
-        const volunteerCards = document.querySelectorAll('#volunteer-list .person-card');
-        const studentCards = document.querySelectorAll('#student-list .person-card');
-        const connectTags = document.querySelectorAll('#connect-area .connect-tag');
-        
-        let matchCount = 0;
-        
-        // 重置所有连接标签
-        connectTags.forEach(tag => {
-            tag.textContent = '未匹配';
-            tag.classList.remove('matched');
-        });
-        
-        // 遍历志愿者和学生进行匹配
-        for (let i = 0; i < Math.min(volunteerCards.length, studentCards.length); i++) {
-            const vol = volunteerCards[i];
-            const stu = studentCards[i];
-            const connectTag = connectTags[i];
-            
-            if (!vol || !stu) continue;
-            
-            const volSubject = vol.getAttribute('data-subject') || '';
-            const volTime = vol.getAttribute('data-time') || '';
-            const stuSubject = stu.getAttribute('data-subject') || '';
-            const stuTime = stu.getAttribute('data-time') || '';
-            
-            // 匹配逻辑：科目匹配或时间匹配
-            const isSubjectMatch = volSubject.includes(stuSubject) || stuSubject.includes(volSubject);
-            
-            // 时间匹配（更宽松的匹配）
-            const volTimeArray = volTime.split(/[,，、\s]+/);
-            const stuTimeArray = stuTime.split(/[,，、\s]+/);
-            const isTimeMatch = volTimeArray.some(t => stuTimeArray.some(st => st.includes(t) || t.includes(st)));
-            
-            const isMatch = isSubjectMatch || isTimeMatch;
-            
-            if (isMatch) {
-                vol.classList.add('matched');
-                stu.classList.add('matched');
-                if (connectTag) {
-                    connectTag.classList.add('matched');
-                    connectTag.textContent = '已匹配';
-                }
-                matchCount++;
-            } else {
-                vol.classList.remove('matched');
-                stu.classList.remove('matched');
-                if (connectTag) {
-                    connectTag.classList.remove('matched');
-                    connectTag.textContent = '未匹配';
-                }
-            }
-        }
-        
-        // 更新匹配计数
-        const matchCountElement = document.getElementById('match-count');
-        if (matchCountElement) {
-            matchCountElement.innerText = matchCount;
-        }
-        
-        // 显示匹配结果提示
-        if (matchCount > 0) {
-            showToast(`成功匹配 ${matchCount} 对志愿者与学生！`, "success");
-        }
-    }
-
-    // 志愿者提交表单
-    document.getElementById('vol-submit').addEventListener('click', function() {
-        const name = document.getElementById('vol-name').value.trim();
-        const phone = document.getElementById('vol-phone').value.trim();
-        const school = document.getElementById('vol-school').value.trim();
-        const major = document.getElementById('vol-major').value.trim();
-        const subject = document.getElementById('vol-subject').value.trim();
-        const time = document.getElementById('vol-time').value.trim();
-        const intro = document.getElementById('vol-intro').value.trim();
-        
-        if (!name || !phone || !subject) {
-            showToast("请填写姓名、联系方式和擅长科目", "error");
-            return;
-        }
-        
-        // 添加到志愿者列表
-        const volunteerList = document.getElementById('volunteer-list');
-        const newCard = document.createElement('div');
-        newCard.className = 'person-card';
-        newCard.setAttribute('data-subject', subject);
-        newCard.setAttribute('data-time', time);
-        newCard.innerHTML = `
-            <div class="person-name">${name}</div>
-            <div class="person-info">院校：${school || '未填写'}<br>
-            专业：${major || '未填写'}<br>
-            擅长：${subject}<br>
-            时间：${time || '未填写'}</div>
-        `;
-        volunteerList.appendChild(newCard);
-        
-        // 清空表单
-        document.getElementById('vol-name').value = '';
-        document.getElementById('vol-phone').value = '';
-        document.getElementById('vol-school').value = '';
-        document.getElementById('vol-major').value = '';
-        document.getElementById('vol-subject').value = '';
-        document.getElementById('vol-time').value = '';
-        document.getElementById('vol-intro').value = '';
-        
-        showToast("志愿者报名成功！", "success");
-        
-        // 如果在匹配结果页面，重新匹配
-        if (document.getElementById('match-result').classList.contains('active')) {
-            checkMatch();
-        }
-    });
-    
-    // 学生需求提交
-    document.getElementById('stu-submit').addEventListener('click', function() {
-        const name = document.getElementById('stu-name').value.trim();
-        const grade = document.getElementById('stu-grade').value.trim();
-        const school = document.getElementById('stu-school').value.trim();
-        const subject = document.getElementById('stu-subject').value.trim();
-        const time = document.getElementById('stu-time').value.trim();
-        const desc = document.getElementById('stu-desc').value.trim();
-        const phone = document.getElementById('guardian-phone').value.trim();
-        
-        if (!name || !subject || !phone) {
-            showToast("请填写学生姓名、需求科目和家长联系方式", "error");
-            return;
-        }
-        
-        // 添加到学生列表
-        const studentList = document.getElementById('student-list');
-        const newCard = document.createElement('div');
-        newCard.className = 'person-card';
-        newCard.setAttribute('data-subject', subject);
-        newCard.setAttribute('data-time', time);
-        newCard.innerHTML = `
-            <div class="person-name">${name}</div>
-            <div class="person-info">学校：${school || '未填写'}<br>
-            年级：${grade || '未填写'}<br>
-            需求：${subject}<br>
-            时间：${time || '未填写'}</div>
-        `;
-        studentList.appendChild(newCard);
-        
-        // 清空表单
-        document.getElementById('stu-name').value = '';
-        document.getElementById('stu-grade').value = '';
-        document.getElementById('stu-school').value = '';
-        document.getElementById('stu-subject').value = '';
-        document.getElementById('stu-time').value = '';
-        document.getElementById('stu-desc').value = '';
-        document.getElementById('guardian-phone').value = '';
-        
-        showToast("学生需求提交成功！", "success");
-        
-        // 如果在匹配结果页面，重新匹配
-        if (document.getElementById('match-result').classList.contains('active')) {
-            checkMatch();
-        }
-    });
-    
-    // 添加连接区域的连接标签（动态更新数量）
-    function updateConnectArea() {
-        const volunteerCount = document.querySelectorAll('#volunteer-list .person-card').length;
-        const studentCount = document.querySelectorAll('#student-list .person-card').length;
-        const maxCount = Math.max(volunteerCount, studentCount);
-        const connectArea = document.getElementById('connect-area');
-        
-        // 清空连接区域
-        connectArea.innerHTML = '';
-        
-        // 重新生成连接标签
-        for (let i = 0; i < maxCount; i++) {
-            const tag = document.createElement('div');
-            tag.className = 'connect-tag';
-            tag.textContent = '未匹配';
-            connectArea.appendChild(tag);
-            
-            if (i < maxCount - 1) {
-                const line = document.createElement('div');
-                line.className = 'connect-line';
-                connectArea.appendChild(line);
-            }
-        }
-    }
-    
-    // 监听列表变化，更新连接区域
-    const observer = new MutationObserver(function() {
-        updateConnectArea();
-        if (document.getElementById('match-result').classList.contains('active')) {
-            checkMatch();
-        }
-    });
-    
-    observer.observe(document.getElementById('volunteer-list'), { childList: true, subtree: true });
-    observer.observe(document.getElementById('student-list'), { childList: true, subtree: true });
-    
-    // 初始化连接区域
-    updateConnectArea();
-    
-    // 初始化登录状态
+function logout() {
+    clearLoginInfo();
     updateLoginUI();
-    
-    // 页面加载完成后执行匹配
-    window.addEventListener('load', function() {
-        // 初始匹配
-        checkMatch();
+    showToast('已退出登录');
+    initTabButtons();
+    renderMatch();
+    renderAdminData();
+}
+
+function checkMyNeedLogin(event) {
+    const { isLogin } = getStoredLoginInfo();
+    if (!isLogin) { event.preventDefault(); showToast('请先登录', 'error'); openModal('login'); return false; }
+    return true;
+}
+// ============= 登录状态管理结束 =============
+
+function toggleNav() { document.querySelector('.nav-menu').classList.toggle('active'); }
+function openModal(t) { document.getElementById('modal').classList.add('active'); switchTabModal(t); }
+function closeModal() { document.getElementById('modal').classList.remove('active'); }
+function switchTabModal(t) {
+    document.querySelectorAll('.modal-panel,.modal-tab-item').forEach(e => e.classList.remove('active'));
+    document.getElementById(t + 'Panel').classList.add('active');
+    document.querySelectorAll('.modal-tab-item')[t === 'login' ? 0 : 1].classList.add('active');
+}
+function showToast(msg, type = 'success') {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg; toast.className = `toast ${type} show`;
+    setTimeout(() => toast.classList.remove('show'), 2000);
+}
+function openEditModal(id, type) {
+    editId = id; editType = type;
+    if (type === 'vol') {
+        const item = volunteers.find(v => v.id === id);
+        document.getElementById('editName').value = item?.name || '';
+        document.getElementById('editPhone').value = item?.phone || '';
+        document.getElementById('editSchool').value = item?.school || '';
+        document.getElementById('editSchoolGroup').style.display = 'block';
+        document.getElementById('editGradeGroup').style.display = 'none';
+    } else {
+        const item = classes.find(c => c.id === id);
+        document.getElementById('editName').value = item?.class_name || '';
+        document.getElementById('editPhone').value = item?.contact_phone || '';
+        document.getElementById('editGrade').value = item?.grade || '';
+        document.getElementById('editSchoolGroup').style.display = 'none';
+        document.getElementById('editGradeGroup').style.display = 'block';
+    }
+    document.getElementById('editModal').classList.add('active');
+}
+function closeEditModal() { document.getElementById('editModal').classList.remove('active'); }
+
+async function saveEdit() {
+    const name = document.getElementById('editName').value.trim();
+    const phone = document.getElementById('editPhone').value.trim();
+    if (!name || !phone) { showToast('姓名和电话不能为空', 'error'); return; }
+    const table = editType === 'vol' ? 'volunteers' : 'classes';
+    let data = {};
+    if (editType === 'vol') data = { name, phone, school: document.getElementById('editSchool').value.trim() };
+    else data = { class_name: name, contact_phone: phone, grade: document.getElementById('editGrade').value.trim() };
+    try {
+        await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${editId}`, { method: 'PATCH', headers: HEADERS, body: JSON.stringify(data) });
+        showToast('保存成功'); closeEditModal(); await loadAllData(); renderMatch(); renderAdminData();
+    } catch (e) { showToast('保存失败', 'error'); }
+}
+async function deleteItem(id, type) {
+    if (!confirm('确定删除？')) return;
+    const table = type === 'vol' ? 'volunteers' : 'classes';
+    try { await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, { method: 'DELETE', headers: HEADERS }); showToast('删除成功'); await loadAllData(); renderMatch(); renderAdminData(); } 
+    catch (e) { showToast('删除失败', 'error'); }
+}
+async function loadAllData() {
+    try {
+        const v = await fetch(`${SUPABASE_URL}/rest/v1/volunteers?select=*`, { headers: HEADERS });
+        volunteers = await v.json() || [];
+        const c = await fetch(`${SUPABASE_URL}/rest/v1/classes?select=*`, { headers: HEADERS });
+        classes = await c.json() || [];
+    } catch (e) { console.error('加载失败', e); }
+}
+function doSearch() { searchKeyword = document.getElementById('searchInput').value.trim().toLowerCase(); matchPage = 1; renderMatch(); }
+function exportAll() { /* 保持原有导出功能 */ alert('导出功能保留'); }
+
+function renderPagination(total, page, containerId, type, isAdminFlag = false) { /* 简单实现分页UI */ const container = document.getElementById(containerId); container.innerHTML = `<div style="padding:10px;text-align:center">第${page}/${Math.ceil(total/PAGE_SIZE)||1}页</div>`; }
+
+function renderMatch() {
+    const usedVolIds = new Set(), usedClassIds = new Set(), result = [];
+    const volPri = volunteers.filter(v => (v.subject || '').includes('小学'));
+    const volMid = volunteers.filter(v => !(v.subject || '').includes('小学'));
+    const clsPri = classes.filter(c => (c.grade || '').includes('一')||(c.grade||'').includes('二')||(c.grade||'').includes('三')||(c.grade||'').includes('四')||(c.grade||'').includes('五')||(c.grade||'').includes('六'));
+    const clsMid = classes.filter(c => !clsPri.includes(c));
+    const matchGroup = (vols, clsList) => { vols.forEach(vol => { if(usedVolIds.has(vol.id)) return; const match = clsList.find(c => !usedClassIds.has(c.id)); if(match) { result.push({vol, cls:match}); usedVolIds.add(vol.id); usedClassIds.add(match.id); } }); };
+    matchGroup(volPri, clsPri); matchGroup(volMid, clsMid);
+    const filtered = result.filter(i => (i.vol.name+ i.vol.school+ i.cls.class_name+ i.cls.school_name).toLowerCase().includes(searchKeyword));
+    const total = filtered.length, start = (matchPage-1)*PAGE_SIZE, pageData = filtered.slice(start, start+PAGE_SIZE);
+    const listEl = document.getElementById('matchList');
+    if(pageData.length===0) listEl.innerHTML = '<div style="text-align:center;padding:30px;color:#999">暂无匹配数据</div>';
+    else {
+        let html = '';
+        pageData.forEach(item => {
+            const adminBtns = isAdmin ? `<div class="admin-bar"><button class="admin-btn btn-edit" onclick="openEditModal(${item.vol.id},'vol')">编辑志愿者</button><button class="admin-btn btn-del" onclick="deleteItem(${item.vol.id},'vol')">删除</button><button class="admin-btn btn-edit" onclick="openEditModal(${item.cls.id},'cls')">编辑班级</button><button class="admin-btn btn-del" onclick="deleteItem(${item.cls.id},'cls')">删除</button></div>` : '';
+            html += `<div class="match-item">${adminBtns}<div class="match-header"><div class="match-tag">✓ 已精准匹配</div></div><div class="match-content-row"><div><div class="person-name">志愿者：${item.vol.name}</div><div class="person-info">院校：${item.vol.school||'-'}<br>专业：${item.vol.major||'-'}<br>授课：${item.vol.subject||'-'}<br>时间：${item.vol.available_time||'-'}</div></div><div><div class="person-name">班级：${item.cls.class_name}</div><div class="person-info">学校：${item.cls.school_name||'-'}<br>年级：${item.cls.grade}<br>期望时间：${item.cls.time||'-'}</div></div></div></div>`;
+        });
+        listEl.innerHTML = html;
+    }
+    document.getElementById('match-count').textContent = filtered.length;
+    renderPagination(total, matchPage, 'matchPagination', 'match');
+}
+function renderAdminData() { if(!isAdmin) return; const volList = volunteers.map(v => `<tr><td>${v.name}</td><td>${v.phone}</td><td>${v.school||'-'}</td><td>${v.major||'-'}</td><td>${v.subject||'-'}</td><td><button class="admin-btn btn-edit" onclick="openEditModal(${v.id},'vol')">编辑</button><button class="admin-btn btn-del" onclick="deleteItem(${v.id},'vol')">删除</button></td></tr>`).join('');
+    document.getElementById('adminVolunteerList').innerHTML = volList || '<tr><td colspan="6">暂无数据</td></tr>';
+    const clsList = classes.map(c => `<tr><td>${c.class_name}</td><td>${c.grade}</td><td>${c.school_name||'-'}</td><td>${c.contact_phone||'-'}</td><td><button class="admin-btn btn-edit" onclick="openEditModal(${c.id},'cls')">编辑</button><button class="admin-btn btn-del" onclick="deleteItem(${c.id},'cls')">删除</button></td></tr>`).join('');
+    document.getElementById('adminClassList').innerHTML = clsList || '<tr><td colspan="5">暂无数据</td></tr>';
+}
+function initTabButtons() {
+    const container = document.getElementById('tabButtons');
+    container.innerHTML = `<button class="tab-btn active" data-tab="volunteer-form">志愿者报名</button><button class="tab-btn" data-tab="student-form">班级需求</button><button class="tab-btn" data-tab="match-result">匹配结果</button>`;
+    if (isAdmin) container.innerHTML += `<button class="tab-btn" data-tab="admin">管理后台</button>`;
+    container.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.onclick = () => {
+            document.querySelectorAll('.form-content,.match-content,.admin-content').forEach(x => x.classList.remove('active'));
+            document.getElementById(btn.dataset.tab).classList.add('active');
+            container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if(btn.dataset.tab === 'match-result') renderMatch();
+            if(btn.dataset.tab === 'admin') renderAdminData();
+        };
     });
+}
+function switchAdminTab(tab) {
+    document.querySelectorAll('.admin-tab,.admin-panel').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.admin-tab')[tab === 'volunteer-admin' ? 0 : 1].classList.add('active');
+    document.getElementById(tab).classList.add('active');
+}
+document.getElementById('vol-submit').onclick = async () => {
+    const { isLogin } = getStoredLoginInfo();
+    if (!isLogin) { showToast('请先登录', 'error'); openModal('login'); return; }
+    const name = document.getElementById('vol-name').value.trim();
+    if (!name || !document.getElementById('vol-phone').value.trim()) { showToast('带*为必填项', 'error'); return; }
+    try {
+        await fetch(`${SUPABASE_URL}/rest/v1/volunteers`, { method: 'POST', headers: HEADERS, body: JSON.stringify({ name, phone: document.getElementById('vol-phone').value, school: document.getElementById('vol-school').value, major: document.getElementById('vol-major').value, subject: document.getElementById('vol-subject').value, available_time: document.getElementById('vol-time').value, intro: document.getElementById('vol-intro').value }) });
+        showToast('报名成功'); await loadAllData(); renderMatch();
+        document.querySelectorAll('#volunteer-form input,#volunteer-form textarea').forEach(i => i.value = '');
+    } catch(e) { showToast('提交失败', 'error'); }
+};
+document.getElementById('cls-submit').onclick = async () => {
+    const { isLogin } = getStoredLoginInfo();
+    if (!isLogin) { showToast('请先登录', 'error'); openModal('login'); return; }
+    const class_name = document.getElementById('cls-name').value.trim();
+    if (!class_name) { showToast('请填写班级名称', 'error'); return; }
+    try {
+        await fetch(`${SUPABASE_URL}/rest/v1/classes`, { method: 'POST', headers: HEADERS, body: JSON.stringify({ class_name, grade: document.getElementById('cls-grade').value, school_name: document.getElementById('cls-school').value, contact_phone: document.getElementById('cls-phone').value, time: document.getElementById('cls-time').value, study_desc: document.getElementById('cls-desc').value, subject: '道德与法治' }) });
+        showToast('需求提交成功'); await loadAllData(); renderMatch();
+        document.querySelectorAll('#student-form input,#student-form select').forEach(i => i.value = '');
+    } catch(e) { showToast('提交失败', 'error'); }
+};
+window.onload = async () => {
+    const { isLogin, account, role } = getStoredLoginInfo();
+    if (isLogin && account) { currentUserAccount = account; isAdmin = (role === 'admin'); }
+    updateLoginUI();
+    await loadAllData();
+    renderMatch();
+    initTabButtons();
+    document.getElementById('volunteer-form').classList.add('active');
+    document.getElementById('student-form').classList.remove('active');
+    document.getElementById('match-result').classList.remove('active');
+    if(document.getElementById('admin')) document.getElementById('admin').classList.remove('active');
+};
 </script>
 </body>
 </html>

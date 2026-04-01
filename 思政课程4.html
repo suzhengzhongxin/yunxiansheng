@@ -86,6 +86,7 @@
         .top-bar a {
             color: #fff;
             margin-left: 15px;
+            cursor: pointer;
         }
         .top-bar a:hover {
             color: var(--gold-color);
@@ -195,6 +196,25 @@
             width: 100%; padding: 10px;
             border: 1px solid #ddd; border-radius: 6px;
         }
+
+        /* 提示toast */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .toast.success { background-color: #42b983; }
+        .toast.error { background-color: #d62828; }
+        .toast.show { opacity: 1; }
 
         /* 课程内容区域 */
         .course-detail {
@@ -352,7 +372,7 @@
 <header class="header">
     <div class="container nav">
         <div class="logo">
-            <img src="图片/云先生logo.jpg" alt="云先生logo">
+            <img src="图片/云先生logo.jpg" alt="云先生logo" onerror="this.src='https://via.placeholder.com/48x48?text=云先生'">
             <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
         </div>
         <ul class="nav-menu">
@@ -408,25 +428,27 @@
     </div>
 </div>
 
+<div id="toast" class="toast"></div>
+
 <!-- 课程详情内容 -->
 <div class="course-detail">
     <h1>邓小平理论</h1>
     
     <div id="section1" class="course-section">
-        <p>马列主义同当代中国实践和时代特征相结合的产物，是马克思主义中国化第二次历史性飞跃的开创性成果，是中国特色社会主义理论体系的开创之作，科学回答 “什么是社会主义、怎样建设社会主义”。</p>
+        <p>马列主义同当代中国实践和时代特征相结合的产物，是马克思主义中国化第二次历史性飞跃的开创性成果，是中国特色社会主义理论体系的开创之作，科学回答 "什么是社会主义、怎样建设社会主义"。</p>
     </div>
 
     <div id="section2" class="course-section">
         <h2>1.形成背景</h2>
-        <p>和平与发展成为时代主题；国内 “文革” 结束后亟待拨乱反正，突破 “两个凡是” 束缚，国民经济发展面临压力。</p>
+        <p>和平与发展成为时代主题；国内 "文革" 结束后亟待拨乱反正，突破 "两个凡是" 束缚，国民经济发展面临压力。</p>
     </div>
 
     <div id="section3" class="course-section">
         <h2>2.发展过程</h2>
         <p>1978 年十一届三中全会开启改革开放，确立实事求是的思想路线；</p>
-        <p>1982 年十二大提出 “建设有中国特色的社会主义”；</p>
-        <p>1987 年十三大阐述社会主义初级阶段理论，提出 “一个中心、两个基本点”；</p>
-        <p>1992 年南方谈话明确社会主义本质、“三个有利于” 标准，思想走向成熟；</p>
+        <p>1982 年十二大提出 "建设有中国特色的社会主义"；</p>
+        <p>1987 年十三大阐述社会主义初级阶段理论，提出 "一个中心、两个基本点"；</p>
+        <p>1992 年南方谈话明确社会主义本质、"三个有利于" 标准，思想走向成熟；</p>
         <p>1997 年十五大将其确立为党的指导思想。</p>
     </div>
 
@@ -435,7 +457,7 @@
         <p><strong>精髓：</strong>解放思想、实事求是；</p>
         <p><strong>立论依据：</strong>社会主义初级阶段理论；</p>
         <p><strong>核心：</strong>社会主义本质（解放发展生产力，消灭剥削，消除两极分化，最终达到共同富裕）；</p>
-        <p><strong>主要内容：</strong>明确以经济建设为中心，改革开放是发展动力，提出社会主义市场经济理论、“三步走” 发展战略、“一国两制” 构想等。</p>
+        <p><strong>主要内容：</strong>明确以经济建设为中心，改革开放是发展动力，提出社会主义市场经济理论、"三步走" 发展战略、"一国两制" 构想等。</p>
     </div>
 
     <div id="section5" class="course-section">
@@ -446,7 +468,7 @@
 
     <div class="course-section">
         <h2>5.学习思考</h2>
-        <p>邓小平理论中“解放思想、实事求是”的精髓对我们今天的学习和工作有何启示？如何理解“发展才是硬道理”这一重要论断？</p>
+        <p>邓小平理论中"解放思想、实事求是"的精髓对我们今天的学习和工作有何启示？如何理解"发展才是硬道理"这一重要论断？</p>
         <p>欢迎在留言板分享你的学习心得和思考～</p>
     </div>
 
@@ -467,6 +489,23 @@
 </footer>
 
 <script>
+    // Supabase 配置
+    const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
+    const HEADERS = {
+        apikey: SUPABASE_KEY,
+        Authorization: "Bearer " + SUPABASE_KEY,
+        "Content-Type": "application/json"
+    };
+
+    // 显示提示消息
+    function showToast(msg, type = 'success') {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.className = `toast ${type} show`;
+        setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
     function toggleNav() {
         document.querySelector('.nav-menu').classList.toggle('active');
     }
@@ -490,34 +529,114 @@
         }
     }
 
-    function loginHandler() {
+    // 登录处理 - 连接Supabase user表
+    async function loginHandler() {
         const username = document.getElementById('loginUsername').value.trim();
         const pwd = document.getElementById('loginPassword').value.trim();
-        if(!username || !pwd) { alert("请输入账号和密码"); return; }
-        localStorage.setItem('isLogin', 'true');
-        localStorage.setItem('loginUser', username);
-        alert('登录成功！');
-        closeModal();
-        updateLoginUI();
+        if(!username || !pwd) {
+            showToast("请输入账号和密码", "error");
+            return;
+        }
+        
+        try {
+            const response = await fetch(
+                `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(pwd)}&select=*`,
+                { headers: HEADERS }
+            );
+            
+            if (!response.ok) {
+                throw new Error("网络请求失败");
+            }
+            
+            const data = await response.json();
+            
+            if (data && data.length > 0) {
+                const user = data[0];
+                localStorage.setItem('isLogin', 'true');
+                localStorage.setItem('loginUser', user.account);
+                localStorage.setItem('userRole', user.role || 'user');
+                showToast("登录成功！", "success");
+                closeModal();
+                updateLoginUI();
+                document.getElementById('loginUsername').value = '';
+                document.getElementById('loginPassword').value = '';
+            } else {
+                showToast("账号或密码错误", "error");
+            }
+        } catch (error) {
+            console.error("登录错误:", error);
+            showToast("登录失败，请检查网络连接", "error");
+        }
     }
     
-    function registerHandler() {
+    // 注册处理 - 连接Supabase user表
+    async function registerHandler() {
         const phone = document.getElementById('regPhone').value.trim();
         const pwd = document.getElementById('regPwd').value;
         const confirm = document.getElementById('regConfirm').value;
-        if(!phone || !pwd) { alert("请填写手机号和密码"); return; }
-        if(pwd !== confirm) { alert("两次密码不一致"); return; }
-        alert('注册成功！请登录');
-        switchTabModal('login');
-        document.getElementById('loginUsername').value = phone;
-        document.getElementById('loginPassword').value = '';
+        
+        if(!phone) {
+            showToast("请填写手机号", "error");
+            return;
+        }
+        if(!pwd) {
+            showToast("请设置密码", "error");
+            return;
+        }
+        if(pwd !== confirm) {
+            showToast("两次密码不一致", "error");
+            return;
+        }
+        try {
+            // 检查账号是否已存在
+            const checkResponse = await fetch(
+                `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(phone)}&select=*`,
+                { headers: HEADERS }
+            );
+            const existingUsers = await checkResponse.json();
+            
+            if (existingUsers && existingUsers.length > 0) {
+                showToast("该账号已存在，请直接登录", "error");
+                return;
+            }
+            
+            // 创建新用户
+            const newUser = {
+                account: phone,
+                password: pwd,
+                role: "user"
+            };
+            
+            const createResponse = await fetch(`${SUPABASE_URL}/rest/v1/user`, {
+                method: 'POST',
+                headers: HEADERS,
+                body: JSON.stringify(newUser)
+            });
+            
+            if (createResponse.ok) {
+                showToast("注册成功！请登录", "success");
+                document.getElementById('regPhone').value = '';
+                document.getElementById('regPwd').value = '';
+                document.getElementById('regConfirm').value = '';
+                switchTabModal('login');
+                document.getElementById('loginUsername').value = phone;
+                document.getElementById('loginPassword').value = '';
+            } else {
+                const errorData = await createResponse.text();
+                console.error("注册失败:", errorData);
+                showToast("注册失败，请稍后重试", "error");
+            }
+        } catch (error) {
+            console.error("注册错误:", error);
+            showToast("注册失败，请检查网络连接", "error");
+        }
     }
 
     function checkMyNeedLogin(event) {
         const isLogged = localStorage.getItem('isLogin') === 'true';
         if(!isLogged) {
             event.preventDefault();
-            alert('请先登录后访问"我的"页面！');
+            showToast("请先登录后访问我的页面", "error");
             openModal('login');
             return false;
         }
@@ -538,9 +657,9 @@
     function logout() {
         localStorage.removeItem('isLogin');
         localStorage.removeItem('loginUser');
-        alert('已退出登录');
+        localStorage.removeItem('userRole');
+        showToast("已退出登录", "success");
         updateLoginUI();
-        window.location.href = 'index.html';
     }
 
     window.addEventListener('DOMContentLoaded', function() {

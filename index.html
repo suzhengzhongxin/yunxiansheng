@@ -68,7 +68,7 @@
         }
         .top-bar .slogan { flex: 1; text-align: center; }
         .top-bar .login-group { padding-right: 20px; }
-        .top-bar a { color: #fff; margin-left: 15px; }
+        .top-bar a { color: #fff; margin-left: 15px; cursor: pointer; }
         .top-bar a:hover { color: var(--gold-color); }
 
         .header {
@@ -144,10 +144,29 @@
         .modal-panel { display: none; }
         .modal-panel.active { display: block; }
         .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; margin-bottom: 6px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 500; }
         .form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-size: 14px;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .toast.show { opacity: 1; }
+        .toast.success { background: #42b983; }
+        .toast.error { background: #d62828; }
 
-        /* 轮播 - 完全移除阴影，文字区域无任何背景灰色阴影 */
+        /* 轮播 */
         .banner-slider {
             position: relative;
             width: 100%;
@@ -166,11 +185,8 @@
             justify-content: center;
             opacity: 0;
             transition: opacity 1.2s ease;
-            box-shadow: none;
-            filter: none;
         }
         .banner-slide.active { opacity: 1; }
-        /* 文字容器：完全无背景、无阴影、无模糊、无灰色底 */
         .banner-content {
             max-width: 900px;
             width: 90%;
@@ -178,12 +194,7 @@
             color: #fff;
             text-align: center;
             background: none;
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-            box-shadow: none;
-            border-radius: 0;
         }
-        /* 第一张图专属优化排版（更优雅的断行与间距） */
         .banner-content.first-slide-content .banner-title {
             font-size: 48px;
             letter-spacing: 2px;
@@ -201,18 +212,12 @@
             margin-bottom: 16px; 
             text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
             font-weight: 700;
-            line-height: 1.3;
         }
         .banner-subtitle { 
             font-size: 20px; 
             margin-bottom: 32px; 
             text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
-            letter-spacing: 1px;
-            opacity: 0.95;
         }
-        
-        /* ========== 轮播图按钮统一动态效果 ========== */
-        /* 基础样式 - 所有轮播按钮共用 */
         .banner-btn { 
             background: var(--gold-color); 
             color: var(--primary-dark); 
@@ -223,42 +228,16 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
             display: inline-block;
             cursor: pointer;
-            border: none;
-            /* 添加平滑过渡 */
             transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
-            /* 确保缩放效果不受父元素影响 */
-            transform: scale(1);
-            will-change: transform;
         }
-        
-        /* 悬停效果：放大 + 阴影加深 + 背景微调 */
         .banner-btn:hover {
             transform: scale(1.08);
             background: #ffea80;
             box-shadow: 0 12px 28px rgba(0,0,0,0.4);
         }
-        
-        /* 点击时轻微缩小，增强交互反馈 */
         .banner-btn:active {
             transform: scale(0.96);
-            transition: all 0.1s ease;
         }
-        
-        /* 确保所有按钮样式一致，覆盖可能的干扰 */
-        .banner-slide .banner-btn,
-        .banner-content .banner-btn,
-        a.banner-btn {
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2) !important;
-        }
-        
-        .banner-slide .banner-btn:hover,
-        .banner-content .banner-btn:hover,
-        a.banner-btn:hover {
-            transform: scale(1.08) !important;
-            background: #ffea80 !important;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.4) !important;
-        }
-        /* ========== 轮播图按钮动态效果结束 ========== */
 
         /* 平台介绍区域 */
         .platform-section {
@@ -311,18 +290,13 @@
             justify-content: center;
             gap: 12px;
         }
-        .info-btn i {
-            font-size: 20px;
-            color: var(--primary-color);
-        }
+        .info-btn i { font-size: 20px; color: var(--primary-color); }
         .info-btn:hover {
             background: var(--primary-color);
             color: white;
             transform: translateX(8px);
         }
-        .info-btn:hover i {
-            color: white;
-        }
+        .info-btn:hover i { color: white; }
         .platform-right {
             flex: 0.9;
             border-radius: 24px;
@@ -333,7 +307,6 @@
             width: 100%;
             height: auto;
             display: block;
-            object-fit: cover;
         }
 
         /* 核心功能模块 */
@@ -360,7 +333,6 @@
             width: 60%;
             height: 3px;
             background: linear-gradient(90deg, var(--gold-color), var(--primary-color));
-            border-radius: 3px;
         }
         .modules-grid {
             display: grid;
@@ -414,7 +386,6 @@
             margin: 12px 0;
             font-size: 14px;
             color: var(--primary-dark);
-            font-weight: 500;
             border-left: 3px solid var(--gold-color);
         }
         .module-description {
@@ -460,6 +431,7 @@
             border-radius: var(--radius-lg);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
+            display: block;
         }
         .course-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
         .course-card:hover img { transform: scale(1.05); }
@@ -488,7 +460,7 @@
         .footer-col li a:hover, .footer-col li span:hover { color: var(--gold-color); }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #ccc; }
 
-        /* 纯文字弹窗样式 */
+        /* 纯文字弹窗 */
         .info-modal {
             position: fixed;
             top: 0; left: 0;
@@ -510,7 +482,6 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: var(--shadow-lg);
         }
         .info-modal-header {
             background: var(--primary-color);
@@ -520,22 +491,14 @@
             justify-content: space-between;
             align-items: center;
         }
-        .info-modal-header h3 {
-            font-size: 24px;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .info-modal-header h3 { font-size: 24px; margin: 0; display: flex; align-items: center; gap: 10px; }
         .info-modal-close {
             background: none;
             border: none;
             color: white;
             font-size: 32px;
             cursor: pointer;
-            line-height: 1;
         }
-        .info-modal-close:hover { opacity: 0.8; }
         .info-modal-body {
             padding: 32px 36px;
             overflow-y: auto;
@@ -550,11 +513,6 @@
             margin: 24px 0 12px 0;
             border-left: 5px solid var(--gold-color);
             padding-left: 16px;
-        }
-        .info-modal-body h4:first-of-type { margin-top: 0; }
-        .info-modal-body p {
-            margin-bottom: 14px;
-            text-indent: 2em;
         }
 
         @media (max-width: 992px) {
@@ -581,24 +539,6 @@
             .banner-title { font-size: 28px; }
             .banner-subtitle { font-size: 16px; }
             .banner-slider { height: 380px; }
-            .info-modal-body { padding: 20px; }
-            .banner-content.first-slide-content .banner-title {
-                font-size: 30px;
-            }
-            .banner-btn {
-                padding: 8px 24px;
-                font-size: 16px;
-            }
-            /* 移动端悬停效果也保持 */
-            .banner-btn:hover {
-                transform: scale(1.05) !important;
-            }
-        }
-        
-        /* 添加一个简单的按钮悬停调试样式，确保可见 */
-        .banner-btn {
-            position: relative;
-            z-index: 10;
         }
     </style>
 </head>
@@ -617,7 +557,7 @@
 <header class="header">
     <div class="container nav">
         <div class="logo">
-            <img src="图片/云先生logo.jpg" alt="云先生logo">
+            <img src="图片/云先生logo.jpg" alt="云先生logo" onerror="this.src='https://via.placeholder.com/48x48?text=云先生'">
             <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
         </div>
         <ul class="nav-menu">
@@ -628,7 +568,7 @@
             <li><a href="video.html">录播课室</a></li>
             <li><a href="download.html">直播课室</a></li>
             <li><a href="forum.html">留言板</a></li>
-            <li><a href="checkin.html" onclick="return checkLogin()">我的</a></li>
+            <li><a href="checkin.html" onclick="return checkLoginBeforeNavigate(event)">我的</a></li>
         </ul>
         <div class="nav-toggle" onclick="toggleNav()"><i class="fa fa-bars"></i></div>
     </div>
@@ -643,22 +583,21 @@
             <div class="modal-tab-item" onclick="switchTab('reg')">注册</div>
         </div>
         <div class="modal-panel active" id="loginPanel">
-            <div class="form-group"><label>账号</label><input type="text" id="loginUsername" placeholder="手机号/学号"></div>
+            <div class="form-group"><label>账号（手机号/学号）</label><input type="text" id="loginUsername" placeholder="请输入账号"></div>
             <div class="form-group"><label>密码</label><input type="password" id="loginPassword" placeholder="请输入密码"></div>
-            <button class="btn" onclick="login()">登录</button>
+            <button class="btn" onclick="login()" style="width:100%">登录</button>
         </div>
         <div class="modal-panel" id="regPanel">
-            <div class="form-group"><label>手机号</label><input type="text" id="regPhone" placeholder="请输入手机号"></div>
+            <div class="form-group"><label>手机号/账号</label><input type="text" id="regPhone" placeholder="请输入手机号或学号"></div>
             <div class="form-group"><label>密码</label><input type="password" id="regPwd" placeholder="设置密码"></div>
             <div class="form-group"><label>确认密码</label><input type="password" id="regConfirm" placeholder="确认密码"></div>
-            <button class="btn" onclick="register()">注册</button>
+            <button class="btn" onclick="register()" style="width:100%">注册</button>
         </div>
     </div>
 </div>
 
-<!-- 轮播区：所有按钮都具有相同的悬停放大动态效果 -->
+<!-- 轮播区 -->
 <section class="banner-slider">
-    <!-- 第一张轮播图 -->
     <div class="banner-slide active" style="background-image: url('图片/banner1.jpg');">
         <div class="banner-content first-slide-content">
             <h1 class="banner-title">云先生-师范生助力<br>乡村中小学道德与法治</h1>
@@ -666,7 +605,6 @@
             <a href="javascript:void(0);" class="btn banner-btn js-scroll-to-core">立即学习</a>
         </div>
     </div>
-    <!-- 第二张图 -->
     <div class="banner-slide" style="background-image: url('图片/banner2.jpg');">
         <div class="banner-content">
             <h1 class="banner-title">大手牵小手</h1>
@@ -674,7 +612,6 @@
             <a href="javascript:void(0);" class="btn banner-btn js-scroll-to-core">开始学习</a>
         </div>
     </div>
-    <!-- 第三张图 -->
     <div class="banner-slide" style="background-image: url('图片/banner3.jpg');">
         <div class="banner-content">
             <h1 class="banner-title">云端育新人</h1>
@@ -682,7 +619,6 @@
             <a href="javascript:void(0);" class="btn banner-btn js-scroll-to-core">进入课堂</a>
         </div>
     </div>
-    <!-- 第四张图：红色传承 · 铸魂育人，同样动态效果 -->
     <div class="banner-slide" style="background-image: url('图片/banner4.jpg');">
         <div class="banner-content">
             <h1 class="banner-title">红色传承 · 铸魂育人</h1>
@@ -719,21 +655,16 @@
     </div>
 </section>
 
-<!-- 核心功能矩阵模块 -->
+<!-- 核心功能矩阵 -->
 <section class="core-modules" id="coreModulesSection">
     <div class="container">
-        <div class="section-header">
-            <h2>平台核心功能矩阵</h2>
-            <p>六大模块 · 精准服务乡村思政教育</p>
-        </div>
-        <div class="modules-grid" id="modulesGrid">
-            <!-- 动态渲染核心模块 -->
-        </div>
+        <div class="section-header"><h2>平台核心功能矩阵</h2><p>六大模块 · 精准服务乡村思政教育</p></div>
+        <div class="modules-grid" id="modulesGrid"></div>
     </div>
 </section>
 
 <!-- 思政课程 -->
-<section class="course-learning" id="course">
+<section class="course-learning">
     <div class="container">
         <h2 class="course-title">思政课程学习</h2>
         <p class="course-desc">系统梳理中国特色社会主义理论体系，坚定理想信念，厚植爱国情怀</p>
@@ -760,21 +691,160 @@
     </div>
 </footer>
 
-<div id="infoModal" class="info-modal">
-    <div class="info-modal-content">
-        <div class="info-modal-header">
-            <h3 id="modalTitle"><i class="fa fa-info-circle"></i> 详情</h3>
-            <button class="info-modal-close" onclick="closeInfoModal()">×</button>
-        </div>
-        <div class="info-modal-body" id="modalBody"></div>
-    </div>
-</div>
+<div id="infoModal" class="info-modal"><div class="info-modal-content"><div class="info-modal-header"><h3 id="modalTitle"><i class="fa fa-info-circle"></i> 详情</h3><button class="info-modal-close" onclick="closeInfoModal()">×</button></div><div class="info-modal-body" id="modalBody"></div></div></div>
+<div id="toastMessage" class="toast"></div>
 
 <script>
+    // Supabase 配置
+    const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
+    const HEADERS = {
+        apikey: SUPABASE_KEY,
+        Authorization: "Bearer " + SUPABASE_KEY,
+        "Content-Type": "application/json"
+    };
+
+    // 全局用户状态
+    let currentUser = null;
+
+    function showToast(msg, type = 'success') {
+        const toast = document.getElementById('toastMessage');
+        toast.textContent = msg;
+        toast.className = `toast ${type} show`;
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // 登录逻辑 - 连接数据库 user 表 (account, password, role)
+    async function login() {
+        const account = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        if (!account || !password) {
+            showToast('请输入账号和密码', 'error');
+            return;
+        }
+        try {
+            // 查询 user 表中匹配 account 和 password 的记录
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(account)}&password=eq.${encodeURIComponent(password)}`, {
+                headers: HEADERS
+            });
+            if (!response.ok) throw new Error('网络错误');
+            const data = await response.json();
+            if (data && data.length > 0) {
+                const user = data[0];
+                currentUser = { account: user.account, role: user.role };
+                localStorage.setItem('isLogin', 'true');
+                localStorage.setItem('loginUser', user.account);
+                localStorage.setItem('userRole', user.role);
+                showToast(`欢迎回来，${user.account}`, 'success');
+                closeModal();
+                updateLoginUI();
+                // 清空输入框
+                document.getElementById('loginUsername').value = '';
+                document.getElementById('loginPassword').value = '';
+            } else {
+                showToast('账号或密码错误', 'error');
+            }
+        } catch (err) {
+            console.error(err);
+            showToast('登录失败，请检查网络', 'error');
+        }
+    }
+
+    // 注册逻辑 - 插入新用户到 user 表 (account, password, role 默认 'user')
+    async function register() {
+        const account = document.getElementById('regPhone').value.trim();
+        const password = document.getElementById('regPwd').value;
+        const confirm = document.getElementById('regConfirm').value;
+        if (!account || !password) {
+            showToast('请填写账号和密码', 'error');
+            return;
+        }
+        if (password !== confirm) {
+            showToast('两次密码不一致', 'error');
+            return;
+        }
+        try {
+            // 先检查账号是否已存在
+            const checkRes = await fetch(`${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(account)}`, { headers: HEADERS });
+            const exist = await checkRes.json();
+            if (exist && exist.length > 0) {
+                showToast('该账号已被注册', 'error');
+                return;
+            }
+            // 插入新用户，role 默认为 'user'
+            const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/user`, {
+                method: 'POST',
+                headers: HEADERS,
+                body: JSON.stringify({ account: account, password: password, role: 'user' })
+            });
+            if (insertRes.ok) {
+                showToast('注册成功，请登录', 'success');
+                // 清空注册表单
+                document.getElementById('regPhone').value = '';
+                document.getElementById('regPwd').value = '';
+                document.getElementById('regConfirm').value = '';
+                // 切换到登录面板
+                switchTab('login');
+                // 自动填充账号到登录框
+                document.getElementById('loginUsername').value = account;
+                document.getElementById('loginPassword').value = '';
+            } else {
+                const err = await insertRes.text();
+                console.error(err);
+                showToast('注册失败，请稍后重试', 'error');
+            }
+        } catch (err) {
+            console.error(err);
+            showToast('网络错误，注册失败', 'error');
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem('isLogin');
+        localStorage.removeItem('loginUser');
+        localStorage.removeItem('userRole');
+        currentUser = null;
+        showToast('已退出登录', 'success');
+        updateLoginUI();
+    }
+
+    function updateLoginUI() {
+        const isLogin = localStorage.getItem('isLogin') === 'true';
+        const group = document.getElementById('loginGroup');
+        if (isLogin && group) {
+            const userName = localStorage.getItem('loginUser') || '用户';
+            group.innerHTML = `<span style="color:#ffd700;">欢迎，${userName}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`;
+        } else {
+            group.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`;
+        }
+    }
+
+    function checkLoginBeforeNavigate(e) {
+        const isLogin = localStorage.getItem('isLogin') === 'true';
+        if (!isLogin) {
+            e.preventDefault();
+            showToast('请先登录再访问“我的”页面', 'error');
+            openModal('login');
+            return false;
+        }
+        return true;
+    }
+
+    function navigateTo(page) {
+        const isLogin = localStorage.getItem('isLogin') === 'true';
+        if (!isLogin) {
+            showToast('请先登录后访问此功能', 'error');
+            openModal('login');
+            return false;
+        }
+        window.location.href = page;
+        return true;
+    }
+
     // 导航菜单
     function toggleNav() { document.querySelector('.nav-menu').classList.toggle('active'); }
     
-    // 轮播切换
+    // 轮播
     let slides = document.querySelectorAll('.banner-slide');
     let slideIndex = 0;
     function runSlide() { 
@@ -784,54 +854,30 @@
     }
     setInterval(runSlide, 4500);
     
-    // 统一滚动到核心功能模块的函数
     function scrollToCoreModules() {
-        const targetSection = document.getElementById('coreModulesSection');
-        if(targetSection) {
-            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            targetSection.style.transition = 'background 0.5s';
-            targetSection.style.backgroundColor = '#fff9ef';
-            setTimeout(() => { targetSection.style.backgroundColor = ''; }, 800);
-        }
+        const target = document.getElementById('coreModulesSection');
+        if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    
-    // 为所有轮播图按钮绑定点击事件
-    function bindBannerButtons() {
-        const btns = document.querySelectorAll('.banner-slide .banner-btn.js-scroll-to-core');
-        btns.forEach(btn => {
-            btn.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                scrollToCoreModules();
-                return false;
-            };
-        });
-    }
-    
-    // 登录注册逻辑
+    document.querySelectorAll('.js-scroll-to-core').forEach(btn => {
+        btn.onclick = (e) => { e.preventDefault(); scrollToCoreModules(); };
+    });
+
+    // 弹窗控制
     const modalEl = document.getElementById('modal');
     function openModal(type) { modalEl.classList.add('active'); switchTab(type); }
     function closeModal() { modalEl.classList.remove('active'); }
     function switchTab(t) {
         document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.modal-tab-item').forEach(i => i.classList.remove('active'));
-        if (t === 'login') { document.getElementById('loginPanel').classList.add('active'); document.querySelectorAll('.modal-tab-item')[0].classList.add('active'); }
-        else { document.getElementById('regPanel').classList.add('active'); document.querySelectorAll('.modal-tab-item')[1].classList.add('active'); }
+        if (t === 'login') { 
+            document.getElementById('loginPanel').classList.add('active'); 
+            document.querySelectorAll('.modal-tab-item')[0].classList.add('active');
+        } else { 
+            document.getElementById('regPanel').classList.add('active'); 
+            document.querySelectorAll('.modal-tab-item')[1].classList.add('active');
+        }
     }
-    function login() { const u = document.getElementById('loginUsername').value.trim(), p = document.getElementById('loginPassword').value.trim(); if(!u||!p){alert("请输入账号和密码");return;} localStorage.setItem('isLogin','true'); localStorage.setItem('loginUser',u); alert('登录成功！'); closeModal(); updateLoginUI(); renderCoreModules(); }
-    function register() { const phone = document.getElementById('regPhone').value.trim(), pwd = document.getElementById('regPwd').value, cfm = document.getElementById('regConfirm').value; if(!phone||!pwd){alert("请填写手机号和密码");return;} if(pwd!==cfm){alert("两次密码不一致");return;} alert('注册成功！请登录'); switchTab('login'); document.getElementById('loginUsername').value = phone; document.getElementById('loginPassword').value = ''; }
-    function checkLogin() { if(!localStorage.getItem('isLogin')){ alert('请先登录再访问“我的”页面！'); openModal('login'); return false; } return true; }
-    function logout() { localStorage.removeItem('isLogin'); localStorage.removeItem('loginUser'); alert('已退出登录'); updateLoginUI(); renderCoreModules(); }
-    function updateLoginUI() { const isLogin = localStorage.getItem('isLogin') === 'true'; const group = document.getElementById('loginGroup'); if(isLogin && group){ const user = localStorage.getItem('loginUser') || '用户'; group.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`; } else { group.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`; } }
-    
-    // 模块跳转检查登录
-    function navigateTo(page) {
-        const isLogin = localStorage.getItem('isLogin') === 'true';
-        if(!isLogin) { alert('请先登录后访问此功能'); openModal('login'); return false; }
-        window.location.href = page;
-        return true;
-    }
-    
+
     // 动态渲染核心模块
     function renderCoreModules() {
         const modules = [
@@ -843,23 +889,24 @@
             { name:'留言板', icon:'fa-comments-o', highlight:'💬 学习心得 · 成长感悟 · 答疑互助', desc:'师生交流思政学习感悟，展示优秀作业，形成互助共进的乡村思政学习共同体。', stats:'📝 交流社区 · ❤️ 师生互动', link:'forum.html', tag:'互动社区', img:'图片/留言板.jpg' }
         ];
         const grid = document.getElementById('modulesGrid');
-        if(!grid) return;
-        grid.innerHTML = modules.map(m => `
-            <div class="module-card">
-                <div class="module-img" style="background-image: url('${m.img}');"><div class="tag">${m.tag}</div></div>
-                <div class="module-content">
-                    <h3><i class="fa ${m.icon}"></i> ${m.name}</h3>
-                    <div class="module-highlight">${m.highlight}</div>
-                    <div class="module-description">${m.desc}</div>
-                    <div class="module-stats"><span>${m.stats.split('·')[0]}</span><span>${m.stats.split('·')[1] || ''}</span></div>
-                    <a class="module-link" onclick="navigateTo('${m.link}')">进入${m.name} <i class="fa fa-arrow-right"></i></a>
+        if(grid) {
+            grid.innerHTML = modules.map(m => `
+                <div class="module-card">
+                    <div class="module-img" style="background-image: url('${m.img}');"><div class="tag">${m.tag}</div></div>
+                    <div class="module-content">
+                        <h3><i class="fa ${m.icon}"></i> ${m.name}</h3>
+                        <div class="module-highlight">${m.highlight}</div>
+                        <div class="module-description">${m.desc}</div>
+                        <div class="module-stats"><span>${m.stats.split('·')[0]}</span><span>${m.stats.split('·')[1] || ''}</span></div>
+                        <a class="module-link" onclick="navigateTo('${m.link}')">进入${m.name} <i class="fa fa-arrow-right"></i></a>
+                    </div>
                 </div>
-            </div>
-        `).join('');
+            `).join('');
+        }
     }
-    
-    // 弹窗内容
-    const teamFull = `<h4>云先生团队介绍</h4><p><strong>（一）团队介绍</strong><br>云先生团队成员横跨六个专业，彼此分工明确，具有跨专业、跨学科的特点，专业覆盖全面、专业知识互补，为项目推进提供强有力支撑。团队致力于改变乡村思政教师匮乏的现状，主要目标是不断创新乡村思政教育模式，实现师范生夯实教学基本功与乡村思政教育的互利共赢。在“互联网+”的契机下，将思政专业师范生与缺乏思政教师等资源的乡村中小学有机结合起来，构建基于互联网的乡村思政教育网络平台。</p><p><strong>（二）成员组成</strong><br>项目团队负责人：范乐乐...（团队详情完整保留）</p><p><strong>（三）团队口号</strong><br>共建共赢，以自我迎接超我<br>共享共担，以小我完成大我</p><p><strong>（四）团队目标</strong><br>在实践中认识自己，在学习中充实自己。<br>发挥师范生团队力量，助推乡村思政教育。</p>`;
+
+     // 弹窗内容
+  const teamFull = `<h4>云先生团队介绍</h4><p><strong>（一）团队介绍</strong><br>云先生团队成员横跨六个专业，彼此分工明确，具有跨专业、跨学科的特点，专业覆盖全面、专业知识互补，为项目推进提供强有力支撑。团队致力于改变乡村思政教师匮乏的现状，主要目标是不断创新乡村思政教育模式，实现师范生夯实教学基本功与乡村思政教育的互利共赢。在“互联网+”的契机下，将思政专业师范生与缺乏思政教师等资源的乡村中小学有机结合起来，构建基于互联网的乡村思政教育网络平台。</p><p><strong>（二）成员组成</strong><br>项目团队负责人：范乐乐：全面负责项目总体策划、内外沟通协调与整体统筹工作。责任心强、实践经验丰富，具备优秀的组织协调与沟通能力，思维敏捷、细致严谨，善于捕捉关键细节，为项目方向把控与团队协作提供核心支撑。<br>卜丹：主要负责项目资料收集、调研数据整理与调查结果分析。耐心细致，具备较强的学术研究能力与逻辑思辨能力，能够透过现象把握本质，曾多次在校级社会实践调查报告评选中获奖，为项目提供扎实的理论与数据支撑。<br>兰婧旖：具备优秀的观察能力、分析能力与理解能力，对项目发展拥有独立思考与独到见解。主要承担项目策划书撰写、项目整体框架规划与内容架构设计，保障项目体系完整、逻辑清晰。<br>王文婷：擅长小规模精准市场调研与数据统计分析，担任项目与乡村中小学校的沟通联络工作，及时反馈一线需求与意见。为项目提供真实、动态的市场环境信息与落地可行性依据，是连接项目与服务对象的重要桥梁。<br>刘梦凡：思维敏捷、逻辑性强、严谨细致，深度参与平台建设工作，负责平台界面逻辑梳理、交互流程优化、功能模块呈现设计，熟悉APP研发流程，助力平台结构更清晰、使用更便捷。<br>雷雅茹：拥有出色的活动策划能力、创新思维与亲和力，沟通协调能力突出。面对突发问题冷静理性、分析到位，主要负责项目活动方案策划、内容优化与可行性分析，提升项目创新性与落地性。<br>刘宇冉：负责项目整体文案撰写、宣传材料创作与品牌内容策划。文字功底扎实、创意构思能力强，能够将项目理念转化为清晰生动、富有感染力的表达，有效提升项目对外传播力与认可度。<br>张铃欣：擅长在小范围内进行市场调研，并进行数据分析。在本项目中，起到了沟通乡村中小学校，并做出及时反馈的桥梁作用。在项目的创立过程中，提供了市场环境及其变化等重要信息。<br>刘伟：擅长思政类实时资讯检索，能筛选适配乡村中小学的内容。在本项目中负责实时热点搜集：挖掘思政相关热点、政策资讯，辅助整理为教学素材，补充平台时效资源储备。<br>王思辰：具备出色的活动策划能力和创新思想，还有较强的协调能力，擅长与他人沟通和有较强的亲和力。有耐心，能够对突发的问题冷静分析，在该项目中承担着策划分析的责任。<br>陈明：熟悉青少年认知特点与学习规律，专注教学内容设计、课程打磨与形式优化。能够结合乡村学生实际调整教学方案，提升线上课程适配性、趣味性与教学效果。<br>王雅琴：负责项目互联网平台的整体搭建与技术开发，包括网站架构搭建、功能模块实现、公众号运营维护等，保障平台服务功能稳定运行、符合项目使用需求与预期。<br>王浩捷：负责项目财务核算、成本控制与盈亏分析，具备专业财务知识与实操技能，为项目经费管理、预算执行与可持续运营提供专业保障。<br>马碧沄：美术功底扎实，负责项目品牌核心视觉体系设计，包括项目LOGO、封面、主视觉形象等，打造辨识度高、风格统一的项目品牌符号。<br>刘程程：美术设计能力突出，负责项目文创产品、宣传物料及延伸视觉内容设计，丰富项目视觉表达，提升项目文化内涵与传播吸引力。</p><p><strong>（三）团队口号</strong><br>共建共赢，以自我迎接超我<br>共享共担，以小我完成大我</p><p><strong>（四）团队目标</strong><br>在实践中认识自己，在学习中充实自己。<br>发挥师范生团队力量，助推乡村思政教育。</p>`;
     const activitiesFull = `<h4>相关活动开展</h4><p>本项目孕育地区为山西省忻州市，所处高校为忻州师范学院。基于该高校的相关活动的基础上，更好的为本项目的实施奠定了基础。</p><p><strong>1. 忻州师范学院“大手拉小手，双减助双赢”课后志愿服务活动：</strong>此次活动旨在结合忻州师范学院的师范特色，主动对接忻州市基础教育发展需求，助力小学生培养学习兴趣、开阔思路视野、增强实践能力。共有130余名志愿者参加该活动。</p><p><strong>2. 忻州师范学院“一起云支教，奋进新征程”系列活动：</strong>该活动共有1346人报名，经各系（院）选报、校团委青年志愿者服务中心筛选，最终510名学生入选为志愿者参加云支教活动。</p><p><strong>3. 忻州师范学院“一起云支教，共同迎冬奥”主题实践活动：</strong>本次活动共有650名学生报名，经过宣传动员、系部推荐、层层选拔后来自20个系（院）374名志愿者成功入选。</p><p><strong>4. 忻州师范学院春雨读书社志愿支教服务：</strong>作为忻州师范学院的五星级社团，该社团每周都会组织社员前往忻州市上社小学进行讲课为主，活动为辅的志愿服务。</p><p><strong>5. 忻州师范学院爱心社远程支教活动：</strong>该活动借classin软件，大学生志愿者与中小学通过互联网的形式参加线上活动。</p>`;
     const xinzhiFull = `<h4>忻州师范学院支教介绍</h4><p>作为山西省师范类院校，忻州师范学院主要培养师范类人才，师范资源丰富。学校自1997年起，创造性开展扶贫顶岗实习支教工作，构建了高师院校、地方政府、中小学校“三位一体”协同育人机制。27年来累计派出60000余名大学生，深入山西、河北、新疆、海南等地23个县(市、区)700余所农村中小学开展实习文教工作，走出了一条符合实际、富有成效的“扶贫和扶志扶智相结合”“阻断贫困代际传递”的“忻师”脱贫攻坚之路。</p>`;
     
@@ -874,15 +921,10 @@
     }
     function closeInfoModal() { document.getElementById('infoModal').classList.remove('active'); }
     document.getElementById('infoModal').addEventListener('click', (e) => { if(e.target === document.getElementById('infoModal')) closeInfoModal(); });
-    
-    // 页面加载时执行
+
     window.addEventListener('DOMContentLoaded', () => {
-        bindBannerButtons();
         updateLoginUI();
         renderCoreModules();
-    });
-    window.addEventListener('load', () => {
-        bindBannerButtons();
     });
 </script>
 </body>

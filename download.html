@@ -59,38 +59,40 @@
             box-shadow: var(--shadow-sm);
         }
         
-        /* 顶部栏 + 导航 */
+        /* 顶部栏 - 与video.html完全一致 */
         .top-bar {
             background: var(--primary-dark);
             color: var(--gold-color);
             padding: 8px 0;
-            font-size: 13px;
+            font-size: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .top-bar .slogan { flex: 1; text-align: center; }
-        .top-bar .login-group { padding-right: 24px; }
-        .top-bar a { color: #fff; margin-left: 18px; transition: 0.2s; }
+        .top-bar .login-group { padding-right: 20px; }
+        .top-bar a { color: #fff; margin-left: 15px; cursor: pointer; transition: 0.2s; }
         .top-bar a:hover { color: var(--gold-color); }
         
+        /* 导航栏 - 完全参照video.html，高度70px，样式一致 */
         .header {
             position: sticky;
             top: 0;
             z-index: 999;
             background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
             box-shadow: var(--shadow-sm);
+            padding: 0;
         }
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 72px;
+            height: 70px;
         }
         .logo { display: flex; align-items: center; gap: 12px; }
-        .logo img { width: 48px; height: 48px; border-radius: 12px; border: 2px solid white; object-fit: cover; }
-        .logo-text { color: white; font-size: 20px; font-weight: 700; }
-        .nav-menu { display: flex; gap: 36px; }
+        .logo img { width: 48px; height: 48px; border-radius: 8px; border: 2px solid white; object-fit: cover; }
+        .logo-text { color: white; font-size: 20px; font-weight: bold; }
+        .nav-menu { display: flex; gap: 35px; }
         .nav-menu li a {
             color: #fff;
             font-size: 16px;
@@ -110,9 +112,9 @@
             transition: 0.3s;
         }
         .nav-menu li a:hover::after { width: 100%; }
-        .nav-toggle { display: none; font-size: 26px; color: white; cursor: pointer; }
+        .nav-toggle { display: none; font-size: 24px; color: white; cursor: pointer; }
         
-        /* 登录弹窗 */
+        /* 登录弹窗 - 与video.html一致 */
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -123,110 +125,150 @@
             justify-content: center;
         }
         .modal.active { display: flex; }
-        .modal-box { background: #fff; width: 90%; max-width: 420px; padding: 28px; border-radius: 24px; position: relative; }
-        .modal-close { position: absolute; top: 16px; right: 20px; font-size: 24px; cursor: pointer; }
-        .modal-tab { display: flex; gap: 20px; margin-bottom: 24px; border-bottom: 1px solid #eee; }
-        .modal-tab-item { padding: 8px 0; cursor: pointer; font-weight: 600; }
+        .modal-box {
+            background: #fff;
+            width: 90%;
+            max-width: 420px;
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+        }
+        .modal-close { position: absolute; top: 15px; right: 15px; font-size: 20px; cursor: pointer; }
+        .modal-tab { display: flex; margin-bottom: 20px; }
+        .modal-tab-item { flex: 1; text-align: center; padding: 10px 0; font-weight: bold; cursor: pointer; }
         .modal-tab-item.active { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); }
         .modal-panel { display: none; }
         .modal-panel.active { display: block; }
         .form-group { margin-bottom: 18px; }
-        .form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 40px; padding-left: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
         
-        /* 直播课室banner */
+        /* toast提示 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .toast.success { background-color: #42b983; }
+        .toast.error { background-color: #d62828; }
+        .toast.show { opacity: 1; }
+        
+        /* 直播课室banner - 与video横幅风格统一，高度380px */
         .live-hero {
-            background: linear-gradient(115deg, #6b0f1a 0%, #991a28 45%, #c02b3a 100%);
-            padding: 56px 0 64px;
+            height: 380px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #b82232 100%);
             position: relative;
-            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .live-hero:before {
             content: "";
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: url('图片/bg(1).jpg') center/cover no-repeat;
-            opacity: 0.12;
+            opacity: 0.25;
+            z-index: 1;
         }
         .hero-content {
             position: relative;
             z-index: 2;
             text-align: center;
             color: white;
+            padding: 0 20px;
+            width: 100%;
         }
         .hero-content h1 {
-            font-size: 48px;
-            font-weight: 800;
+            font-size: 44px;
+            font-weight: bold;
             margin-bottom: 16px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .hero-content p {
-            font-size: 18px;
-            max-width: 650px;
+            font-size: 20px;
+            max-width: 800px;
             margin: 0 auto 28px;
-            opacity: 0.92;
+            opacity: 0.95;
+            line-height: 1.6;
         }
         
-        /* 快捷分类导航 (只要优秀教案和课程视频) */
-        .quick-cats {
-            background: white;
-            border-bottom: 1px solid #f0e5dc;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
-            position: sticky;
-            top: 72px;
-            z-index: 99;
-        }
-        .quick-tabs {
+        /* 快捷分类导航 - banner内部下方，类似video中的横幅按钮 */
+        .hero-buttons {
+            position: relative;
+            z-index: 2;
             display: flex;
             justify-content: center;
-            gap: 24px;
+            gap: 40px;
+            margin-top: 10px;
             flex-wrap: wrap;
-            padding: 14px 20px;
         }
-        .quick-tab {
-            padding: 8px 32px;
-            border-radius: 60px;
-            background: #f5ede6;
-            color: #4a3b2f;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.25s;
-            border: 1px solid transparent;
-        }
-        .quick-tab i { margin-right: 8px; }
-        .quick-tab:hover {
-            background: #ffe6d5;
-            transform: translateY(-1px);
-        }
-        .quick-tab.active {
-            background: var(--primary-color);
+        .hero-btn {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.5);
+            padding: 12px 32px;
+            border-radius: 40px;
             color: white;
-            box-shadow: 0 2px 8px rgba(153,26,40,0.3);
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .hero-btn i { font-size: 20px; }
+        .hero-btn:hover {
+            background: var(--gold-color);
+            border-color: var(--gold-color);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         
-        /* 板块通用样式 */
+        /* 板块通用样式 - 与video风格协调 */
         .section-block {
             padding: 60px 0 40px;
         }
         .block-header {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 32px;
-            border-left: 5px solid var(--primary-color);
-            padding-left: 20px;
+            text-align: center;
+            margin-bottom: 40px;
         }
         .block-header h2 {
             font-size: 32px;
-            font-weight: 700;
-            color: #2c3e4e;
+            color: #991a28;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .block-header h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background-color: #991a28;
         }
         .block-header h2 i {
-            color: var(--primary-color);
             margin-right: 12px;
         }
         
-        /* 卡片网格 - 优秀教案和课程视频都使用相同样式 */
+        /* 卡片网格 */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -269,7 +311,7 @@
             overflow-y: auto;
         }
         
-        /* 文件/视频条目样式（统一） */
+        /* 文件/视频条目样式 */
         .resource-row {
             display: flex;
             align-items: center;
@@ -301,7 +343,6 @@
         .resource-meta {
             font-size: 11px;
             color: #8b7a6b;
-            margin-left: 8px;
             flex-shrink: 0;
         }
         .action-btns {
@@ -328,11 +369,11 @@
         .icon-btn.download-btn:hover { background: var(--primary-light); }
         .icon-btn.preview-btn:hover { background: #e2d9d0; }
         
-        /* 底部 */
+        /* 底部 - 与video完全一致 */
         .footer {
-            background: var(--primary-dark);
-            color: #fff;
-            padding: 48px 0 24px;
+            background-color: var(--primary-dark);
+            color: var(--white-color);
+            padding: 50px 0 20px;
             margin-top: 60px;
         }
         .footer-top {
@@ -340,25 +381,44 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 40px;
-            margin-bottom: 32px;
+            margin-bottom: 40px;
         }
-        .footer-col h4 { font-size: 18px; margin-bottom: 20px; position: relative; padding-bottom: 8px; }
-        .footer-col h4::after { content: ''; width: 40px; height: 2px; background: var(--gold-color); position: absolute; bottom: 0; left: 0; }
-        .footer-col ul li { margin-bottom: 12px; opacity: 0.85; }
-        .footer-bottom { text-align: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.15); font-size: 13px; }
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--gold-color);
+        }
+        .footer-col li { margin-bottom: 12px; }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #ccc;
+        }
         
         @media (max-width: 800px) {
             .nav-menu {
-                position: fixed; top: 72px; left: -100%; width: 100%; height: calc(100vh - 72px);
+                position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px);
                 background: var(--primary-dark); flex-direction: column; align-items: center; padding: 40px 0;
                 transition: 0.3s;
             }
             .nav-menu.active { left: 0; }
             .nav-toggle { display: block; }
+            .live-hero { height: 420px; }
             .hero-content h1 { font-size: 32px; }
-            .quick-tabs { gap: 12px; }
-            .quick-tab { padding: 6px 20px; font-size: 14px; }
-            .block-header h2 { font-size: 26px; }
+            .hero-content p { font-size: 16px; margin-bottom: 30px; }
+            .hero-btn { padding: 10px 28px; font-size: 16px; gap: 8px; }
+            .block-header h2 { font-size: 28px; }
             .card-grid { grid-template-columns: 1fr; }
             .resource-name { white-space: normal; word-break: break-word; }
         }
@@ -377,18 +437,18 @@
 <header class="header">
     <div class="container nav">
         <div class="logo">
-            <img src="图片/云先生logo.jpg" alt="云先生logo">
+            <img src="图片/云先生logo.jpg" alt="云先生logo" onerror="this.src='https://via.placeholder.com/48x48?text=云先生'">
             <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
         </div>
         <ul class="nav-menu">
             <li><a href="index.html">首页</a></li>
-	    <li><a href="volunteer.html">志愿者匹配</a></li>
+            <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="news.html">思政文库</a></li>
             <li><a href="bookstore.html">思政乐园</a></li>
             <li><a href="video.html">录播课室</a></li>
             <li><a href="download.html" class="active">直播课室</a></li>
             <li><a href="forum.html">留言板</a></li>
-            <li><a href="checkin.html" onclick="return checkLogin()">我的</a></li>
+            <li><a href="checkin.html" onclick="return checkMyNeedLogin(event)">我的</a></li>
         </ul>
         <div class="nav-toggle" onclick="toggleNav()"><i class="fa fa-bars"></i></div>
     </div>
@@ -399,59 +459,59 @@
     <div class="modal-box">
         <div class="modal-close" onclick="closeModal()">&times;</div>
         <div class="modal-tab">
-            <div class="modal-tab-item active" onclick="switchTab('login')">登录</div>
-            <div class="modal-tab-item" onclick="switchTab('reg')">注册</div>
+            <div class="modal-tab-item active" onclick="switchTabModal('login')">登录</div>
+            <div class="modal-tab-item" onclick="switchTabModal('reg')">注册</div>
         </div>
         <div class="modal-panel active" id="loginPanel">
             <div class="form-group"><label>账号</label><input type="text" id="loginUsername" placeholder="手机号/学号"></div>
             <div class="form-group"><label>密码</label><input type="password" id="loginPassword" placeholder="请输入密码"></div>
-            <button class="btn" style="width:100%; justify-content:center;" onclick="login()">登录</button>
+            <button class="btn" style="width:100%; justify-content:center;" onclick="loginHandler()">登录</button>
         </div>
         <div class="modal-panel" id="regPanel">
             <div class="form-group"><label>手机号</label><input type="text" id="regPhone" placeholder="请输入手机号"></div>
             <div class="form-group"><label>密码</label><input type="password" id="regPwd" placeholder="设置密码"></div>
             <div class="form-group"><label>确认密码</label><input type="password" id="regConfirm" placeholder="确认密码"></div>
-            <button class="btn" style="width:100%" onclick="register()">注册</button>
+            <button class="btn" style="width:100%" onclick="registerHandler()">注册</button>
         </div>
     </div>
 </div>
 
-<!-- 直播课室banner -->
+<div id="toast" class="toast"></div>
+
+<!-- 直播课室banner - 风格与video.html横幅统一高度380px -->
 <section class="live-hero">
-    <div class="container hero-content">
-        <h1>直播课室 </h1>
-        <p> 师范生在线资源库，助力乡村思政教学相长</p>
+    <div class="hero-content">
+        <h1>直播课室</h1>
+        <p>师范生在线资源库，助力乡村思政教学相长</p>
+        <div class="hero-buttons">
+            <div class="hero-btn" id="gotoExcellentBtn">
+                <i class="fa fa-star"></i> 优秀教案
+            </div>
+            <div class="hero-btn" id="gotoCoursesBtn">
+                <i class="fa fa-video-camera"></i> 课程视频
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- 快捷分类导航（只要优秀教案和课程视频） -->
-<div class="quick-cats">
-    <div class="container">
-        <div class="quick-tabs" id="quickTabs">
-            <div class="quick-tab active" data-target="excellent"><i class="fa fa-star"></i> 优秀教案</div>
-            <div class="quick-tab" data-target="courses"><i class="fa fa-video-camera"></i> 课程视频</div>
-        </div>
-    </div>
-</div>
-
 <div class="container">
-    <!-- 板块一：优秀教案（内部按照图片分类细分为三个子类） -->
+    <!-- 板块一：优秀教案 -->
     <div class="section-block" id="excellent-section">
         <div class="block-header">
-            <h2><i class="fa fa-file-text"></i> 优秀教案 </h2>
+            <h2><i class="fa fa-file-text"></i> 优秀教案</h2>
         </div>
         <div class="card-grid" id="excellentGrid">
-            <!-- 动态渲染三个卡片：题型方法突破、时政热点、教材复习 -->
+            <!-- 动态渲染三个卡片 -->
         </div>
     </div>
 
-    <!-- 板块二：课程视频（同样卡片形式，分为三类） -->
+    <!-- 板块二：课程视频 -->
     <div class="section-block" id="courses-section">
         <div class="block-header">
-            <h2><i class="fa fa-play-circle"></i> 课程视频 </h2>
+            <h2><i class="fa fa-play-circle"></i> 课程视频</h2>
         </div>
         <div class="card-grid" id="videoGrid">
-            <!-- 动态渲染三个视频分类卡片：解题技巧、道法价值引领、时政热点专题 -->
+            <!-- 动态渲染三个视频分类卡片 -->
         </div>
     </div>
 </div>
@@ -469,20 +529,34 @@
 </footer>
 
 <script>
-    // ========= 优秀教案数据（完全保留原始路径）=========
-    // 题型方法突破类
+    // Supabase 配置
+    const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
+    const HEADERS = {
+        apikey: SUPABASE_KEY,
+        Authorization: "Bearer " + SUPABASE_KEY,
+        "Content-Type": "application/json"
+    };
+
+    // 显示提示消息
+    function showToast(msg, type = 'success') {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.className = `toast ${type} show`;
+        setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    // ========= 优秀教案数据 =========
     const methodFiles = [
         { name: "模型公式法——启示类设问.docx", size: "37KB", url: "file/模型公式法——启示类设问.docx", type: "doc" },
         { name: "王锋（2.5）直播课教学设计.docx", size: "15KB", url: "file/王锋（2.5）直播课教学设计.docx", type: "doc" },
         { name: "对号入座法课堂教学设计——意义、作用、影响类设问解题指导.docx", size: "42KB", url: "file/对号入座法课堂教学设计——意义、作用、影响类设问解题指导.docx", type: "doc" },
         { name: "【云直播—政治】0205分析说明题教学设计.docx", size: "19KB", url: "file/【云直播—政治】0205分析说明题教学设计.docx", type: "doc" }
     ];
-    // 时政热点与国家政策专题
     const policyFiles = [
         { name: "2026年中央一号文件-道法备考 教学设计.docx", size: "18KB", url: "file/2026年中央一号文件-道法备考 教学设计.docx", type: "doc" },
         { name: "初中政治《课前时政积累 + 25 年中考真题精析》教学设计.docx", size: "19KB", url: "file/初中政治《课前时政积累 + 25 年中考真题精析》教学设计.docx", type: "doc" }
     ];
-    // 教材知识复习类
     const textbookFiles = [
         { name: "八下政治复习课.docx", size: "15KB", url: "file/八下政治复习课.docx", type: "doc" },
         { name: "教案.docx", size: "28KB", url: "file/教案.docx", type: "doc" },
@@ -491,8 +565,7 @@
         { name: "教学设计.jpg", size: "832KB", url: "file/教学设计.jpg", type: "image" }
     ];
     
-    // ========= 课程视频数据（三类，完全保留原始路径）=========
-    // 第一类：初中政治解题技巧
+    // ========= 课程视频数据 =========
     const skillVideos = [
         { name: "初中道德与法治答题技巧", url: "video/直播视频/20260205084606-张越预定的会议-视频-1.mp4"},
         { name: "初中政治主观题类型，解题技巧及方法(按题目内容分)", url: "video/直播视频/20260205085528-辞忧预定的会议-视频-1.mp4"},
@@ -504,32 +577,30 @@
         { name: "答疑3", url: "video/直播视频/王思辰（02.10）直播课.mp4" },
         { name: "答疑4", url: "video/直播视频/meeting_01.mp4"}
     ];
-    // 第二类：道法教学与价值引领专题
     const valueVideos = [
         { name: "二十届四中全会主要内容", url: "video/直播视频/20260205085739-高佳昕预定的会议 2.5-视频-1.mp4" },
         { name: "九年级上册:生活在新型民主国家", url: "video/直播视频/20260205105445-2026.2.5政治课（1）-视频-1.mp4"}
     ];
-    // 第三类：时政热点与国家政策专题（补充更多视频，使分类完整）
     const hotTopicVideos = [
-        { name: "2026年中央一号文件精神解读", url: "video/直播视频/20260224085636-高佳昕预定的会议-视频-1 (1).mp4", note: "时政专题" },
+        { name: "2026年中央一号文件精神解读", url: "video/直播视频/20260224085636-高佳昕预定的会议-视频-1 (1).mp4" },
         { name: "两会热点与青少年责任担当", url: "video/直播视频/牛雨欣（02.05）直播课.mp4" },
         { name: "乡村振兴战略中的思政教育", url: "video/直播视频/王思辰（02.10）直播课.mp4" }
     ];
     
-    // 渲染优秀教案的三个卡片
     function renderExcellentCards() {
         const grid = document.getElementById('excellentGrid');
+        if(!grid) return;
         grid.innerHTML = `
             <div class="resource-card">
-                <div class="card-title"><i class="fa fa-lightbulb-o"></i><h3> 题型方法突破</h3></div>
+                <div class="card-title"><i class="fa fa-lightbulb-o"></i><h3>题型方法突破</h3></div>
                 <div class="resource-list-scroll" id="methodList"></div>
             </div>
             <div class="resource-card">
-                <div class="card-title"><i class="fa fa-newspaper-o"></i><h3> 时政热点 · 政策解读</h3></div>
+                <div class="card-title"><i class="fa fa-newspaper-o"></i><h3>时政热点 · 政策解读</h3></div>
                 <div class="resource-list-scroll" id="policyList"></div>
             </div>
             <div class="resource-card">
-                <div class="card-title"><i class="fa fa-book"></i><h3> 教材知识复习</h3></div>
+                <div class="card-title"><i class="fa fa-book"></i><h3>教材知识复习</h3></div>
                 <div class="resource-list-scroll" id="textbookList"></div>
             </div>
         `;
@@ -538,20 +609,20 @@
         renderResourceList('textbookList', textbookFiles, 'file');
     }
     
-    // 渲染课程视频的三个卡片（与教案形式完全一致）
     function renderVideoCards() {
         const grid = document.getElementById('videoGrid');
+        if(!grid) return;
         grid.innerHTML = `
             <div class="resource-card">
-                <div class="card-title"><i class="fa fa-graduation-cap"></i><h3> 初中政治解题技巧</h3></div>
+                <div class="card-title"><i class="fa fa-graduation-cap"></i><h3>初中政治解题技巧</h3></div>
                 <div class="resource-list-scroll" id="skillVideoList"></div>
             </div>
             <div class="resource-card">
-                <div class="card-title"><i class="fa fa-heart"></i><h3> 道法教学与价值引领</h3></div>
+                <div class="card-title"><i class="fa fa-heart"></i><h3>道法教学与价值引领</h3></div>
                 <div class="resource-list-scroll" id="valueVideoList"></div>
             </div>
             <div class="resource-card">
-                <div class="card-title"><i class="fa fa-flag-checkered"></i><h3> 时政热点与国家政策</h3></div>
+                <div class="card-title"><i class="fa fa-flag-checkered"></i><h3>时政热点与国家政策</h3></div>
                 <div class="resource-list-scroll" id="hotVideoList"></div>
             </div>
         `;
@@ -560,11 +631,9 @@
         renderResourceList('hotVideoList', hotTopicVideos, 'video');
     }
     
-    // 通用渲染函数（支持文件和视频）
     function renderResourceList(containerId, items, type) {
         const container = document.getElementById(containerId);
         if(!container) return;
-        
         if(type === 'file') {
             container.innerHTML = items.map(item => `
                 <div class="resource-row">
@@ -579,15 +648,13 @@
                     </div>
                 </div>
             `).join('');
-            attachPreviewEvents(container);
         } else {
-            // 视频类型
             container.innerHTML = items.map(item => `
                 <div class="resource-row">
                     <div class="resource-info">
                         <i class="fa fa-video-camera"></i>
                         <span class="resource-name" title="${item.name}">${item.name}</span>
-                        <span class="resource-meta">${item.size || '视频文件'}</span>
+                        <span class="resource-meta">视频文件</span>
                     </div>
                     <div class="action-btns">
                         <button class="icon-btn preview-btn" data-url="${item.url}" data-name="${item.name}" data-type="video"><i class="fa fa-play"></i> 预览</button>
@@ -595,11 +662,10 @@
                     </div>
                 </div>
             `).join('');
-            attachPreviewEvents(container);
         }
+        attachPreviewEvents(container);
     }
     
-    // 预览弹窗
     function attachPreviewEvents(container) {
         container.querySelectorAll('.preview-btn').forEach(btn => {
             btn.removeEventListener('click', previewHandler);
@@ -619,7 +685,6 @@
         modalDiv.style.cssText = `position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10001; display:flex; align-items:center; justify-content:center; padding:20px;`;
         const closeFn = () => { document.body.removeChild(modalDiv); };
         let inner = `<div style="background:#fff; border-radius:28px; width:90%; max-width:900px; max-height:90%; overflow:auto; position:relative;"><button style="position:absolute; top:16px; right:20px; background:#991a28; color:white; border:none; border-radius:40px; width:38px; height:38px; font-size:20px; cursor:pointer;">×</button><div style="padding:28px;">`;
-        
         if(fileUrl.match(/\.(jpg|jpeg|png)$/i)) {
             inner += `<img src="${fileUrl}" style="max-width:100%; max-height:70vh; border-radius:16px;">`;
         } else if(fileUrl.match(/\.mp4$/i) || fileType === 'video') {
@@ -634,45 +699,172 @@
         modalDiv.addEventListener('click', (e) => { if(e.target === modalDiv) closeFn(); });
     }
     
-    // 快捷导航滚动
-    function initQuickTabs() {
-        const tabs = document.querySelectorAll('.quick-tab');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = tab.dataset.target;
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                if(target === 'excellent') {
-                    document.getElementById('excellent-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else if(target === 'courses') {
-                    document.getElementById('courses-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
+    // 导航栏折叠
+    function toggleNav() { document.querySelector('.nav-menu').classList.toggle('active'); }
+    
+    // 登录弹窗相关
+    const modalEl = document.getElementById('modal');
+    function openModal(type) { modalEl.classList.add('active'); if(type === 'login') switchTabModal('login'); else switchTabModal('reg'); }
+    function closeModal() { modalEl.classList.remove('active'); }
+    function switchTabModal(tab) {
+        document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.modal-tab-item').forEach(i => i.classList.remove('active'));
+        if(tab === 'login') {
+            document.getElementById('loginPanel').classList.add('active');
+            document.querySelectorAll('.modal-tab-item')[0].classList.add('active');
+        } else {
+            document.getElementById('regPanel').classList.add('active');
+            document.querySelectorAll('.modal-tab-item')[1].classList.add('active');
+        }
     }
     
-    // 登录交互
-    function toggleNav() { document.querySelector('.nav-menu').classList.toggle('active'); }
-    const modalEl = document.getElementById('modal');
-    function openModal(type) { modalEl.classList.add('active'); switchTab(type); }
-    function closeModal() { modalEl.classList.remove('active'); }
-    function switchTab(t) {
-        document.querySelectorAll('.modal-panel').forEach(p=>p.classList.remove('active'));
-        document.querySelectorAll('.modal-tab-item').forEach(i=>i.classList.remove('active'));
-        if(t==='login'){ document.getElementById('loginPanel').classList.add('active'); document.querySelectorAll('.modal-tab-item')[0].classList.add('active');}
-        else { document.getElementById('regPanel').classList.add('active'); document.querySelectorAll('.modal-tab-item')[1].classList.add('active');}
+   // 登录处理
+    async function loginHandler() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const pwd = document.getElementById('loginPassword').value.trim();
+        if(!username || !pwd) {
+            showToast("请输入账号和密码", "error");
+            return;
+        }
+        
+        try {
+            const response = await fetch(
+                `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(pwd)}&select=*`,
+                { headers: HEADERS }
+            );
+            
+            if (!response.ok) {
+                throw new Error("网络请求失败");
+            }
+            
+            const data = await response.json();
+            
+            if (data && data.length > 0) {
+                const user = data[0];
+                localStorage.setItem('isLogin', 'true');
+                localStorage.setItem('loginUser', user.account);
+                localStorage.setItem('userRole', user.role || 'user');
+                showToast("登录成功！", "success");
+                closeModal();
+                updateLoginUI();
+                document.getElementById('loginUsername').value = '';
+                document.getElementById('loginPassword').value = '';
+            } else {
+                showToast("账号或密码错误", "error");
+            }
+        } catch (error) {
+            console.error("登录错误:", error);
+            showToast("登录失败，请检查网络连接", "error");
+        }
     }
-    function login(){ const u=document.getElementById('loginUsername').value.trim(); const p=document.getElementById('loginPassword').value.trim(); if(!u||!p){alert("请输入账号密码");return;} localStorage.setItem('isLogin','true'); localStorage.setItem('loginUser',u); alert('登录成功'); closeModal(); updateLoginUI(); }
-    function register(){ const phone=document.getElementById('regPhone').value.trim(); const pwd=document.getElementById('regPwd').value; const cfm=document.getElementById('regConfirm').value; if(!phone||!pwd){alert("填写完整");return;} if(pwd!==cfm){alert("密码不一致");return;} alert('注册成功，请登录'); switchTab('login'); document.getElementById('loginUsername').value=phone; document.getElementById('loginPassword').value='';}
-    function checkLogin(){ if(!localStorage.getItem('isLogin')){ alert('请先登录后访问“我的”页面！'); openModal('login'); return false;} return true;}
-    function updateLoginUI(){ const isLogin=localStorage.getItem('isLogin')==='true'; const group=document.getElementById('loginGroup'); if(isLogin&&group){ const user=localStorage.getItem('loginUser')||'用户'; group.innerHTML=`<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`;} else { group.innerHTML=`<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`; } }
-    function logout(){ localStorage.removeItem('isLogin'); localStorage.removeItem('loginUser'); alert('已退出'); updateLoginUI(); }
+    
+    // 注册处理
+    async function registerHandler() {
+        const phone = document.getElementById('regPhone').value.trim();
+        const pwd = document.getElementById('regPwd').value;
+        const confirm = document.getElementById('regConfirm').value;
+        
+        if(!phone) {
+            showToast("请填写手机号", "error");
+            return;
+        }
+        if(!pwd) {
+            showToast("请设置密码", "error");
+            return;
+        }
+        if(pwd !== confirm) {
+            showToast("两次密码不一致", "error");
+            return;
+        }
+        try {
+            const checkResponse = await fetch(
+                `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(phone)}&select=*`,
+                { headers: HEADERS }
+            );
+            const existingUsers = await checkResponse.json();
+            
+            if (existingUsers && existingUsers.length > 0) {
+                showToast("该账号已存在，请直接登录", "error");
+                return;
+            }
+            
+            const newUser = { account: phone, password: pwd, role: "user" };
+            
+            const createResponse = await fetch(`${SUPABASE_URL}/rest/v1/user`, {
+                method: 'POST',
+                headers: HEADERS,
+                body: JSON.stringify(newUser)
+            });
+            
+            if (createResponse.ok) {
+                showToast("注册成功！请登录", "success");
+                document.getElementById('regPhone').value = '';
+                document.getElementById('regPwd').value = '';
+                document.getElementById('regConfirm').value = '';
+                switchTabModal('login');
+                document.getElementById('loginUsername').value = phone;
+                document.getElementById('loginPassword').value = '';
+            } else {
+                showToast("注册失败，请稍后重试", "error");
+            }
+        } catch (error) {
+            console.error("注册错误:", error);
+            showToast("注册失败，请检查网络连接", "error");
+        }
+    }
+    
+    function checkMyNeedLogin(event) {
+        const isLogged = localStorage.getItem('isLogin') === 'true';
+        if(!isLogged) {
+            event.preventDefault();
+            showToast("请先登录后访问我的页面", "error");
+            openModal('login');
+            return false;
+        }
+        return true;
+    }
+    
+    function updateLoginUI() {
+        const isLogin = localStorage.getItem('isLogin') === 'true';
+        const loginGroup = document.getElementById('loginGroup');
+        if(isLogin && loginGroup) {
+            const user = localStorage.getItem('loginUser') || '用户';
+            loginGroup.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`;
+        } else {
+            loginGroup.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`;
+        }
+    }
+    
+    function logout() {
+        localStorage.removeItem('isLogin');
+        localStorage.removeItem('loginUser');
+        localStorage.removeItem('userRole');
+        showToast("已退出登录", "success");
+        updateLoginUI();
+    }
+    
+    // 按钮滚动事件
+    function initHeroButtons() {
+        const excellentBtn = document.getElementById('gotoExcellentBtn');
+        const coursesBtn = document.getElementById('gotoCoursesBtn');
+        
+        if(excellentBtn) {
+            excellentBtn.addEventListener('click', () => {
+                document.getElementById('excellent-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+        if(coursesBtn) {
+            coursesBtn.addEventListener('click', () => {
+                document.getElementById('courses-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+    }
     
     window.addEventListener('DOMContentLoaded', () => {
+        updateLoginUI();
         renderExcellentCards();
         renderVideoCards();
-        initQuickTabs();
-        updateLoginUI();
+        initHeroButtons();
     });
 </script>
 </body>

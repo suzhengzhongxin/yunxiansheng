@@ -65,8 +65,6 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
         }
-
-        /* 顶部栏 - 与index完全一致 */
         .top-bar {
             background: var(--primary-dark);
             color: var(--gold-color);
@@ -86,12 +84,11 @@
         .top-bar a {
             color: #fff;
             margin-left: 15px;
+            cursor: pointer;
         }
         .top-bar a:hover {
             color: var(--gold-color);
         }
-
-        /* 导航栏 - 与index完全一致 */
         .header {
             position: sticky;
             top: 0;
@@ -152,8 +149,6 @@
             color: var(--white-color);
             cursor: pointer;
         }
-
-        /* 登录弹窗 */
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -195,8 +190,23 @@
             width: 100%; padding: 10px;
             border: 1px solid #ddd; border-radius: 6px;
         }
-
-        /* 课程内容区域 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .toast.success { background-color: #42b983; }
+        .toast.error { background-color: #d62828; }
+        .toast.show { opacity: 1; }
         .course-detail {
             max-width: 1200px;
             margin: 0 auto;
@@ -275,8 +285,6 @@
         :target {
             scroll-margin-top: 80px;
         }
-
-        /* 底部 */
         .footer {
             background-color: var(--primary-dark);
             color: var(--white-color);
@@ -312,11 +320,8 @@
             font-size: 14px;
             color: #ccc;
         }
-
         @media (max-width: 768px) {
-            .nav-toggle {
-                display: block;
-            }
+            .nav-toggle { display: block; }
             .nav-menu {
                 position: fixed;
                 top: 70px;
@@ -331,26 +336,15 @@
                 transition: var(--transition);
             }
             .nav-menu.active { left: 0; }
-            .course-detail {
-                padding: 30px 15px;
-                margin: 20px;
-            }
-            .course-detail h1 {
-                font-size: 24px;
-            }
-            .course-section h2 {
-                font-size: 20px;
-            }
-            .footer-top {
-                flex-direction: column;
-                gap: 30px;
-            }
+            .course-detail { padding: 30px 15px; margin: 20px; }
+            .course-detail h1 { font-size: 24px; }
+            .course-section h2 { font-size: 20px; }
+            .footer-top { flex-direction: column; gap: 30px; }
         }
     </style>
 </head>
 <body>
 
-<!-- 顶部栏 -->
 <div class="top-bar">
     <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
     <div class="login-group" id="loginGroup">
@@ -359,16 +353,15 @@
     </div>
 </div>
 
-<!-- 导航栏 -->
 <header class="header">
     <div class="container nav">
         <div class="logo">
-            <img src="图片/云先生logo.jpg" alt="云先生logo">
+            <img src="图片/云先生logo.jpg" alt="云先生logo" onerror="this.src='https://via.placeholder.com/48x48?text=云先生'">
             <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
         </div>
         <ul class="nav-menu">
             <li><a href="index.html">首页</a></li>
- 	    <li><a href="volunteer.html">志愿者匹配</a></li>
+            <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="news.html">思政文库</a></li>
             <li><a href="bookstore.html">思政乐园</a></li>
             <li><a href="video.html">录播课室</a></li>
@@ -382,7 +375,6 @@
     </div>
 </header>
 
-<!-- 登录弹窗 -->
 <div class="modal" id="modal">
     <div class="modal-box">
         <div class="modal-close" onclick="closeModal()">&times;</div>
@@ -419,7 +411,8 @@
     </div>
 </div>
 
-<!-- 课程详情内容 -->
+<div id="toast" class="toast"></div>
+
 <div class="course-detail">
     <h1>科学发展观</h1>
     
@@ -443,7 +436,7 @@
     <div id="section3" class="course-section">
         <h2>2.提出背景与发展历程</h2>
         <p><strong>背景：</strong>进入21世纪，我国进入全面建设小康社会、加快推进社会主义现代化的新阶段。在快速发展的同时，也面临城乡差距、区域差距、资源环境压力等突出矛盾和问题。</p>
-        <p><strong>提出：</strong>2003年，胡锦涛同志在考察广东时首次提出“科学发展观”的概念。2007年，党的十七大将科学发展观写入党章。2012年，党的十八大将其确立为党必须长期坚持的指导思想。</p>
+        <p><strong>提出：</strong>2003年，胡锦涛同志在考察广东时首次提出"科学发展观"的概念。2007年，党的十七大将科学发展观写入党章。2012年，党的十八大将其确立为党必须长期坚持的指导思想。</p>
     </div>
 
     <div id="section4" class="course-section">
@@ -483,7 +476,6 @@
     <a href="index.html" class="back-btn"><i class="fa fa-arrow-left"></i> 返回首页</a>
 </div>
 
-<!-- 底部 -->
 <footer class="footer">
     <div class="container">
         <div class="footer-top">
@@ -497,6 +489,21 @@
 </footer>
 
 <script>
+    const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
+    const HEADERS = {
+        apikey: SUPABASE_KEY,
+        Authorization: "Bearer " + SUPABASE_KEY,
+        "Content-Type": "application/json"
+    };
+
+    function showToast(msg, type = 'success') {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.className = `toast ${type} show`;
+        setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
     function toggleNav() {
         document.querySelector('.nav-menu').classList.toggle('active');
     }
@@ -520,34 +527,84 @@
         }
     }
 
-    function loginHandler() {
+    async function loginHandler() {
         const username = document.getElementById('loginUsername').value.trim();
         const pwd = document.getElementById('loginPassword').value.trim();
-        if(!username || !pwd) { alert("请输入账号和密码"); return; }
-        localStorage.setItem('isLogin', 'true');
-        localStorage.setItem('loginUser', username);
-        alert('登录成功！');
-        closeModal();
-        updateLoginUI();
+        if(!username || !pwd) {
+            showToast("请输入账号和密码", "error");
+            return;
+        }
+        try {
+            const response = await fetch(
+                `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(pwd)}&select=*`,
+                { headers: HEADERS }
+            );
+            if (!response.ok) throw new Error("网络请求失败");
+            const data = await response.json();
+            if (data && data.length > 0) {
+                const user = data[0];
+                localStorage.setItem('isLogin', 'true');
+                localStorage.setItem('loginUser', user.account);
+                localStorage.setItem('userRole', user.role || 'user');
+                showToast("登录成功！", "success");
+                closeModal();
+                updateLoginUI();
+                document.getElementById('loginUsername').value = '';
+                document.getElementById('loginPassword').value = '';
+            } else {
+                showToast("账号或密码错误", "error");
+            }
+        } catch (error) {
+            console.error("登录错误:", error);
+            showToast("登录失败，请检查网络连接", "error");
+        }
     }
     
-    function registerHandler() {
+    async function registerHandler() {
         const phone = document.getElementById('regPhone').value.trim();
         const pwd = document.getElementById('regPwd').value;
         const confirm = document.getElementById('regConfirm').value;
-        if(!phone || !pwd) { alert("请填写手机号和密码"); return; }
-        if(pwd !== confirm) { alert("两次密码不一致"); return; }
-        alert('注册成功！请登录');
-        switchTabModal('login');
-        document.getElementById('loginUsername').value = phone;
-        document.getElementById('loginPassword').value = '';
+        if(!phone) { showToast("请填写手机号", "error"); return; }
+        if(!pwd) { showToast("请设置密码", "error"); return; }
+        if(pwd !== confirm) { showToast("两次密码不一致", "error"); return; }
+        try {
+            const checkResponse = await fetch(
+                `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(phone)}&select=*`,
+                { headers: HEADERS }
+            );
+            const existingUsers = await checkResponse.json();
+            if (existingUsers && existingUsers.length > 0) {
+                showToast("该账号已存在，请直接登录", "error");
+                return;
+            }
+            const newUser = { account: phone, password: pwd, role: "user" };
+            const createResponse = await fetch(`${SUPABASE_URL}/rest/v1/user`, {
+                method: 'POST',
+                headers: HEADERS,
+                body: JSON.stringify(newUser)
+            });
+            if (createResponse.ok) {
+                showToast("注册成功！请登录", "success");
+                document.getElementById('regPhone').value = '';
+                document.getElementById('regPwd').value = '';
+                document.getElementById('regConfirm').value = '';
+                switchTabModal('login');
+                document.getElementById('loginUsername').value = phone;
+                document.getElementById('loginPassword').value = '';
+            } else {
+                showToast("注册失败，请稍后重试", "error");
+            }
+        } catch (error) {
+            console.error("注册错误:", error);
+            showToast("注册失败，请检查网络连接", "error");
+        }
     }
 
     function checkMyNeedLogin(event) {
         const isLogged = localStorage.getItem('isLogin') === 'true';
         if(!isLogged) {
             event.preventDefault();
-            alert('请先登录后访问"我的"页面！');
+            showToast("请先登录后访问我的页面", "error");
             openModal('login');
             return false;
         }
@@ -568,9 +625,9 @@
     function logout() {
         localStorage.removeItem('isLogin');
         localStorage.removeItem('loginUser');
-        alert('已退出登录');
+        localStorage.removeItem('userRole');
+        showToast("已退出登录", "success");
         updateLoginUI();
-        window.location.href = 'index.html';
     }
 
     window.addEventListener('DOMContentLoaded', function() {

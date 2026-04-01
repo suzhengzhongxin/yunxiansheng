@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>思政课程 - “三个代表”重要思想 | 云先生思政教育平台</title>
+    <title>思政课程 - "三个代表"重要思想 | 云先生思政教育平台</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
         * {
@@ -65,8 +65,6 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
         }
-
-        /* 顶部栏 - 与index完全一致 */
         .top-bar {
             background: var(--primary-dark);
             color: var(--gold-color);
@@ -86,12 +84,11 @@
         .top-bar a {
             color: #fff;
             margin-left: 15px;
+            cursor: pointer;
         }
         .top-bar a:hover {
             color: var(--gold-color);
         }
-
-        /* 导航栏 - 与index完全一致 */
         .header {
             position: sticky;
             top: 0;
@@ -152,8 +149,6 @@
             color: var(--white-color);
             cursor: pointer;
         }
-
-        /* 登录弹窗 - 与index完全一致 */
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -195,8 +190,23 @@
             width: 100%; padding: 10px;
             border: 1px solid #ddd; border-radius: 6px;
         }
-
-        /* 课程内容区域 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .toast.success { background-color: #42b983; }
+        .toast.error { background-color: #d62828; }
+        .toast.show { opacity: 1; }
         .course-detail {
             max-width: 1200px;
             margin: 0 auto;
@@ -264,8 +274,6 @@
         :target {
             scroll-margin-top: 80px;
         }
-
-        /* 底部 - 与index完全一致 */
         .footer {
             background-color: var(--primary-dark);
             color: var(--white-color);
@@ -301,11 +309,8 @@
             font-size: 14px;
             color: #ccc;
         }
-
         @media (max-width: 768px) {
-            .nav-toggle {
-                display: block;
-            }
+            .nav-toggle { display: block; }
             .nav-menu {
                 position: fixed;
                 top: 70px;
@@ -320,26 +325,15 @@
                 transition: var(--transition);
             }
             .nav-menu.active { left: 0; }
-            .course-detail {
-                padding: 30px 15px;
-                margin: 20px;
-            }
-            .course-detail h1 {
-                font-size: 24px;
-            }
-            .course-section h2 {
-                font-size: 20px;
-            }
-            .footer-top {
-                flex-direction: column;
-                gap: 30px;
-            }
+            .course-detail { padding: 30px 15px; margin: 20px; }
+            .course-detail h1 { font-size: 24px; }
+            .course-section h2 { font-size: 20px; }
+            .footer-top { flex-direction: column; gap: 30px; }
         }
     </style>
 </head>
 <body>
 
-<!-- 顶部栏 - 与index完全一致 -->
 <div class="top-bar">
     <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
     <div class="login-group" id="loginGroup">
@@ -348,16 +342,15 @@
     </div>
 </div>
 
-<!-- 导航栏 - 与index完全一致 -->
 <header class="header">
     <div class="container nav">
         <div class="logo">
-            <img src="图片/云先生logo.jpg" alt="云先生logo">
+            <img src="图片/云先生logo.jpg" alt="云先生logo" onerror="this.src='https://via.placeholder.com/48x48?text=云先生'">
             <div class="logo-text">云先生-师范生助力乡村中小学道德与法治网络平台</div>
         </div>
         <ul class="nav-menu">
             <li><a href="index.html">首页</a></li>
-	    <li><a href="volunteer.html">志愿者匹配</a></li>
+            <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="news.html">思政文库</a></li>
             <li><a href="bookstore.html">思政乐园</a></li>
             <li><a href="video.html">录播课室</a></li>
@@ -371,7 +364,6 @@
     </div>
 </header>
 
-<!-- 登录弹窗 -->
 <div class="modal" id="modal">
     <div class="modal-box">
         <div class="modal-close" onclick="closeModal()">&times;</div>
@@ -408,22 +400,23 @@
     </div>
 </div>
 
-<!-- 课程详情内容 -->
+<div id="toast" class="toast"></div>
+
 <div class="course-detail">
-    <h1>“三个代表”重要思想</h1>
+    <h1>"三个代表"重要思想</h1>
     
     <div id="section1" class="course-section">
-        <p>中国特色社会主义理论体系的重要组成部分，是世纪之交党面对新考验提出的理论创新，进一步回答了 “什么是社会主义、怎样建设社会主义”，创造性回答 “建设什么样的党、怎样建设党”。</p>
+        <p>中国特色社会主义理论体系的重要组成部分，是世纪之交党面对新考验提出的理论创新，进一步回答了 "什么是社会主义、怎样建设社会主义"，创造性回答 "建设什么样的党、怎样建设党"。</p>
     </div>
 
     <div id="section2" class="course-section">
         <h2>1.形成背景</h2>
-        <p>苏联解体、东欧剧变，世界社会主义遭遇挫折，经济全球化加速；国内改革开放深入，社会结构多样化；党实现 “两个历史性转变”，自身建设面临新课题。</p>
+        <p>苏联解体、东欧剧变，世界社会主义遭遇挫折，经济全球化加速；国内改革开放深入，社会结构多样化；党实现 "两个历史性转变"，自身建设面临新课题。</p>
     </div>
 
     <div id="section3" class="course-section">
         <h2>2.提出过程</h2>
-        <p>2000年江泽民首次完整阐述，2001年 “七一” 讲话系统阐释内涵，2002年十六大将其确立为党的指导思想。</p>
+        <p>2000年江泽民首次完整阐述，2001年 "七一" 讲话系统阐释内涵，2002年十六大将其确立为党的指导思想。</p>
     </div>
 
     <div id="section4" class="course-section">
@@ -439,19 +432,18 @@
     <div id="section5" class="course-section">
         <h2>4.历史意义</h2>
         <p>是马克思主义中国化的重要成果，是加强和改进党的建设的根本指针，承续发展了中国特色社会主义理论体系，指引中国特色社会主义事业推向 21 世纪。</p>
-        <p>“三个代表”重要思想深化了对共产党执政规律、社会主义建设规律、人类社会发展规律的认识，为党和国家事业发展提供了强大理论指导。</p>
+        <p>"三个代表"重要思想深化了对共产党执政规律、社会主义建设规律、人类社会发展规律的认识，为党和国家事业发展提供了强大理论指导。</p>
     </div>
 
     <div class="course-section">
         <h2>5.学习思考</h2>
-        <p>在新的历史条件下，如何更好地贯彻“三个代表”重要思想？作为新时代青年，我们应该如何将个人发展与党和国家事业紧密结合起来？</p>
+        <p>在新的历史条件下，如何更好地贯彻"三个代表"重要思想？作为新时代青年，我们应该如何将个人发展与党和国家事业紧密结合起来？</p>
         <p>欢迎在留言板分享你的学习心得和思考～</p>
     </div>
 
     <a href="index.html" class="back-btn"><i class="fa fa-arrow-left"></i> 返回首页</a>
 </div>
 
-<!-- 底部 -->
 <footer class="footer">
     <div class="container">
         <div class="footer-top">
@@ -465,6 +457,21 @@
 </footer>
 
 <script>
+    const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
+    const HEADERS = {
+        apikey: SUPABASE_KEY,
+        Authorization: "Bearer " + SUPABASE_KEY,
+        "Content-Type": "application/json"
+    };
+
+    function showToast(msg, type = 'success') {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.className = `toast ${type} show`;
+        setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
     function toggleNav() {
         document.querySelector('.nav-menu').classList.toggle('active');
     }
@@ -488,34 +495,84 @@
         }
     }
 
-    function loginHandler() {
+    async function loginHandler() {
         const username = document.getElementById('loginUsername').value.trim();
         const pwd = document.getElementById('loginPassword').value.trim();
-        if(!username || !pwd) { alert("请输入账号和密码"); return; }
-        localStorage.setItem('isLogin', 'true');
-        localStorage.setItem('loginUser', username);
-        alert('登录成功！');
-        closeModal();
-        updateLoginUI();
+        if(!username || !pwd) {
+            showToast("请输入账号和密码", "error");
+            return;
+        }
+        try {
+            const response = await fetch(
+                `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(pwd)}&select=*`,
+                { headers: HEADERS }
+            );
+            if (!response.ok) throw new Error("网络请求失败");
+            const data = await response.json();
+            if (data && data.length > 0) {
+                const user = data[0];
+                localStorage.setItem('isLogin', 'true');
+                localStorage.setItem('loginUser', user.account);
+                localStorage.setItem('userRole', user.role || 'user');
+                showToast("登录成功！", "success");
+                closeModal();
+                updateLoginUI();
+                document.getElementById('loginUsername').value = '';
+                document.getElementById('loginPassword').value = '';
+            } else {
+                showToast("账号或密码错误", "error");
+            }
+        } catch (error) {
+            console.error("登录错误:", error);
+            showToast("登录失败，请检查网络连接", "error");
+        }
     }
     
-    function registerHandler() {
+    async function registerHandler() {
         const phone = document.getElementById('regPhone').value.trim();
         const pwd = document.getElementById('regPwd').value;
         const confirm = document.getElementById('regConfirm').value;
-        if(!phone || !pwd) { alert("请填写手机号和密码"); return; }
-        if(pwd !== confirm) { alert("两次密码不一致"); return; }
-        alert('注册成功！请登录');
-        switchTabModal('login');
-        document.getElementById('loginUsername').value = phone;
-        document.getElementById('loginPassword').value = '';
+        if(!phone) { showToast("请填写手机号", "error"); return; }
+        if(!pwd) { showToast("请设置密码", "error"); return; }
+        if(pwd !== confirm) { showToast("两次密码不一致", "error"); return; }
+        try {
+            const checkResponse = await fetch(
+                `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(phone)}&select=*`,
+                { headers: HEADERS }
+            );
+            const existingUsers = await checkResponse.json();
+            if (existingUsers && existingUsers.length > 0) {
+                showToast("该账号已存在，请直接登录", "error");
+                return;
+            }
+            const newUser = { account: phone, password: pwd, role: "user" };
+            const createResponse = await fetch(`${SUPABASE_URL}/rest/v1/user`, {
+                method: 'POST',
+                headers: HEADERS,
+                body: JSON.stringify(newUser)
+            });
+            if (createResponse.ok) {
+                showToast("注册成功！请登录", "success");
+                document.getElementById('regPhone').value = '';
+                document.getElementById('regPwd').value = '';
+                document.getElementById('regConfirm').value = '';
+                switchTabModal('login');
+                document.getElementById('loginUsername').value = phone;
+                document.getElementById('loginPassword').value = '';
+            } else {
+                showToast("注册失败，请稍后重试", "error");
+            }
+        } catch (error) {
+            console.error("注册错误:", error);
+            showToast("注册失败，请检查网络连接", "error");
+        }
     }
 
     function checkMyNeedLogin(event) {
         const isLogged = localStorage.getItem('isLogin') === 'true';
         if(!isLogged) {
             event.preventDefault();
-            alert('请先登录后访问"我的"页面！');
+            showToast("请先登录后访问我的页面", "error");
             openModal('login');
             return false;
         }
@@ -536,9 +593,9 @@
     function logout() {
         localStorage.removeItem('isLogin');
         localStorage.removeItem('loginUser');
-        alert('已退出登录');
+        localStorage.removeItem('userRole');
+        showToast("已退出登录", "success");
         updateLoginUI();
-        window.location.href = 'index.html';
     }
 
     window.addEventListener('DOMContentLoaded', function() {
