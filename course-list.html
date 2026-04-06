@@ -65,7 +65,6 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
         }
-
         /* 顶部栏 */
         .top-bar {
             background: var(--primary-dark);
@@ -91,7 +90,6 @@
         .top-bar a:hover {
             color: var(--gold-color);
         }
-
         /* 导航栏 */
         .header {
             position: sticky;
@@ -156,7 +154,6 @@
             color: var(--white-color);
             cursor: pointer;
         }
-
         /* 登录弹窗 */
         .modal {
             position: fixed;
@@ -199,7 +196,6 @@
             width: 100%; padding: 10px;
             border: 1px solid #ddd; border-radius: 6px;
         }
-
         /* 提示toast */
         .toast {
             position: fixed;
@@ -218,7 +214,6 @@
         .toast.success { background-color: #42b983; }
         .toast.error { background-color: #d62828; }
         .toast.show { opacity: 1; }
-
         /* 课程列表样式 */
         .course-section {
             padding: 40px 0;
@@ -339,7 +334,6 @@
         .play-btn i {
             margin-right: 5px;
         }
-
         /* 搜索栏和筛选 */
         .filter-bar {
             margin-bottom: 30px;
@@ -399,7 +393,6 @@
             color: var(--gray-dark);
             font-size: 16px;
         }
-
         /* 底部 */
         .footer {
             background-color: var(--primary-dark);
@@ -437,7 +430,48 @@
             font-size: 14px;
             color: #ccc;
         }
-
+        /* 视频播放弹窗（页面内显示） */
+        .video-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .video-modal.active { display: flex; }
+        .video-container {
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+        }
+        .video-close {
+            position: absolute; top: -40px; right: 0;
+            color: white; font-size: 24px; cursor: pointer;
+            background: rgba(0,0,0,0.5);
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* 自适应视频容器（16:9比例） */
+        .bilibili-video-wrap {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+        }
+        .bilibili-video-wrap iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
         @media (max-width: 768px) {
             .nav-toggle {
                 display: block;
@@ -471,11 +505,15 @@
                 flex-direction: column;
                 gap: 30px;
             }
+            .video-close {
+                top: -30px;
+                width: 30px; height: 30px;
+                font-size: 18px;
+            }
         }
     </style>
 </head>
 <body>
-
 <!-- 顶部栏 -->
 <div class="top-bar">
     <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
@@ -484,7 +522,6 @@
         <a href="javascript:;" onclick="openModal('reg')">注册</a>
     </div>
 </div>
-
 <!-- 导航栏 -->
 <header class="header">
     <div class="container nav">
@@ -494,7 +531,7 @@
         </div>
         <ul class="nav-menu">
             <li><a href="index.html">首页</a></li>
-	    <li><a href="volunteer.html">志愿者匹配</a></li>
+            <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="news.html">思政文库</a></li>
             <li><a href="bookstore.html">思政乐园</a></li>
             <li><a href="video.html" class="active">录播课室</a></li>
@@ -507,7 +544,6 @@
         </div>
     </div>
 </header>
-
 <!-- 登录弹窗 -->
 <div class="modal" id="modal">
     <div class="modal-box">
@@ -544,9 +580,14 @@
         </div>
     </div>
 </div>
-
+<!-- 视频播放弹窗（页面内） -->
+<div class="video-modal" id="videoModal">
+    <div class="video-container">
+        <div class="video-close" onclick="closeVideoModal()">&times;</div>
+        <div class="bilibili-video-wrap" id="videoPlayerContainer"></div>
+    </div>
+</div>
 <div id="toast" class="toast"></div>
-
 <!-- 课程列表主内容 -->
 <section class="course-section">
     <div class="container">
@@ -554,7 +595,6 @@
             <h2>全部视频课程</h2>
         </div>
         <div class="stats-info" id="statsInfo">共 20 门课程，陪你一起成长</div>
-        
         <!-- 分类筛选 -->
         <div class="category-tabs">
             <div class="category-tab active" data-category="all">全部课程</div>
@@ -563,19 +603,16 @@
             <div class="category-tab" data-category="文化传承">文化传承</div>
             <div class="category-tab" data-category="科技创新">科技创新</div>
         </div>
-
         <!-- 搜索栏 -->
         <div class="filter-bar">
             <input type="text" class="search-input" id="searchInput" placeholder="搜索课程名称..." onkeyup="filterCourses()">
             <button class="filter-btn" onclick="filterCourses()"><i class="fa fa-search"></i> 搜索</button>
         </div>
-
         <!-- 课程列表 -->
         <div class="course-list" id="courseList"></div>
         <div id="noResult" class="no-result" style="display: none;">没有找到相关课程，试试其他关键词吧～</div>
     </div>
 </section>
-
 <!-- 底部 -->
 <footer class="footer">
     <div class="container">
@@ -629,36 +666,37 @@
         "Content-Type": "application/json"
     };
 
-    // 显示提示消息
+    // 全局提示框
     function showToast(msg, type = 'success') {
         const toast = document.getElementById('toast');
+        if (!toast) return;
         toast.textContent = msg;
         toast.className = `toast ${type} show`;
         setTimeout(() => toast.classList.remove('show'), 2000);
     }
 
-    // 课程数据
+    // 课程数据（B站iframe改为https协议，解决CSP拦截）
     const courses = [
-        { id: 1, title: "网络改变世界", category: "科技创新", cover: "图片/录播1.png", video: "video/录课视频(1)/25思政2班韩雯婧2.7第一次录课.mp4" },
-        { id: 2, title: "世界最长高速公路隧道", category: "科技创新", cover: "图片/录播2.png", video: "video/录课视频(1)/25思政2班韩雯婧2.19第二次录课.mp4" },
-        { id: 3, title: "人机共舞耀春晚", category: "科技创新", cover: "图片/录播3.png", video: "video/录课视频(1)/25思政2班韩雯婧2.20第三次录课.mp4" },
-        { id: 4, title: "科技筑梦 创新未来", category: "科技创新", cover: "图片/录播4.png", video: "video/录课视频(1)/25思政2班于瑞康2.7第一次录课.mp4" },
-        { id: 5, title: "中国沙漠铁路：连接未来的希望之路", category: "科技创新", cover: "图片/录播5.png", video: "video/录课视频(1)/25思政2班于瑞康2.19第二次录课.mp4" },
-        { id: 6, title: "原始社会的解体和阶级社会的演进", category: "思政理论", cover: "图片/录播6.png", video: "video/录课视频(1)/郭文凯2.mp4" },
-        { id: 7, title: "2026春运中的民生温度和政治智慧", category: "时政热点", cover: "图片/录播7.png", video: "video/录课视频(1)/和士雅+2026春运中的民主温度与政治智慧录课视频（1）.mp4" },
-        { id: 8, title: "从航天功勋奖章看国家利益与个人担当", category: "时政热点", cover: "图片/录播8.png", video: "video/录课视频(1)/李婧婷从航天功勋奖章看国家利益与个人担当录课视频（2）.mp4" },
-        { id: 9, title: "当熊猫“住进”国家公园", category: "文化传承", cover: "图片/录播9.png", video: "video/录课视频(1)/李靖婷视频.mp4" },
-        { id: 10, title: "从国潮崛起看新时代青年的文化自信", category: "文化传承", cover: "图片/录播10.png", video: "video/录课视频(1)/屏幕录制 2026-02-13 223426.mp4" },
-        { id: 11, title: "人民理发师", category: "时政热点", cover: "图片/录播11.png", video: "video/录课视频(1)/屏幕录制 2026-02-14 214156.mp4" },
-        { id: 12, title: "双轨并行，漆艺永续", category: "文化传承", cover: "图片/录播12.png", video: "video/录课视频(1)/屏幕录制 2026-02-19 203259.mp4" },
-        { id: 13, title: "时政热点——党的第二十届四中全会", category: "时政热点", cover: "图片/录播13.png", video: "video/录课视频(1)/薛宇芯负责审核的小组.mp4" },
-        { id: 14, title: "AI复活历史人物", category: "科技创新", cover: "图片/录播14.png", video: "video/录课视频(1)/AI复活历史人物——戈梦茹.mov" },
-        { id: 15, title: "认识社会生活", category: "思政理论", cover: "图片/录播15.png", video: "video/录课视频(1)/fffc2e7c715517abe6ef3c82531f6348.mp4" },
-        { id: 16, title: "创新驱动发展：从钠离子电池突围记看中国科技自立自强", category: "科技创新", cover: "图片/录播16.png", video: "video/录课视频(1)/HnVideoEditor_2026_01_24_162317800.mp4" },
-        { id: 17, title: "以案释法：从崔路路抢劫案看法律与法治精神", category: "思政理论", cover: "图片/录播17.png", video: "video/录课视频(1)/HnVideoEditor_2026_02_25_131921423.mp4" },
-        { id: 18, title: "守护底线，捍卫正义", category: "思政理论", cover: "图片/录播18.png", video: "video/录课视频(1)/HnVideoEditor_2026_02_26_134608548.mp4" },
-        { id: 19, title: "世界赴华：藏在旅游里的答案", category: "时政热点", cover: "图片/录播19.png", video: "video/录课视频(1)/mmexport1771512309158.mp4" },
-        { id: 20, title: "守望精神家园——千万流量遇见千年社火", category: "文化传承", cover: "图片/录播20.png", video: "video/录课视频(1)/mmexport1771675862805.mp4" }
+        { id: 1, title: "网络改变世界", category: "科技创新", cover: "图片/录播1.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116329877148766&bvid=BV16a9EBQEbD&cid=37155572146&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 2, title: "天山胜利隧道通车", category: "科技创新", cover: "图片/录播2.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116329944192490&bvid=BV1px9EBdEd8&cid=37156161986&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 3, title: "《武BOT》人机共舞耀春晚", category: "科技创新", cover: "图片/录播3.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116329944192388&bvid=BV1px9EBdEo7&cid=37156094286&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 4, title: "科技筑梦，创新未来", category: "科技创新", cover: "图片/录播4.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116330011300233&bvid=BV1Bd97BjEiS&cid=37156423242&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 5, title: "中国沙漠铁路：连接未来的希望之路", category: "科技创新", cover: "图片/录播5.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116330011302631&bvid=BV1Bd97BjEPY&cid=37156554446&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 6, title: "原始社会的解体和阶级社会的演进", category: "思政理论", cover: "图片/录播6.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116330095254350&bvid=BV1f997BmEpN&cid=37156948280&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 7, title: "2026春运中的民生温度和政治智慧", category: "时政热点", cover: "图片/录播7.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116330095187349&bvid=BV1z997BmEc1&cid=37157011694&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 8, title: "从航天功勋奖章看国家利益和个人担当", category: "时政热点", cover: "图片/录播8.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116330095187167&bvid=BV1B997BmEdP&cid=37157013492&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 9, title: "当熊猫“住进”国家公园", category: "文化传承", cover: "图片/录播9.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116330111964181&bvid=BV1zX97BEEkG&cid=37157015106&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 10, title: "从国潮崛起看新时代青年的文化自信", category: "文化传承", cover: "图片/录播10.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116330162298352&bvid=BV1bG9EBvE2f&cid=37157077610&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 11, title: "人民理发师", category: "时政热点", cover: "图片/录播11.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116335749175379&bvid=BV1Jy9wBzEwM&cid=37182440935&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 12, title: "双轨并行，漆艺永续", category: "文化传承", cover: "图片/录播12.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116335849772405&bvid=BV1R99wBaEBF&cid=37182966769&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 13, title: "时政热点——党的第二十届四中全会考点总结", category: "时政热点", cover: "图片/录播13.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116335883325800&bvid=BV19o9wB8E8x&cid=37183554001&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 14, title: "AI复活历史人物", category: "科技创新", cover: "图片/录播14.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116335883327455&bvid=BV19o9wB8E7v&cid=37183685706&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 15, title: "认识社会生活", category: "思政理论", cover: "图片/录播15.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116335900235816&bvid=BV1Us9wBpEXx&cid=37183687877&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 16, title: "创新驱动发展：从“钠离子电池突围记”看中国科技自立自强", category: "科技创新", cover: "图片/录播16.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116357827992454&bvid=BV1uYSfBzE17&cid=37290707648&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 17, title: "以案释法：崔璐璐抢劫案看法律和法治精神", category: "思政理论", cover: "图片/录播17.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116357844701448&bvid=BV19xSfBVEHu&cid=37290772358&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 18, title: "守护底线，捍卫正义", category: "思政理论", cover: "图片/录播18.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116357844702276&bvid=BV1XxSfBVEZ3&cid=37290836687&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 19, title: "世界赴华：藏在旅游里的答案", category: "时政热点", cover: "图片/录播19.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116357861478676&bvid=BV1RWSfByEPy&cid=37290905328&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' },
+        { id: 20, title: "守护精神家园——千万流量遇见千年社火", category: "文化传承", cover: "图片/录播20.png", video: '<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116357861480420&bvid=BV19WSfByEXx&cid=37290968131&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>' }
     ];
 
     let currentCategory = 'all';
@@ -671,7 +709,6 @@
             if (currentSearch && !course.title.includes(currentSearch)) return false;
             return true;
         });
-
         const container = document.getElementById('courseList');
         const noResult = document.getElementById('noResult');
         
@@ -681,14 +718,13 @@
             document.getElementById('statsInfo').innerText = `共 0 门课程`;
             return;
         }
-
         noResult.style.display = 'none';
         document.getElementById('statsInfo').innerHTML = `共 ${filtered.length} 门课程，陪你一起成长`;
         
         container.innerHTML = filtered.map(course => `
-            <div class="course-item">
+            <div class="course-item" data-video="${encodeURIComponent(course.video)}" data-title="${encodeURIComponent(course.title)}">
                 <div class="course-cover">
-                    <img src="${course.cover}" alt="${course.title}" onerror="this.src='图片/默认封面.png'">
+                    <img src="${course.cover}" alt="${course.title}" onerror="this.onerror=null; this.src='图片/默认封面.png';">
                     <span class="course-badge">${course.category}</span>
                 </div>
                 <div class="course-info">
@@ -697,24 +733,41 @@
                         <span><i class="fa fa-tag"></i> ${course.category}</span>
                         <span><i class="fa fa-play-circle"></i> 师范生录课</span>
                     </div>
-                    <a href="${course.video}" target="_blank" class="play-btn" onclick="return checkPlayAuth(event, '${course.video}')">
+                    <div class="play-btn" onclick="openVideoModal('${encodeURIComponent(course.video)}', '${encodeURIComponent(course.title)}')">
                         <i class="fa fa-play-circle"></i> 播放课程
-                    </a>
+                    </div>
                 </div>
             </div>
         `).join('');
     }
 
-    // 检查播放权限（需要登录）
-    function checkPlayAuth(event, videoUrl) {
+    // 打开视频播放弹窗（页面内显示）
+    function openVideoModal(videoHtml, title) {
+        // 登录校验（可根据需求启用/禁用，注释即关闭校验）
         const isLogged = localStorage.getItem('isLogin') === 'true';
         if (!isLogged) {
-            event.preventDefault();
             showToast('请先登录后观看课程视频！', 'error');
             openModal('login');
-            return false;
+            return;
         }
-        return true;
+        // 解码视频HTML和标题
+        const decodedVideo = decodeURIComponent(videoHtml);
+        const decodedTitle = decodeURIComponent(title);
+        // 填充视频播放器
+        const playerContainer = document.getElementById('videoPlayerContainer');
+        playerContainer.innerHTML = decodedVideo;
+        // 显示弹窗
+        document.getElementById('videoModal').classList.add('active');
+        // 禁止页面滚动
+        document.body.style.overflow = 'hidden';
+    }
+
+    // 关闭视频播放弹窗
+    function closeVideoModal() {
+        document.getElementById('videoModal').classList.remove('active');
+        document.getElementById('videoPlayerContainer').innerHTML = '';
+        // 恢复页面滚动
+        document.body.style.overflow = '';
     }
 
     // 筛选课程
@@ -761,7 +814,7 @@
         }
     }
 
-    // 登录处理 - 连接Supabase user表
+    // 登录处理
     async function loginHandler() {
         const username = document.getElementById('loginUsername').value.trim();
         const pwd = document.getElementById('loginPassword').value.trim();
@@ -800,8 +853,8 @@
             showToast("登录失败，请检查网络连接", "error");
         }
     }
-    
-    // 注册处理 - 连接Supabase user表
+
+    // 注册处理
     async function registerHandler() {
         const phone = document.getElementById('regPhone').value.trim();
         const pwd = document.getElementById('regPwd').value;
@@ -864,6 +917,7 @@
         }
     }
 
+    // 访问"我的"页面登录校验
     function checkMyNeedLogin(event) {
         const isLogged = localStorage.getItem('isLogin') === 'true';
         if(!isLogged) {
@@ -875,6 +929,7 @@
         return true;
     }
 
+    // 更新登录状态UI
     function updateLoginUI() {
         const isLogin = localStorage.getItem('isLogin') === 'true';
         const loginGroup = document.getElementById('loginGroup');
@@ -885,7 +940,8 @@
             loginGroup.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`;
         }
     }
-    
+
+    // 退出登录
     function logout() {
         localStorage.removeItem('isLogin');
         localStorage.removeItem('loginUser');
@@ -899,6 +955,10 @@
         updateLoginUI();
         initCategoryTabs();
         renderCourses();
+        // 点击视频弹窗外部关闭
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) closeVideoModal();
+        });
     });
 </script>
 </body>

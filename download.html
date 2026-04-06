@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>云先生 · 直播课室 | 优秀教案 & 课程视频</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/docx-preview@0.1.14/dist/docx-preview.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft Yahei", "PingFang SC", "Helvetica Neue", sans-serif;
+            font-family: "Microsoft Yahei", "Ping Fang SC", "Helvetica Neue", sans-serif;
         }
         :root {
             --primary-color: #991a28;
@@ -35,7 +36,7 @@
             color: #1e2a3e;
             line-height: 1.5;
         }
-        a { text-decoration: none; color: inherit; }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
         ul { list-style: none; }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
         
@@ -59,7 +60,7 @@
             box-shadow: var(--shadow-sm);
         }
         
-        /* 顶部栏 - 与video.html完全一致 */
+        /* 顶部栏 - 原格式不变 */
         .top-bar {
             background: var(--primary-dark);
             color: var(--gold-color);
@@ -74,7 +75,7 @@
         .top-bar a { color: #fff; margin-left: 15px; cursor: pointer; transition: 0.2s; }
         .top-bar a:hover { color: var(--gold-color); }
         
-        /* 导航栏 - 完全参照video.html，高度70px，样式一致 */
+        /* 导航栏 - 原格式不变 */
         .header {
             position: sticky;
             top: 0;
@@ -114,7 +115,7 @@
         .nav-menu li a:hover::after { width: 100%; }
         .nav-toggle { display: none; font-size: 24px; color: white; cursor: pointer; }
         
-        /* 登录弹窗 - 与video.html一致 */
+        /* 登录弹窗 - 原格式不变 */
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -143,7 +144,7 @@
         .form-group label { display: block; margin-bottom: 6px; }
         .form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
         
-        /* toast提示 */
+        /* toast提示 - 原格式不变 */
         .toast {
             position: fixed;
             top: 20px;
@@ -162,7 +163,7 @@
         .toast.error { background-color: #d62828; }
         .toast.show { opacity: 1; }
         
-        /* 直播课室banner - 与video横幅风格统一，高度380px */
+        /* 直播课室banner - 原格式不变 */
         .live-hero {
             height: 380px;
             background: linear-gradient(135deg, var(--primary-color) 0%, #b82232 100%);
@@ -204,7 +205,7 @@
             line-height: 1.6;
         }
         
-        /* 快捷分类导航 - banner内部下方，类似video中的横幅按钮 */
+        /* 快捷分类导航 - 原格式不变 */
         .hero-buttons {
             position: relative;
             z-index: 2;
@@ -238,7 +239,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         
-        /* 板块通用样式 - 与video风格协调 */
+        /* 板块通用样式 - 原格式不变 */
         .section-block {
             padding: 60px 0 40px;
         }
@@ -268,7 +269,7 @@
             margin-right: 12px;
         }
         
-        /* 卡片网格 */
+        /* 卡片网格 - 原格式不变 */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -311,7 +312,7 @@
             overflow-y: auto;
         }
         
-        /* 文件/视频条目样式 */
+        /* 文件/视频条目样式 - 保留单个按钮 */
         .resource-row {
             display: flex;
             align-items: center;
@@ -329,7 +330,6 @@
         }
         .resource-info i {
             font-size: 20px;
-            width: 28px;
             color: var(--primary-color);
         }
         .resource-name {
@@ -345,16 +345,12 @@
             color: #8b7a6b;
             flex-shrink: 0;
         }
-        .action-btns {
-            display: flex;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-        .icon-btn {
-            background: #f2ece5;
+        .action-btn {
+            background: var(--primary-color);
+            color: white;
             border: none;
             border-radius: 30px;
-            padding: 5px 12px;
+            padding: 6px 16px;
             font-size: 12px;
             cursor: pointer;
             transition: 0.2s;
@@ -362,14 +358,76 @@
             align-items: center;
             gap: 6px;
         }
-        .icon-btn.download-btn {
-            background: var(--primary-color);
-            color: white;
+        .action-btn:hover {
+            background: var(--primary-light);
+            box-shadow: var(--shadow-sm);
         }
-        .icon-btn.download-btn:hover { background: var(--primary-light); }
-        .icon-btn.preview-btn:hover { background: #e2d9d0; }
+        .action-btn.video-btn i {
+            font-size: 14px;
+        }
+        .action-btn.doc-btn i {
+            font-size: 14px;
+        }
         
-        /* 底部 - 与video完全一致 */
+        /* 视频播放弹窗样式 */
+        .video-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-content {
+            background: #fff;
+            border-radius: 28px;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+            padding: 20px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: #991a28;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .modal-title {
+            margin: 0 0 16px 0;
+            color: #2c3e4e;
+            text-align: center;
+            font-size: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0e5dc;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            width: 100%;
+            height: 0;
+        }
+        .video-container iframe, .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* 底部 - 原格式不变 */
         .footer {
             background-color: var(--primary-dark);
             color: var(--white-color);
@@ -407,13 +465,23 @@
         }
         
         @media (max-width: 800px) {
+            .nav-toggle {
+                display: block;
+            }
             .nav-menu {
-                position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px);
-                background: var(--primary-dark); flex-direction: column; align-items: center; padding: 40px 0;
-                transition: 0.3s;
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--primary-dark);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                gap: 20px;
+                transition: var(--transition);
             }
             .nav-menu.active { left: 0; }
-            .nav-toggle { display: block; }
             .live-hero { height: 420px; }
             .hero-content h1 { font-size: 32px; }
             .hero-content p { font-size: 16px; margin-bottom: 30px; }
@@ -425,7 +493,6 @@
     </style>
 </head>
 <body>
-
 <div class="top-bar">
     <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
     <div class="login-group" id="loginGroup">
@@ -433,7 +500,6 @@
         <a href="javascript:;" onclick="openModal('reg')">注册</a>
     </div>
 </div>
-
 <header class="header">
     <div class="container nav">
         <div class="logo">
@@ -453,7 +519,6 @@
         <div class="nav-toggle" onclick="toggleNav()"><i class="fa fa-bars"></i></div>
     </div>
 </header>
-
 <!-- 登录弹窗 -->
 <div class="modal" id="modal">
     <div class="modal-box">
@@ -475,10 +540,8 @@
         </div>
     </div>
 </div>
-
 <div id="toast" class="toast"></div>
-
-<!-- 直播课室banner - 风格与video.html横幅统一高度380px -->
+<!-- 直播课室banner -->
 <section class="live-hero">
     <div class="hero-content">
         <h1>直播课室</h1>
@@ -493,29 +556,284 @@
         </div>
     </div>
 </section>
-
 <div class="container">
-    <!-- 板块一：优秀教案 -->
+    <!-- 板块一：优秀教案（「查看」= 下载功能） -->
     <div class="section-block" id="excellent-section">
         <div class="block-header">
             <h2><i class="fa fa-file-text"></i> 优秀教案</h2>
         </div>
         <div class="card-grid" id="excellentGrid">
-            <!-- 动态渲染三个卡片 -->
+            <div class="resource-card">
+                <div class="card-title"><i class="fa fa-lightbulb-o"></i><h3>题型方法突破</h3></div>
+                <div class="resource-list-scroll">
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-file-word-o"></i>
+                            <span class="resource-name">模型公式法——启示类设问.docx</span>
+                            <span class="resource-meta">37KB</span>
+                        </div>
+                        <a href="file/模型公式法——启示类设问.docx" class="action-btn doc-btn" download>
+                            <i class="fa fa-download"></i> 查看
+                        </a>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-file-word-o"></i>
+                            <span class="resource-name">王锋（2.5）直播课教学设计.docx</span>
+                            <span class="resource-meta">15KB</span>
+                        </div>
+                        <a href="file/王锋（2.5）直播课教学设计.docx" class="action-btn doc-btn" download>
+                            <i class="fa fa-download"></i> 查看
+                        </a>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-file-word-o"></i>
+                            <span class="resource-name">对号入座法课堂教学设计——意义、作用、影响类设问解题指导.docx</span>
+                            <span class="resource-meta">42KB</span>
+                        </div>
+                        <a href="file/对号入座法课堂教学设计——意义、作用、影响类设问解题指导.docx" class="action-btn doc-btn" download>
+                            <i class="fa fa-download"></i> 查看
+                        </a>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-file-word-o"></i>
+                            <span class="resource-name">【云直播—政治】0205分析说明题教学设计.docx</span>
+                            <span class="resource-meta">19KB</span>
+                        </div>
+                        <a href="file/【云直播—政治】0205分析说明题教学设计.docx" class="action-btn doc-btn" download>
+                            <i class="fa fa-download"></i> 查看
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="card-title"><i class="fa fa-newspaper-o"></i><h3>时政热点 · 政策解读</h3></div>
+                <div class="resource-list-scroll">
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-file-word-o"></i>
+                            <span class="resource-name">2026年中央一号文件-道法备考 教学设计.docx</span>
+                            <span class="resource-meta">18KB</span>
+                        </div>
+                        <a href="file/2026年中央一号文件-道法备考 教学设计.docx" class="action-btn doc-btn" download>
+                            <i class="fa fa-download"></i> 查看
+                        </a>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-file-word-o"></i>
+                            <span class="resource-name">初中政治《课前时政积累 + 25 年中考真题精析》教学设计.docx</span>
+                            <span class="resource-meta">19KB</span>
+                        </div>
+                        <a href="file/初中政治《课前时政积累 + 25 年中考真题精析》教学设计.docx" class="action-btn doc-btn" download>
+                            <i class="fa fa-download"></i> 查看
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="card-title"><i class="fa fa-book"></i><h3>教材知识复习</h3></div>
+                <div class="resource-list-scroll">
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-file-word-o"></i>
+                            <span class="resource-name">八下政治复习课.docx</span>
+                            <span class="resource-meta">15KB</span>
+                        </div>
+                        <a href="file/八下政治复习课.docx" class="action-btn doc-btn" download>
+                            <i class="fa fa-download"></i> 查看
+                        </a>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-file-word-o"></i>
+                            <span class="resource-name">教案.docx</span>
+                            <span class="resource-meta">28KB</span>
+                        </div>
+                        <a href="file/教案.docx" class="action-btn doc-btn" download>
+                            <i class="fa fa-download"></i> 查看
+                        </a>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-file-word-o"></i>
+                            <span class="resource-name">教学设计.docx</span>
+                            <span class="resource-meta">403KB</span>
+                        </div>
+                        <a href="file/教学设计.docx" class="action-btn doc-btn" download>
+                            <i class="fa fa-download"></i> 查看
+                        </a>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-file-image-o"></i>
+                            <span class="resource-name">2.7教案.jpg</span>
+                            <span class="resource-meta">757KB</span>
+                        </div>
+                        <a href="file/2.7教案.jpg" class="action-btn doc-btn" download>
+                            <i class="fa fa-download"></i> 查看
+                        </a>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-file-image-o"></i>
+                            <span class="resource-name">教学设计.jpg</span>
+                            <span class="resource-meta">832KB</span>
+                        </div>
+                        <a href="file/教学设计.jpg" class="action-btn doc-btn" download>
+                            <i class="fa fa-download"></i> 查看
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- 板块二：课程视频 -->
+    <!-- 板块二：课程视频（「播放」= 弹窗播放，已移除指定视频） -->
     <div class="section-block" id="courses-section">
         <div class="block-header">
             <h2><i class="fa fa-play-circle"></i> 课程视频</h2>
         </div>
         <div class="card-grid" id="videoGrid">
-            <!-- 动态渲染三个视频分类卡片 -->
+            <div class="resource-card">
+                <div class="card-title"><i class="fa fa-graduation-cap"></i><h3>初中政治解题技巧</h3></div>
+                <div class="resource-list-scroll">
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-video-camera"></i>
+                            <span class="resource-name">初中道德与法治答题技巧</span>
+                            <span class="resource-meta">视频文件</span>
+                        </div>
+                        <button class="action-btn video-btn" onclick="openVideoModal('<iframe src=https://player.bilibili.com/player.html?isOutside=true&aid=116357928656217&bvid=BV1t9SZBKEfb&cid=37291295541&p=1 scrolling=no border=0 frameborder=no framespacing=0 allowfullscreen=true></iframe>', '初中道德与法治答题技巧')">
+                            <i class="fa fa-play"></i> 播放
+                        </button>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-video-camera"></i>
+                            <span class="resource-name">初中政治主观题类型，解题技巧及方法(按题目内容分)</span>
+                            <span class="resource-meta">视频文件</span>
+                        </div>
+                        <button class="action-btn video-btn" onclick="openVideoModal('<iframe src=https://player.bilibili.com/player.html?isOutside=true&aid=116357928654981&bvid=BV1b9SZBKEGK&cid=37291298120&p=1 scrolling=no border=0 frameborder=no framespacing=0 allowfullscreen=true></iframe>', '初中政治主观题类型，解题技巧及方法(按题目内容分)')">
+                            <i class="fa fa-play"></i> 播放
+                        </button>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-video-camera"></i>
+                            <span class="resource-name">初中政治主观题类型，解题方法及技巧(按题目类型分)</span>
+                            <span class="resource-meta">视频文件</span>
+                        </div>
+                        <button class="action-btn video-btn" onclick="openVideoModal('<iframe src=https://player.bilibili.com/player.html?isOutside=true&aid=116357945432660&bvid=BV14ZSZBYEGU&cid=37291494715&p=1 scrolling=no border=0 frameborder=no framespacing=0 allowfullscreen=true></iframe>', '初中政治主观题类型，解题方法及技巧(按题目类型分)')">
+                            <i class="fa fa-play"></i> 播放
+                        </button>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-video-camera"></i>
+                            <span class="resource-name">初中政治：民主知识清单</span>
+                            <span class="resource-meta">视频文件</span>
+                        </div>
+                        <button class="action-btn video-btn" onclick="openVideoModal('<iframe src=https://player.bilibili.com/player.html?isOutside=true&aid=116358029253487&bvid=BV1gDSZBMEsG&cid=37291823047&p=1 scrolling=no border=0 frameborder=no framespacing=0 allowfullscreen=true></iframe>', '初中政治：民主知识清单')">
+                            <i class="fa fa-play"></i> 播放
+                        </button>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-video-camera"></i>
+                            <span class="resource-name">学科理解·解题技巧·开放题攻坚</span>
+                            <span class="resource-meta">视频文件</span>
+                        </div>
+                        <button class="action-btn video-btn" onclick="openVideoModal('<iframe src=https://player.bilibili.com/player.html?isOutside=true&aid=116358046030028&bvid=BV1wTSfB4E5A&cid=37292216078&p=1 scrolling=no border=0 frameborder=no framespacing=0 allowfullscreen=true></iframe>', '学科理解·解题技巧·开放题攻坚')">
+                            <i class="fa fa-play"></i> 播放
+                        </button>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-video-camera"></i>
+                            <span class="resource-name">答疑1</span>
+                            <span class="resource-meta">视频文件</span>
+                        </div>
+                        <button class="action-btn video-btn" onclick="openVideoModal('<iframe src=https://player.bilibili.com/player.html?isOutside=true&aid=116358046031115&bvid=BV1wTSfB4EPF&cid=37291886087&p=1 scrolling=no border=0 frameborder=no framespacing=0 allowfullscreen=true></iframe>', '答疑1')">
+                            <i class="fa fa-play"></i> 播放
+                        </button>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-video-camera"></i>
+                            <span class="resource-name">答疑2</span>
+                            <span class="resource-meta">视频文件</span>
+                        </div>
+                        <button class="action-btn video-btn" onclick="openVideoModal('', '答疑2', 'video/直播视频/牛雨欣（02.05）直播课.mp4')">
+                            <i class="fa fa-play"></i> 播放
+                        </button>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-video-camera"></i>
+                            <span class="resource-name">答疑4</span>
+                            <span class="resource-meta">视频文件</span>
+                        </div>
+                        <button class="action-btn video-btn" onclick="openVideoModal('<iframe src=https://player.bilibili.com/player.html?isOutside=true&aid=116358046030461&bvid=BV1wTSfB4Exn&cid=37291950640&p=1 scrolling=no border=0 frameborder=no framespacing=0 allowfullscreen=true></iframe>', '答疑4')">
+                            <i class="fa fa-play"></i> 播放
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="card-title"><i class="fa fa-heart"></i><h3>道法教学与价值引领</h3></div>
+                <div class="resource-list-scroll">
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-video-camera"></i>
+                            <span class="resource-name">二十届四中全会主要内容</span>
+                            <span class="resource-meta">视频文件</span>
+                        </div>
+                        <button class="action-btn video-btn" onclick="openVideoModal('', '二十届四中全会主要内容', 'video/直播视频/20260205085739-高佳昕预定的会议 2.5-视频-1.mp4')">
+                            <i class="fa fa-play"></i> 播放
+                        </button>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-video-camera"></i>
+                            <span class="resource-name">九年级上册:生活在新型民主国家</span>
+                            <span class="resource-meta">视频文件</span>
+                        </div>
+                        <button class="action-btn video-btn" onclick="openVideoModal('<iframe src=https://player.bilibili.com/player.html?isOutside=true&aid=116357945365538&bvid=BV1KZSZBYERa&cid=37291361900&p=1 scrolling=no border=0 frameborder=no framespacing=0 allowfullscreen=true></iframe>', '九年级上册:生活在新型民主国家')">
+                            <i class="fa fa-play"></i> 播放
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="card-title"><i class="fa fa-flag-checkered"></i><h3>时政热点与国家政策</h3></div>
+                <div class="resource-list-scroll">
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-video-camera"></i>
+                            <span class="resource-name">2026年中央一号文件精神解读</span>
+                            <span class="resource-meta">视频文件</span>
+                        </div>
+                        <button class="action-btn video-btn" onclick="openVideoModal('<iframe src=https://player.bilibili.com/player.html?isOutside=true&aid=116358046031115&bvid=BV1wTSfB4EPF&cid=37291886087&p=1 scrolling=no border=0 frameborder=no framespacing=0 allowfullscreen=true></iframe>', '2026年中央一号文件精神解读')">
+                            <i class="fa fa-play"></i> 播放
+                        </button>
+                    </div>
+                    <div class="resource-row">
+                        <div class="resource-info">
+                            <i class="fa fa-video-camera"></i>
+                            <span class="resource-name">乡村振兴战略中的思政教育</span>
+                            <span class="resource-meta">视频文件</span>
+                        </div>
+                        <button class="action-btn video-btn" onclick="openVideoModal('<iframe src=https://player.bilibili.com/player.html?isOutside=true&aid=116358062938629&bvid=BV1CNSfBZETS&cid=37292015942&p=1 scrolling=no border=0 frameborder=no framespacing=0 allowfullscreen=true></iframe>', '乡村振兴战略中的思政教育')">
+                            <i class="fa fa-play"></i> 播放
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 <footer class="footer">
     <div class="container">
         <div class="footer-top">
@@ -529,15 +847,6 @@
 </footer>
 
 <script>
-    // Supabase 配置
-    const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
-    const HEADERS = {
-        apikey: SUPABASE_KEY,
-        Authorization: "Bearer " + SUPABASE_KEY,
-        "Content-Type": "application/json"
-    };
-
     // 显示提示消息
     function showToast(msg, type = 'success') {
         const toast = document.getElementById('toast');
@@ -546,179 +855,88 @@
         setTimeout(() => toast.classList.remove('show'), 2000);
     }
 
-    // ========= 优秀教案数据 =========
-    const methodFiles = [
-        { name: "模型公式法——启示类设问.docx", size: "37KB", url: "file/模型公式法——启示类设问.docx", type: "doc" },
-        { name: "王锋（2.5）直播课教学设计.docx", size: "15KB", url: "file/王锋（2.5）直播课教学设计.docx", type: "doc" },
-        { name: "对号入座法课堂教学设计——意义、作用、影响类设问解题指导.docx", size: "42KB", url: "file/对号入座法课堂教学设计——意义、作用、影响类设问解题指导.docx", type: "doc" },
-        { name: "【云直播—政治】0205分析说明题教学设计.docx", size: "19KB", url: "file/【云直播—政治】0205分析说明题教学设计.docx", type: "doc" }
-    ];
-    const policyFiles = [
-        { name: "2026年中央一号文件-道法备考 教学设计.docx", size: "18KB", url: "file/2026年中央一号文件-道法备考 教学设计.docx", type: "doc" },
-        { name: "初中政治《课前时政积累 + 25 年中考真题精析》教学设计.docx", size: "19KB", url: "file/初中政治《课前时政积累 + 25 年中考真题精析》教学设计.docx", type: "doc" }
-    ];
-    const textbookFiles = [
-        { name: "八下政治复习课.docx", size: "15KB", url: "file/八下政治复习课.docx", type: "doc" },
-        { name: "教案.docx", size: "28KB", url: "file/教案.docx", type: "doc" },
-        { name: "教学设计.docx", size: "403KB", url: "file/教学设计.docx", type: "doc" },
-        { name: "2.7教案.jpg", size: "757KB", url: "file/2.7教案.jpg", type: "image" },
-        { name: "教学设计.jpg", size: "832KB", url: "file/教学设计.jpg", type: "image" }
-    ];
-    
-    // ========= 课程视频数据 =========
-    const skillVideos = [
-        { name: "初中道德与法治答题技巧", url: "video/直播视频/20260205084606-张越预定的会议-视频-1.mp4"},
-        { name: "初中政治主观题类型，解题技巧及方法(按题目内容分)", url: "video/直播视频/20260205085528-辞忧预定的会议-视频-1.mp4"},
-        { name: "初中政治主观题类型，解题方法及技巧(按题目类型分)", url: "video/直播视频/20260207085447-辞忧预定的会议-视频-1.mp4" },
-        { name: "初中政治：民主知识清单", url: "video/直播视频/20260207085630-2.7-视频-1.mp4" },
-        { name: "学科理解·解题技巧·开放题攻坚", url: "video/直播视频/杨清莉同学的第一次政治直播课（ 学科理解·解题技巧·开放题攻坚）-王锋-2.5.mp4"},
-        { name: "答疑1", url: "video/直播视频/20260224085636-高佳昕预定的会议-视频-1 (1).mp4"},
-        { name: "答疑2", url: "video/直播视频/牛雨欣（02.05）直播课.mp4" },
-        { name: "答疑3", url: "video/直播视频/王思辰（02.10）直播课.mp4" },
-        { name: "答疑4", url: "video/直播视频/meeting_01.mp4"}
-    ];
-    const valueVideos = [
-        { name: "二十届四中全会主要内容", url: "video/直播视频/20260205085739-高佳昕预定的会议 2.5-视频-1.mp4" },
-        { name: "九年级上册:生活在新型民主国家", url: "video/直播视频/20260205105445-2026.2.5政治课（1）-视频-1.mp4"}
-    ];
-    const hotTopicVideos = [
-        { name: "2026年中央一号文件精神解读", url: "video/直播视频/20260224085636-高佳昕预定的会议-视频-1 (1).mp4" },
-        { name: "两会热点与青少年责任担当", url: "video/直播视频/牛雨欣（02.05）直播课.mp4" },
-        { name: "乡村振兴战略中的思政教育", url: "video/直播视频/王思辰（02.10）直播课.mp4" }
-    ];
-    
-    function renderExcellentCards() {
-        const grid = document.getElementById('excellentGrid');
-        if(!grid) return;
-        grid.innerHTML = `
-            <div class="resource-card">
-                <div class="card-title"><i class="fa fa-lightbulb-o"></i><h3>题型方法突破</h3></div>
-                <div class="resource-list-scroll" id="methodList"></div>
-            </div>
-            <div class="resource-card">
-                <div class="card-title"><i class="fa fa-newspaper-o"></i><h3>时政热点 · 政策解读</h3></div>
-                <div class="resource-list-scroll" id="policyList"></div>
-            </div>
-            <div class="resource-card">
-                <div class="card-title"><i class="fa fa-book"></i><h3>教材知识复习</h3></div>
-                <div class="resource-list-scroll" id="textbookList"></div>
-            </div>
-        `;
-        renderResourceList('methodList', methodFiles, 'file');
-        renderResourceList('policyList', policyFiles, 'file');
-        renderResourceList('textbookList', textbookFiles, 'file');
-    }
-    
-    function renderVideoCards() {
-        const grid = document.getElementById('videoGrid');
-        if(!grid) return;
-        grid.innerHTML = `
-            <div class="resource-card">
-                <div class="card-title"><i class="fa fa-graduation-cap"></i><h3>初中政治解题技巧</h3></div>
-                <div class="resource-list-scroll" id="skillVideoList"></div>
-            </div>
-            <div class="resource-card">
-                <div class="card-title"><i class="fa fa-heart"></i><h3>道法教学与价值引领</h3></div>
-                <div class="resource-list-scroll" id="valueVideoList"></div>
-            </div>
-            <div class="resource-card">
-                <div class="card-title"><i class="fa fa-flag-checkered"></i><h3>时政热点与国家政策</h3></div>
-                <div class="resource-list-scroll" id="hotVideoList"></div>
-            </div>
-        `;
-        renderResourceList('skillVideoList', skillVideos, 'video');
-        renderResourceList('valueVideoList', valueVideos, 'video');
-        renderResourceList('hotVideoList', hotTopicVideos, 'video');
-    }
-    
-    function renderResourceList(containerId, items, type) {
-        const container = document.getElementById(containerId);
-        if(!container) return;
-        if(type === 'file') {
-            container.innerHTML = items.map(item => `
-                <div class="resource-row">
-                    <div class="resource-info">
-                        <i class="fa ${item.type === 'image' ? 'fa-file-image-o' : 'fa-file-word-o'}"></i>
-                        <span class="resource-name" title="${item.name}">${item.name}</span>
-                        <span class="resource-meta">${item.size}</span>
-                    </div>
-                    <div class="action-btns">
-                        <button class="icon-btn preview-btn" data-url="${item.url}" data-name="${item.name}" data-type="${item.type || 'doc'}"><i class="fa fa-eye"></i> 预览</button>
-                        <a href="${item.url}" class="icon-btn download-btn" download><i class="fa fa-download"></i> 下载</a>
-                    </div>
-                </div>
-            `).join('');
-        } else {
-            container.innerHTML = items.map(item => `
-                <div class="resource-row">
-                    <div class="resource-info">
-                        <i class="fa fa-video-camera"></i>
-                        <span class="resource-name" title="${item.name}">${item.name}</span>
-                        <span class="resource-meta">视频文件</span>
-                    </div>
-                    <div class="action-btns">
-                        <button class="icon-btn preview-btn" data-url="${item.url}" data-name="${item.name}" data-type="video"><i class="fa fa-play"></i> 预览</button>
-                        <a href="${item.url}" class="icon-btn download-btn" download><i class="fa fa-download"></i> 下载</a>
-                    </div>
-                </div>
-            `).join('');
-        }
-        attachPreviewEvents(container);
-    }
-    
-    function attachPreviewEvents(container) {
-        container.querySelectorAll('.preview-btn').forEach(btn => {
-            btn.removeEventListener('click', previewHandler);
-            btn.addEventListener('click', previewHandler);
-        });
-    }
-    
-    function previewHandler(e) {
-        const url = this.dataset.url;
-        const name = this.dataset.name;
-        const type = this.dataset.type;
-        showPreviewModal(url, name, type);
-    }
-    
-    function showPreviewModal(fileUrl, fileName, fileType) {
+    // ========= 视频弹窗播放功能 =========
+    function openVideoModal(iframeHtml, fileName, localVideoUrl) {
+        // 关闭已有弹窗
+        const oldModal = document.querySelector('.video-modal');
+        if(oldModal) oldModal.remove();
+
+        // 创建弹窗
         const modalDiv = document.createElement('div');
-        modalDiv.style.cssText = `position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10001; display:flex; align-items:center; justify-content:center; padding:20px;`;
-        const closeFn = () => { document.body.removeChild(modalDiv); };
-        let inner = `<div style="background:#fff; border-radius:28px; width:90%; max-width:900px; max-height:90%; overflow:auto; position:relative;"><button style="position:absolute; top:16px; right:20px; background:#991a28; color:white; border:none; border-radius:40px; width:38px; height:38px; font-size:20px; cursor:pointer;">×</button><div style="padding:28px;">`;
-        if(fileUrl.match(/\.(jpg|jpeg|png)$/i)) {
-            inner += `<img src="${fileUrl}" style="max-width:100%; max-height:70vh; border-radius:16px;">`;
-        } else if(fileUrl.match(/\.mp4$/i) || fileType === 'video') {
-            inner += `<video controls style="width:100%; max-height:70vh;"><source src="${fileUrl}" type="video/mp4">您的浏览器不支持视频播放</video>`;
-        } else {
-            inner += `<div style="text-align:center;"><i class="fa fa-file-text-o" style="font-size:50px; color:#991a28;"></i><h3 style="margin:15px 0;">${fileName}</h3><p>暂不支持在线预览，请下载后查看</p><a href="${fileUrl}" class="btn" download style="background:#991a28; margin-top:16px;">下载文件</a></div>`;
-        }
-        inner += `</div></div>`;
-        modalDiv.innerHTML = inner;
+        modalDiv.className = 'video-modal';
         document.body.appendChild(modalDiv);
-        modalDiv.querySelector('button').addEventListener('click', closeFn);
-        modalDiv.addEventListener('click', (e) => { if(e.target === modalDiv) closeFn(); });
+
+        const modalContent = document.createElement('div');
+        modalContent.className = 'modal-content';
+        modalDiv.appendChild(modalContent);
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'modal-close';
+        closeBtn.innerHTML = '×';
+        modalContent.appendChild(closeBtn);
+
+        const title = document.createElement('h3');
+        title.className = 'modal-title';
+        title.textContent = fileName;
+        modalContent.appendChild(title);
+
+        const videoContainer = document.createElement('div');
+        videoContainer.className = 'video-container';
+        modalContent.appendChild(videoContainer);
+
+        // 绑定关闭事件
+        closeBtn.addEventListener('click', () => modalDiv.remove());
+        modalDiv.addEventListener('click', (e) => e.target === modalDiv && modalDiv.remove());
+
+        // B站iframe视频
+        if(iframeHtml) {
+            videoContainer.innerHTML = iframeHtml;
+            return;
+        }
+
+        // 本地视频
+        if(localVideoUrl) {
+            videoContainer.innerHTML = `<video controls><source src="${localVideoUrl}" type="video/mp4">您的浏览器不支持视频播放</video>`;
+            return;
+        }
+
+        // 视频加载失败
+        videoContainer.innerHTML = `
+            <div style="text-align:center; padding:40px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);">
+                <i class="fa fa-video-camera" style="font-size:50px; color:#991a28;"></i>
+                <p style="margin-top:15px;">视频加载失败，请稍后重试</p>
+            </div>
+        `;
     }
-    
-    // 导航栏折叠
-    function toggleNav() { document.querySelector('.nav-menu').classList.toggle('active'); }
-    
-    // 登录弹窗相关
+
+    // ========= 原有功能：导航栏&登录 =========
+    function toggleNav() {
+        const navMenu = document.querySelector('.nav-menu');
+        if(navMenu) navMenu.classList.toggle('active');
+    }
+
     const modalEl = document.getElementById('modal');
-    function openModal(type) { modalEl.classList.add('active'); if(type === 'login') switchTabModal('login'); else switchTabModal('reg'); }
-    function closeModal() { modalEl.classList.remove('active'); }
+    function openModal(type) {
+        if(modalEl) modalEl.classList.add('active');
+        switchTabModal(type);
+    }
+    function closeModal() {
+        if(modalEl) modalEl.classList.remove('active');
+    }
     function switchTabModal(tab) {
-        document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.modal-tab-item').forEach(i => i.classList.remove('active'));
+        const panels = document.querySelectorAll('.modal-panel');
+        const items = document.querySelectorAll('.modal-tab-item');
+        panels.forEach(p => p.classList.remove('active'));
+        items.forEach(i => i.classList.remove('active'));
         if(tab === 'login') {
             document.getElementById('loginPanel').classList.add('active');
-            document.querySelectorAll('.modal-tab-item')[0].classList.add('active');
+            items[0].classList.add('active');
         } else {
             document.getElementById('regPanel').classList.add('active');
-            document.querySelectorAll('.modal-tab-item')[1].classList.add('active');
+            items[1].classList.add('active');
         }
     }
-    
-   // 登录处理
+
     async function loginHandler() {
         const username = document.getElementById('loginUsername').value.trim();
         const pwd = document.getElementById('loginPassword').value.trim();
@@ -728,22 +946,26 @@
         }
         
         try {
+            const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
+            const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
+            const HEADERS = {
+                apikey: SUPABASE_KEY,
+                Authorization: "Bearer " + SUPABASE_KEY,
+                "Content-Type": "application/json"
+            };
+
             const response = await fetch(
                 `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(pwd)}&select=*`,
                 { headers: HEADERS }
             );
             
-            if (!response.ok) {
-                throw new Error("网络请求失败");
-            }
-            
+            if (!response.ok) throw new Error("网络请求失败");
             const data = await response.json();
             
             if (data && data.length > 0) {
-                const user = data[0];
                 localStorage.setItem('isLogin', 'true');
-                localStorage.setItem('loginUser', user.account);
-                localStorage.setItem('userRole', user.role || 'user');
+                localStorage.setItem('loginUser', data[0].account);
+                localStorage.setItem('userRole', data[0].role || 'user');
                 showToast("登录成功！", "success");
                 closeModal();
                 updateLoginUI();
@@ -757,8 +979,7 @@
             showToast("登录失败，请检查网络连接", "error");
         }
     }
-    
-    // 注册处理
+
     async function registerHandler() {
         const phone = document.getElementById('regPhone').value.trim();
         const pwd = document.getElementById('regPwd').value;
@@ -777,6 +998,14 @@
             return;
         }
         try {
+            const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
+            const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
+            const HEADERS = {
+                apikey: SUPABASE_KEY,
+                Authorization: "Bearer " + SUPABASE_KEY,
+                "Content-Type": "application/json"
+            };
+
             const checkResponse = await fetch(
                 `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(phone)}&select=*`,
                 { headers: HEADERS }
@@ -789,7 +1018,6 @@
             }
             
             const newUser = { account: phone, password: pwd, role: "user" };
-            
             const createResponse = await fetch(`${SUPABASE_URL}/rest/v1/user`, {
                 method: 'POST',
                 headers: HEADERS,
@@ -812,7 +1040,7 @@
             showToast("注册失败，请检查网络连接", "error");
         }
     }
-    
+
     function checkMyNeedLogin(event) {
         const isLogged = localStorage.getItem('isLogin') === 'true';
         if(!isLogged) {
@@ -823,18 +1051,18 @@
         }
         return true;
     }
-    
+
     function updateLoginUI() {
         const isLogin = localStorage.getItem('isLogin') === 'true';
         const loginGroup = document.getElementById('loginGroup');
         if(isLogin && loginGroup) {
             const user = localStorage.getItem('loginUser') || '用户';
             loginGroup.innerHTML = `<span style="color:#ffd700;">欢迎，${user}</span> <a href="javascript:;" onclick="logout()" style="margin-left:12px;">退出</a>`;
-        } else {
+        } else if(loginGroup) {
             loginGroup.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`;
         }
     }
-    
+
     function logout() {
         localStorage.removeItem('isLogin');
         localStorage.removeItem('loginUser');
@@ -842,28 +1070,29 @@
         showToast("已退出登录", "success");
         updateLoginUI();
     }
-    
-    // 按钮滚动事件
+
+    // 滚动功能
     function initHeroButtons() {
         const excellentBtn = document.getElementById('gotoExcellentBtn');
         const coursesBtn = document.getElementById('gotoCoursesBtn');
+        const excellentSection = document.getElementById('excellent-section');
+        const coursesSection = document.getElementById('courses-section');
         
-        if(excellentBtn) {
+        if(excellentBtn && excellentSection) {
             excellentBtn.addEventListener('click', () => {
-                document.getElementById('excellent-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                excellentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         }
-        if(coursesBtn) {
+        if(coursesBtn && coursesSection) {
             coursesBtn.addEventListener('click', () => {
-                document.getElementById('courses-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                coursesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         }
     }
-    
+
+    // 页面初始化
     window.addEventListener('DOMContentLoaded', () => {
         updateLoginUI();
-        renderExcellentCards();
-        renderVideoCards();
         initHeroButtons();
     });
 </script>
