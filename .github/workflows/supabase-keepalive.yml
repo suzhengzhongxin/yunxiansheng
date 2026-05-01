@@ -1,0 +1,16 @@
+name: Supabase志愿者平台保活
+
+on:
+  schedule:
+    - cron: '0 0 */3 * *' # 每3天00:00执行
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 访问Supabase班级表保活
+        uses: fjogeleit/http-request-action@v1.15.0
+        with:
+          url: 'https://vpgtpdniqyalolzjfxha.supabase.co/rest/v1/classes?select=id&limit=1'
+          method: 'GET'
+          headers: '{"apikey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwZ3RwZG5pcXlhbG9sempmeGhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5NDEwMDIsImV4cCI6MjA5MDUxNzAwMn0.8AT5gIBk9ZRtdnPsK_V1rB85YNikixDL8DnqFDpuWw8"}'
