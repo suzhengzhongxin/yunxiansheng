@@ -14,3 +14,4 @@ jobs:
           url: 'https://vpgtpdniqyalolzjfxha.supabase.co/rest/v1/classes?select=id&limit=1'
           method: 'GET'
           customHeaders: '{"apikey": "${{ secrets.SUPABASE_API_KEY }}", "Authorization": "Bearer ${{ secrets.SUPABASE_API_KEY }}"}'
+ 
