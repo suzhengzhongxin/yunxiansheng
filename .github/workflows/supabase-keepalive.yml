@@ -2,7 +2,7 @@ name: Supabase志愿者平台保活
 
 on:
   schedule:
-    - cron: '0 0 */3 * *' # 每3天00:00执行
+    - cron: '0 0 */3 * *'
 
 jobs:
   keepalive:
@@ -13,4 +13,4 @@ jobs:
         with:
           url: 'https://vpgtpdniqyalolzjfxha.supabase.co/rest/v1/classes?select=id&limit=1'
           method: 'GET'
-          headers: '{"apikey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwZ3RwZG5pcXlhbG9sempmeGhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5NDEwMDIsImV4cCI6MjA5MDUxNzAwMn0.8AT5gIBk9ZRtdnPsK_V1rB85YNikixDL8DnqFDpuWw8"}'
+          customHeaders: '{"apikey": "${{ secrets.SUPABASE_API_KEY }}", "Authorization": "Bearer ${{ secrets.SUPABASE_API_KEY }}"}'
