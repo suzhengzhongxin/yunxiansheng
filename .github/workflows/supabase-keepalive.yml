@@ -1,17 +1,21 @@
-name: Supabase志愿者平台保活
-
+name: Supabase 志愿者平台 数据库保活（强制防暂停）
 on:
   schedule:
-    - cron: '0 0 */3 * *'
+    - cron: '0 0 * * *'  # 每天 UTC 0:00 自动签到
+  workflow_dispatch:       # 支持手动触发测试
 
 jobs:
-  keepalive:
+  keep-alive-db:
     runs-on: ubuntu-latest
     steps:
-      - name: 访问Supabase班级表保活
-        uses: fjogeleit/http-request-action@v1.15.0
-        with:
-          url: 'https://vpgtpdniqyalolzjfxha.supabase.co/rest/v1/classes?select=id&limit=1'
-          method: 'GET'
-          customHeaders: '{"apikey": "${{ secrets.SUPABASE_API_KEY }}", "Authorization": "Bearer ${{ secrets.SUPABASE_API_KEY }}"}'
- 
+      - name: 执行数据库真实操作（确保被判定为活跃）
+        run: |
+          # 1. 查询真实存在的 classes 表（只读触发）
+          curl -s -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/classes?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_API_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_API_KEY }}"
+
+          # 2. 访问 PostgREST 根路径（轻量兜底唤醒）
+          curl -s -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/" \
+            -H "apikey: ${{ secrets.SUPABASE_API_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_API_KEY }}"
