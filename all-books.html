@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>思政文库 | 云先生-师范生助力乡村中小学道德与法治网络平台</title>
+    <title>全部书目 | 云先生-思政文库</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
         * {
@@ -28,7 +28,6 @@
             --radius-md: 10px;
             --radius-lg: 16px;
             --transition: all 0.3s ease;
-            scroll-behavior: smooth;
         }
         body {
             background-color: var(--gray-light);
@@ -64,6 +63,7 @@
             box-shadow: var(--shadow-sm);
         }
 
+        /* ===== 顶部栏 - 与news.html完全一致 ===== */
         .top-bar {
             background: var(--primary-dark);
             color: var(--gold-color);
@@ -73,11 +73,23 @@
             justify-content: space-between;
             align-items: center;
         }
-        .top-bar .slogan { flex: 1; text-align: center; }
-        .top-bar .login-group { padding-right: 20px; }
-        .top-bar a { color: #fff; margin-left: 15px; cursor: pointer; }
-        .top-bar a:hover { color: var(--gold-color); }
+        .top-bar .slogan {
+            flex: 1;
+            text-align: center;
+        }
+        .top-bar .login-group {
+            padding-right: 20px;
+        }
+        .top-bar a {
+            color: #fff;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        .top-bar a:hover {
+            color: var(--gold-color);
+        }
 
+        /* ===== 导航栏 - 与news.html完全一致 ===== */
         .header {
             position: sticky;
             top: 0;
@@ -119,7 +131,9 @@
             padding: 8px 0;
             position: relative;
         }
-        .nav-menu li a.active { color: #ffd700; }
+        .nav-menu li a.active {
+            color: #ffd700;
+        }
         .nav-menu li a::after {
             content: '';
             position: absolute;
@@ -130,7 +144,9 @@
             background-color: #ffd700;
             transition: var(--transition);
         }
-        .nav-menu li a:hover::after { width: 100%; }
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
         .nav-toggle {
             display: none;
             font-size: 24px;
@@ -138,6 +154,7 @@
             cursor: pointer;
         }
 
+        /* ===== 登录弹窗 - 与news.html完全一致 ===== */
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -198,240 +215,126 @@
         .toast.error { background-color: #d62828; }
         .toast.show { opacity: 1; }
 
-        .banner {
-            height: 380px;
+        /* ===== 页面标题 ===== */
+        .page-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, #b82232 100%);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .banner-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('图片/bg(1).jpg') center/cover no-repeat;
-            opacity: 0.25;
-            z-index: 1;
-        }
-        .banner-content {
-            position: relative;
-            z-index: 2;
+            padding: 50px 0 40px;
             text-align: center;
             color: var(--white-color);
-            padding: 0 20px;
         }
-        .banner-title {
-            font-size: 44px;
+        .page-header h1 {
+            font-size: 38px;
             font-weight: bold;
-            margin-bottom: 16px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
         }
-        .banner-subtitle {
-            font-size: 20px;
-            margin-bottom: 28px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+        .page-header p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 18px;
         }
-        .banner-btn {
-            background-color: var(--gold-color);
+        .back-link {
+            display: inline-block;
+            color: var(--gold-color);
+            font-size: 16px;
+            padding: 8px 20px;
+            border: 2px solid var(--gold-color);
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+        .back-link:hover {
+            background: var(--gold-color);
             color: var(--primary-dark);
-            font-weight: bold;
-            padding: 12px 32px;
-            border-radius: var(--radius-md);
+        }
+        .back-link i {
+            margin-right: 6px;
+            transition: var(--transition);
+        }
+        .back-link:hover i {
+            transform: translateX(-4px);
         }
 
-        /* ===== 双栏并排布局 ===== */
-        .dual-section {
-            padding: 60px 0 30px;
+        /* ===== 书籍网格 ===== */
+        .books-section {
+            padding: 50px 0 60px;
         }
-        .dual-grid {
+        .books-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
-
-        /* 左侧：21天伴读 */
-        .reading-col .col-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid var(--primary-color);
-        }
-        .reading-col .col-header h2 {
-            font-size: 26px;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-        .reading-col .col-header i {
-            font-size: 28px;
-            color: var(--primary-color);
-        }
-        .reading-col .col-desc {
-            color: var(--gray-dark);
-            font-size: 15px;
-            margin-bottom: 20px;
-        }
-
-        .mini-books {
+        .book-card {
+            background: var(--white-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: var(--transition);
             display: flex;
             flex-direction: column;
-            gap: 16px;
         }
-        .mini-book-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            background: var(--white-color);
-            padding: 12px 18px;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            cursor: pointer;
+        .book-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
         }
-        .mini-book-item:hover {
-            transform: translateX(6px);
-            box-shadow: var(--shadow-md);
-        }
-        .mini-book-item .mb-cover {
-            width: 56px;
-            height: 72px;
-            border-radius: 4px;
+        .book-card .book-cover {
+            width: 100%;
+            height: 220px;
+            background: var(--gray-middle);
             overflow: hidden;
             flex-shrink: 0;
-            background: var(--gray-middle);
         }
-        .mini-book-item .mb-cover img {
+        .book-card .book-cover img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
-        .mini-book-item .mb-info {
+        .book-card .book-info {
+            padding: 20px 24px 24px;
             flex: 1;
-            min-width: 0;
-        }
-        .mini-book-item .mb-info h4 {
-            font-size: 15px;
-            color: var(--primary-dark);
-            margin-bottom: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .mini-book-item .mb-info .mb-author {
-            font-size: 13px;
-            color: #888;
-        }
-        .mini-book-item .mb-link {
-            color: var(--primary-color);
-            font-size: 13px;
-            white-space: nowrap;
-        }
-        .mini-book-item .mb-link i {
-            margin-left: 4px;
-            transition: var(--transition);
-        }
-        .mini-book-item:hover .mb-link i {
-            transform: translateX(4px);
-        }
-
-        /* 右侧：时政热点 */
-        .news-col .col-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid var(--primary-color);
-        }
-        .news-col .col-header h2 {
-            font-size: 26px;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-        .news-col .col-header i {
-            font-size: 28px;
-            color: var(--primary-color);
-        }
-
-        .mini-timeline {
             display: flex;
             flex-direction: column;
-            gap: 16px;
         }
-        .mini-timeline-item {
-            display: flex;
-            gap: 16px;
-            background: var(--white-color);
-            padding: 14px 18px;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            align-items: center;
+        .book-card .book-info h3 {
+            font-size: 20px;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
         }
-        .mini-timeline-item:hover {
-            transform: translateX(6px);
-            box-shadow: var(--shadow-md);
+        .book-card .book-info .book-author {
+            font-size: 14px;
+            color: var(--gray-dark);
+            margin-bottom: 10px;
         }
-        .mini-timeline-item .mt-date {
-            font-size: 13px;
-            font-weight: bold;
-            color: var(--primary-color);
-            white-space: nowrap;
-            min-width: 80px;
-            flex-shrink: 0;
-        }
-        .mini-timeline-item .mt-text {
-            flex: 1;
+        .book-card .book-info .book-desc {
             font-size: 15px;
-            color: #333;
+            color: #555;
+            line-height: 1.7;
+            flex: 1;
+            margin-bottom: 16px;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            line-height: 1.5;
         }
-        .mini-timeline-item .mt-arrow {
-            color: var(--primary-color);
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .view-all-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 8px 28px;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            border-radius: var(--radius-sm);
-            font-weight: bold;
-            font-size: 14px;
-            transition: var(--transition);
-            background: transparent;
-            cursor: pointer;
-        }
-        .view-all-btn:hover {
+        .book-card .book-info .book-link {
+            align-self: flex-start;
+            padding: 8px 20px;
             background: var(--primary-color);
             color: #fff;
-        }
-        .view-all-btn i {
-            margin-left: 6px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
             transition: var(--transition);
         }
-        .view-all-btn:hover i {
+        .book-card .book-info .book-link:hover {
+            background: var(--primary-light);
             transform: translateX(4px);
         }
 
-        /* ===== 底部 ===== */
+        /* ===== 底部 - 与news.html完全一致 ===== */
         .footer {
             background-color: var(--primary-dark);
             color: var(--white-color);
             padding: 50px 0 20px;
-            margin-top: 40px;
+            margin-top: 60px;
         }
         .footer-top {
             display: flex;
@@ -464,12 +367,6 @@
         }
 
         /* ===== 响应式 ===== */
-        @media (max-width: 992px) {
-            .dual-grid {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-        }
         @media (max-width: 768px) {
             .nav-menu {
                 position: fixed;
@@ -483,43 +380,42 @@
                 padding: 40px 0;
                 gap: 20px;
                 transition: var(--transition);
+                z-index: 998;
             }
-            .nav-menu.active { left: 0; }
-            .nav-toggle { display: block; }
-            .banner {
-                height: 320px;
+            .nav-menu.active {
+                left: 0;
             }
-            .banner-title {
-                font-size: 32px;
+            .nav-toggle {
+                display: block;
             }
-            .mini-timeline-item {
-                flex-wrap: wrap;
+            .books-grid {
+                grid-template-columns: 1fr 1fr;
             }
-            .mini-timeline-item .mt-date {
-                min-width: 70px;
-                font-size: 12px;
+            .page-header {
+                padding: 35px 0 30px;
             }
-            .mini-timeline-item .mt-text {
-                font-size: 14px;
+            .page-header h1 {
+                font-size: 28px;
             }
             .footer-top {
                 flex-direction: column;
                 gap: 30px;
             }
         }
-        @media (max-width: 480px) {
-            .mini-book-item {
-                flex-wrap: wrap;
+
+        @media (max-width: 500px) {
+            .books-grid {
+                grid-template-columns: 1fr;
             }
-            .mini-book-item .mb-link {
-                margin-left: auto;
+            .book-card .book-cover {
+                height: 180px;
             }
         }
     </style>
 </head>
 <body>
 
-<!-- 顶部栏 -->
+<!-- 顶部栏 - 与news.html完全一致 -->
 <div class="top-bar">
     <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
     <div class="login-group" id="loginGroup">
@@ -528,7 +424,7 @@
     </div>
 </div>
 
-<!-- 导航栏 -->
+<!-- 导航栏 - 与news.html完全一致 -->
 <header class="header">
     <div class="container nav">
         <div class="logo">
@@ -573,120 +469,105 @@
     </div>
 </div>
 
-<!-- 横幅 -->
-<section class="banner">
-    <div class="banner-bg"></div>
-    <div class="banner-content">
-        <h1 class="banner-title">思政文库</h1>
-        <p class="banner-subtitle">读红色经典 · 观时政大势 —— 筑牢乡村思政教育理论根基</p>
-        <a href="#dual-content" class="btn banner-btn">开始探索</a>
+<!-- 页面标题 -->
+<section class="page-header">
+    <div class="container">
+        <h1>📚 全部书目</h1>
+        <p>21天伴读活动 · 精选红色经典与品德教育读物</p>
+        <a href="news.html" class="back-link"><i class="fa fa-chevron-left"></i> 返回思政文库</a>
     </div>
 </section>
 
-<!-- ===== 双栏并排核心区 ===== -->
-<section class="dual-section" id="dual-content">
+<!-- 书籍列表 -->
+<section class="books-section">
     <div class="container">
-        <div class="dual-grid">
-
-            <!-- ====== 左栏：21天伴读活动 ====== -->
-            <div class="reading-col">
-                <div class="col-header">
-                    <i class="fa fa-book"></i>
-                    <h2>21天伴读活动</h2>
+        <div class="books-grid">
+            <div class="book-card">
+                <div class="book-cover"><img src="图片/思政书库1.jpg" alt="谁是最可爱的人" onerror="this.src='https://via.placeholder.com/340x220?text=谁是最可爱的人'"></div>
+                <div class="book-info">
+                    <h3>谁是最可爱的人</h3>
+                    <span class="book-author">魏巍</span>
+                    <p class="book-desc">本书是魏巍从朝鲜战场归来后所著的报告文学，以饱含深情的笔触记录了志愿军战士的英勇事迹，感动了一代又一代中国人，是爱国主义教育的经典读本。</p>
+                    <a href="https://weread.qq.com/web/reader/869320a0813ab7ce0g01292eke4d32d5015e4da3b7fbb1fa" target="_blank" class="book-link">开始阅读 <i class="fa fa-chevron-right"></i></a>
                 </div>
-                <p class="col-desc">精选红色经典与品德教育读物，每天一本，陪伴孩子成长。</p>
-                <div class="mini-books">
-                    <a href="https://weread.qq.com/web/reader/869320a0813ab7ce0g01292eke4d32d5015e4da3b7fbb1fa" target="_blank" class="mini-book-item">
-                        <div class="mb-cover"><img src="图片/思政书库1.jpg" alt="谁是最可爱的人" onerror="this.src='https://via.placeholder.com/56x72?text=?'"></div>
-                        <div class="mb-info"><h4>谁是最可爱的人</h4><span class="mb-author">魏巍</span></div>
-                        <span class="mb-link">阅读 <i class="fa fa-chevron-right"></i></span>
-                    </a>
-                    <a href="https://weread.qq.com/web/reader/dc632170813ab8a37g01435ckecc32f3013eccbc87e4b62e" target="_blank" class="mini-book-item">
-                        <div class="mb-cover"><img src="图片/思政书库2.jpg" alt="四十七天" onerror="this.src='https://via.placeholder.com/56x72?text=?'"></div>
-                        <div class="mb-info"><h4>四十七天</h4><span class="mb-author">刘晓</span></div>
-                        <span class="mb-link">阅读 <i class="fa fa-chevron-right"></i></span>
-                    </a>
-                    <a href="https://xuexi.12371.cn/2015/07/06/VIDA1436167245536874.shtml" target="_blank" class="mini-book-item">
-                        <div class="mb-cover"><img src="图片/思政书库3.jpg" alt="红色家书" onerror="this.src='https://via.placeholder.com/56x72?text=?'"></div>
-                        <div class="mb-info"><h4>红色家书</h4><span class="mb-author">革命先烈书信</span></div>
-                        <span class="mb-link">阅读 <i class="fa fa-chevron-right"></i></span>
-                    </a>
-                    <a href="https://m.baidu.com/tcx?appui=alaxs&data=%7B%22fromaction%22%3A%22search_newtrans_1%22%2C%22fromaction_original%22%3A%22search_newtrans_1%22%2C%22query%22%3A%22%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%22%7D&page=detail&gid=14300287635&sign=ee432cf58e6805921eba16258e0a06e6&ts=1770816728&novelsadd=www.aqxsw.com%2Fbook%2F434356408174%2F&novelsearchquery=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%E7%94%B5%E5%AD%90%E4%B9%A6&sourceurl=&trace_log=undefined_undefined_undefined&cid=14300287635%7C1571528083&index=1&chapterIndex=0" target="_blank" class="mini-book-item">
-                        <div class="mb-cover"><img src="图片/思政书库4.jpg" alt="为什么是中国" onerror="this.src='https://via.placeholder.com/56x72?text=?'"></div>
-                        <div class="mb-info"><h4>为什么是中国</h4><span class="mb-author">金一南</span></div>
-                        <span class="mb-link">阅读 <i class="fa fa-chevron-right"></i></span>
-                    </a>
-                    <a href="https://www.77zw.cc/book/3209/" target="_blank" class="mini-book-item">
-                        <div class="mb-cover"><img src="图片/思政书库5.jpg" alt="苦难辉煌" onerror="this.src='https://via.placeholder.com/56x72?text=?'"></div>
-                        <div class="mb-info"><h4>苦难辉煌</h4><span class="mb-author">金一南</span></div>
-                        <span class="mb-link">阅读 <i class="fa fa-chevron-right"></i></span>
-                    </a>
-                    <a href="https://www.acxsw.com/shtml74608.html" target="_blank" class="mini-book-item">
-                        <div class="mb-cover"><img src="图片/思政书库6.jpg" alt="觉醒年代" onerror="this.src='https://via.placeholder.com/56x72?text=?'"></div>
-                        <div class="mb-info"><h4>觉醒年代</h4><span class="mb-author">龙平平</span></div>
-                        <span class="mb-link">阅读 <i class="fa fa-chevron-right"></i></span>
-                    </a>
-                </div>
-                <a href="all-books.html" class="view-all-btn">查看全部书目 <i class="fa fa-chevron-right"></i></a>
             </div>
-
-            <!-- ====== 右栏：时政热点解析 ====== -->
-            <div class="news-col">
-                <div class="col-header">
-                    <i class="fa fa-newspaper-o"></i>
-                    <h2>时政热点解析</h2>
+            <div class="book-card">
+                <div class="book-cover"><img src="图片/思政书库2.jpg" alt="四十七天" onerror="this.src='https://via.placeholder.com/340x220?text=四十七天'"></div>
+                <div class="book-info">
+                    <h3>四十七天</h3>
+                    <span class="book-author">刘晓</span>
+                    <p class="book-desc">讲述1949年上海解放前夕，中共地下党员在47天内与国民党反动派展开惊心动魄的斗争故事，展现了革命先辈坚定的理想信念和大无畏的牺牲精神。</p>
+                    <a href="https://weread.qq.com/web/reader/dc632170813ab8a37g01435ckecc32f3013eccbc87e4b62e" target="_blank" class="book-link">开始阅读 <i class="fa fa-chevron-right"></i></a>
                 </div>
-		<p class="col-desc" style="color:#6c757d;font-size:15px;margin-bottom:20px;">关注国家大事，解读时代脉搏，让思政教育扎根现实土壤。</p>
-                <div class="mini-timeline">
-                    <a href="all-news.html" class="mini-timeline-item">
-                        <span class="mt-date">2026-01-15</span>
-                        <span class="mt-text">中国可控核聚变实验装置实现100秒持续运行，刷新世界纪录</span>
-                        <span class="mt-arrow"><i class="fa fa-chevron-right"></i></span>
-                    </a>
-                    <a href="all-news.html" class="mini-timeline-item">
-                        <span class="mt-date">2026-01-01</span>
-                        <span class="mt-text">习近平发表2026年新年贺词：携手新征程，共赴现代化</span>
-                        <span class="mt-arrow"><i class="fa fa-chevron-right"></i></span>
-                    </a>
-                    <a href="all-news.html" class="mini-timeline-item">
-                        <span class="mt-date">2025-10-20</span>
-                        <span class="mt-text">二十届四中全会召开，审议通过"十五五"规划建议</span>
-                        <span class="mt-arrow"><i class="fa fa-chevron-right"></i></span>
-                    </a>
-                    <a href="all-news.html" class="mini-timeline-item">
-                        <span class="mt-date">2025-09-03</span>
-                        <span class="mt-text">九三阅兵｜纪念抗战胜利80周年，彰显强国强军伟力</span>
-                        <span class="mt-arrow"><i class="fa fa-chevron-right"></i></span>
-                    </a>
-                    <a href="all-news.html" class="mini-timeline-item">
-                        <span class="mt-date">2025-06-26</span>
-                        <span class="mt-text">龙芯3C6000发布，国产通用处理器实现完全自主掌控</span>
-                        <span class="mt-arrow"><i class="fa fa-chevron-right"></i></span>
-                    </a>
-                    <a href="all-news.html" class="mini-timeline-item">
-                        <span class="mt-date">2025-05-03</span>
-                        <span class="mt-text">情暖帕米尔 青春绽边疆——习近平总书记回信支教志愿者</span>
-                        <span class="mt-arrow"><i class="fa fa-chevron-right"></i></span>
-                    </a>
-                    <a href="all-news.html" class="mini-timeline-item">
-                        <span class="mt-date">2025-03-04</span>
-                        <span class="mt-text">十四届全国人大三次会议、全国政协十四届三次会议召开</span>
-                        <span class="mt-arrow"><i class="fa fa-chevron-right"></i></span>
-                    </a>
-                    <a href="all-news.html" class="mini-timeline-item">
-                        <span class="mt-date">2025-02-07</span>
-                        <span class="mt-text">第九届亚冬会在哈尔滨开幕，习近平出席并宣布开幕</span>
-                        <span class="mt-arrow"><i class="fa fa-chevron-right"></i></span>
-                    </a>
-                </div>
-                <a href="all-news.html" class="view-all-btn">查看全部时政 <i class="fa fa-chevron-right"></i></a>
             </div>
-
+            <div class="book-card">
+                <div class="book-cover"><img src="图片/思政书库3.jpg" alt="红色家书" onerror="this.src='https://via.placeholder.com/340x220?text=红色家书'"></div>
+                <div class="book-info">
+                    <h3>红色家书</h3>
+                    <span class="book-author">革命先烈书信</span>
+                    <p class="book-desc">收录了多位革命先烈在战火纷飞的年代写给家人的书信，字里行间流淌着对亲人的眷恋和对革命事业的忠诚，是传承红色基因的生动教材。</p>
+                    <a href="https://xuexi.12371.cn/2015/07/06/VIDA1436167245536874.shtml" target="_blank" class="book-link">开始阅读 <i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover"><img src="图片/思政书库4.jpg" alt="为什么是中国" onerror="this.src='https://via.placeholder.com/340x220?text=为什么是中国'"></div>
+                <div class="book-info">
+                    <h3>为什么是中国</h3>
+                    <span class="book-author">金一南</span>
+                    <p class="book-desc">国防大学金一南教授力作，从百年沧桑到民族复兴，深刻解读中国崛起的历史逻辑与现实路径，被誉为"读懂中国的最佳读本"。</p>
+                    <a href="https://m.baidu.com/tcx?appui=alaxs&data=%7B%22fromaction%22%3A%22search_newtrans_1%22%2C%22fromaction_original%22%3A%22search_newtrans_1%22%2C%22query%22%3A%22%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%22%7D&page=detail&gid=14300287635&sign=ee432cf58e6805921eba16258e0a06e6&ts=1770816728&novelsadd=www.aqxsw.com%2Fbook%2F434356408174%2F&novelsearchquery=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%E7%94%B5%E5%AD%90%E4%B9%A6&sourceurl=&trace_log=undefined_undefined_undefined&cid=14300287635%7C1571528083&index=1&chapterIndex=0" target="_blank" class="book-link">开始阅读 <i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover"><img src="图片/思政书库5.jpg" alt="苦难辉煌" onerror="this.src='https://via.placeholder.com/340x220?text=苦难辉煌'"></div>
+                <div class="book-info">
+                    <h3>苦难辉煌</h3>
+                    <span class="book-author">金一南</span>
+                    <p class="book-desc">金一南教授历时15年写就的巨著，讲述中国共产党从苦难走向辉煌的壮阔历程，揭示了中华民族复兴的精神密码，是学习党史的必读之作。</p>
+                    <a href="https://www.77zw.cc/book/3209/" target="_blank" class="book-link">开始阅读 <i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover"><img src="图片/思政书库6.jpg" alt="觉醒年代" onerror="this.src='https://via.placeholder.com/340x220?text=觉醒年代'"></div>
+                <div class="book-info">
+                    <h3>觉醒年代</h3>
+                    <span class="book-author">龙平平</span>
+                    <p class="book-desc">以1915年《青年杂志》问世到1921年《新青年》成为中国共产党机关刊物为主线，全景式展现从新文化运动到中国共产党成立的光辉历程。</p>
+                    <a href="https://www.acxsw.com/shtml74608.html" target="_blank" class="book-link">开始阅读 <i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover"><img src="图片/思政书库7.jpg" alt="红星照耀中国" onerror="this.src='https://via.placeholder.com/340x220?text=红星照耀中国'"></div>
+                <div class="book-info">
+                    <h3>红星照耀中国</h3>
+                    <span class="book-author">埃德加·斯诺</span>
+                    <p class="book-desc">美国记者埃德加·斯诺的不朽经典，真实记录了他在陕北革命根据地的所见所闻，向世界第一次全面报道了中国工农红军的真实面貌。</p>
+                    <a href="https://www.douban.com/note/857238639/" target="_blank" class="book-link">开始阅读 <i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover"><img src="图片/思政书库8.jpg" alt="青春之歌" onerror="this.src='https://via.placeholder.com/340x220?text=青春之歌'"></div>
+                <div class="book-info">
+                    <h3>青春之歌</h3>
+                    <span class="book-author">杨沫</span>
+                    <p class="book-desc">杨沫代表作，描写了知识女性林道静在革命浪潮中从个人奋斗到投身革命的心路历程，是一部激励了几代青年的红色经典长篇小说。</p>
+                    <a href="https://www.douban.com/note/857238639/" target="_blank" class="book-link">开始阅读 <i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover"><img src="图片/思政书库9.jpg" alt="可爱的中国" onerror="this.src='https://via.placeholder.com/340x220?text=可爱的中国'"></div>
+                <div class="book-info">
+                    <h3>可爱的中国</h3>
+                    <span class="book-author">方志敏</span>
+                    <p class="book-desc">方志敏烈士在狱中写下的不朽篇章，以赤诚的爱国之情描绘了未来中国的美好图景，是进行爱国主义和革命传统教育的珍贵教材。</p>
+                    <a href="https://www.douban.com/note/857238639/" target="_blank" class="book-link">开始阅读 <i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- 底部 -->
+<!-- 底部 - 与news.html完全一致 -->
 <footer class="footer">
     <div class="container">
         <div class="footer-top">
@@ -714,7 +595,7 @@
         const toast = document.getElementById('toast');
         toast.textContent = msg;
         toast.className = `toast ${type} show`;
-        setTimeout(() => toast.classList.remove('show'), 2000);
+        setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
     function toggleNav() {
