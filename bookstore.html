@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>云先生-思政乐园 | 红色经典读物推荐</title>
+    <title>思政乐园 | 云先生-师范生助力乡村中小学道德与法治网络平台</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
         * {
@@ -35,14 +35,8 @@
             color: #333;
             line-height: 1.6;
         }
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-        ul {
-            list-style: none;
-        }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -66,7 +60,6 @@
             box-shadow: var(--shadow-sm);
         }
 
-        /* 顶部栏 - 与index完全一致 */
         .top-bar {
             background: var(--primary-dark);
             color: var(--gold-color);
@@ -76,23 +69,11 @@
             justify-content: space-between;
             align-items: center;
         }
-        .top-bar .slogan {
-            flex: 1;
-            text-align: center;
-        }
-        .top-bar .login-group {
-            padding-right: 20px;
-        }
-        .top-bar a {
-            color: #fff;
-            margin-left: 15px;
-            cursor: pointer;
-        }
-        .top-bar a:hover {
-            color: var(--gold-color);
-        }
+        .top-bar .slogan { flex: 1; text-align: center; }
+        .top-bar .login-group { padding-right: 20px; }
+        .top-bar a { color: #fff; margin-left: 15px; cursor: pointer; }
+        .top-bar a:hover { color: var(--gold-color); }
 
-        /* 导航栏 - 与index完全一致 */
         .header {
             position: sticky;
             top: 0;
@@ -134,9 +115,7 @@
             padding: 8px 0;
             position: relative;
         }
-        .nav-menu li a.active {
-            color: #ffd700;
-        }
+        .nav-menu li a.active { color: #ffd700; }
         .nav-menu li a::after {
             content: '';
             position: absolute;
@@ -147,9 +126,7 @@
             background-color: #ffd700;
             transition: var(--transition);
         }
-        .nav-menu li a:hover::after {
-            width: 100%;
-        }
+        .nav-menu li a:hover::after { width: 100%; }
         .nav-toggle {
             display: none;
             font-size: 24px;
@@ -157,7 +134,6 @@
             cursor: pointer;
         }
 
-        /* 登录弹窗 - 与index完全一致 */
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -217,7 +193,6 @@
         .toast.error { background-color: #d62828; }
         .toast.show { opacity: 1; }
 
-        /* 横幅 */
         .banner {
             height: 380px;
             background: linear-gradient(135deg, var(--primary-color) 0%, #b82232 100%);
@@ -264,7 +239,6 @@
             border-radius: var(--radius-md);
         }
 
-        /* 书库内容区样式 */
         .bookstore-section {
             padding: 80px 0;
         }
@@ -294,11 +268,13 @@
             color: var(--gray-dark);
             font-size: 16px;
         }
+
         .books-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 40px 30px;
         }
+
         .book-card {
             background-color: var(--white-color);
             border-radius: var(--radius-lg);
@@ -311,37 +287,44 @@
             transform: translateY(-8px);
             box-shadow: var(--shadow-lg);
         }
+
         .book-img {
             width: 100%;
-            max-width: 200px;
+            max-width: 100%;
             margin: 0 auto 20px;
             overflow: hidden;
             border-radius: 4px;
             display: block;
+            aspect-ratio: 16 / 9;
+            background: #0b1a2e;
         }
         .book-img img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
             transition: transform 0.3s ease;
         }
         .book-card:hover .book-img img {
             transform: scale(1.05);
         }
+
         .book-info h3 {
-            font-size: 18px;
+            font-size: 19px;
             color: var(--primary-dark);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: bold;
         }
         .book-author {
             font-size: 14px;
             color: #666;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
+            line-height: 1.5;
+            min-height: 42px;
         }
         .book-read-btn {
             display: inline-block;
-            padding: 8px 20px;
+            padding: 8px 24px;
             background-color: var(--primary-color);
             color: #fff;
             border-radius: var(--radius-sm);
@@ -353,7 +336,6 @@
             transform: translateY(-2px);
         }
 
-        /* 底部 - 与index完全一致 */
         .footer {
             background-color: var(--primary-dark);
             color: var(--white-color);
@@ -406,26 +388,18 @@
             }
             .nav-menu.active { left: 0; }
             .nav-toggle { display: block; }
-            .banner {
-                height: 320px;
-            }
-            .banner-title {
-                font-size: 32px;
-            }
+            .banner { height: 320px; }
+            .banner-title { font-size: 32px; }
             .books-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-            .footer-top {
-                flex-direction: column;
-                gap: 30px;
-            }
+            .footer-top { flex-direction: column; gap: 30px; }
         }
     </style>
 </head>
 <body>
 
-<!-- 顶部栏 - 与index完全一致 -->
 <div class="top-bar">
     <div class="slogan">师范生助力乡村思政教育 · 传承红色基因 · 培育时代新人</div>
     <div class="login-group" id="loginGroup">
@@ -434,7 +408,6 @@
     </div>
 </div>
 
-<!-- 导航栏 - 与index完全一致 -->
 <header class="header">
     <div class="container nav">
         <div class="logo">
@@ -443,7 +416,7 @@
         </div>
         <ul class="nav-menu">
             <li><a href="index.html">首页</a></li>
-	    <li><a href="volunteer.html">志愿者匹配</a></li>
+            <li><a href="volunteer.html">志愿者匹配</a></li>
             <li><a href="news.html">思政文库</a></li>
             <li><a href="bookstore.html" class="active">思政乐园</a></li>
             <li><a href="video.html">录播课室</a></li>
@@ -457,7 +430,6 @@
     </div>
 </header>
 
-<!-- 登录弹窗 -->
 <div class="modal" id="modal">
     <div class="modal-box">
         <div class="modal-close" onclick="closeModal()">&times;</div>
@@ -466,156 +438,138 @@
             <div class="modal-tab-item" onclick="switchTab('reg')">注册</div>
         </div>
         <div class="modal-panel active" id="loginPanel">
-            <div class="form-group">
-                <label>账号</label>
-                <input type="text" id="loginUsername" placeholder="手机号/学号">
-            </div>
-            <div class="form-group">
-                <label>密码</label>
-                <input type="password" id="loginPassword" placeholder="请输入密码">
-            </div>
+            <div class="form-group"><label>账号</label><input type="text" id="loginUsername" placeholder="手机号/学号"></div>
+            <div class="form-group"><label>密码</label><input type="password" id="loginPassword" placeholder="请输入密码"></div>
             <button class="btn" onclick="loginHandler()">登录</button>
         </div>
         <div class="modal-panel" id="regPanel">
-            <div class="form-group">
-                <label>手机号</label>
-                <input type="text" id="regPhone" placeholder="请输入手机号">
-            </div>
-            <div class="form-group">
-                <label>密码</label>
-                <input type="password" id="regPwd" placeholder="设置密码">
-            </div>
-            <div class="form-group">
-                <label>确认密码</label>
-                <input type="password" id="regConfirm" placeholder="确认密码">
-            </div>
+            <div class="form-group"><label>手机号</label><input type="text" id="regPhone" placeholder="请输入手机号"></div>
+            <div class="form-group"><label>密码</label><input type="password" id="regPwd" placeholder="设置密码"></div>
+            <div class="form-group"><label>确认密码</label><input type="password" id="regConfirm" placeholder="确认密码"></div>
             <button class="btn" onclick="registerHandler()">注册</button>
         </div>
     </div>
 </div>
 
-<!-- 横幅区域 -->
 <section class="banner">
     <div class="banner-bg"></div>
     <div class="banner-content">
         <h1 class="banner-title">思政乐园</h1>
-        <p class="banner-subtitle">精选优质思政读物，让红色读物陪伴孩子成长</p>
-        <a href="#bookstore-content" class="btn banner-btn">浏览书籍</a>
+        <p class="banner-subtitle">以AI技术重现峥嵘岁月，每一帧都是对历史的致敬</p>
+        <a href="#bookstore-content" class="btn banner-btn">立即观看</a>
     </div>
 </section>
 
-<!-- 书库核心内容区 -->
 <section class="bookstore-section" id="bookstore-content">
     <div class="container">
         <div class="bookstore-title">
-            <h2>思政读物推荐</h2>
-            <p>适合阅读的红色故事、品德教育类书籍</p>
+            <h2>AI 重现 · 红色史诗</h2>
+            <p>观看红色历史短片，铭记先烈，珍爱和平</p>
         </div>
         <div class="books-grid">
-            <!-- 第1本书：谁是最可爱的人 -->
+            <!-- 1. 五四青年 -->
             <div class="book-card">
-                <a href="https://weread.qq.com/web/reader/869320a0813ab7ce0g01292eke4d32d5015e4da3b7fbb1fa" target="_blank" class="book-img">
-                    <img src="图片/思政书库1.jpg" alt="谁是最可爱的人" onerror="this.src='https://via.placeholder.com/200x280?text=谁是最可爱的人'">
+                <a href="https://v.douyin.com/fGfWqxV_ucQ/" target="_blank" class="book-img">
+                    <img src="图片/五四青年.jpg" alt="五四青年" onerror="this.src='https://via.placeholder.com/400x225?text=五四青年'">
                 </a>
                 <div class="book-info">
-                    <h3>谁是最可爱的人</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i> 魏巍</div>
-                    <a href="https://weread.qq.com/web/reader/869320a0813ab7ce0g01292eke4d32d5015e4da3b7fbb1fa" target="_blank" class="book-read-btn">在线阅读</a>
+                    <h3>五四青年</h3>
+                    <div class="book-author">青年振臂呼救国，热血觉醒启新章。</div>
+                    <a href="https://v.douyin.com/fGfWqxV_ucQ/" target="_blank" class="book-read-btn">观看短片</a>
                 </div>
             </div>
-            <!-- 第2本书：四十七天 -->
+            <!-- 2. 不敢忘 -->
             <div class="book-card">
-                <a href="https://weread.qq.com/web/reader/dc632170813ab8a37g01435ckecc32f3013eccbc87e4b62e" target="_blank" class="book-img">
-                    <img src="图片/思政书库2.jpg" alt="四十七天" onerror="this.src='https://via.placeholder.com/200x280?text=四十七天'">
+                <a href="https://v.douyin.com/IhmWILZsmfw/" target="_blank" class="book-img">
+                    <img src="图片/不敢忘.jpg" alt="不敢忘" onerror="this.src='https://via.placeholder.com/400x225?text=不敢忘'">
                 </a>
                 <div class="book-info">
-                    <h3>四十七天</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i> 刘晓</div>
-                    <a href="https://weread.qq.com/web/reader/dc632170813ab8a37g01435ckecc32f3013eccbc87e4b62e" target="_blank" class="book-read-btn">在线阅读</a>
+                    <h3>永不敢忘</h3>
+                    <div class="book-author">山河铭刻先烈骨，百年岁月永不敢忘。</div>
+                    <a href="https://v.douyin.com/IhmWILZsmfw/" target="_blank" class="book-read-btn">观看短片</a>
                 </div>
             </div>
-            <!-- 第3本书：红色家书 -->
+            <!-- 3. 红军长征 -->
             <div class="book-card">
-                <a href="https://xuexi.12371.cn/2015/07/06/VIDA1436167245536874.shtml" target="_blank" class="book-img">
-                    <img src="图片/思政书库3.jpg" alt="红色家书" onerror="this.src='https://via.placeholder.com/200x280?text=红色家书'">
+                <a href="https://v.douyin.com/l5WtrPgn3IU/" target="_blank" class="book-img">
+                    <img src="图片/红军长征.jpg" alt="红军长征" onerror="this.src='https://via.placeholder.com/400x225?text=红军长征'">
                 </a>
                 <div class="book-info">
-                    <h3>红色家书</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i> 革命先烈书信合集</div>
-                    <a href="https://xuexi.12371.cn/2015/07/06/VIDA1436167245536874.shtml" target="_blank" class="book-read-btn">在线阅读</a>
+                    <h3>红军长征</h3>
+                    <div class="book-author">万里征途踏山河，红旗漫卷救中华。</div>
+                    <a href="https://v.douyin.com/l5WtrPgn3IU/" target="_blank" class="book-read-btn">观看短片</a>
                 </div>
             </div>
-            <!-- 第4本书：为什么是中国 -->
+            <!-- 4. 赤水忠魂 -->
             <div class="book-card">
-                <a href="https://m.baidu.com/tcx?appui=alaxs&data=%7B%22fromaction%22%3A%22search_newtrans_1%22%2C%22fromaction_original%22%3A%22search_newtrans_1%22%2C%22query%22%3A%22%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%22%7D&page=detail&gid=14300287635&sign=ee432cf58e6805921eba16258e0a06e6&ts=1770816728&novelsadd=www.aqxsw.com%2Fbook%2F434356408174%2F&novelsearchquery=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%E7%94%B5%E5%AD%90%E4%B9%A6&sourceurl=&trace_log=undefined_undefined_undefined&cid=14300287635%7C1571528083&index=1&chapterIndex=0" target="_blank" class="book-img">
-                    <img src="图片/思政书库4.jpg" alt="为什么是中国" onerror="this.src='https://via.placeholder.com/200x280?text=为什么是中国'">
+                <a href="https://v.douyin.com/bI-H11Pbmuw/" target="_blank" class="book-img">
+                    <img src="图片/赤水忠魂.jpg" alt="赤水忠魂" onerror="this.src='https://via.placeholder.com/400x225?text=赤水忠魂'">
                 </a>
                 <div class="book-info">
-                    <h3>为什么是中国</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i> 金一南</div>
-                    <a href="https://m.baidu.com/tcx?appui=alaxs&data=%7B%22fromaction%22%3A%22search_newtrans_1%22%2C%22fromaction_original%22%3A%22search_newtrans_1%22%2C%22query%22%3A%22%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%22%7D&page=detail&gid=14300287635&sign=ee432cf58e6805921eba16258e0a06e6&ts=1770816728&novelsadd=www.aqxsw.com%2Fbook%2F434356408174%2F&novelsearchquery=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E5%9B%BD%E7%94%B5%E5%AD%90%E4%B9%A6&sourceurl=&trace_log=undefined_undefined_undefined&cid=14300287635%7C1571528083&index=1&chapterIndex=0" target="_blank" class="book-read-btn">在线阅读</a>
+                    <h3>赤水忠魂</h3>
+                    <div class="book-author">赤水河畔踏征途，红军热血赴家国。</div>
+                    <a href="https://v.douyin.com/bI-H11Pbmuw/" target="_blank" class="book-read-btn">观看短片</a>
                 </div>
             </div>
-            <!-- 第5本书：苦难辉煌 -->
+            <!-- 5. 勇夺娘子关 -->
             <div class="book-card">
-                <a href="https://www.77zw.cc/book/3209/" target="_blank" class="book-img">
-                    <img src="图片/思政书库5.jpg" alt="苦难辉煌" onerror="this.src='https://via.placeholder.com/200x280?text=苦难辉煌'">
+                <a href="https://v.douyin.com/nR1tkEHfQZQ/" target="_blank" class="book-img">
+                    <img src="图片/勇夺娘子关.jpg" alt="勇夺娘子关" onerror="this.src='https://via.placeholder.com/400x225?text=勇夺娘子关'">
                 </a>
                 <div class="book-info">
-                    <h3>苦难辉煌</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i> 金一南</div>
-                    <a href="https://www.77zw.cc/book/3209/" target="_blank" class="book-read-btn">在线阅读</a>
+                    <h3>勇夺娘子关</h3>
+                    <div class="book-author">抢占娘子雄关，打通晋冀抗战要道。</div>
+                    <a href="https://v.douyin.com/nR1tkEHfQZQ/" target="_blank" class="book-read-btn">观看短片</a>
                 </div>
             </div>
-            <!-- 第6本书：觉醒年代 -->
+            <!-- 6. 黄崖洞-抗战兵工摇篮 -->
             <div class="book-card">
-                <a href="https://www.acxsw.com/shtml74608.html" target="_blank" class="book-img">
-                    <img src="图片/思政书库6.jpg" alt="觉醒年代" onerror="this.src='https://via.placeholder.com/200x280?text=觉醒年代'">
+                <a href="https://v.douyin.com/Tf6C3Bj15Uo/" target="_blank" class="book-img">
+                    <img src="图片/黄崖洞-抗战兵工摇篮.jpg" alt="黄崖洞-抗战兵工摇篮" onerror="this.src='https://via.placeholder.com/400x225?text=黄崖洞-抗战兵工摇篮'">
                 </a>
                 <div class="book-info">
-                    <h3>觉醒年代</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i> 龙平平</div>
-                    <a href="https://www.acxsw.com/shtml74608.html" target="_blank" class="book-read-btn">在线阅读</a>
+                    <h3>黄崖洞-抗战兵工摇篮</h3>
+                    <div class="book-author">深山造枪铸利器，小小山洞撑稳抗战底气。</div>
+                    <a href="https://v.douyin.com/Tf6C3Bj15Uo/" target="_blank" class="book-read-btn">观看短片</a>
                 </div>
             </div>
-            <!-- 第7本书：红岩 -->
+            <!-- 7. 黄崖洞保卫战 -->
             <div class="book-card">
-                <a href="https://www.kaopool.com" target="_blank" class="book-img">
-                    <img src="图片/思政书库7.jpg" alt="红岩" onerror="this.src='https://via.placeholder.com/200x280?text=红岩'">
+                <a href="https://v.douyin.com/I3XvYeLCq0Q/" target="_blank" class="book-img">
+                    <img src="图片/黄崖洞保卫战.jpg" alt="黄崖洞保卫战" onerror="this.src='https://via.placeholder.com/400x225?text=黄崖洞保卫战'">
                 </a>
                 <div class="book-info">
-                    <h3>红岩</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i> 罗广斌、杨益言</div>
-                    <a href="https://www.kaopool.com" target="_blank" class="book-read-btn">在线阅读</a>
+                    <h3>黄崖洞保卫战</h3>
+                    <div class="book-author">峡谷鏖战护兵工，寸土不让守后方。</div>
+                    <a href="https://v.douyin.com/I3XvYeLCq0Q/" target="_blank" class="book-read-btn">观看短片</a>
                 </div>
             </div>
-            <!-- 第8本书：中国共产党简史 -->
+            <!-- 8. 平型关大捷-乔沟：天险 -->
             <div class="book-card">
-                <a href="http://www.woc88.com/v-114625064.html" target="_blank" class="book-img">
-                    <img src="图片/思政书库8.png" alt="中国共产党简史" onerror="this.src='https://via.placeholder.com/200x280?text=中国共产党简史'">
+                <a href="https://v.douyin.com/BTQOdVdJ5t0/" target="_blank" class="book-img">
+                    <img src="图片/平型关大捷-乔沟：天险.jpg" alt="平型关大捷-乔沟：天险" onerror="this.src='https://via.placeholder.com/400x225?text=平型关大捷-乔沟：天险'">
                 </a>
                 <div class="book-info">
-                    <h3>中国共产党简史</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i> 中共中央党史研究室</div>
-                    <a href="http://www.woc88.com/v-114625064.html" target="_blank" class="book-read-btn">在线阅读</a>
+                    <h3>平型关大捷-乔沟：天险</h3>
+                    <div class="book-author">乔沟伏击破敌神话，平型关打出国人底气。</div>
+                    <a href="https://v.douyin.com/BTQOdVdJ5t0/" target="_blank" class="book-read-btn">观看短片</a>
                 </div>
             </div>
-            <!-- 第9本书：红星照耀中国 -->
+            <!-- 9. 运城记忆：中条山的英雄事迹 -->
             <div class="book-card">
-                <a href="https://ubook.reader.qq.com/book-read/52976100/8" target="_blank" class="book-img">
-                    <img src="图片/思政书库9.png" alt="红星照耀中国" onerror="this.src='https://via.placeholder.com/200x280?text=红星照耀中国'">
+                <a href="https://v.douyin.com/ZWxV1uw9D0Y/" target="_blank" class="book-img">
+                    <img src="图片/运城记忆：中条山的英雄事迹.jpg" alt="运城记忆：中条山的英雄事迹" onerror="this.src='https://via.placeholder.com/400x225?text=运城记忆：中条山的英雄事迹'">
                 </a>
                 <div class="book-info">
-                    <h3>红星照耀中国</h3>
-                    <div class="book-author"><i class="fa fa-pencil"></i> 埃德加·斯诺</div>
-                    <a href="https://ubook.reader.qq.com/book-read/52976100/8" target="_blank" class="book-read-btn">在线阅读</a>
+                    <h3>运城记忆：中条山的英雄事迹</h3>
+                    <div class="book-author">中条山浴血坚守，用血肉筑起晋南屏障。</div>
+                    <a href="https://v.douyin.com/ZWxV1uw9D0Y/" target="_blank" class="book-read-btn">观看短片</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 底部 -->
 <footer class="footer">
     <div class="container">
         <div class="footer-top">
@@ -631,7 +585,6 @@
 <div id="toast" class="toast"></div>
 
 <script>
-    // Supabase 配置
     const SUPABASE_URL = "https://vpgtpdniqyalolzjfxha.supabase.co";
     const SUPABASE_KEY = "sb_publishable_1rTNRTyJYIH1smURd8gs3A_aetNk9za";
     const HEADERS = {
@@ -640,7 +593,6 @@
         "Content-Type": "application/json"
     };
 
-    // 显示提示消息
     function showToast(msg, type = 'success') {
         const toast = document.getElementById('toast');
         toast.textContent = msg;
@@ -653,10 +605,7 @@
     }
 
     const modalEl = document.getElementById('modal');
-    function openModal(type) {
-        modalEl.classList.add('active');
-        switchTab(type);
-    }
+    function openModal(type) { modalEl.classList.add('active'); switchTab(type); }
     function closeModal() { modalEl.classList.remove('active'); }
     function switchTab(tab) {
         document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
@@ -670,27 +619,14 @@
         }
     }
 
-    // 登录处理 - 连接Supabase user表
     async function loginHandler() {
         const username = document.getElementById('loginUsername').value.trim();
         const pwd = document.getElementById('loginPassword').value.trim();
-        if(!username || !pwd) {
-            showToast("请输入账号和密码", "error");
-            return;
-        }
-        
+        if(!username || !pwd) { showToast("请输入账号和密码", "error"); return; }
         try {
-            const response = await fetch(
-                `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(pwd)}&select=*`,
-                { headers: HEADERS }
-            );
-            
-            if (!response.ok) {
-                throw new Error("网络请求失败");
-            }
-            
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(pwd)}&select=*`, { headers: HEADERS });
+            if (!response.ok) throw new Error("网络请求失败");
             const data = await response.json();
-            
             if (data && data.length > 0) {
                 const user = data[0];
                 localStorage.setItem('isLogin', 'true');
@@ -701,59 +637,25 @@
                 updateLoginUI();
                 document.getElementById('loginUsername').value = '';
                 document.getElementById('loginPassword').value = '';
-            } else {
-                showToast("账号或密码错误", "error");
-            }
-        } catch (error) {
-            console.error("登录错误:", error);
-            showToast("登录失败，请检查网络连接", "error");
-        }
+            } else { showToast("账号或密码错误", "error"); }
+        } catch (error) { showToast("登录失败，请检查网络连接", "error"); }
     }
-    
-    // 注册处理 - 连接Supabase user表
+
     async function registerHandler() {
         const phone = document.getElementById('regPhone').value.trim();
         const pwd = document.getElementById('regPwd').value;
         const confirm = document.getElementById('regConfirm').value;
-        
-        if(!phone) {
-            showToast("请填写手机号", "error");
-            return;
-        }
-        if(!pwd) {
-            showToast("请设置密码", "error");
-            return;
-        }
-        if(pwd !== confirm) {
-            showToast("两次密码不一致", "error");
-            return;
-        }
+        if(!phone) { showToast("请填写手机号", "error"); return; }
+        if(!pwd) { showToast("请设置密码", "error"); return; }
+        if(pwd !== confirm) { showToast("两次密码不一致", "error"); return; }
         try {
-            // 检查账号是否已存在
-            const checkResponse = await fetch(
-                `${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(phone)}&select=*`,
-                { headers: HEADERS }
-            );
+            const checkResponse = await fetch(`${SUPABASE_URL}/rest/v1/user?account=eq.${encodeURIComponent(phone)}&select=*`, { headers: HEADERS });
             const existingUsers = await checkResponse.json();
-            
-            if (existingUsers && existingUsers.length > 0) {
-                showToast("该账号已存在，请直接登录", "error");
-                return;
-            }
-            
-            // 创建新用户
-            const newUser = {
-                account: phone,
-                password: pwd,
-                role: "user"
-            };
-            
+            if (existingUsers && existingUsers.length > 0) { showToast("该账号已存在，请直接登录", "error"); return; }
+            const newUser = { account: phone, password: pwd, role: "user" };
             const createResponse = await fetch(`${SUPABASE_URL}/rest/v1/user`, {
-                method: 'POST',
-                headers: HEADERS,
-                body: JSON.stringify(newUser)
+                method: 'POST', headers: HEADERS, body: JSON.stringify(newUser)
             });
-            
             if (createResponse.ok) {
                 showToast("注册成功！请登录", "success");
                 document.getElementById('regPhone').value = '';
@@ -762,15 +664,8 @@
                 switchTab('login');
                 document.getElementById('loginUsername').value = phone;
                 document.getElementById('loginPassword').value = '';
-            } else {
-                const errorData = await createResponse.text();
-                console.error("注册失败:", errorData);
-                showToast("注册失败，请稍后重试", "error");
-            }
-        } catch (error) {
-            console.error("注册错误:", error);
-            showToast("注册失败，请检查网络连接", "error");
-        }
+            } else { showToast("注册失败，请稍后重试", "error"); }
+        } catch (error) { showToast("注册失败，请检查网络连接", "error"); }
     }
 
     function checkMyNeedLogin(event) {
@@ -794,7 +689,7 @@
             loginGroup.innerHTML = `<a href="javascript:;" onclick="openModal('login')">登录</a><a href="javascript:;" onclick="openModal('reg')">注册</a>`;
         }
     }
-    
+
     function logout() {
         localStorage.removeItem('isLogin');
         localStorage.removeItem('loginUser');
